@@ -1,0 +1,206 @@
+@media only screen and (max-width: 660px) and (min-width: 320px) {
+
+    .about_us_ceo_img {
+        width: 10rem;
+    }
+
+    .about_us_h2 {
+        font-size: 24px !important;
+    }
+
+    .slider-btn.v2 {
+        display: none;
+    }
+
+    .hover-pinch-zoom-container {
+        height: 22rem !important;
+    }
+
+    #reservation_modal_image {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .project_banner_p1 {
+        font-size: 24px;
+        padding-left: 0rem;
+        font-weight: 400;
+        text-align: center;
+        padding-top: 6rem;
+    }
+
+    .display_for_pc {
+        display: none !important;
+    }
+
+    .rent_banner_p1 {
+        font-size: 24px;
+        font-weight: 500;
+        padding-top: 5rem;
+    }
+
+    .developments_banner_p1 {
+        font-size: 26px;
+        font-weight: 200;
+        text-align: center;
+    }
+
+    .home_section_2_div {
+        background-image: none;
+    }
+
+    #floor_plan_reservation_modal .modal-dialog {
+        max-width: 100%;
+    }
+
+    .contact_banner_p1 {
+        font-size: 24px;
+        font-weight: 200;
+        margin-top: 5rem;
+    }
+
+    .about_banner {
+        background-image: url(../images/banner/about_mobile_banner.jpg);
+        height: 35rem;
+    }
+
+    .contact_banner {
+        background-image: url(../images/banner/contact_mobile_banner.jpg);
+        height: 23rem;
+    }
+
+    .project_search_banner {
+        background-image: url(../images/banner/project_search_mobile_banner.jpg);
+        height: 23rem !important;
+    }
+    .rent_search_banner {
+        background-image: url(../images/banner/project_search_mobile_banner.jpg);
+        height: 30rem !important;
+    }
+    .blog_header_banner{
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 23rem;
+    }
+    .blog_header_h2{
+        padding-top: 5rem;
+    }
+
+    .category-section.v2 .single_cat h4 {
+        font-size: 14px !important;
+    }
+
+    .category-section.v2 .single_cat p {
+        font-size: 12px !important;
+    }
+
+    .mortgage_calculator_banner {
+        background-image: url(../images/banner/project_search_mobile_banner.jpg);
+        height: 20rem;
+    }
+
+    .home_2nd_section_widgets {
+        width: 49% !important;
+    }
+
+    .header-text.v1 h1 {
+        padding-top: 5rem;
+        font-size: 28px !important;
+    }
+
+    .home_section_1_row {
+        margin-top: -10rem !important;
+    }
+
+    .home_section_1_image {
+        background-image: url(../images/banner/home_banner.webp);
+        height: 33rem !important;
+    }
+
+    .single-listing-title h2 {
+        font-size: 18px;
+    }
+
+    .single-listing-title h2 span {
+        display: none;
+    }
+
+    .list-details-btn p {
+        font-size: 14px !important;
+    }
+
+    .search_main_div {
+        width: 100%;
+    }
+
+    .search_div1 {
+        width: 80%;
+    }
+
+    .search_div2 {
+        width: 20%;
+    }
+
+    .search_div2_input1 {
+        width: 90%;
+    }
+
+    .single-property-details.v1 {
+        margin-top: 150px !important;
+    }
+
+    .list_menu {
+        display: none;
+    }
+
+    .mortgage_header_h2 {
+        font-size: 24px !important;
+    }
+
+    .mortgage_header_h3 {
+        font-size: 21px !important;
+    }
+
+    .call-to-action.bg-h.consult-form.v10 {
+        height: 500px !important;
+    }
+
+    .for_h2 {
+        font-size: 26px;
+    }
+
+    .for_h3 {
+        font-size: 24px;
+    }
+
+    .for_h4 {
+        font-size: 24px;
+    }
+
+    .only_for_mobile {
+        display: block !important;
+    }
+
+    .homepage_consulting_form {
+        height: 28rem !important;
+    }
+    .hero__form.v2 .custom-select.hero__form-input{
+        height: 4rem;
+    }
+
+    .py-100{
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    .single-property-header{
+        height: 20rem;
+    }
+
+    .list-details-title.v1{
+        margin-top: -10rem;
+    }
+    .assignment_detail_agent_img{
+        width: 10rem !important;
+    }
+}
