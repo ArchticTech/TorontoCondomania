@@ -21,38 +21,7 @@
 
 
 
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org/",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://torontocondomania.ca/index"
-            }, {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "About Us",
-                "item": "https://torontocondomania.ca/about-us"
-            }, {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Projects",
-                "item": "https://torontocondomania.ca/properties"
-            }, {
-                "@type": "ListItem",
-                "position": 4,
-                "name": "Blogs",
-                "item": "https://torontocondomania.ca/blogs"
-            }, {
-                "@type": "ListItem",
-                "position": 5,
-                "name": "Contact Us",
-                "item": "https://torontocondomania.ca/contact-us"
-            }]
-        }
-    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LE607QYRBQ"></script>
     <script>
