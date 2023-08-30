@@ -13,7 +13,7 @@ class Property extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_property', function (Blueprint $table) {
+        Schema::create('property', function (Blueprint $table) {
             $table->id();
             $table->string('prop_code', 200)->unique();
             $table->string('prop_name', 200);
