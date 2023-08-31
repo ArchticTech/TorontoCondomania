@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Property;
+use Carbon\Carbon;
 
 class PropertyController extends Controller
 {
@@ -25,7 +26,6 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        return view('addProperty');
         $date = now();
 
         $prop_code = $request->input('prop_code');
@@ -86,9 +86,14 @@ class PropertyController extends Controller
         $locker_price = $request->input('locker_price');
         $min_deposit_percentage = $request->input('min_deposit_percentage');
 
+        $image = $request->file('prop_image');
+        $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('images', $prop_imageName);
+
         $property = new Property([
             'prop_code' => $prop_code,
             'prop_name' => $prop_name,
+            'prop_image' => $prop_imageName,
             'city_id' => $city_id,
             'development_id' => $development_id,
             'developer_id' => $developer_id,
@@ -127,9 +132,12 @@ class PropertyController extends Controller
             'parking_price' => $parking_price,
             'locker_price' => $locker_price,
             'min_deposit_percentage' => $min_deposit_percentage,
+            'created_date' => Carbon::now()
         ]);
 
         $property->save();
+
+        return response('Success', 200);
     }
 
     /**

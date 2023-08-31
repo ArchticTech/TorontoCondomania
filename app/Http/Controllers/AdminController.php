@@ -12,7 +12,15 @@ class AdminController extends Controller
     {
         $this->propertyController = $propertyController;
     }
-    public function addProperty(Request $request)
+    public function dashboard()
+    {
+        return view('admin.index');
+    }
+    public function addProperty()
+    {
+        return view('admin.property-add');
+    }
+    public function storeProperty(Request $request)
     {
         return $this->propertyController->store($request);
     }
