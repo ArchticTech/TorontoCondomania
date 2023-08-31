@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,5 +18,4 @@ class Property extends Model
         'for_rent', 'sold_out', 'status', 'created_by', 'created_date'
     ];
 
-    
 }
