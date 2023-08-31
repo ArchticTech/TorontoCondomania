@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Controllers\PropertyController;
+use App\Http\Controllers\PropertyController;
 
 class AdminController extends Controller
 {
@@ -12,8 +12,8 @@ class AdminController extends Controller
     {
         $this->propertyController = $propertyController;
     }
-    public function addProperty()
+    public function addProperty(Request $request)
     {
-        $this->propertyController->store();
+        return $this->propertyController->store($request);
     }
 }

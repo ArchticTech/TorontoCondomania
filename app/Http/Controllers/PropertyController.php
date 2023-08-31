@@ -25,7 +25,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        return view('main', compact('properties'));
+        return view('addProperty');
         $date = now();
 
         $prop_code = $request->input('prop_code');
