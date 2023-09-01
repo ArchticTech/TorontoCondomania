@@ -16,6 +16,12 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+    public function viewProperty()
+    {
+        $properties = $this->propertyController->index();
+
+        return view('admin.property-view', ['properties' => $properties]);
+    }
     public function addProperty()
     {
         return view('admin.property-add');
