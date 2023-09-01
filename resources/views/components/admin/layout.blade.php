@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Property Edit</title>
+    <title>Admin Panel</title>
 
     <meta name="description" content="" />
 
@@ -116,7 +116,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="#" class="menu-link">
+                        <a href="/secure-zone" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -129,19 +129,19 @@
                     <!-- Main pages -->
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <a href="#" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx bx-building-house"></i>
-                            <div data-i18n="Account Settings">Property</div>
+                            <div>Property</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <a href="/secure-zone/property/add" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div data-i18n="Layouts">Add Property</div>
+                                    <div >Add Property</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <a href="/secure-zone/property/view" class="menu-link">
                                     <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
                                     <div data-i18n="Layouts">View Property</div>
                                 </a>
@@ -153,7 +153,7 @@
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                            <div data-i18n="Account Settings">Assigments</div>
+                            <div>Assigments</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
@@ -202,7 +202,7 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
+                        <a href="/secure-zone/subscription" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
                             <div data-i18n="Layouts">Subscription Form</div>
                         </a>
@@ -233,22 +233,22 @@
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                            <div data-i18n="Account Settings">Account Settings</div>
+                            <div>Account Settings</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="pages-account-settings-account.html" class="menu-link">
-                                    <div data-i18n="Account">Account</div>
+                                    <div >Account</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="pages-account-settings-notifications.html" class="menu-link">
-                                    <div data-i18n="Notifications">Notifications</div>
+                                    <div >Notifications</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="pages-account-settings-connections.html" class="menu-link">
-                                    <div data-i18n="Connections">Connections</div>
+                                    <div >Connections</div>
                                 </a>
                             </li>
                         </ul>
@@ -400,10 +400,6 @@
                             <a href="#" target="_blank" class="footer-link fw-bolder">TCM</a>
                         </div>
                         <div>
-                            <a href="#" class="footer-link me-4" target="_blank">License</a>
-                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                Themes</a>
-
                             <a href="#" target="_blank" class="footer-link me-4">Documentation</a>
 
                             <a href="#" target="_blank" class="footer-link me-4">Support</a>
