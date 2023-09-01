@@ -13,7 +13,7 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function all()
     {
         return Property::all();
     }
@@ -135,9 +135,17 @@ class PropertyController extends Controller
             'created_date' => Carbon::now()
         ]);
 
-        $property->save();
+        try {
+            $property->save();
+            // Continue with success logic if the save is successful
+        } catch (\Exception $e) {
+            // Handle the error here
+            return redirect()->route('admin.property.add')
+            ->with('message', 'Property Failed to Add');
+        }
 
-        return response('Success', 200);
+        return redirect()->route('admin.property.view')
+                ->with('message', 'Property Added Successfully');
     }
 
     /**
@@ -146,20 +154,9 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function get($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Property::find($id);
     }
 
     /**
@@ -171,7 +168,88 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Find the property by its ID
+        $property = Property::find($id);
+
+        if (!$property) {
+            // Handle the case where the property with the given ID is not found, e.g., return a 404 response.
+            return redirect()->route('admin.property.view')
+                    ->with('message', 'Property Not Found');
+        }
+
+        // Update the property attributes with new values
+        $property->prop_code = $request->input('prop_code');
+        $property->prop_name = $request->input('prop_name');
+        $property->city_id = $request->input('city_id');
+        $property->development_id = $request->input('development_id');
+        $property->developer_id = $request->input('developer_id');
+        $property->architects_id = $request->input('architects_id');
+        $property->interior_designer_id = $request->input('interior_designer_id');
+        $property->prop_agent_id = $request->input('prop_agent_id');
+        $property->prop_address = $request->input('prop_address');
+        $property->prop_iframe = $request->input('prop_iframe');
+        $property->prop_type = $request->input('prop_type');
+        $property->prop_status = $request->input('prop_status');
+        $property->no_of_stories = $request->input('no_of_stories');
+        $property->no_of_suites = $request->input('no_of_suites');
+        $property->est_occupancy_month = $request->input('est_occupancy_month');
+        $property->est_occupancy_year = $request->input('est_occupancy_year');
+        $property->vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
+        $property->public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
+        $property->const_start_date = now()->parse($request->input('const_start_date'))->toDateString();
+        $property->is_hot = $request->input('is_hot');
+
+        // Check the VIP, Featured, Promotion status
+        $vip_featured_promotion = $request->input('vip_featured_promotion');
+        $property->is_vip = ($vip_featured_promotion === 'Vip') ? 1 : 0;
+        $property->is_featured = ($vip_featured_promotion === 'Featured') ? 1 : 0;
+        $property->is_promotion = ($vip_featured_promotion === 'Promotion') ? 1 : 0;
+
+        // Check the Sale/Rent status
+        $sale_rent = $request->input('sale_rent');
+        $property->for_sale = ($sale_rent === 'Sale') ? 1 : 0;
+        $property->for_rent = ($sale_rent === 'Rent') ? 1 : 0;
+
+        $property->sold_out = $request->input('sold_out');
+        $property->status = $request->input('status');
+        $property->suites_starting_floor = $request->input('suites_starting_floor');
+        $property->suites_per_floor = $request->input('suites_per_floor');
+        $property->floor_plans = $request->input('floor_plans');
+        $property->prop_price_from = $request->input('prop_price_from');
+        $property->prop_price_to = $request->input('prop_price_to');
+        $property->suite_size_from = $request->input('suite_size_from');
+        $property->suite_size_to = $request->input('suite_size_to');
+        $property->ceiling_height = $request->input('ceiling_height');
+        $property->price_per_sqft_from = $request->input('price_per_sqft_from');
+        $property->price_per_sqft_to = $request->input('price_per_sqft_to');
+        $property->parking_price = $request->input('parking_price');
+        $property->locker_price = $request->input('locker_price');
+        $property->min_deposit_percentage = $request->input('min_deposit_percentage');
+
+        // Check if a new image has been uploaded
+        if ($request->hasFile('prop_image')) {
+            // Handle the image upload here, e.g., store it and update the image attribute.
+            // Assuming you store the image in a folder named "images" under the public directory:
+            $image = $request->file('prop_image');
+            $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $prop_imageName);
+
+            $property->prop_image = $prop_imageName;
+        }
+
+        
+        try {
+            // Save the changes to the property
+            $property->save();
+            // Continue with success logic if the save is successful
+        } catch (\Exception $e) {
+            // Handle the error here
+            return redirect()->route('admin.property.update')
+            ->with('message', 'Property Failed to Update');
+        }
+
+        return redirect()->route('admin.property.view')
+                ->with('message', 'Property Updated Successfully');
     }
 
     /**

@@ -18,7 +18,7 @@ class AdminController extends Controller
     }
     public function viewProperty()
     {
-        $properties = $this->propertyController->index();
+        $properties = $this->propertyController->all();
 
         return view('admin.property-view', ['properties' => $properties]);
     }
@@ -26,17 +26,18 @@ class AdminController extends Controller
     {
         return view('admin.property-add');
     }
-    public function editProperty()
-    {
-        return view('admin.property-edit');
-    }
-    public function updateProperty()
-    {
-        return view('admin.property-edit');
-    }
-
     public function storeProperty(Request $request)
     {
         return $this->propertyController->store($request);
+    }
+    public function editProperty($id)
+    {
+        $property = $this->propertyController->get($id);
+
+        return view('admin.property-edit', ['property' => $property]);
+    }
+    public function updateProperty(Request $request, $id)
+    {
+        return $this->propertyController->update($request, $id);
     }
 }
