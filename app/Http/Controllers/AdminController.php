@@ -20,6 +20,10 @@ class AdminController extends Controller
     {
         return view('admin.property-add');
     }
+    public function viewProperty()
+    {
+        return view('admin.property-view');
+    }
     public function storeProperty(Request $request)
     {
         return $this->propertyController->store($request);
