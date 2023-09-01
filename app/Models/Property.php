@@ -18,4 +18,28 @@ class Property extends Model
         'for_rent', 'sold_out', 'status', 'created_by', 'created_date'
     ];
 
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+    public function architect()
+    {
+        return $this->belongsTo(Architect::class);
+    }
+    public function developer()
+    {
+        return $this->belongsTo(Developer::class);
+    }
+    public function development()
+    {
+        return $this->belongsTo(Development::class);
+    }
+    public function interior_designer()
+    {
+        return $this->belongsTo(InteriorDesigner::class);
+    }
+    public function property_agent()
+    {
+        return $this->belongsTo(PropertyAgent::class);
+    }
 }

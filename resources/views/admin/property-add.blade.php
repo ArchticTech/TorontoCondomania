@@ -220,13 +220,6 @@
                         </a>
                     </li>
 
-
-
-
-
-
-
-
                     <!-- Components -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
 
@@ -568,7 +561,6 @@
                         </li>
                     </ul>
                 </nav>
-
 
                 <div class="content-wrapper">
                     <section class="content">

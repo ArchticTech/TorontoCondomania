@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\PropertyController;
+use App\Models\Architect;
+use App\Models\City;
+use App\Models\Developer;
+use App\Models\Development;
+use App\Models\InteriorDesigner;
+use App\Models\PropertyAgent;
 
 class AdminController extends Controller
 {
@@ -24,7 +30,14 @@ class AdminController extends Controller
     }
     public function addProperty()
     {
-        return view('admin.property-add');
+        $architects = Architect::all();
+        $cities = City::all();
+        $developers = Developer::all();
+        $developments = Development::all();
+        $interiorDesigners = InteriorDesigner::all();
+        $propertyAgents = PropertyAgent::all();
+
+        return view('admin.property-add', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
     }
     public function storeProperty(Request $request)
     {

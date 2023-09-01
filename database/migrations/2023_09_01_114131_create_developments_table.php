@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDevelopersTable extends Migration
+class CreateDevelopmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDevelopersTable extends Migration
      */
     public function up()
     {
-        Schema::create('developers', function (Blueprint $table) {
+        Schema::create('developments', function (Blueprint $table) {
             $table->id();
-            $table->string('developer_name', 100);
+            $table->string('development_name', 100);
             $table->integer('is_main');
             $table->integer('status')->default(0);
             $table->integer('created_by')->default(0);
@@ -30,6 +30,6 @@ class CreateDevelopersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('developers');
+        Schema::dropIfExists('developments');
     }
 }
