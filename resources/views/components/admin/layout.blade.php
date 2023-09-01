@@ -47,12 +47,32 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const notification = document.getElementById("myNotification");
+
+            // Function to show the notification
+            function showNotification() {
+                notification.style.display = "block";
+
+                // Hide the notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.display = "none";
+                }, 3000);
+            }
+
+            // Initialize the notification
+            showNotification();
+        });
+    </script>
 </head>
 
 <body>
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
+
             <!-- Menu -->
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -113,6 +133,8 @@
 
                 <div class="menu-inner-shadow"></div>
 
+
+
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
@@ -137,7 +159,7 @@
                             <li class="menu-item">
                                 <a href="/secure-zone/property/add" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div >Add Property</div>
+                                    <div>Add Property</div>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -238,17 +260,17 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="pages-account-settings-account.html" class="menu-link">
-                                    <div >Account</div>
+                                    <div>Account</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="pages-account-settings-notifications.html" class="menu-link">
-                                    <div >Notifications</div>
+                                    <div>Notifications</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="pages-account-settings-connections.html" class="menu-link">
-                                    <div >Connections</div>
+                                    <div>Connections</div>
                                 </a>
                             </li>
                         </ul>
@@ -384,7 +406,16 @@
                     </ul>
                 </nav>
 
-@yield('content')
+                @if (session()->has('message'))
+                    <div id="myNotification"
+                        class="fixed-top start-50 translate-middle-x bg-primary text-white text-center px-5 py-3"
+                        style="display: none; z-index: 2000; border-radius: 0.375rem; box-shadow: rgb(135 148 163 / 30%) 0px 0px 0.75rem 0.25rem; top: 50px;
+    text-transform: capitalize; font-size: 21px;">
+                        <p id="message">test message</p>
+                    </div>
+                @endif
+
+                @yield('content')
 
 
 
