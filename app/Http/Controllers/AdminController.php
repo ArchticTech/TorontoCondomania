@@ -20,6 +20,10 @@ class AdminController extends Controller
     {
         return view('admin.property-add');
     }
+    public function editProperty()
+    {
+        return view('admin.property-edit');
+    }
     public function viewProperty()
     {
         return view('admin.property-view');

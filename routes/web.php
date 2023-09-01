@@ -15,5 +15,6 @@ Route::prefix('secure-zone')->group(function () {
         Route::get('add', [AdminController::class, 'addProperty'])->name('admin.property.add');
         Route::post('store', [AdminController::class, 'storeProperty'])->name('admin.property.store');
         Route::get('view', [AdminController::class, 'viewProperty'])->name('admin.property.view');
+        Route::get('edit', [AdminController::class, 'editProperty'])->name('admin.property.edit');
     });
 });
