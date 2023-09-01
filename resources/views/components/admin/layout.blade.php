@@ -13,7 +13,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('admin/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('admin/assets/img/favicon/favicon-32x32.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,7 +79,7 @@
                 <div class="app-brand demo">
                     <a href="#" class="app-brand-link">
                         <span class="app-brand-logo demo">
-                            <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            {{-- <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <defs>
                                     <path
@@ -120,7 +120,11 @@
                                         </g>
                                     </g>
                                 </g>
-                            </svg>
+                            </svg> --}}
+                            <div>
+                                <img src="{{ asset('admin/assets/img/logo.png') }}"
+                                    style="width: 70px; height: 70px;"  class="p-1"/>
+                            </div>
                         </span>
                         <span class="app-brand-text demo menu-text fw-bolder ms-2">TCM</span>
                     </a>
@@ -409,9 +413,9 @@
                 @if (session()->has('message'))
                     <div id="myNotification"
                         class="fixed-top start-50 translate-middle-x bg-primary text-white text-center px-5 py-3"
-                        style="display: none; z-index: 2000; border-radius: 0.375rem; box-shadow: rgb(135 148 163 / 30%) 0px 0px 0.75rem 0.25rem; top: 50px;
+                        style="z-index: 2000; border-radius: 0.375rem; box-shadow: rgb(135 148 163 / 30%) 0px 0px 0.75rem 0.25rem; top: 50px;
     text-transform: capitalize; font-size: 21px;">
-                        <p id="message">test message</p>
+                        <p id="message">{{ session('message') }}</p>
                     </div>
                 @endif
 
@@ -609,42 +613,38 @@
         $('#property_floor_plan_row' + button_id + '').remove();
     });
 
-    $("#property_add").submit(function(e) {
-        e.preventDefault();
-        $("#add_property_button").empty();
-        $("#add_property_button").append('<i class="bx bxs-error-circle"></i>');
-        document.getElementById("add_property_button").disabled = true;
+    // $("#property_add").submit(function(e) {
+    //     e.preventDefault();
+    //     $("#add_property_button").empty();
+    //     $("#add_property_button").append('<i class="bx bxs-error-circle"></i>');
+    //     document.getElementById("add_property_button").disabled = true;
 
-        var formData = new FormData(this);
-        var encodedIframe = encodeURIComponent(formData.get('prop_iframe'));
+    //     var formData = new FormData(this);
+    //     var encodedIframe = encodeURIComponent(formData.get('prop_iframe'));
 
-        formData.set('prop_iframe', encodedIframe);
+    //     formData.set('prop_iframe', encodedIframe);
 
-        $.ajax({
-            url: '{{ route('admin.property.store') }}',
-            enctype: 'multipart/form-data',
-            data: formData,
-            type: 'POST',
-            contentType: false,
-            processData: false,
-            success: (res) => {
-                // console.log(res);
-                swal({
-                    title: "Property Added!",
-                    text: "Property Has Been Added Succesfully!",
-                    icon: "success",
-                    button: "Ok",
-                });
-                $("#add_property_button").empty();
-                $("#add_property_button").append('Add Property');
-                document.getElementById("add_property_button").disabled = false;
-                $("#property_add")[0].reset();
-            },
-            error: (res) => {
-                console.log(res);
-            }
-        });
-    });
+    //     $.ajax({
+    //         url: '{{ route('admin.property.store') }}',
+    //         enctype: 'multipart/form-data',
+    //         data: formData,
+    //         type: 'POST',
+    //         contentType: false,
+    //         processData: false,
+    //         success: (res) => {
+    //             // console.log(res);
+    //             window.location.href = "{{ route('admin.property.view') }}";
+
+    //             $("#add_property_button").empty();
+    //             $("#add_property_button").append('Add Property');
+    //             document.getElementById("add_property_button").disabled = false;
+    //             $("#property_add")[0].reset();
+    //         },
+    //         error: (res) => {
+    //             console.log(res);
+    //         }
+    //     });
+    // });
 </script>
 
 </html>

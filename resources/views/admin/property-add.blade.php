@@ -23,7 +23,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <form method="POST" id="property_add" enctype="multipart/form-data">
+                                            <form method="POST" id="property_add" enctype="multipart/form-data" action="{{ route('admin.property.store') }}">
                                                 <div class="row">
                                                     @csrf
                                                     <div class="col-md-4">
@@ -59,7 +59,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-4 mt-4 col-md-4">
-                                                        <label for="development_id">Select Developmenth</label>
+                                                        <label for="development_id">Select Development</label>
                                                         <select name="development_id" class="form-select" id="development_id">
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -108,7 +108,7 @@
                                                             <option value="Single-family">Single family</option>
                                                         </select>
                                                     </div>
-                                                    <div class="mb-4 mt-4 col-md-4">\
+                                                    <div class="mb-4 mt-4 col-md-4">
                                                         <label for="prop_status">Select Property Status</label>
                                                         <select name="prop_status" class="form-select"
                                                             id="prop_status">
@@ -146,11 +146,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 mt-4 col-md-4">
+                                                        <label for="est_occupancy_year">Estimate Occupency
+                                                            Year</label>
                                                         <select name="est_occupancy_year" class="form-select"
-                                                            id="exampleFormControlSelect1"
-                                                            aria-label="Default select example">
+                                                            id="est_occupancy_year"
+                                                          >
                                                             <option selected>Estimate Occupency Year</option>
-                                                            <option value="Pre-Construction">Pre-Construction</option>
                                                             <option value="2022">2022</option>
                                                             <option value="2023">2023</option>
                                                             <option value="2024">2024</option>

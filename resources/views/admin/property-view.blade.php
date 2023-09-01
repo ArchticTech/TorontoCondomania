@@ -25,7 +25,7 @@
                                                         <th>ID</th>
                                                         <th>Property Code</th>
                                                         <th>Property Name</th>
-                                                        <th>City</th>
+                                                        <th>City ID</th>
                                                         <th>Address</th>
                                                         <th>Type</th>
                                                         <th>Status</th>
@@ -36,20 +36,22 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach ($properties as $property)
 
                                                     <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td>{{ $property->id }}</td>
+                                                        <td>{{ $property->prop_code }}</td>
+                                                        <td>{{ $property->prop_name }}</td>
+                                                        <td>{{ $property->city_id }}</td>
+                                                        <td>{{ $property->prop_address }}</td>
+                                                        <td>{{ $property->prop_type }}</td>
+                                                        <td>{{ $property->prop_status }}</td>
+                                                        <td>{{ $property->prop_price_from }}</td>
+                                                        <td>{{ $property->prop_price_to }}</td>
+                                                        <td>{{ $property->est_occupancy_month }}</td>
+                                                        <td><a href="{{ route('admin.property.edit', $property->id) }}"><i class='bx bxs-edit'></i></a></td>
                                                     </tr>
+                                                    @endforeach
 
                                                 </tbody>
                                             </table>
