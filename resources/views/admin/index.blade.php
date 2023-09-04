@@ -43,20 +43,10 @@
                                             <img src="{{ asset('admin/assets/img/icons/unicons/chart-success.png') }}"
                                                 alt="chart success" class="rounded" />
                                         </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                    More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                            </div>
-                                        </div>
+
                                     </div>
-                                    <span class="fw-semibold d-block mb-1">Profit</span>
-                                    <h3 class="card-title mb-2">$12,628</h3>
+                                    <span class="fw-semibold d-block mb-1">Cities</span>
+                                    <h3 class="card-title mb-2">{{$cities}}</h3>
                                     <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
                                         +72.80%</small>
                                 </div>
@@ -70,20 +60,10 @@
                                             <img src="{{ asset('admin/assets/img/icons/unicons/wallet-info.png') }}"
                                                 alt="Credit Card" class="rounded" />
                                         </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                    More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                            </div>
-                                        </div>
+
                                     </div>
-                                    <span>Sales</span>
-                                    <h3 class="card-title text-nowrap mb-1">$4,679</h3>
+                                    <span>Developers</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{$developers}}</h3>
                                     <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
                                         +28.42%</small>
                                 </div>
@@ -156,20 +136,10 @@
                                             <img src="{{ asset('admin/assets/img/icons/unicons/paypal.png') }}"
                                                 alt="Credit Card" class="rounded" />
                                         </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt4"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                    More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                            </div>
-                                        </div>
+
                                     </div>
-                                    <span class="d-block mb-1">Payments</span>
-                                    <h3 class="card-title text-nowrap mb-2">$2,456</h3>
+                                    <span class="d-block mb-1">Interior Designers</span>
+                                    <h3 class="card-title text-nowrap mb-2">{{$interiorDesigners}}</h3>
                                     <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i>
                                         -14.82%</small>
                                 </div>
@@ -183,20 +153,10 @@
                                             <img src="{{ asset('admin/assets/img/icons/unicons/cc-primary.png') }}"
                                                 alt="Credit Card" class="rounded" />
                                         </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt1"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                    More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                            </div>
-                                        </div>
+
                                     </div>
-                                    <span class="fw-semibold d-block mb-1">Transactions</span>
-                                    <h3 class="card-title mb-2">$14,857</h3>
+                                    <span class="fw-semibold d-block mb-1">Countries</span>
+                                    <h3 class="card-title mb-2">{{$country}}</h3>
                                     <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
                                         +28.14%</small>
                                 </div>
@@ -211,14 +171,14 @@
                                         <div
                                             class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                             <div class="card-title">
-                                                <h5 class="text-nowrap mb-2">Profile Report</h5>
+                                                <h5 class="text-nowrap mb-2">Architects</h5>
                                                 <span class="badge bg-label-warning rounded-pill">Year
-                                                    2021</span>
+                                                    2023</span>
                                             </div>
                                             <div class="mt-sm-auto">
                                                 <small class="text-success text-nowrap fw-semibold"><i
                                                         class="bx bx-chevron-up"></i> 68.2%</small>
-                                                <h3 class="mb-0">$84,686k</h3>
+                                                <h3 class="mb-0">{{$architects}}</h3>
                                             </div>
                                         </div>
                                         <div id="profileReportChart"></div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class PropertyController extends Controller
 {
@@ -44,11 +45,11 @@ class PropertyController extends Controller
         $no_of_suites = $request->input('no_of_suites');
         $est_occupancy_month = $request->input('est_occupancy_month');
         $est_occupancy_year = $request->input('est_occupancy_year');
-        
+
         $vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
         $public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
         $const_start_date = now()->parse($request->input('const_start_date'))->toDateString();
-        
+
         $is_hot = $request->input('is_hot');
         $vip_featured_promotion = $request->input('vip_featured_promotion');
         $is_vip = $is_featured = $is_promotion = 0;
@@ -69,7 +70,7 @@ class PropertyController extends Controller
         } elseif ($sale_rent === 'Rent') {
             $for_rent = 1;
         }
-        
+
         $sold_out = $request->input('sold_out');
         $status = $request->input('status');
         $suites_starting_floor = $request->input('suites_starting_floor');
@@ -88,7 +89,8 @@ class PropertyController extends Controller
 
         $image = $request->file('prop_image');
         $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('images', $prop_imageName);
+        $image->move(public_path('images'), $prop_imageName);
+
 
         $property = new Property([
             'prop_code' => $prop_code,
@@ -135,17 +137,9 @@ class PropertyController extends Controller
             'created_date' => Carbon::now()
         ]);
 
-        try {
-            $property->save();
-            // Continue with success logic if the save is successful
-        } catch (\Exception $e) {
-            // Handle the error here
-            return redirect()->route('admin.property.add')
-            ->with('message', 'Property Failed to Add');
-        }
+        $property->save();
 
-        return redirect()->route('admin.property.view')
-                ->with('message', 'Property Added Successfully');
+        return $property;
     }
 
     /**
@@ -168,13 +162,15 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($id);
         // Find the property by its ID
         $property = Property::find($id);
+        // dd($property->prop_name);
 
         if (!$property) {
             // Handle the case where the property with the given ID is not found, e.g., return a 404 response.
-            return redirect()->route('admin.property.view')
-                    ->with('message', 'Property Not Found');
+            return redirect()->route('admin.property')
+                ->with('message', 'Property Not Found');
         }
 
         // Update the property attributes with new values
@@ -227,29 +223,38 @@ class PropertyController extends Controller
         $property->min_deposit_percentage = $request->input('min_deposit_percentage');
 
         // Check if a new image has been uploaded
-        if ($request->hasFile('prop_image')) {
-            // Handle the image upload here, e.g., store it and update the image attribute.
-            // Assuming you store the image in a folder named "images" under the public directory:
-            $image = $request->file('prop_image');
-            $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('images', $prop_imageName);
+        // if ($request->hasFile('prop_image')) {
+        //     // Handle the image upload here, e.g., store it and update the image attribute.
+        //     // Assuming you store the image in a folder named "images" under the public directory:
+        //     $image = $request->file('prop_image');
+        //     $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     $image->move(public_path('images'), $prop_imageName);
+        //     $property->prop_image = $prop_imageName;
+        // }
 
-            $property->prop_image = $prop_imageName;
+        $imagePath = public_path('images/' . $request->input('prop_imageName')); // Replace with the actual image name
+
+        if (File::exists($imagePath)) {
+            // Delete the image if it exists
+            File::delete($imagePath);
         }
 
-        
-        try {
-            // Save the changes to the property
-            $property->save();
-            // Continue with success logic if the save is successful
-        } catch (\Exception $e) {
-            // Handle the error here
-            return redirect()->route('admin.property.update')
-            ->with('message', 'Property Failed to Update');
-        }
+        $image = $request->file('prop_image');
+        $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $prop_imageName);
+        $property->prop_image = $prop_imageName;
 
-        return redirect()->route('admin.property.view')
+        // dd($property->prop_name);
+
+        $propertySave =  $property->save();
+
+
+        if ($propertySave) {
+            return redirect()->route('admin.property.view')
                 ->with('message', 'Property Updated Successfully');
+        }
+
+        return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
     }
 
     /**

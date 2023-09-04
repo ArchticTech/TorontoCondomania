@@ -1,3 +1,4 @@
+
 @extends('components.admin.layout')
 @section('content')
     <div class="content-wrapper">
@@ -5,14 +6,14 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                        <h1 class="m-0">Add Property</h1>
+                        <h1 class="m-0">Add Assigment</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Properties</h3>
+                                <h3 class="card-title">Assigments</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -21,26 +22,26 @@
                             </div>
                             <div class="card-body">
                                 <form method="POST" id="property_add" enctype="multipart/form-data"
-                                    action="{{ route('admin.property.store') }}">
+                                    action="{{ route('admin.assigment.store') }}">
                                     <div class="row">
                                         @csrf
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 mb-4 mt-4 ">
                                             <div class="form-group">
-                                                <label for="prop_code">Property Code</label>
+                                                <label for="prop_code">Assignment Code</label>
                                                 <input type="text" required class="form-control" id="prop_code"
-                                                    name="prop_code" placeholder="Property Code">
+                                                    name="prop_code" placeholder="Assignment Code">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 mb-4 mt-4 ">
                                             <div class="form-group">
-                                                <label for="prop_name">Property Name</label>
+                                                <label for="prop_name">Assignment Name</label>
                                                 <input type="text" required class="form-control" id="prop_name"
-                                                    name="prop_name" placeholder="Property Name">
+                                                    name="prop_name" placeholder="Assignment Name">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 mb-4 mt-4 ">
                                             <div class="form-group">
-                                                <label for="prop_name">Property Image</label>
+                                                <label for="prop_name">Assignment Image</label>
                                                 <input type="file" required class="form-control" id="prop_image"
                                                     name="prop_image" placeholder="Property Image">
                                             </div>
@@ -75,7 +76,8 @@
                                             <label for="architects_id">Select Architect</label>
                                             <select name="architects_id" class="form-select" id="architects_id">
                                                 @foreach ($architects as $architect)
-                                                    <option value="{{ $architect->id }}">{{ $architect->architects_name }}
+                                                    <option value="{{ $architect->id }}">
+                                                        {{ $architect->architects_name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -194,7 +196,7 @@
                                             <label for="hot_property">Hot Property</label>
                                             <select name="is_hot" class="form-select" id="hot_property"
                                                 aria-label="Default select example">
-                                                {{-- <option selected>Hot Property</option> --}}
+                                                <option value="">Hot Property</option>
                                                 <option value="1" selected>Yes</option>
                                                 <option value="0">No</option>
                                             </select>
@@ -203,6 +205,7 @@
                                             <label for="vip_featured_promotion">Vip/Featured/Promotion</label>
                                             <select class="form-select" name="vip_featured_promotion"
                                                 id="vip_featured_promotion" required>
+                                                <option value="">Vip/Featured/Promotion</option>
                                                 <option value="Vip">Vip</option>
                                                 <option value="Featured">Featured</option>
                                                 <option value="Promotion">Promotion</option>
@@ -211,6 +214,7 @@
                                         <div class="mb-4 mt-4 col-md-4">
                                             <label for="sale_rent">Sale/Rent</label>
                                             <select name="sale_rent" required id="sale_rent" class="form-select">
+                                                <option value="">Sale/Rent</option>
                                                 <option value="Sale" selected>Sale</option>
                                                 <option value="Rent">Rent</option>
                                             </select>
@@ -218,6 +222,7 @@
                                         <div class="mb-4 mt-4 col-md-4">
                                             <label for="sold_out">Sold Out</label>
                                             <select name="sold_out" required id="sold_out" class="form-select">
+                                                <option value="">Sold Out</option>
                                                 <option value="1">Yes</option>
                                                 <option value="0" selected>No</option>
                                             </select>
@@ -225,6 +230,7 @@
                                         <div class="mb-4 mt-4 col-md-4">
                                             <label for="status">Status</label>
                                             <select name="status" required id="status" class="form-select">
+                                                <option value="">Status</option>
                                                 <option value="1">Active</option>
                                                 <option value="0">In Active</option>
                                             </select>
@@ -257,7 +263,7 @@
                                         </div>
                                         <div class="col-md-4 mb-4 mt-4">
                                             <div class="form-group">
-                                                <label for="prop_price_from">Property Price From</label>
+                                                <label for="prop_price_from">Assignment Price From</label>
                                                 <input type="number" class="form-control" id="prop_price_from" required
                                                     value="0" name="prop_price_from"
                                                     placeholder="Property Price From">
@@ -265,7 +271,7 @@
                                         </div>
                                         <div class="col-md-4 mb-4 mt-4">
                                             <div class="form-group">
-                                                <label for="prop_price_to">Property Price To</label>
+                                                <label for="prop_price_to">Assignment Price To</label>
                                                 <input type="number" required value="0" class="form-control"
                                                     id="prop_price_to" name="prop_price_to"
                                                     placeholder="Property Price To">
@@ -325,6 +331,20 @@
                                         </div>
                                         <div class="col-md-4 mb-4 mt-4">
                                             <div class="form-group">
+                                                <label for="no_of_beds">No Of Beds</label>
+                                                <input type="number" required value="0" class="form-control"
+                                                    id="no_of_beds" name="no_of_beds" placeholder="No Of Beds">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="no_of_baths">No Of Baths</label>
+                                                <input type="number" required value="0" class="form-control"
+                                                    id="no_of_baths" name="no_of_baths" placeholder="No Of Baths">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
                                                 <label for="min_deposit_percentage">Min Deposit
                                                     Percentage</label>
                                                 <input type="number" class="form-control" id="min_deposit_percentage"
@@ -332,40 +352,101 @@
                                                     placeholder="Min Deposit Percentage">
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-4 mb-4 mt-4">
                                             <div class="form-group">
-                                                <label for="prop_address">Property Address</label>
-                                                <input type="text" required class="form-control" id="prop_address"
-                                                    name="prop_address" placeholder="Property Address">
+                                                <label for="assign_unit_no">Assignment Unit No</label>
+                                                <input type="number" class="form-control" id="assign_unit_no" required
+                                                    value="0" name="assign_unit_no"
+                                                    placeholder="Assignment Unit No">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="assign_floor_no">Assignment Floor No</label>
+                                                <input type="number" class="form-control" id="assign_floor_no" required
+                                                    value="0" name="assign_floor_no"
+                                                    placeholder="Assignment Floor No">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="assign_purchase_price">Assignment Purchase No</label>
+                                                <input type="number" class="form-control" id="assign_purchase_price"
+                                                    required value="0" name="assign_purchase_price"
+                                                    placeholder="Assignment Purchase No">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="assign_cooperation_percentage">Assignment Cooperative
+                                                    Percentage</label>
+                                                <input type="number" class="form-control"
+                                                    id="assign_cooperation_percentage" required value="0"
+                                                    name="assign_cooperation_percentage"
+                                                    placeholder="Assignment Cooperative Percentage">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="assign_deposit_paid">Assignment Deposit Paid</label>
+                                                <input type="number" class="form-control" id="assign_deposit_paid"
+                                                    required value="0" name="assign_deposit_paid"
+                                                    placeholder="Assignment Deposit Paid">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="assign_purchased_date">Assign Purchased Date <span
+                                                        style="font-size: 12px;color: grey;">(If No Purchased Date :
+                                                        01/01/2020)</span></label>
+                                                    <input type="date" class="form-control" id="assign_purchased_date"
+                                                        required value="0" name="assign_purchased_date"
+                                                        placeholder="Assignment Purchased Date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="assign_tentative_occ_date">Assign Tentative Occ <span
+                                                        style="font-size: 12px;color: grey;">(If No Assign Tentative Occ :
+                                                        01/01/2020)</span></label>
+                                                <input class="form-control" value="2020-01-01"
+                                                    id="assign_tentative_occ_date" required
+                                                    name="assign_tentative_occ_date" type="date"
+                                                    placeholder="Assign Tentative Occ">
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">
                                             <div class="form-group">
-                                                <label for="prop_iframe">Property Location Iframe</label>
-                                                <textarea name="prop_iframe" required placeholder="Property Location Iframe" id="prop_iframe" rows="5"
+                                                <label for="prop_address">Assignment Address</label>
+                                                <input type="text" required class="form-control" id="prop_address"
+                                                    name="prop_address" placeholder="Assignment Address">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4 mt-4">
+                                            <div class="form-group">
+                                                <label for="prop_iframe">Assignment Location Iframe</label>
+                                                <textarea name="prop_iframe" required placeholder="Assignment Location Iframe" id="prop_iframe" rows="5"
                                                     class="form-control"> </textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">
                                             <div class="form-group">
-                                                <label for="prop_meta_title">Property Meta Title</label>
-                                                <textarea name="prop_meta_title" placeholder="Property Meta Title" id="prop_meta_title" rows="1"
+                                                <label for="prop_meta_title">Assignment Meta Title</label>
+                                                <textarea name="prop_meta_title" placeholder="Assignment Meta Title" id="prop_meta_title" rows="1"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">
                                             <div class="form-group">
-                                                <label for="prop_meta_description">Property Meta
-                                                    Description</label>
-                                                <textarea name="prop_meta_description" placeholder="Property Meta Description" id="prop_meta_description"
+                                                <label for="prop_meta_description">Assignment Meta Description</label>
+                                                <textarea name="prop_meta_description" placeholder="Assignment Meta Description" id="prop_meta_description"
                                                     rows="2" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">
                                             <div class="form-group">
-                                                <label for="prop_meta_keywords">Property Meta
-                                                    Keywords</label>
-                                                <textarea name="prop_meta_keywords" placeholder="Property Meta Keywords" id="prop_meta_keywords" rows="1"
+                                                <label for="prop_meta_keywords">Assignment Meta Keywords</label>
+                                                <textarea name="prop_meta_keywords" placeholder="Assignment Meta Keywords" id="prop_meta_keywords" rows="1"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
@@ -377,13 +458,12 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">
-                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
-                                                Property Features</p>
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
+                                                Features</p>
                                             <table class="table table-bordered table-hover" id="property_feature_table">
                                                 <thead>
                                                     <tr>
-                                                        <th style="text-align: center;">Property Feature
-                                                        </th>
+                                                        <th style="text-align: center;">Assignment Feature</th>
                                                         <th style="text-align: center;">Action</th>
                                                     </tr>
                                                 </thead>
@@ -394,16 +474,15 @@
                                             <button type="button" name="add_property_feature"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
                                                 id="add_property_feature" class="btn btn-xs btn-success"><i
-                                                    class="bx bx-plus"></i></button>
+                                                class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">
-                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
-                                                Property Description</p>
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
+                                                Description</p>
                                             <table class="table table-bordered table-hover" id="property_detail_table">
                                                 <thead>
                                                     <tr>
-                                                        <th style="text-align: center;">Property
-                                                            Description</th>
+                                                        <th style="text-align: center;">Assignment Description</th>
                                                         <th style="text-align: center;">Action</th>
                                                     </tr>
                                                 </thead>
@@ -414,36 +493,36 @@
                                             <button type="button" name="add_property_detail"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
                                                 id="add_property_detail" class="btn btn-xs btn-success"><i
-                                                    class="bx bx-plus"></i></button>
+                                                class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
-                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
-                                                Property Images</p>
+                                        <div class="col-md-12 mt-4 mb-4">
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment Images
+                                            </p>
                                             <div class="row" id="property_image_row">
 
                                             </div>
                                             <button type="button" name="add_property_image"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
                                                 id="add_property_image" class="btn btn-xs btn-success"><i
-                                                    class="bx bx-plus"></i></button>
+                                                class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
-                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
-                                                Property Floor Plan</p>
-                                            <div id="property_floor_plan_image_row">
+                                        <div class="col-md-12 mt-4 mb-4">
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment Floor
+                                                Plan Images</p>
+                                            <div class="row" id="assignment_floor_plan_image_row">
 
                                             </div>
-                                            <button type="button" name="add_property_floor_plan"
+                                            <button type="button" name="add_assignment_floor_plan"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_property_floor_plan" class="btn btn-xs btn-success"><i
-                                                    class="bx bx-plus"></i></button>
+                                                id="add_assignment_floor_plan" class="btn btn-xs btn-success"><i
+                                                class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">
 
                                             <button type="submit"
                                                 style="margin-top: 5rem;padding: 0.5rem 5rem 0.5rem 5rem;"
                                                 class="btn btn-success" id="add_property_button">Add
-                                                Property</button>
+                                                Assigment</button>
 
                                         </div>
                                     </div>

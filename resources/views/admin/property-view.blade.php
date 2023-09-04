@@ -1,10 +1,7 @@
 @extends('components.admin.layout')
 @section('content')
 
-
                 {{-- View property table --}}
-
-
 
                 <div class="content-wrapper">
                     <section class="content">
@@ -62,11 +59,6 @@
                         </div>
                     </section>
                 </div>
-
-
-
-
-
 
 
 @endsection
