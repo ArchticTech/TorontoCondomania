@@ -53,6 +53,7 @@ class AdminController extends Controller
     }
     public function storeProperty(Request $request)
     {
+        dd($request);
         $propertySave = $this->propertyController->store($request);
 
         if ($propertySave) {

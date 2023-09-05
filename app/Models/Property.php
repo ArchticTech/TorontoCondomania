@@ -43,6 +43,23 @@ class Property extends Model
         return $this->belongsTo(PropertyAgent::class);
     }
 
+    public function propertyFeatures()
+    {
+        return $this->hasMany(PropertyFeature::class);
+    }
+    public function propertyDescriptions()
+    {
+        return $this->hasMany(PropertyDescription::class);
+    }
+    public function propertyImages()
+    {
+        return $this->hasMany(PropertyImage::class);
+    }
+    public function propertyFloorPlans()
+    {
+        return $this->hasMany(PropertyFloorPlan::class);
+    }
+
     public function assignment()
     {
         return $this->hasOne(Assignment::class, 'property_id', 'id');

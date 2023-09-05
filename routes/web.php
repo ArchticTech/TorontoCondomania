@@ -12,7 +12,8 @@ Route::prefix('secure-zone')->group(function () {
 
     Route::prefix('property')->group(function () {
         // Routes within the 'secure-zone/property' group
-        //Property CRUD routes
+        // Property CRUD routes
+
         Route::get('', [AdminController::class, 'viewProperty'])->name('admin.property.view');
         Route::get('add', [AdminController::class, 'addProperty'])->name('admin.property.add');
         Route::post('store', [AdminController::class, 'storeProperty'])->name('admin.property.store');
@@ -22,7 +23,8 @@ Route::prefix('secure-zone')->group(function () {
 
     Route::prefix('assigment')->group(function () {
         // Routes within the 'secure-zone/assignment' group
-        //Assigments CRUD routes
+        // Assigments CRUD routes
+
         Route::get('', [AdminController::class, 'viewAssigments'])->name('admin.assigment.view');
         Route::get('add', [AdminController::class, 'addAssigment'])->name('admin.assigment.add');
         Route::post('store', [AdminController::class, 'storeAssigment'])->name('admin.assigment.store');
