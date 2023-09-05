@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Property extends Model
 {
     protected $table = 'property';
-    
+
     protected $fillable = [
         'prop_code', 'prop_name', 'prop_image', 'city_id', 'development_id', 'developer_id',
         'architects_id', 'interior_designer_id', 'prop_agent_id', 'prop_address', 'prop_iframe',
@@ -41,5 +41,10 @@ class Property extends Model
     public function property_agent()
     {
         return $this->belongsTo(PropertyAgent::class);
+    }
+
+    public function assignment()
+    {
+        return $this->hasOne(Assignment::class, 'property_id', 'id');
     }
 }
