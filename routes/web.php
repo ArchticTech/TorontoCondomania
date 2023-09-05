@@ -27,7 +27,7 @@ Route::prefix('secure-zone')->group(function () {
         Route::get('add', [AdminController::class, 'addAssigment'])->name('admin.assigment.add');
         Route::post('store', [AdminController::class, 'storeAssigment'])->name('admin.assigment.store');
         Route::get('edit/{id}', [AdminController::class, 'editAssigment'])->name('admin.assigment.edit');
-        Route::PUT('update/{id}', [AdminController::class, 'updateAssigment'])->name('admin.assigment.update');
+        Route::PUT('update/{id}', [AdminController::class, 'updateAssignment'])->name('admin.assigment.update');
     });
 });
 

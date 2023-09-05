@@ -24,28 +24,28 @@
                                     action="{{ route('admin.property.store') }}">
                                     <div class="row">
                                         @csrf
-                                        <div class="col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <div class="form-group">
                                                 <label for="prop_code">Property Code</label>
                                                 <input type="text" required class="form-control" id="prop_code"
                                                     name="prop_code" placeholder="Property Code">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class=" mb-3 mt-3 col-md-4">
                                             <div class="form-group">
                                                 <label for="prop_name">Property Name</label>
                                                 <input type="text" required class="form-control" id="prop_name"
                                                     name="prop_name" placeholder="Property Name">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_name">Property Image</label>
                                                 <input type="file" required class="form-control" id="prop_image"
                                                     name="prop_image" placeholder="Property Image">
                                             </div>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="city_id">Select City</label>
                                             <select name="city_id" class="form-select" id="city_id">
                                                 @foreach ($cities as $city)
@@ -53,7 +53,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="development_id">Select Development</label>
                                             <select name="development_id" class="form-select" id="development_id">
                                                 @foreach ($developments as $development)
@@ -62,7 +62,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="developer_id">Select Developer</label>
                                             <select name="developer_id" class="form-select" id="developer_id">
                                                 @foreach ($developers as $developer)
@@ -71,7 +71,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="architects_id">Select Architect</label>
                                             <select name="architects_id" class="form-select" id="architects_id">
                                                 @foreach ($architects as $architect)
@@ -80,7 +80,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="interior_designer_id">Select interior
                                                 Design</label>
                                             <select name="interior_designer_id" class="form-select"
@@ -91,7 +91,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_agent_id">Select Property Agent</label>
                                             <select name="prop_agent_id" class="form-select" id="prop_agent_id">
                                                 @foreach ($propertyAgents as $propertyAgent)
@@ -100,16 +100,17 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_type">Select Property Type</label>
                                             <select name="prop_type" class="form-select" id="prop_type">
+                                                <option>Select Property Type</option>
                                                 <option value="Condo">Condo</option>
                                                 <option value="Townhouse">Townhouse</option>
                                                 <option value="Condo-Townhomes">Condo Townhomes</option>
                                                 <option value="Single-family">Single family</option>
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_status">Select Property Status</label>
                                             <select name="prop_status" class="form-select" id="prop_status">
                                                 <option value="Pre-Construction">Pre-Construction</option>
@@ -119,21 +120,21 @@
                                             </select>
                                         </div>
 
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="no_of_stories">No Of Stories</label>
                                                 <input type="number" value="0" required class="form-control"
                                                     id="no_of_stories" name="no_of_stories" placeholder="No Of Stories">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="no_of_suites">No Of Suites</label>
                                                 <input type="number" value="0" required class="form-control"
                                                     id="no_of_suites" name="no_of_suites" placeholder="No Of Suites">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="est_occupancy_month">Estimate Occupency
                                                     Month</label>
@@ -142,7 +143,7 @@
                                                     placeholder="Estimate Occupency Month">
                                             </div>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="est_occupancy_year">Estimate Occupency
                                                 Year</label>
                                             <select name="est_occupancy_year" class="form-select"
@@ -160,7 +161,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="vip_launch_date">Vip launch Date <span
                                                         style="font-size: 12px;color: grey;">(If No Vip
@@ -170,7 +171,7 @@
                                                     placeholder="Vip launch Date">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="public_launch_date">Public launch Date <span
                                                         style="font-size: 12px;color: grey;">(If No Public
@@ -180,7 +181,7 @@
                                                     placeholder="Public launch Date">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="const_start_date">Construction Start Date <span
                                                         style="font-size: 12px;color: grey;">(If No
@@ -190,7 +191,7 @@
                                                     placeholder="Construction Start Date">
                                             </div>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="hot_property">Hot Property</label>
                                             <select name="is_hot" class="form-select" id="hot_property"
                                                 aria-label="Default select example">
@@ -199,7 +200,7 @@
                                                 <option value="0">No</option>
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="vip_featured_promotion">Vip/Featured/Promotion</label>
                                             <select class="form-select" name="vip_featured_promotion"
                                                 id="vip_featured_promotion" required>
@@ -208,21 +209,21 @@
                                                 <option value="Promotion">Promotion</option>
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="sale_rent">Sale/Rent</label>
                                             <select name="sale_rent" required id="sale_rent" class="form-select">
                                                 <option value="Sale" selected>Sale</option>
                                                 <option value="Rent">Rent</option>
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="sold_out">Sold Out</label>
                                             <select name="sold_out" required id="sold_out" class="form-select">
                                                 <option value="1">Yes</option>
                                                 <option value="0" selected>No</option>
                                             </select>
                                         </div>
-                                        <div class="mb-4 mt-4 col-md-4">
+                                        <div class="mb-3 mt-3 col-md-4">
                                             <label for="status">Status</label>
                                             <select name="status" required id="status" class="form-select">
                                                 <option value="1">Active</option>
@@ -231,7 +232,7 @@
                                         </div>
 
 
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="suites_starting_floor">Suites Starting
                                                     Floor</label>
@@ -240,7 +241,7 @@
                                                     placeholder="Suites Starting Floor">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="suites_per_floor">Suites Per Floor</label>
                                                 <input type="number" class="form-control" id="suites_per_floor" required
@@ -248,14 +249,14 @@
                                                     placeholder="Suites Per Floor">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="floor_plans">Floor Plans</label>
                                                 <input type="number" required value="0" class="form-control"
                                                     id="floor_plans" name="floor_plans" placeholder="Floor Plans">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_price_from">Property Price From</label>
                                                 <input type="number" class="form-control" id="prop_price_from" required
@@ -263,7 +264,7 @@
                                                     placeholder="Property Price From">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_price_to">Property Price To</label>
                                                 <input type="number" required value="0" class="form-control"
@@ -271,28 +272,28 @@
                                                     placeholder="Property Price To">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="suite_size_from">Suite Size From</label>
                                                 <input type="number" class="form-control" id="suite_size_from" required
                                                     value="0" name="suite_size_from" placeholder="Suite Size From">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="suite_size_to">Suite Size To</label>
                                                 <input type="number" required value="0" class="form-control"
                                                     id="suite_size_to" name="suite_size_to" placeholder="Suite Size To">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="ceiling_height">Ceiling Height</label>
                                                 <input type="number" class="form-control" id="ceiling_height" required
                                                     value="0" name="ceiling_height" placeholder="Ceiling Height">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="price_per_sqft_from">Price Per Sq/ft
                                                     From</label>
@@ -301,7 +302,7 @@
                                                     placeholder="Price Per Sq/ft From">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="price_per_sqft_to">Price Per Sq/ft To</label>
                                                 <input type="number" required value="0" class="form-control"
@@ -309,21 +310,21 @@
                                                     placeholder="Price Per Sq/ft To">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="parking_price">Parking Price</label>
                                                 <input type="number" required value="0" class="form-control"
                                                     id="parking_price" name="parking_price" placeholder="Parking Price">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="locker_price">Locker Price</label>
                                                 <input type="number" required value="0" class="form-control"
                                                     id="locker_price" name="locker_price" placeholder="Locker Price">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-4 mt-4">
+                                        <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="min_deposit_percentage">Min Deposit
                                                     Percentage</label>
@@ -332,28 +333,28 @@
                                                     placeholder="Min Deposit Percentage">
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_address">Property Address</label>
                                                 <input type="text" required class="form-control" id="prop_address"
                                                     name="prop_address" placeholder="Property Address">
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_iframe">Property Location Iframe</label>
                                                 <textarea name="prop_iframe" required placeholder="Property Location Iframe" id="prop_iframe" rows="5"
                                                     class="form-control"> </textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_meta_title">Property Meta Title</label>
                                                 <textarea name="prop_meta_title" placeholder="Property Meta Title" id="prop_meta_title" rows="1"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_meta_description">Property Meta
                                                     Description</label>
@@ -361,7 +362,7 @@
                                                     rows="2" class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_meta_keywords">Property Meta
                                                     Keywords</label>
@@ -369,14 +370,14 @@
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_meta_tags">Property Meta Tags</label>
                                                 <textarea name="prop_meta_tags" placeholder="Property Meta Tags" id="prop_meta_tags" rows="3"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
                                                 Property Features</p>
                                             <table class="table table-bordered table-hover" id="property_feature_table">
@@ -396,7 +397,7 @@
                                                 id="add_property_feature" class="btn btn-xs btn-success"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
                                                 Property Description</p>
                                             <table class="table table-bordered table-hover" id="property_detail_table">
@@ -416,7 +417,7 @@
                                                 id="add_property_detail" class="btn btn-xs btn-success"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
                                                 Property Images</p>
                                             <div class="row" id="property_image_row">
@@ -427,7 +428,7 @@
                                                 id="add_property_image" class="btn btn-xs btn-success"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3">
                                             <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
                                                 Property Floor Plan</p>
                                             <div id="property_floor_plan_image_row">
@@ -438,7 +439,7 @@
                                                 id="add_property_floor_plan" class="btn btn-xs btn-success"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mb-4 mt-4">
+                                        <div class="col-md-12 mb-3 mt-3" style="display: flex; align-items: center; justify-content: center">
 
                                             <button type="submit"
                                                 style="margin-top: 5rem;padding: 0.5rem 5rem 0.5rem 5rem;"

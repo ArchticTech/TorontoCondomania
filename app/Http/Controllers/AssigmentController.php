@@ -47,4 +47,9 @@ class AssigmentController extends Controller
 
         return $final;
     }
+
+    public function get($id)
+    {
+        return Assignment::find($id);
+    }
 }

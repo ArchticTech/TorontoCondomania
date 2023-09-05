@@ -23,7 +23,7 @@
                             <div class="card-body">
                                 {{-- action="{{ route('admin.property.update', $property->id) }}"  --}}
                                 <form method="POST" id="property_add" enctype="multipart/form-data"
-                                action = "{{ route('admin.property.update', ['id' => $property->id]) }}" />
+                                    action="{{ route('admin.property.update', ['id' => $property->id]) }}" />
                                 <div class="row">
                                     @csrf
                                     @method('PUT')
@@ -152,16 +152,16 @@
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="no_of_stories">No Of Stories</label>
-                                            <input type="number" value="0" required class="form-control"
-                                                id="no_of_stories" name="no_of_stories" placeholder="No Of Stories"
+                                            <input type="number" required class="form-control" id="no_of_stories"
+                                                name="no_of_stories" placeholder="No Of Stories"
                                                 value="{{ $property->no_of_stories }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="no_of_suites">No Of Suites</label>
-                                            <input type="number" value="0" required class="form-control"
-                                                id="no_of_suites" name="no_of_suites" placeholder="No Of Suites"
+                                            <input type="number" required class="form-control" id="no_of_suites"
+                                                name="no_of_suites" placeholder="No Of Suites"
                                                 value="{{ $property->no_of_suites }}">
                                         </div>
                                     </div>
@@ -205,7 +205,7 @@
                                             <label for="vip_launch_date">Vip launch Date <span
                                                     style="font-size: 12px;color: grey;">(If No Vip
                                                     launch Date : 01/01/2020)</span></label>
-                                            <input class="form-control" required value="2020-01-01" id="vip_launch_date"
+                                            <input class="form-control" required id="vip_launch_date"
                                                 name="vip_launch_date" type="date" placeholder="Vip launch Date"
                                                 value="{{ $property->vip_launch_date }}">
                                         </div>
@@ -215,9 +215,8 @@
                                             <label for="public_launch_date">Public launch Date <span
                                                     style="font-size: 12px;color: grey;">(If No Public
                                                     launch Date : 01/01/2020)</span></label>
-                                            <input class="form-control" value="2020-01-01" id="public_launch_date"
-                                                required name="public_launch_date" type="date"
-                                                placeholder="Public launch Date"
+                                            <input class="form-control" id="public_launch_date" required
+                                                name="public_launch_date" type="date" placeholder="Public launch Date"
                                                 value="{{ $property->public_launch_date }}">
                                         </div>
                                     </div>
@@ -226,9 +225,8 @@
                                             <label for="const_start_date">Construction Start Date <span
                                                     style="font-size: 12px;color: grey;">(If No
                                                     Construction Start Date : 01/01/2020)</span></label>
-                                            <input class="form-control" value="2020-01-01" id="const_start_date" required
+                                            <input class="form-control" id="const_start_date" required
                                                 name="const_start_date" type="date"
-                                                placeholder="Construction Start Date"
                                                 value="{{ $property->const_start_date }}">
                                         </div>
                                     </div>
@@ -236,7 +234,7 @@
                                         <label for="hot_property">Hot Property</label>
                                         <select name="is_hot" class="form-select" id="hot_property"
                                             aria-label="Default select example">
-                                            {{-- <option selected>Hot Property</option> --}}
+                                            <option value="">Hot Property</option>
                                             <option value="1" @if ($property->is_hot == '1') selected @endif>Yes
                                             </option>
                                             <option value="0" @if ($property->is_hot == '0') selected @endif>No
@@ -289,8 +287,7 @@
                                             <label for="suites_starting_floor">Suites Starting
                                                 Floor</label>
                                             <input type="number" class="form-control" id="suites_starting_floor"
-                                                required value="0" name="suites_starting_floor"
-                                                placeholder="Suites Starting Floor"
+                                                required name="suites_starting_floor" placeholder="Suites Starting Floor"
                                                 value="{{ $property->suites_starting_floor }}">
                                         </div>
                                     </div>
@@ -298,91 +295,79 @@
                                         <div class="form-group">
                                             <label for="suites_per_floor">Suites Per Floor</label>
                                             <input type="number" class="form-control" id="suites_per_floor" required
-                                                value="0" name="suites_per_floor" placeholder="Suites Per Floor"
+                                                name="suites_per_floor" placeholder="Suites Per Floor"
                                                 value="{{ $property->suites_per_floor }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="floor_plans">Floor Plans</label>
-                                            <input type="number" required value="0" class="form-control"
-                                                id="floor_plans" name="floor_plans" placeholder="Floor Plans"
-                                                value="{{ $property->floor_plans }}">
+                                            <input type="number" required class="form-control" id="floor_plans"
+                                                name="floor_plans" value="{{ $property->floor_plans }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_price_from">Property Price From</label>
                                             <input type="number" class="form-control" id="prop_price_from" required
-                                                value="0" name="prop_price_from" placeholder="Property Price From"
-                                                value="{{ $property->prop_price_from }}">
+                                                name="prop_price_from" value="{{ $property->prop_price_from }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_price_to">Property Price To</label>
-                                            <input type="number" required value="0" class="form-control"
-                                                id="prop_price_to" name="prop_price_to" placeholder="Property Price To"
-                                                value="{{ $property->prop_price_to }}">
+                                            <input type="number" required class="form-control" id="prop_price_to"
+                                                name="prop_price_to" value="{{ $property->prop_price_to }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="suite_size_from">Suite Size From</label>
                                             <input type="number" class="form-control" id="suite_size_from" required
-                                                value="0" name="suite_size_from" placeholder="Suite Size From"
-                                                value="{{ $property->suite_size_from }}">
+                                                name="suite_size_from" value="{{ $property->suite_size_from }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="suite_size_to">Suite Size To</label>
-                                            <input type="number" required value="0" class="form-control"
-                                                id="suite_size_to" name="suite_size_to" placeholder="Suite Size To"
-                                                value="{{ $property->suite_size_to }}">
+                                            <input type="number" required class="form-control" id="suite_size_to"
+                                                name="suite_size_to" value="{{ $property->suite_size_to }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="ceiling_height">Ceiling Height</label>
                                             <input type="number" class="form-control" id="ceiling_height" required
-                                                value="0" name="ceiling_height" placeholder="Ceiling Height"
-                                                value="{{ $property->ceiling_height }}">
+                                                name="ceiling_height" value="{{ $property->ceiling_height }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="price_per_sqft_from">Price Per Sq/ft
                                                 From</label>
-                                            <input type="number" required value="0" class="form-control"
-                                                id="price_per_sqft_from" name="price_per_sqft_from"
-                                                placeholder="Price Per Sq/ft From"
-                                                value="{{ $property->price_per_sqft_from }}">
+                                            <input type="number" required class="form-control" id="price_per_sqft_from"
+                                                name="price_per_sqft_from" value="{{ $property->price_per_sqft_from }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="price_per_sqft_to">Price Per Sq/ft To</label>
-                                            <input type="number" required value="0" class="form-control"
-                                                id="price_per_sqft_to" name="price_per_sqft_to"
-                                                placeholder="Price Per Sq/ft To"
-                                                value="{{ $property->price_per_sqft_to }}">
+                                            <input type="number" required class="form-control" id="price_per_sqft_to"
+                                                name="price_per_sqft_to" value="{{ $property->price_per_sqft_to }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="parking_price">Parking Price</label>
-                                            <input type="number" required value="0" class="form-control"
-                                                id="parking_price" name="parking_price" placeholder="Parking Price"
-                                                value="{{ $property->parking_price }}">
+                                            <input type="number" required class="form-control" id="parking_price"
+                                                name="parking_price" value="{{ $property->parking_price }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="locker_price">Locker Price</label>
-                                            <input type="number" required value="0" class="form-control"
-                                                id="locker_price" name="locker_price" placeholder="Locker Price"
-                                                value="{{ $property->locker_price }}">
+                                            <input type="number" required class="form-control" id="locker_price"
+                                                name="locker_price" value="{{ $property->locker_price }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
@@ -390,8 +375,7 @@
                                             <label for="min_deposit_percentage">Min Deposit
                                                 Percentage</label>
                                             <input type="number" class="form-control" id="min_deposit_percentage"
-                                                required value="0" name="min_deposit_percentage"
-                                                placeholder="Min Deposit Percentage"
+                                                required name="min_deposit_percentage"
                                                 value="{{ $property->min_deposit_percentage }}">
                                         </div>
                                     </div>
@@ -399,45 +383,39 @@
                                         <div class="form-group">
                                             <label for="prop_address">Property Address</label>
                                             <input type="text" required class="form-control" id="prop_address"
-                                                name="prop_address" placeholder="Property Address"
-                                                value="{{ $property->prop_address }}">
+                                                name="prop_address" value="{{ $property->prop_address }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_iframe">Property Location Iframe</label>
-                                            <textarea name="prop_iframe" required placeholder="Property Location Iframe" id="prop_iframe" rows="5"
-                                                class="form-control"> </textarea>
+                                            <textarea name="prop_iframe" required id="prop_iframe" rows="5" class="form-control" value="{{ $property->prop_iframe }}"> </textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_title">Property Meta Title</label>
-                                            <textarea name="prop_meta_title" placeholder="Property Meta Title" id="prop_meta_title" rows="1"
-                                                class="form-control"></textarea>
+                                            <textarea name="prop_meta_title" id="prop_meta_title" rows="1" class="form-control" value="{{ $property->prop_meta_title }}"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_description">Property Meta
                                                 Description</label>
-                                            <textarea name="prop_meta_description" placeholder="Property Meta Description" id="prop_meta_description"
-                                                rows="2" class="form-control"></textarea>
+                                            <textarea name="prop_meta_description" id="prop_meta_description" rows="2" class="form-control" value="{{ $property->prop_meta_description }}"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_keywords">Property Meta
                                                 Keywords</label>
-                                            <textarea name="prop_meta_keywords" placeholder="Property Meta Keywords" id="prop_meta_keywords" rows="1"
-                                                class="form-control"></textarea>
+                                            <textarea name="prop_meta_keywords" id="prop_meta_keywords" rows="1" class="form-control" value="{{ $property->prop_meta_keywords }}"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_tags">Property Meta Tags</label>
-                                            <textarea name="prop_meta_tags" placeholder="Property Meta Tags" id="prop_meta_tags" rows="3"
-                                                class="form-control"></textarea>
+                                            <textarea name="prop_meta_tags" id="prop_meta_tags" rows="3" class="form-control" value="{{ $property->prop_meta_tags }}"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
@@ -502,7 +480,7 @@
                                             id="add_property_floor_plan" class="btn btn-xs btn-success"><i
                                                 class="bx bx-plus"></i></button>
                                     </div>
-                                    <div class="col-md-12 mb-3 mt-3">
+                                    <div class="col-md-12 mb-3 mt-3" style="display: flex; align-items: center; justify-content: center">
 
                                         <button type="submit" style="margin-top: 5rem;padding: 0.5rem 5rem 0.5rem 5rem;"
                                             class="btn btn-success" id="add_property_button">Update

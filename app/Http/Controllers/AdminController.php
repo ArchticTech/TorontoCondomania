@@ -117,4 +117,23 @@ class AdminController extends Controller
                 ->with('message', 'Assigment Failed to Add');
         }
     }
+    public function editAssigment($id)
+    {
+        $architects = Architect::all();
+        $cities = City::all();
+        $developers = Developer::all();
+        $developments = Development::all();
+        $interiorDesigners = InteriorDesigner::all();
+        $propertyAgents = PropertyAgent::all();
+
+        $assigment = $this->assigmentController->get($id);
+
+        return view('admin.assignment-edit', compact('assigment','architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
+
+    }
+    // public function updateAssignment(Request $request, $id)
+    // {
+
+    //     return $this->propertyController->update($request, $id);
+    // }
 }
