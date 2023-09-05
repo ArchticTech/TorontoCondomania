@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Property;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+use App\Models\Assigment;
 
 class PropertyController extends Controller
 {
@@ -27,6 +28,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->prop_name);
         $date = now();
 
         $prop_code = $request->input('prop_code');

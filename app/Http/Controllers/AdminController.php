@@ -13,6 +13,7 @@ use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
 
+
 class AdminController extends Controller
 {
     private $propertyController, $assigmentController;
@@ -31,7 +32,7 @@ class AdminController extends Controller
         $interiorDesigners = InteriorDesigner::count();
         $propertyAgents = PropertyAgent::all();
 
-        return view('admin.index', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents','country'));
+        return view('admin.index', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents', 'country'));
     }
     public function viewProperty()
     {
@@ -54,15 +55,13 @@ class AdminController extends Controller
     {
         $propertySave = $this->propertyController->store($request);
 
-        if($propertySave){
+        if ($propertySave) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Added Successfully');
-            }
-        else {
+        } else {
             return redirect()->route('admin.property.add')
                 ->with('message', 'Property Failed to Add');
         }
-
     }
     public function editProperty($id)
     {
@@ -75,7 +74,7 @@ class AdminController extends Controller
 
         $property = $this->propertyController->get($id);
 
-        return view('admin.property-edit', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents','property'));
+        return view('admin.property-edit', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents', 'property'));
     }
     public function updateProperty(Request $request, $id)
     {
@@ -85,6 +84,13 @@ class AdminController extends Controller
 
 
     //Assigments CRUD
+
+    public function viewAssigments()
+    {
+        $assigments = $this->assigmentController->all();
+
+        return view('admin.assigment-view', ['assigments' => $assigments]);
+    }
 
     public function addAssigment()
     {
@@ -102,15 +108,13 @@ class AdminController extends Controller
     {
         $assigmentSave = $this->assigmentController->store($request);
 
-        if($assigmentSave){
+
+        if ($assigmentSave) {
             return redirect()->route('admin.assigment.view')
                 ->with('message', 'Assigment Added Successfully');
-            }
-        else {
+        } else {
             return redirect()->route('admin.assigment.add')
                 ->with('message', 'Assigment Failed to Add');
         }
-
     }
-
 }
