@@ -21,7 +21,7 @@ Route::prefix('secure-zone')->group(function () {
     });
 
     Route::prefix('assigment')->group(function () {
-        // Routes within the 'secure-zone/property' group
+        // Routes within the 'secure-zone/assignment' group
         //Assigments CRUD routes
         Route::get('', [AdminController::class, 'viewAssigments'])->name('admin.assigment.view');
         Route::get('add', [AdminController::class, 'addAssigment'])->name('admin.assigment.add');

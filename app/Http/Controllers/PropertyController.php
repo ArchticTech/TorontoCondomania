@@ -28,7 +28,6 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->prop_name);
         $date = now();
 
         $prop_code = $request->input('prop_code');
@@ -92,7 +91,6 @@ class PropertyController extends Controller
         $image = $request->file('prop_image');
         $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $prop_imageName);
-
 
         $property = new Property([
             'prop_code' => $prop_code,
@@ -164,13 +162,10 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($id);
         // Find the property by its ID
         $property = Property::find($id);
-        // dd($property->prop_name);
 
         if (!$property) {
-            // Handle the case where the property with the given ID is not found, e.g., return a 404 response.
             return redirect()->route('admin.property')
                 ->with('message', 'Property Not Found');
         }
@@ -224,17 +219,7 @@ class PropertyController extends Controller
         $property->locker_price = $request->input('locker_price');
         $property->min_deposit_percentage = $request->input('min_deposit_percentage');
 
-        // Check if a new image has been uploaded
-        // if ($request->hasFile('prop_image')) {
-        //     // Handle the image upload here, e.g., store it and update the image attribute.
-        //     // Assuming you store the image in a folder named "images" under the public directory:
-        //     $image = $request->file('prop_image');
-        //     $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
-        //     $image->move(public_path('images'), $prop_imageName);
-        //     $property->prop_image = $prop_imageName;
-        // }
-
-        $imagePath = public_path('images/' . $request->input('prop_imageName')); // Replace with the actual image name
+        $imagePath = public_path('images/' . $request->input('prop_imageName'));
 
         if (File::exists($imagePath)) {
             // Delete the image if it exists
@@ -246,27 +231,9 @@ class PropertyController extends Controller
         $image->move(public_path('images'), $prop_imageName);
         $property->prop_image = $prop_imageName;
 
-        // dd($property->prop_name);
-
         $propertySave =  $property->save();
 
-
-        if ($propertySave) {
-            return redirect()->route('admin.property.view')
-                ->with('message', 'Property Updated Successfully');
-        }
-
-        return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
+        return $propertySave;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

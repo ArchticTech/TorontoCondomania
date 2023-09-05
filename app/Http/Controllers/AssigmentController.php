@@ -18,7 +18,6 @@ class AssigmentController extends Controller
     }
     public function all()
     {
-
         $assignments = Assignment::with('property')->get();
 
         return $assignments;
@@ -40,11 +39,28 @@ class AssigmentController extends Controller
         ]);
 
         $final = $assignment->save();
-        // dd($assignment->assign_unit_no);
 
         // Associate the assignment with the property
         $property->assignment()->save($assignment);
 
         return $final;
+    }
+    public function update(Request $request, $id)
+    {
+        $assignment = Assignment::findOrFail($id);
+
+        $propertySave = $this->propertyController->update($request, $assignment->property_id);
+
+        $assignment->assign_unit_no = $request->input('assign_unit_no');
+        $assignment->assign_floor_no = $request->input('assign_floor_no');
+        $assignment->assign_purchase_price = $request->input('assign_purchase_price');
+        $assignment->assign_tentative_occ_date = $request->input('assign_tentative_occ_date');
+        $assignment->assign_purchased_date = $request->input('assign_purchased_date');
+        $assignment->assign_cooperation_percentage = $request->input('assign_cooperation_percentage');
+        $assignment->assign_deposit_paid = $request->input('assign_deposit_paid');
+        
+        $assignmentSave = $assignment->save();
+
+        return ($assignmentSave && $propertySave);
     }
 }

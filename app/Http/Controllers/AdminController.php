@@ -78,12 +78,18 @@ class AdminController extends Controller
     }
     public function updateProperty(Request $request, $id)
     {
+        $propertySave = $this->propertyController->update($request, $id);
 
-        return $this->propertyController->update($request, $id);
+        if ($propertySave) {
+            return redirect()->route('admin.property.view')
+                ->with('message', 'Property Updated Successfully');
+        }
+        else {
+            return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
+        }   
     }
 
-
-    //Assigments CRUD
+    // Assigments CRUD
 
     public function viewAssigments()
     {
@@ -108,7 +114,6 @@ class AdminController extends Controller
     {
         $assigmentSave = $this->assigmentController->store($request);
 
-
         if ($assigmentSave) {
             return redirect()->route('admin.assigment.view')
                 ->with('message', 'Assigment Added Successfully');
@@ -116,5 +121,30 @@ class AdminController extends Controller
             return redirect()->route('admin.assigment.add')
                 ->with('message', 'Assigment Failed to Add');
         }
+    }
+    public function editAssignment($id)
+    {
+        $architects = Architect::all();
+        $cities = City::all();
+        $developers = Developer::all();
+        $developments = Development::all();
+        $interiorDesigners = InteriorDesigner::all();
+        $propertyAgents = PropertyAgent::all();
+
+        $assignment = $this->assignmentController->get($id);
+
+        return view('admin.assignment-edit', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents', 'assignment'));
+    }
+    public function updateAssignment(Request $request, $id)
+    {
+        $assignmentSave = $this->assignmentController->update($request, $id);
+
+        if ($assignmentSave) {
+            return redirect()->route('admin.assignment.view')
+                ->with('message', 'Assignment Updated Successfully');
+        }
+        else {
+            return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
+        }   
     }
 }
