@@ -12,6 +12,7 @@ use App\Models\Development;
 use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
+use App\Models\Property;
 
 
 class AdminController extends Controller
@@ -48,14 +49,19 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
-        return view('admin.property-add', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
+        return view('admin.property-add', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function storeProperty(Request $request)
     {
-        [$propertySaved, $property] = $this->propertyController->store($request);
+        $result = $this->propertyController->store($request);
 
-        if ($propertySaved) {
+        if ($result['saved']) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Added Successfully');
         } else {
@@ -71,16 +77,21 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
         $property = $this->propertyController->get($id);
 
-        return view('admin.property-edit', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents', 'property'));
+        return view('admin.property-edit', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'property', 'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function updateProperty(Request $request, $id)
     {
-        [$propertySaved, $property] = $this->propertyController->update($request, $id);
+        $result = $this->propertyController->update($request, $id);
 
-        if ($propertySaved) {
+        if ($result['saved']) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Updated Successfully');
         }
@@ -106,8 +117,13 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
-        return view('admin.assigment-add', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
+        return view('admin.assigment-add', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'propertyTypeEnums', 'propertyStatusEnums'));
     }
 
     public function storeAssigment(Request $request)
@@ -130,10 +146,15 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
         $assignment = $this->assignmentController->get($id);
 
-        return view('admin.assignment-edit', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents', 'assignment'));
+        return view('admin.assignment-edit', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'assignment', 'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function updateAssignment(Request $request, $id)
     {

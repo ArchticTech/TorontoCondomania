@@ -14,8 +14,7 @@ class Property extends Model
         'prop_meta_title', 'prop_meta_description', 'prop_meta_keywords', 'prop_meta_tags',
         'prop_type', 'prop_status', 'no_of_stories', 'no_of_suites', 'est_occupancy_month',
         'est_occupancy_year', 'vip_launch_date', 'public_launch_date', 'const_start_date',
-        'is_hot', 'is_vip', 'is_featured', 'is_promotion', 'is_assignment', 'for_sale',
-        'for_rent', 'sold_out', 'status', 'created_by', 'created_date'
+        'is_hot', 'vip_featured_promotion', 'is_assignment', 'sale_rent', 'sold_out', 'status', 'created_by', 'created_date'
     ];
 
     public function city()
@@ -63,5 +62,14 @@ class Property extends Model
     public function assignment()
     {
         return $this->hasOne(Assignment::class, 'property_id', 'id');
+    }
+
+    public static function getPropertyTypeEnums()
+    {
+        return ['Condo', 'Townhouse', 'Condo Townhomes', 'Single Family'];
+    }
+    public static function getPropertyStatusEnums()
+    {
+        return ['Pre-Construction', 'Under-Construction', 'Ready to move'];
     }
 }

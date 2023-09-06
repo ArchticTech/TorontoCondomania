@@ -103,10 +103,9 @@
                                         <div class="mb-4 mt-4 col-md-4">
                                             <label for="prop_type">Select Property Type</label>
                                             <select name="prop_type" class="form-select" id="prop_type">
-                                                <option value="Condo">Condo</option>
-                                                <option value="Townhouse">Townhouse</option>
-                                                <option value="Condo-Townhomes">Condo Townhomes</option>
-                                                <option value="Single-family">Single family</option>
+                                                @foreach($propertyTypeEnums as $value)
+                                                    <option value="{{ $value }}">{{ $value }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-4 mt-4 col-md-4">
@@ -343,7 +342,7 @@
                                             <div class="form-group">
                                                 <label for="prop_iframe">Property Location Iframe</label>
                                                 <textarea name="prop_iframe" required placeholder="Property Location Iframe" id="prop_iframe" rows="5"
-                                                    class="form-control"> </textarea>
+                                                    class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4 mt-4">

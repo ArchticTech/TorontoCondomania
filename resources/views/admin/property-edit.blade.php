@@ -68,7 +68,7 @@
                                         </select>
                                     </div>
                                     <div class="mb-3 mt-3 col-md-4">
-                                        <label for="development_id">Select Developmenth</label>
+                                        <label for="development_id">Select Development</label>
                                         <select name="development_id" class="form-select" id="development_id"
                                             value="{{ $property->development_id }}">
                                             <@foreach ($developments as $development)
@@ -130,10 +130,10 @@
                                             </option>
                                             <option value="Townhouse" @if ($property->prop_type == 'Townhouse') selected @endif>
                                                 Townhouse</option>
-                                            <option value="Condo-Townhomes"
-                                                @if ($property->prop_type == 'Condo-Townhomes') selected @endif>Condo Townhomes</option>
-                                            <option value="Single-family"
-                                                @if ($property->prop_type == 'Single-family') selected @endif>Single family</option>
+                                            <option value="Condo Townhomes"
+                                                @if ($property->prop_type == 'Condo Townhomes') selected @endif>Condo Townhomes</option>
+                                            <option value="Single Family"
+                                                @if ($property->prop_type == 'Single Family') selected @endif>Single Family</option>
                                         </select>
                                     </div>
                                     <div class="mb-3 mt-3 col-md-4">

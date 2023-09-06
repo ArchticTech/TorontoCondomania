@@ -30,8 +30,8 @@ class Property extends Migration
             $table->text('prop_meta_description')->nullable();
             $table->text('prop_meta_keywords')->nullable();
             $table->text('prop_meta_tags')->nullable();
-            $table->string('prop_type', 100);
-            $table->string('prop_status', 100);
+            $table->enum('prop_type', ['Condo', 'Townhouse', 'Condo Townhomes', 'Single Family']);
+            $table->enum('prop_status', ['Pre-Construction', 'Under-Construction', 'Ready to move']);
             $table->integer('no_of_stories')->default(0);
             $table->integer('no_of_suites')->default(0);
             $table->string('est_occupancy_month', 100);
@@ -39,13 +39,10 @@ class Property extends Migration
             $table->date('vip_launch_date');
             $table->date('public_launch_date');
             $table->date('const_start_date');
+            $table->enum('vip_featured_promotion', ['Vip', 'Featured', 'Promotion']);
+            $table->enum('sale_rent', ['Sale', 'Rent']);
             $table->boolean('is_hot')->default(false);
-            $table->boolean('is_vip')->default(false);
-            $table->boolean('is_featured')->default(false);
-            $table->boolean('is_promotion')->default(false);
             $table->boolean('is_assignment')->default(false);
-            $table->boolean('for_sale')->default(false);
-            $table->boolean('for_rent')->default(false);
             $table->boolean('sold_out')->default(false);
 
             $table->integer('suites_starting_floor')->default(0);

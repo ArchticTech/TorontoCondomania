@@ -53,27 +53,10 @@ class PropertyController extends Controller
 
         $is_hot = $request->input('is_hot');
         $vip_featured_promotion = $request->input('vip_featured_promotion');
-        $is_vip = $is_featured = $is_promotion = 0;
-
-        if ($vip_featured_promotion === 'Vip') {
-            $is_vip = 1;
-        } elseif ($vip_featured_promotion === 'Featured') {
-            $is_featured = 1;
-        } elseif ($vip_featured_promotion === 'Promotion') {
-            $is_promotion = 1;
-        }
-
         $sale_rent = $request->input('sale_rent');
-        $for_sale = $for_rent = 0;
-
-        if ($sale_rent === 'Sale') {
-            $for_sale = 1;
-        } elseif ($sale_rent === 'Rent') {
-            $for_rent = 1;
-        }
-
         $sold_out = $request->input('sold_out');
         $status = $request->input('status');
+
         $suites_starting_floor = $request->input('suites_starting_floor');
         $suites_per_floor = $request->input('suites_per_floor');
         $floor_plans = $request->input('floor_plans');
@@ -116,11 +99,8 @@ class PropertyController extends Controller
             'public_launch_date' => $public_launch_date,
             'const_start_date' => $const_start_date,
             'is_hot' => $is_hot,
-            'is_vip' => $is_vip,
-            'is_featured' => $is_featured,
-            'is_promotion' => $is_promotion,
-            'for_sale' => $for_sale,
-            'for_rent' => $for_rent,
+            'vip_featured_promotion' => $vip_featured_promotion,
+            'sale_rent' => $sale_rent,
             'sold_out' => $sold_out,
             'status' => $status,
             'suites_starting_floor' => $suites_starting_floor,
@@ -142,7 +122,7 @@ class PropertyController extends Controller
 
         $saved = $property->save();
 
-        if($saved)
+        if($saved && $request->input('prop_feature'))
         {
             $this->addFeatures($request->input('prop_feature'), $property);
         }
@@ -160,7 +140,6 @@ class PropertyController extends Controller
                 'prop_feature' => $feature,
                 'status' => 1
             ]);
-            $propertyFeature->save();
 
             $property->propertyFeatures()->save($propertyFeature);
         }
@@ -211,24 +190,17 @@ class PropertyController extends Controller
         $property->no_of_suites = $request->input('no_of_suites');
         $property->est_occupancy_month = $request->input('est_occupancy_month');
         $property->est_occupancy_year = $request->input('est_occupancy_year');
+        
         $property->vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
         $property->public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
         $property->const_start_date = now()->parse($request->input('const_start_date'))->toDateString();
+
         $property->is_hot = $request->input('is_hot');
-
-        // Check the VIP, Featured, Promotion status
-        $vip_featured_promotion = $request->input('vip_featured_promotion');
-        $property->is_vip = ($vip_featured_promotion === 'Vip') ? 1 : 0;
-        $property->is_featured = ($vip_featured_promotion === 'Featured') ? 1 : 0;
-        $property->is_promotion = ($vip_featured_promotion === 'Promotion') ? 1 : 0;
-
-        // Check the Sale/Rent status
-        $sale_rent = $request->input('sale_rent');
-        $property->for_sale = ($sale_rent === 'Sale') ? 1 : 0;
-        $property->for_rent = ($sale_rent === 'Rent') ? 1 : 0;
-
+        $property->vip_featured_promotion = $request->input('vip_featured_promotion');
+        $property->sale_rent = $request->input('sale_rent');
         $property->sold_out = $request->input('sold_out');
         $property->status = $request->input('status');
+
         $property->suites_starting_floor = $request->input('suites_starting_floor');
         $property->suites_per_floor = $request->input('suites_per_floor');
         $property->floor_plans = $request->input('floor_plans');

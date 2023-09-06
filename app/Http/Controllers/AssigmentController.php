@@ -24,10 +24,15 @@ class AssigmentController extends Controller
     }
     public function store(Request $request)
     {
-        [$propertySaved, $property] = $this->propertyController->store($request);
+        $result = $this->propertyController->store($request);
+
+        $propertySaved = $result['saved'];
+        $property = $result['property'];
+
+        $property->is_assignment = true;
+        $property->save();
 
         $assignment = new Assignment([
-            'property_id' => $property['id'],
             'assign_unit_no' => $request->input('assign_unit_no'),
             'assign_floor_no' => $request->input('assign_floor_no'),
             'assign_purchase_price' => $request->input('assign_purchase_price'),
@@ -38,10 +43,8 @@ class AssigmentController extends Controller
             'created_by' => 1,
         ]);
 
-        $assignmentSaved = $assignment->save();
-
         // Associate the assignment with the property
-        $property->assignment()->save($assignment);
+        $assignmentSaved = $property->assignment()->save($assignment);
 
         return ($assignmentSaved && $propertySaved);
     }
@@ -49,7 +52,9 @@ class AssigmentController extends Controller
     {
         $assignment = Assignment::findOrFail($id);
 
-        [$propertySaved, $property] = $this->propertyController->update($request, $assignment->property_id);
+        $result = $this->propertyController->update($request, $assignment->property_id);
+
+        $propertySaved = $result['saved'];
 
         $assignment->assign_unit_no = $request->input('assign_unit_no');
         $assignment->assign_floor_no = $request->input('assign_floor_no');
