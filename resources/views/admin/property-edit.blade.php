@@ -452,7 +452,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="property_feature_tbody">
-
                                             </tbody>
                                         </table>
                                         <button type="button" name="add_property_feature"

@@ -23,6 +23,20 @@ class AdminController extends Controller
         $this->propertyController = $propertyController;
         $this->assigmentController = $assigmentController;
     }
+    private function getFormData()
+    {
+        return [
+            'architects' => Architect::all(),
+            'cities' => City::all(),
+            'developers' => Developer::all(),
+            'developments' => Development::all(),
+            'interiorDesigners' => InteriorDesigner::all(),
+            'propertyAgents' => PropertyAgent::all(),
+            'propertyTypeEnums' => Property::getPropertyTypeEnums(),
+            'propertyStatusEnums' => Property::getPropertyStatusEnums(),
+        ];
+    }
+
     public function dashboard()
     {
         $architects = Architect::count();
@@ -43,19 +57,9 @@ class AdminController extends Controller
     }
     public function addProperty()
     {
-        $architects = Architect::all();
-        $cities = City::all();
-        $developers = Developer::all();
-        $developments = Development::all();
-        $interiorDesigners = InteriorDesigner::all();
-        $propertyAgents = PropertyAgent::all();
-        
-        $propertyTypeEnums = Property::getPropertyTypeEnums();
-        $propertyStatusEnums = Property::getPropertyStatusEnums();
+        $data = $this->getFormData();
 
-        return view('admin.property-add', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
-        'propertyTypeEnums', 'propertyStatusEnums'));
+        return view('admin.property-add', $data);
     }
     public function storeProperty(Request $request)
     {
@@ -71,21 +75,13 @@ class AdminController extends Controller
     }
     public function editProperty($id)
     {
-        $architects = Architect::all();
-        $cities = City::all();
-        $developers = Developer::all();
-        $developments = Development::all();
-        $interiorDesigners = InteriorDesigner::all();
-        $propertyAgents = PropertyAgent::all();
+        $data = $this->getFormData();
+
+        $data['property'] = $this->propertyController->get($id);
         
-        $propertyTypeEnums = Property::getPropertyTypeEnums();
-        $propertyStatusEnums = Property::getPropertyStatusEnums();
+        $data['features'] = $data['property']->propertyFeatures();
 
-        $property = $this->propertyController->get($id);
-
-        return view('admin.property-edit', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
-        'property', 'propertyTypeEnums', 'propertyStatusEnums'));
+        return view('admin.property-edit', $data);
     }
     public function updateProperty(Request $request, $id)
     {
@@ -111,19 +107,9 @@ class AdminController extends Controller
 
     public function addAssigment()
     {
-        $architects = Architect::all();
-        $cities = City::all();
-        $developers = Developer::all();
-        $developments = Development::all();
-        $interiorDesigners = InteriorDesigner::all();
-        $propertyAgents = PropertyAgent::all();
-        
-        $propertyTypeEnums = Property::getPropertyTypeEnums();
-        $propertyStatusEnums = Property::getPropertyStatusEnums();
+        $data = $this->getFormData();
 
-        return view('admin.assigment-add', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
-        'propertyTypeEnums', 'propertyStatusEnums'));
+        return view('admin.assigment-add', $data);
     }
 
     public function storeAssigment(Request $request)
@@ -140,21 +126,11 @@ class AdminController extends Controller
     }
     public function editAssignment($id)
     {
-        $architects = Architect::all();
-        $cities = City::all();
-        $developers = Developer::all();
-        $developments = Development::all();
-        $interiorDesigners = InteriorDesigner::all();
-        $propertyAgents = PropertyAgent::all();
-        
-        $propertyTypeEnums = Property::getPropertyTypeEnums();
-        $propertyStatusEnums = Property::getPropertyStatusEnums();
+        $data = $this->getFormData();
 
-        $assignment = $this->assignmentController->get($id);
+        $data['assignment'] = $this->assignmentController->get($id);
 
-        return view('admin.assignment-edit', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
-        'assignment', 'propertyTypeEnums', 'propertyStatusEnums'));
+        return view('admin.assignment-edit', $data);
     }
     public function updateAssignment(Request $request, $id)
     {

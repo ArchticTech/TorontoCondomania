@@ -22,6 +22,10 @@ class AssigmentController extends Controller
 
         return $assignments;
     }
+    public function get($id)
+    {
+        return Assignment::find($id);
+    }
     public function store(Request $request)
     {
         $result = $this->propertyController->store($request);
@@ -39,8 +43,7 @@ class AssigmentController extends Controller
             'assign_tentative_occ_date' => $request->input('assign_tentative_occ_date'),
             'assign_purchased_date' => $request->input('assign_purchased_date'),
             'assign_cooperation_percentage' => $request->input('assign_cooperation_percentage'),
-            'assign_deposit_paid' => $request->input('assign_deposit_paid'),
-            'created_by' => 1,
+            'assign_deposit_paid' => $request->input('assign_deposit_paid')
         ]);
 
         // Associate the assignment with the property

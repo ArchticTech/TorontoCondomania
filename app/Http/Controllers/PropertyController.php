@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Property;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+use App\Models\Property;
 use App\Models\Assigment;
+use App\Models\PropertyFeature;
 
 class PropertyController extends Controller
 {
