@@ -23,7 +23,7 @@ class CreateAssignmentsTable extends Migration
             $table->date('assign_purchased_date')->nullable();
             $table->integer('assign_cooperation_percentage');
             $table->integer('assign_deposit_paid');
-            $table->integer('created_by');
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
         });
     }

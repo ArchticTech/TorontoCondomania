@@ -44,9 +44,7 @@ class ArchitectSeeder extends Seeder
         foreach ($architectNames as $name) {
             DB::table('architects')->insert([
                 'architects_name' => $name,
-                'is_main' => 1,
-                'status' => 1,
-                'created_by' => 1,
+                'is_main' => 1
             ]);
         }
     }

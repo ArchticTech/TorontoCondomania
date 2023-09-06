@@ -50,9 +50,7 @@ class DeveloperSeeder extends Seeder
         foreach ($developerNames as $name) {
             DB::table('developers')->insert([
                 'developer_name' => $name,
-                'is_main' => 1,
-                'status' => 1,
-                'created_by' => 1,
+                'is_main' => 1
             ]);
         }
     }

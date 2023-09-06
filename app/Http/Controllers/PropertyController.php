@@ -1,5 +1,5 @@
 <?php
-
+// Property Controller
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -28,7 +28,6 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->prop_name);
         $date = now();
 
         $prop_code = $request->input('prop_code');
@@ -54,27 +53,10 @@ class PropertyController extends Controller
 
         $is_hot = $request->input('is_hot');
         $vip_featured_promotion = $request->input('vip_featured_promotion');
-        $is_vip = $is_featured = $is_promotion = 0;
-
-        if ($vip_featured_promotion === 'Vip') {
-            $is_vip = 1;
-        } elseif ($vip_featured_promotion === 'Featured') {
-            $is_featured = 1;
-        } elseif ($vip_featured_promotion === 'Promotion') {
-            $is_promotion = 1;
-        }
-
         $sale_rent = $request->input('sale_rent');
-        $for_sale = $for_rent = 0;
-
-        if ($sale_rent === 'Sale') {
-            $for_sale = 1;
-        } elseif ($sale_rent === 'Rent') {
-            $for_rent = 1;
-        }
-
         $sold_out = $request->input('sold_out');
         $status = $request->input('status');
+
         $suites_starting_floor = $request->input('suites_starting_floor');
         $suites_per_floor = $request->input('suites_per_floor');
         $floor_plans = $request->input('floor_plans');
@@ -94,7 +76,6 @@ class PropertyController extends Controller
         $image = $request->file('prop_image');
         $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $prop_imageName);
-
 
         $property = new Property([
             'prop_code' => $prop_code,
@@ -118,11 +99,8 @@ class PropertyController extends Controller
             'public_launch_date' => $public_launch_date,
             'const_start_date' => $const_start_date,
             'is_hot' => $is_hot,
-            'is_vip' => $is_vip,
-            'is_featured' => $is_featured,
-            'is_promotion' => $is_promotion,
-            'for_sale' => $for_sale,
-            'for_rent' => $for_rent,
+            'vip_featured_promotion' => $vip_featured_promotion,
+            'sale_rent' => $sale_rent,
             'sold_out' => $sold_out,
             'status' => $status,
             'suites_starting_floor' => $suites_starting_floor,
@@ -142,9 +120,29 @@ class PropertyController extends Controller
             'no_of_baths' => $no_of_baths
         ]);
 
-        $property->save();
+        $saved = $property->save();
 
-        return $property;
+        if($saved && $request->input('prop_feature'))
+        {
+            $this->addFeatures($request->input('prop_feature'), $property);
+        }
+
+        return [
+            'saved' => $saved,   // This will be true or false
+            'property' => $property,  // This will be the saved Property object
+        ];
+    }
+    
+    public function addFeatures($features, $property)
+    {
+        foreach($features as $feature) {
+            $propertyFeature = new PropertyFeature([
+                'prop_feature' => $feature,
+                'status' => 1
+            ]);
+
+            $property->propertyFeatures()->save($propertyFeature);
+        }
     }
 
     /**
@@ -167,13 +165,10 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($id);
         // Find the property by its ID
         $property = Property::find($id);
-        // dd($property->prop_name);
 
         if (!$property) {
-            // Handle the case where the property with the given ID is not found, e.g., return a 404 response.
             return redirect()->route('admin.property')
                 ->with('message', 'Property Not Found');
         }
@@ -195,24 +190,17 @@ class PropertyController extends Controller
         $property->no_of_suites = $request->input('no_of_suites');
         $property->est_occupancy_month = $request->input('est_occupancy_month');
         $property->est_occupancy_year = $request->input('est_occupancy_year');
+        
         $property->vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
         $property->public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
         $property->const_start_date = now()->parse($request->input('const_start_date'))->toDateString();
+
         $property->is_hot = $request->input('is_hot');
-
-        // Check the VIP, Featured, Promotion status
-        $vip_featured_promotion = $request->input('vip_featured_promotion');
-        $property->is_vip = ($vip_featured_promotion === 'Vip') ? 1 : 0;
-        $property->is_featured = ($vip_featured_promotion === 'Featured') ? 1 : 0;
-        $property->is_promotion = ($vip_featured_promotion === 'Promotion') ? 1 : 0;
-
-        // Check the Sale/Rent status
-        $sale_rent = $request->input('sale_rent');
-        $property->for_sale = ($sale_rent === 'Sale') ? 1 : 0;
-        $property->for_rent = ($sale_rent === 'Rent') ? 1 : 0;
-
+        $property->vip_featured_promotion = $request->input('vip_featured_promotion');
+        $property->sale_rent = $request->input('sale_rent');
         $property->sold_out = $request->input('sold_out');
         $property->status = $request->input('status');
+
         $property->suites_starting_floor = $request->input('suites_starting_floor');
         $property->suites_per_floor = $request->input('suites_per_floor');
         $property->floor_plans = $request->input('floor_plans');
@@ -229,7 +217,7 @@ class PropertyController extends Controller
         $property->no_of_beds = $request->input('no_of_beds');
         $property->no_of_baths = $request->input('no_of_baths');
 
-        $imagePath = public_path('images/' . $request->input('prop_imageName')); // Replace with the actual image name
+        $imagePath = public_path('images/' . $request->input('prop_imageName'));
 
         if (File::exists($imagePath)) {
             // Delete the image if it exists
@@ -241,27 +229,12 @@ class PropertyController extends Controller
         $image->move(public_path('images'), $prop_imageName);
         $property->prop_image = $prop_imageName;
 
-        // dd($property->prop_name);
+        $saved = $property->save();
 
-        $propertySave =  $property->save();
-
-
-        if ($propertySave) {
-            return redirect()->route('admin.property.view')
-                ->with('message', 'Property Updated Successfully');
-        }
-
-        return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
+        return [
+            'saved' => $saved,   // This will be true or false
+            'property' => $property,  // This will be the saved Property object
+        ];
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

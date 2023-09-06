@@ -12,6 +12,7 @@ use App\Models\Development;
 use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
+use App\Models\Property;
 
 
 class AdminController extends Controller
@@ -48,14 +49,19 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
-        return view('admin.property-add', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
+        return view('admin.property-add', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function storeProperty(Request $request)
     {
-        $propertySave = $this->propertyController->store($request);
+        $result = $this->propertyController->store($request);
 
-        if ($propertySave) {
+        if ($result['saved']) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Added Successfully');
         } else {
@@ -71,19 +77,30 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
         $property = $this->propertyController->get($id);
 
-        return view('admin.property-edit', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents', 'property'));
+        return view('admin.property-edit', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'property', 'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function updateProperty(Request $request, $id)
     {
+        $result = $this->propertyController->update($request, $id);
 
-        return $this->propertyController->update($request, $id);
+        if ($result['saved']) {
+            return redirect()->route('admin.property.view')
+                ->with('message', 'Property Updated Successfully');
+        }
+        else {
+            return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
+        }   
     }
 
-
-    //Assigments CRUD
+    // Assigments CRUD
 
     public function viewAssigments()
     {
@@ -100,16 +117,20 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
-        return view('admin.assigment-add', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
+        return view('admin.assigment-add', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'propertyTypeEnums', 'propertyStatusEnums'));
     }
 
     public function storeAssigment(Request $request)
     {
-        $assigmentSave = $this->assigmentController->store($request);
+        $assigmentSaved = $this->assigmentController->store($request);
 
-
-        if ($assigmentSave) {
+        if ($assigmentSaved) {
             return redirect()->route('admin.assigment.view')
                 ->with('message', 'Assigment Added Successfully');
         } else {
@@ -117,7 +138,7 @@ class AdminController extends Controller
                 ->with('message', 'Assigment Failed to Add');
         }
     }
-    public function editAssigment($id)
+    public function editAssignment($id)
     {
         $architects = Architect::all();
         $cities = City::all();
@@ -125,15 +146,26 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
+        
+        $propertyTypeEnums = Property::getPropertyTypeEnums();
+        $propertyStatusEnums = Property::getPropertyStatusEnums();
 
-        $assigment = $this->assigmentController->get($id);
+        $assignment = $this->assignmentController->get($id);
 
-        return view('admin.assignment-edit', compact('assigment','architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
-
+        return view('admin.assignment-edit', compact('architects', 'cities', 
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        'assignment', 'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function updateAssignment(Request $request, $id)
     {
+        $assignmentSaved = $this->assignmentController->update($request, $id);
 
-        return $this->propertyController->update($request, $id);
+        if ($assignmentSaved) {
+            return redirect()->route('admin.assignment.view')
+                ->with('message', 'Assignment Updated Successfully');
+        }
+        else {
+            return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
+        }   
     }
 }

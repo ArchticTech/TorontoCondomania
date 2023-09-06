@@ -22,10 +22,10 @@ class CreateCitiesTable extends Migration
             $table->text('city_meta_description')->nullable();
             $table->text('city_meta_keywords')->nullable();
             $table->text('city_description')->nullable();
-            $table->unsignedTinyInteger('is_main')->default(0);
-            $table->unsignedTinyInteger('for_header')->default(0);
-            $table->unsignedTinyInteger('status')->default(0);
-            $table->unsignedBigInteger('created_by')->default(0);
+            $table->boolean('is_main')->default(false);
+            $table->boolean('for_header')->default(false);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
 
             $table->foreign('country_id')->references('id')->on('countries');

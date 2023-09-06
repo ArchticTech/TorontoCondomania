@@ -18,17 +18,21 @@ class AssigmentController extends Controller
     }
     public function all()
     {
-
         $assignments = Assignment::with('property')->get();
 
         return $assignments;
     }
     public function store(Request $request)
     {
-        $property = $this->propertyController->store($request);
+        $result = $this->propertyController->store($request);
+
+        $propertySaved = $result['saved'];
+        $property = $result['property'];
+
+        $property->is_assignment = true;
+        $property->save();
 
         $assignment = new Assignment([
-            'property_id' => $property['id'],
             'assign_unit_no' => $request->input('assign_unit_no'),
             'assign_floor_no' => $request->input('assign_floor_no'),
             'assign_purchase_price' => $request->input('assign_purchase_price'),
@@ -39,17 +43,29 @@ class AssigmentController extends Controller
             'created_by' => 1,
         ]);
 
-        $final = $assignment->save();
-        // dd($assignment->assign_unit_no);
-
         // Associate the assignment with the property
-        $property->assignment()->save($assignment);
+        $assignmentSaved = $property->assignment()->save($assignment);
 
-        return $final;
+        return ($assignmentSaved && $propertySaved);
     }
-
-    public function get($id)
+    public function update(Request $request, $id)
     {
-        return Assignment::find($id);
+        $assignment = Assignment::findOrFail($id);
+
+        $result = $this->propertyController->update($request, $assignment->property_id);
+
+        $propertySaved = $result['saved'];
+
+        $assignment->assign_unit_no = $request->input('assign_unit_no');
+        $assignment->assign_floor_no = $request->input('assign_floor_no');
+        $assignment->assign_purchase_price = $request->input('assign_purchase_price');
+        $assignment->assign_tentative_occ_date = $request->input('assign_tentative_occ_date');
+        $assignment->assign_purchased_date = $request->input('assign_purchased_date');
+        $assignment->assign_cooperation_percentage = $request->input('assign_cooperation_percentage');
+        $assignment->assign_deposit_paid = $request->input('assign_deposit_paid');
+        
+        $assignmentSaved = $assignment->save();
+
+        return ($assignmentSaved && $propertySaved);
     }
 }

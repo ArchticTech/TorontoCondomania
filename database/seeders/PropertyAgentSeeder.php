@@ -27,9 +27,7 @@ class PropertyAgentSeeder extends Seeder
                 'agent_agency' => 'The Label Market',
                 'agent_company' => 'Property Agent Company',
                 'company_phone_no' => '400 500 6000',
-                'company_address' => 'Property Agent',
-                'status' => 1,
-                'created_by' => 1,
+                'company_address' => 'Property Agent'
             ],
         ]);
     }
