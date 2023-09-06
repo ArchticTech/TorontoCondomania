@@ -16,10 +16,9 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('country_name', 100);
-            $table->unsignedTinyInteger('is_main');
-            $table->unsignedTinyInteger('status')->default(0);
-            $table->unsignedBigInteger('created_by')->default(0);
-            $table->datetime('created_date');
+            $table->boolean('is_main')->default(false);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
         });
     }

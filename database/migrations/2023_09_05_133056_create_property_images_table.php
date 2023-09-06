@@ -18,9 +18,9 @@ class CreatePropertyImagesTable extends Migration
             $table->unsignedBigInteger('property_id');
             $table->text('prop_image');
             $table->string('prop_image_name', 200)->default('');
-            $table->integer('is_assignment')->default(0);
-            $table->integer('status')->default(0);
-            $table->integer('created_by')->default(0);
+            $table->boolean('is_assignment')->default(false);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
         });
     }

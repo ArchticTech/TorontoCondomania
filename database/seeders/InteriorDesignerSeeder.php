@@ -30,9 +30,7 @@ class InteriorDesignerSeeder extends Seeder
         foreach ($interiorDesigners as $name) {
             DB::table('interior_designers')->insert([
                 'interior_designer_name' => $name,
-                'is_main' => 1,
-                'status' => 1,
-                'created_by' => 1,
+                'is_main' => 1
             ]);
         }
     }

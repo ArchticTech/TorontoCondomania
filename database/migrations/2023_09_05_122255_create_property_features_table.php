@@ -17,8 +17,8 @@ class CreatePropertyFeaturesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('property_id')->default(0);
             $table->text('prop_feature');
-            $table->integer('status')->default(0);
-            $table->integer('created_by')->default(0);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
         });
     }

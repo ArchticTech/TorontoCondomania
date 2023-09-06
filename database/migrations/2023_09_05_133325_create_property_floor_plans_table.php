@@ -24,7 +24,7 @@ class CreatePropertyFloorPlansTable extends Migration
             $table->float('plan_bed')->default(0);
             $table->integer('plan_availability')->default(0);
             $table->string('plan_terrace_balcony', 50)->default('0');
-            $table->integer('created_by')->default(0);
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
         });
 

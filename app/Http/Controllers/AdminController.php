@@ -53,10 +53,9 @@ class AdminController extends Controller
     }
     public function storeProperty(Request $request)
     {
-        dd($request);
-        $propertySave = $this->propertyController->store($request);
+        [$propertySaved, $property] = $this->propertyController->store($request);
 
-        if ($propertySave) {
+        if ($propertySaved) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Added Successfully');
         } else {
@@ -79,9 +78,9 @@ class AdminController extends Controller
     }
     public function updateProperty(Request $request, $id)
     {
-        $propertySave = $this->propertyController->update($request, $id);
+        [$propertySaved, $property] = $this->propertyController->update($request, $id);
 
-        if ($propertySave) {
+        if ($propertySaved) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Updated Successfully');
         }
@@ -113,9 +112,9 @@ class AdminController extends Controller
 
     public function storeAssigment(Request $request)
     {
-        $assigmentSave = $this->assigmentController->store($request);
+        $assigmentSaved = $this->assigmentController->store($request);
 
-        if ($assigmentSave) {
+        if ($assigmentSaved) {
             return redirect()->route('admin.assigment.view')
                 ->with('message', 'Assigment Added Successfully');
         } else {
@@ -138,9 +137,9 @@ class AdminController extends Controller
     }
     public function updateAssignment(Request $request, $id)
     {
-        $assignmentSave = $this->assignmentController->update($request, $id);
+        $assignmentSaved = $this->assignmentController->update($request, $id);
 
-        if ($assignmentSave) {
+        if ($assignmentSaved) {
             return redirect()->route('admin.assignment.view')
                 ->with('message', 'Assignment Updated Successfully');
         }

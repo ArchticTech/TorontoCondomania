@@ -24,7 +24,7 @@ class AssigmentController extends Controller
     }
     public function store(Request $request)
     {
-        $property = $this->propertyController->store($request);
+        [$propertySaved, $property] = $this->propertyController->store($request);
 
         $assignment = new Assignment([
             'property_id' => $property['id'],
@@ -38,18 +38,18 @@ class AssigmentController extends Controller
             'created_by' => 1,
         ]);
 
-        $final = $assignment->save();
+        $assignmentSaved = $assignment->save();
 
         // Associate the assignment with the property
         $property->assignment()->save($assignment);
 
-        return $final;
+        return ($assignmentSaved && $propertySaved);
     }
     public function update(Request $request, $id)
     {
         $assignment = Assignment::findOrFail($id);
 
-        $propertySave = $this->propertyController->update($request, $assignment->property_id);
+        [$propertySaved, $property] = $this->propertyController->update($request, $assignment->property_id);
 
         $assignment->assign_unit_no = $request->input('assign_unit_no');
         $assignment->assign_floor_no = $request->input('assign_floor_no');
@@ -59,8 +59,8 @@ class AssigmentController extends Controller
         $assignment->assign_cooperation_percentage = $request->input('assign_cooperation_percentage');
         $assignment->assign_deposit_paid = $request->input('assign_deposit_paid');
         
-        $assignmentSave = $assignment->save();
+        $assignmentSaved = $assignment->save();
 
-        return ($assignmentSave && $propertySave);
+        return ($assignmentSaved && $propertySaved);
     }
 }

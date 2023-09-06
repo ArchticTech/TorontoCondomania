@@ -47,9 +47,25 @@ class Property extends Migration
             $table->boolean('for_sale')->default(false);
             $table->boolean('for_rent')->default(false);
             $table->boolean('sold_out')->default(false);
-            $table->boolean('status')->default(false);
-            $table->integer('created_by')->default(0);
-            $table->datetime('created_date');
+
+            $table->integer('suites_starting_floor')->default(0);
+            $table->integer('suites_per_floor')->default(0);
+            $table->integer('floor_plans')->default(0);
+            $table->integer('prop_price_from')->default(0);
+            $table->integer('prop_price_to')->default(0);
+            $table->integer('suite_size_from')->default(0);
+            $table->integer('suite_size_to')->default(0);
+            $table->integer('ceiling_height')->default(0);
+            $table->integer('price_per_sqft_from')->default(0);
+            $table->integer('price_per_sqft_to')->default(0);
+            $table->integer('parking_price')->default(0);
+            $table->integer('locker_price')->default(0);
+            $table->integer('min_deposit_percentage')->default(0);
+            $table->integer('no_of_beds')->default(0);
+            $table->integer('no_of_baths')->default(0);
+
+            $table->boolean('status')->default(true);
+            $table->integer('created_by')->default(1);
             $table->timestamps();
         });
     }
@@ -61,6 +77,6 @@ class Property extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_property');
+        Schema::dropIfExists('property');
     }
 }

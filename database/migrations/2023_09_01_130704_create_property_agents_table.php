@@ -26,8 +26,8 @@ class CreatePropertyAgentsTable extends Migration
             $table->string('agent_company', 100)->nullable();
             $table->string('company_phone_no', 100)->nullable();
             $table->string('company_address', 100)->nullable();
-            $table->integer('status')->default(0);
-            $table->integer('created_by')->default(0);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
 
             $table->foreign('city_id')->references('id')->on('cities');

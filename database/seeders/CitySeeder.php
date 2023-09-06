@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class CitySeeder extends Seeder
 {
@@ -14,9 +13,7 @@ class CitySeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $currentDate = Carbon::now();
-        
+    {        
         $cityNames = [
             'Brampton', 'Oshawa', 'Markham', 'Oakville', 'Richmond Hill', 'Burlington', 'Halton Hills', 'Caledon',
             'Clarington', 'Whitchurch-Stouffville', 'Whitby', 'Ajax', 'Regional municipality', 'East Gwillimbury',
@@ -38,10 +35,7 @@ class CitySeeder extends Seeder
                 'country_id' => 1,
                 'city_name' => $cityNameMain,
                 'is_main' => 1,
-                'for_header' => 1,
-                'status' => 1,
-                'created_by' => 1,
-                'created_date' => $currentDate,
+                'for_header' => 1
             ];
         }
         foreach ($cityNames as $cityName) {
@@ -49,10 +43,7 @@ class CitySeeder extends Seeder
                 'country_id' => 1,
                 'city_name' => $cityName,
                 'is_main' => 0,
-                'for_header' => 1,
-                'status' => 1,
-                'created_by' => 1,
-                'created_date' => $currentDate,
+                'for_header' => 1
             ];
         }
         

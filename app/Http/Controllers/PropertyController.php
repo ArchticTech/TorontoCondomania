@@ -87,6 +87,8 @@ class PropertyController extends Controller
         $parking_price = $request->input('parking_price');
         $locker_price = $request->input('locker_price');
         $min_deposit_percentage = $request->input('min_deposit_percentage');
+        $no_of_beds = $request->input('no_of_beds');
+        $no_of_baths = $request->input('no_of_baths');
 
         $image = $request->file('prop_image');
         $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -134,12 +136,34 @@ class PropertyController extends Controller
             'parking_price' => $parking_price,
             'locker_price' => $locker_price,
             'min_deposit_percentage' => $min_deposit_percentage,
-            'created_date' => Carbon::now()
+            'no_of_beds' => $no_of_beds,
+            'no_of_baths' => $no_of_baths
         ]);
 
-        $property->save();
+        $saved = $property->save();
 
-        return $property;
+        if($saved)
+        {
+            $this->addFeatures($request->input('prop_feature'), $property);
+        }
+
+        return [
+            'saved' => $saved,   // This will be true or false
+            'property' => $property,  // This will be the saved Property object
+        ];
+    }
+    
+    public function addFeatures($features, $property)
+    {
+        foreach($features as $feature) {
+            $propertyFeature = new PropertyFeature([
+                'prop_feature' => $feature,
+                'status' => 1
+            ]);
+            $propertyFeature->save();
+
+            $property->propertyFeatures()->save($propertyFeature);
+        }
     }
 
     /**
@@ -218,6 +242,8 @@ class PropertyController extends Controller
         $property->parking_price = $request->input('parking_price');
         $property->locker_price = $request->input('locker_price');
         $property->min_deposit_percentage = $request->input('min_deposit_percentage');
+        $property->no_of_beds = $request->input('no_of_beds');
+        $property->no_of_baths = $request->input('no_of_baths');
 
         $imagePath = public_path('images/' . $request->input('prop_imageName'));
 
@@ -231,9 +257,12 @@ class PropertyController extends Controller
         $image->move(public_path('images'), $prop_imageName);
         $property->prop_image = $prop_imageName;
 
-        $propertySave =  $property->save();
+        $saved = $property->save();
 
-        return $propertySave;
+        return [
+            'saved' => $saved,   // This will be true or false
+            'property' => $property,  // This will be the saved Property object
+        ];
     }
 
 }

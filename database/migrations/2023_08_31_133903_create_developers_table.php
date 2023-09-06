@@ -16,9 +16,9 @@ class CreateDevelopersTable extends Migration
         Schema::create('developers', function (Blueprint $table) {
             $table->id();
             $table->string('developer_name', 100);
-            $table->integer('is_main');
-            $table->integer('status')->default(0);
-            $table->integer('created_by')->default(0);
+            $table->boolean('is_main')->default(false);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
         });
     }
