@@ -49,7 +49,6 @@ class Property extends Migration
             $table->boolean('sold_out')->default(false);
             $table->boolean('status')->default(false);
             $table->integer('created_by')->default(0);
-            $table->datetime('created_date');
             $table->timestamps();
         });
     }

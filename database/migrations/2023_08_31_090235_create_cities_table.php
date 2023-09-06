@@ -26,7 +26,6 @@ class CreateCitiesTable extends Migration
             $table->unsignedTinyInteger('for_header')->default(0);
             $table->unsignedTinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by')->default(0);
-            $table->datetime('created_date');
             $table->timestamps();
 
             $table->foreign('country_id')->references('id')->on('countries');

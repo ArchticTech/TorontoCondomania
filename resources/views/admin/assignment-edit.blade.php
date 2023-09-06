@@ -340,272 +340,266 @@
                                                     value="{{ $assigment->property->prop_price_from }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4
+                                        <div
+                                            class="col-md-4
                                                     mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="prop_price_to">Assignment Price To</label>
-                                                    <input type="number" class="form-control" id="prop_price_from"
-                                                        required name="prop_price_from"
-                                                        value="{{ $assigment->property->prop_price_to }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="suite_size_from">Suite Size From</label>
-                                                    <input type="number" class="form-control" id="suite_size_from"
-                                                        required name="suite_size_from"
-                                                        value="{{ $assigment->property->suite_size_from }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="suite_size_to">Suite Size To</label>
-                                                    <input type="number" required class="form-control"
-                                                        id="suite_size_to" name="suite_size_to"
-                                                        value="{{ $assigment->property->suite_size_to }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="ceiling_height">Ceiling Height</label>
-                                                    <input type="number" class="form-control" id="ceiling_height"
-                                                        required name="ceiling_height"
-                                                        value="{{ $assigment->property->ceiling_height }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="price_per_sqft_from">Price Per Sq/ft
-                                                        From</label>
-                                                    <input type="number" required class="form-control"
-                                                        id="price_per_sqft_from" name="price_per_sqft_from"
-                                                        value="{{ $assigment->property->price_per_sqft_from }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="price_per_sqft_to">Price Per Sq/ft To</label>
-                                                    <input type="number" required class="form-control"
-                                                        id="price_per_sqft_to" name="price_per_sqft_to"
-                                                        value="{{ $assigment->property->price_per_sqft_to }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="parking_price">Parking Price</label>
-                                                    <input type="number" required class="form-control"
-                                                        id="parking_price" name="parking_price"
-                                                        value="{{ $assigment->property->parking_price }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="locker_price">Locker Price</label>
-                                                    <input type="number" required class="form-control" id="locker_price"
-                                                        name="locker_price"
-                                                        value="{{ $assigment->property->locker_price }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="no_of_beds">No Of Beds</label>
-                                                    <input type="number" required value="0" class="form-control"
-                                                        id="no_of_beds" name="no_of_beds" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="no_of_baths">No Of Baths</label>
-                                                    <input type="number" required value="0" class="form-control"
-                                                        id="no_of_baths" name="no_of_baths" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="min_deposit_percentage">Min Deposit
-                                                        Percentage</label>
-                                                    <input type="number" class="form-control"
-                                                        id="min_deposit_percentage" required name="min_deposit_percentage"
-                                                        value="{{ $assigment->property->min_deposit_percentage }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="assign_unit_no">Assignment Unit No</label>
-                                                    <input type="number" class="form-control" id="assign_unit_no"
-                                                        required value="0" name="assign_unit_no"
-                                                        >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="assign_floor_no">Assignment Floor No</label>
-                                                    <input type="number" class="form-control" id="assign_floor_no"
-                                                        required value="0" name="assign_floor_no"
-                                                        >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="assign_purchase_price">Assignment Purchase No</label>
-                                                    <input type="number" class="form-control" id="assign_purchase_price"
-                                                        required value="0" name="assign_purchase_price"
-                                                        >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="assign_cooperation_percentage">Assignment Cooperative
-                                                        Percentage</label>
-                                                    <input type="number" class="form-control"
-                                                        id="assign_cooperation_percentage" required value="0"
-                                                        name="assign_cooperation_percentage"
-                                                        >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="assign_deposit_paid">Assignment Deposit Paid</label>
-                                                    <input type="number" class="form-control" id="assign_deposit_paid"
-                                                        required value="0" name="assign_deposit_paid">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="assign_purchased_date">Assign Purchased Date <span
-                                                            style="font-size: 12px;color: grey;">(If No Purchased Date :
-                                                            01/01/2020)</span></label>
-                                                    <input type="date" class="form-control" id="assign_purchased_date"
-                                                        required value="0" name="assign_purchased_date">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="assign_tentative_occ_date">Assign Tentative Occ <span
-                                                            style="font-size: 12px;color: grey;">(If No Assign Tentative
-                                                            Occ :
-                                                            01/01/2020)</span></label>
-                                                    <input class="form-control" value="2020-01-01"
-                                                        id="assign_tentative_occ_date" required
-                                                        name="assign_tentative_occ_date" type="date">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="prop_address">Assignment Address</label>
-                                                    <input type="text" required class="form-control" id="prop_address"
-                                                        name="prop_address"
-                                                        value="{{ $assigment->property->prop_address }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="prop_iframe">Assignment Location Iframe</label>
-                                                    <textarea name="prop_iframe" required value="{{ $assigment->property->prop_iframe }}" id="prop_iframe"
-                                                        rows="5" class="form-control"> </textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="prop_meta_title">Assignment Meta Title</label>
-                                                    <textarea name="prop_meta_title" value="{{ $assigment->property->prop_meta_title }}" id="prop_meta_title"
-                                                        rows="1" class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="prop_meta_description">Assignment Meta Description</label>
-                                                    <textarea name="prop_meta_description" id="prop_meta_description" rows="2" class="form-control"
-                                                        value="{{ $assigment->property->prop_meta_description }}"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="prop_meta_keywords">Assignment Meta Keywords</label>
-                                                    <textarea name="prop_meta_keywords" id="prop_meta_keywords" rows="1" class="form-control"
-                                                        value="{{ $assigment->property->prop_meta_keywords }}"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <div class="form-group">
-                                                    <label for="prop_meta_tags">Property Meta Tags</label>
-                                                    <textarea name="prop_meta_tags" value="{{ $assigment->property->prop_meta_tags }}" id="prop_meta_tags"
-                                                        rows="3" class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
-                                                    Features</p>
-                                                <table class="table table-bordered table-hover"
-                                                    id="property_feature_table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="text-align: center;">Assignment Feature</th>
-                                                            <th style="text-align: center;">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="property_feature_tbody">
-
-                                                    </tbody>
-                                                </table>
-                                                <button type="button" name="add_property_feature"
-                                                    style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                    id="add_property_feature" class="btn btn-xs btn-success"><i
-                                                        class="bx bx-plus"></i></button>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3">
-                                                <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
-                                                    Description</p>
-                                                <table class="table table-bordered table-hover"
-                                                    id="property_detail_table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="text-align: center;">Assignment Description</th>
-                                                            <th style="text-align: center;">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="property_detail_tbody">
-
-                                                    </tbody>
-                                                </table>
-                                                <button type="button" name="add_property_detail"
-                                                    style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                    id="add_property_detail" class="btn btn-xs btn-success"><i
-                                                        class="bx bx-plus"></i></button>
-                                            </div>
-                                            <div class="col-md-12 mt-3 mb-3">
-                                                <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
-                                                    Images
-                                                </p>
-                                                <div class="row" id="property_image_row">
-
-                                                </div>
-                                                <button type="button" name="add_property_image"
-                                                    style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                    id="add_property_image" class="btn btn-xs btn-success"><i
-                                                        class="bx bx-plus"></i></button>
-                                            </div>
-                                            <div class="col-md-12 mt-3 mb-3">
-                                                <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
-                                                    Floor
-                                                    Plan Images</p>
-                                                <div class="row" id="assignment_floor_plan_image_row">
-
-                                                </div>
-                                                <button type="button" name="add_assignment_floor_plan"
-                                                    style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                    id="add_assignment_floor_plan" class="btn btn-xs btn-success"><i
-                                                        class="bx bx-plus"></i></button>
-                                            </div>
-                                            <div class="col-md-12 mb-3 mt-3" style="display: flex; align-items: center; justify-content: center">
-
-                                                <button type="submit"
-                                                    style="margin-top: 5rem;padding: 0.5rem 5rem 0.5rem 5rem;"
-                                                    class="btn btn-success" id="add_property_button">Update
-                                                    Assigment</button>
-
+                                            <div class="form-group">
+                                                <label for="prop_price_to">Assignment Price To</label>
+                                                <input type="number" class="form-control" id="prop_price_from" required
+                                                    name="prop_price_from"
+                                                    value="{{ $assigment->property->prop_price_to }}">
                                             </div>
                                         </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="suite_size_from">Suite Size From</label>
+                                                <input type="number" class="form-control" id="suite_size_from" required
+                                                    name="suite_size_from"
+                                                    value="{{ $assigment->property->suite_size_from }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="suite_size_to">Suite Size To</label>
+                                                <input type="number" required class="form-control" id="suite_size_to"
+                                                    name="suite_size_to"
+                                                    value="{{ $assigment->property->suite_size_to }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="ceiling_height">Ceiling Height</label>
+                                                <input type="number" class="form-control" id="ceiling_height" required
+                                                    name="ceiling_height"
+                                                    value="{{ $assigment->property->ceiling_height }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="price_per_sqft_from">Price Per Sq/ft
+                                                    From</label>
+                                                <input type="number" required class="form-control"
+                                                    id="price_per_sqft_from" name="price_per_sqft_from"
+                                                    value="{{ $assigment->property->price_per_sqft_from }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="price_per_sqft_to">Price Per Sq/ft To</label>
+                                                <input type="number" required class="form-control"
+                                                    id="price_per_sqft_to" name="price_per_sqft_to"
+                                                    value="{{ $assigment->property->price_per_sqft_to }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="parking_price">Parking Price</label>
+                                                <input type="number" required class="form-control" id="parking_price"
+                                                    name="parking_price"
+                                                    value="{{ $assigment->property->parking_price }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="locker_price">Locker Price</label>
+                                                <input type="number" required class="form-control" id="locker_price"
+                                                    name="locker_price" value="{{ $assigment->property->locker_price }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="no_of_beds">No Of Beds</label>
+                                                <input type="number" required value="0" class="form-control"
+                                                    id="no_of_beds" name="no_of_beds">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="no_of_baths">No Of Baths</label>
+                                                <input type="number" required value="0" class="form-control"
+                                                    id="no_of_baths" name="no_of_baths">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="min_deposit_percentage">Min Deposit
+                                                    Percentage</label>
+                                                <input type="number" class="form-control" id="min_deposit_percentage"
+                                                    required name="min_deposit_percentage"
+                                                    value="{{ $assigment->property->min_deposit_percentage }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="assign_unit_no">Assignment Unit No</label>
+                                                <input type="number" class="form-control" id="assign_unit_no" required
+                                                    value="{{ $assigment->assign_unit_no }}" name="assign_unit_no">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="assign_floor_no">Assignment Floor No</label>
+                                                <input type="number" class="form-control" id="assign_floor_no" required
+                                                    value="{{ $assigment->assign_floor_no }}" name="assign_floor_no">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="assign_purchase_price">Assignment Purchase No</label>
+                                                <input type="number" class="form-control" id="assign_purchase_price"
+                                                    required value="{{ $assigment->assign_purchase_price }}"
+                                                    name="assign_purchase_price">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="assign_cooperation_percentage">Assignment Cooperative
+                                                    Percentage</label>
+                                                <input type="number" class="form-control"
+                                                    id="assign_cooperation_percentage" required
+                                                    value="{{ $assigment->assign_cooperation_percentage }}"
+                                                    name="assign_cooperation_percentage">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="assign_deposit_paid">Assignment Deposit Paid</label>
+                                                <input type="number" class="form-control" id="assign_deposit_paid"
+                                                    required value="{{ $assigment->assign_deposit_paid }}"
+                                                    name="assign_deposit_paid">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="assign_purchased_date">Assign Purchased Date <span
+                                                        style="font-size: 12px;color: grey;">(If No Purchased Date :
+                                                        01/01/2020)</span></label>
+                                                <input type="date" class="form-control" id="assign_purchased_date"
+                                                    required value="{{ $assigment->assign_purchased_date }}"
+                                                    name="assign_purchased_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="assign_tentative_occ_date">Assign Tentative Occ <span
+                                                        style="font-size: 12px;color: grey;">(If No Assign Tentative
+                                                        Occ :
+                                                        01/01/2020)</span></label>
+                                                <input class="form-control"
+                                                    value="{{ $assigment->assign_tentative_occ_date }}"
+                                                    id="assign_tentative_occ_date" required
+                                                    name="assign_tentative_occ_date" type="date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="prop_address">Assignment Address</label>
+                                                <input type="text" required class="form-control" id="prop_address"
+                                                    name="prop_address" value="{{ $assigment->property->prop_address }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="prop_iframe">Assignment Location Iframe</label>
+                                                <textarea name="prop_iframe" required id="prop_iframe" rows="5" class="form-control">{{ $assigment->property->prop_iframe }} </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="prop_meta_title">Assignment Meta Title</label>
+                                                <textarea name="prop_meta_title" id="prop_meta_title" rows="1" class="form-control">{{ $assigment->property->prop_meta_title }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="prop_meta_description">Assignment Meta Description</label>
+                                                <textarea name="prop_meta_description" id="prop_meta_description" rows="2" class="form-control">{{ $assigment->property->prop_meta_description }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="prop_meta_keywords">Assignment Meta Keywords</label>
+                                                <textarea name="prop_meta_keywords" id="prop_meta_keywords" rows="1" class="form-control">{{ $assigment->property->prop_meta_keywords }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <div class="form-group">
+                                                <label for="prop_meta_tags">Property Meta Tags</label>
+                                                <textarea name="prop_meta_tags" id="prop_meta_tags" rows="3" class="form-control">{{ $assigment->property->prop_meta_tags }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
+                                                Features</p>
+                                            <table class="table table-bordered table-hover" id="property_feature_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: center;">Assignment Feature</th>
+                                                        <th style="text-align: center;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="property_feature_tbody">
+
+                                                </tbody>
+                                            </table>
+                                            <button type="button" name="add_property_feature"
+                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
+                                                id="add_property_feature" class="btn btn-xs btn-success mt-2"><i
+                                                    class="bx bx-plus"></i></button>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
+                                                Description</p>
+                                            <table class="table table-bordered table-hover" id="property_detail_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: center;">Assignment Description</th>
+                                                        <th style="text-align: center;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="property_detail_tbody">
+
+                                                </tbody>
+                                            </table>
+                                            <button type="button" name="add_property_detail"
+                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
+                                                id="add_property_detail" class="btn btn-xs btn-success mt-2"><i
+                                                    class="bx bx-plus"></i></button>
+                                        </div>
+                                        <div class="col-md-12 mt-3 mb-3">
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
+                                                Images
+                                            </p>
+                                            <div class="row" id="property_image_row">
+
+                                            </div>
+                                            <button type="button" name="add_property_image"
+                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
+                                                id="add_property_image" class="btn btn-xs btn-success mt-2"><i
+                                                    class="bx bx-plus"></i></button>
+                                        </div>
+                                        <div class="col-md-12 mt-3 mb-3">
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment
+                                                Floor
+                                                Plan Images</p>
+                                            <div class="row" id="assignment_floor_plan_image_row">
+
+                                            </div>
+                                            <button type="button" name="add_assignment_floor_plan"
+                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
+                                                id="add_assignment_floor_plan" class="btn btn-xs btn-success mt-2"><i
+                                                    class="bx bx-plus"></i></button>
+                                        </div>
+                                        <div class="col-md-12 mb-3 mt-3"
+                                            style="display: flex; align-items: center; justify-content: center">
+
+                                            <button type="submit"
+                                                style="margin-top: 5rem;padding: 0.5rem 5rem 0.5rem 5rem;"
+                                                class="btn btn-success" id="add_property_button">Update
+                                                Assigment</button>
+
+                                        </div>
+                                    </div>
 
 
                                 </form>

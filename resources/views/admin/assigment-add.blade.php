@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3 mt-3 ">
                                             <div class="form-group">
-                                                <label for="prop_name">Assignment Image</label>
+                                                <label for="prop_image">Assignment Image</label>
                                                 <input type="file" required class="form-control" id="prop_image"
                                                     name="prop_image" placeholder="Property Image">
                                             </div>
@@ -452,7 +452,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
-                                                <label for="prop_meta_tags">Property Meta Tags</label>
+                                                <label for="prop_meta_tags">Assignment Meta Tags</label>
                                                 <textarea name="prop_meta_tags" placeholder="Property Meta Tags" id="prop_meta_tags" rows="3"
                                                     class="form-control"></textarea>
                                             </div>
@@ -473,7 +473,7 @@
                                             </table>
                                             <button type="button" name="add_property_feature"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_property_feature" class="btn btn-xs btn-success"><i
+                                                id="add_property_feature" class="btn btn-xs btn-success mt-2"><i
                                                 class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3">
@@ -492,7 +492,7 @@
                                             </table>
                                             <button type="button" name="add_property_detail"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_property_detail" class="btn btn-xs btn-success"><i
+                                                id="add_property_detail" class="btn btn-xs btn-success mt-2"><i
                                                 class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mt-3 mb-3">
@@ -503,19 +503,19 @@
                                             </div>
                                             <button type="button" name="add_property_image"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_property_image" class="btn btn-xs btn-success"><i
+                                                id="add_property_image" class="btn btn-xs btn-success mt-2"><i
                                                 class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mt-3 mb-3">
-                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Assignment Floor
-                                                Plan Images</p>
-                                            <div class="row" id="assignment_floor_plan_image_row">
+                                        <div class="col-md-12 mb-3 mt-3">
+                                            <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
+                                                Assignment Floor Plan</p>
+                                            <div id="property_floor_plan_image_row">
 
                                             </div>
-                                            <button type="button" name="add_assignment_floor_plan"
+                                            <button type="button" name="add_property_floor_plan"
                                                 style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_assignment_floor_plan" class="btn btn-xs btn-success"><i
-                                                class="bx bx-plus"></i></button>
+                                                id="add_property_floor_plan" class="btn btn-xs btn-success mt-2"><i
+                                                    class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3" style="display: flex; align-items: center; justify-content: center">
 

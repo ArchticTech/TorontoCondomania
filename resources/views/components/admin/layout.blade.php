@@ -137,19 +137,19 @@
                     <li class="menu-item">
                         <a href="#" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                            <div>Assigments</div>
+                            <div>Assignments</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="/secure-zone/assigment/add" class="menu-link ">
                                     <i class="menu-icon tf-icons bx bx-image-add"></i>
-                                    <div data-i18n="Layouts">Add Assigment</div>
+                                    <div data-i18n="Layouts">Add Assignment</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="/secure-zone/assigment" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-image-alt"></i>
-                                    <div data-i18n="Layouts">View Assigments</div>
+                                    <div data-i18n="Layouts">View Assignments</div>
                                 </a>
                             </li>
 
@@ -157,19 +157,19 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <a href="#" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bxs-buildings"></i>
                             <div data-i18n="Account Settings">Rentals</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <a href="/secure-zone/rentals/add" class="menu-link menu-toggle">
                                     <i class="menu-icon tf-icons bx bx-plus-circle"></i>
                                     <div data-i18n="Layouts">Add Rentals</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <a href="/secure-zone/rentals" class="menu-link menu-toggle">
                                     <i class="menu-icon tf-icons bx bx-info-circle"></i>
                                     <div data-i18n="Layouts">View Rentals</div>
                                 </a>
@@ -480,7 +480,7 @@
                 <div class="form-group">\
                     <label for="prop_name">Property Image ' + k +
             '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_prop_image" id="' +
-            k + '" class="btn btn-xs btn-danger btn_remove_prop_image"><i class="bx bxs-trash"></i></button></label>\
+            k + '" class="btn btn-xs btn-danger m-1 btn_remove_prop_image"><i class="bx bxs-trash"></i></button></label>\
                     <input type="file"  class="form-control property_image" id="prop_image" name="property_image[]" placeholder="Property Image">\
                 </div>\
             </div>');
@@ -496,58 +496,57 @@
         l++;
         $('#property_floor_plan_image_row').append('\
             <div class="row" id="property_floor_plan_row' + l + '">\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="property_floor_plan">Floor Plan ' + l +
-            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" style="padding: 2px 10px 2px 10px;" name="btn_remove_property_floor_plan" id="' +
-            l + '" class="btn btn-xs btn-danger btn_remove_property_floor_plan"><i class="bx bxs-trash"></i></button></label>\
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>\
                         <input type="file" class="form-control floor_plan_image" id="prop_image" name="floor_plan_image[]" required placeholder="Floor Plan">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="plan_suite_no">Suite No ' + l + '</label>\
                         <input type="text" required class="form-control" id="plan_suite_no" name="plan_suite_no[]" placeholder="Suite No">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="plan_suite_name">Suite Name ' + l + '</label>\
                         <input type="text" required class="form-control" id="plan_suite_name" name="plan_suite_name[]" placeholder="Suite Name">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="plan_sq_ft">Plan Sq. Ft ' + l + '</label>\
                         <input type="number" required class="form-control" id="plan_sq_ft" name="plan_sq_ft[]" placeholder="Plan Sq. Ft">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="plan_bath">Plan Bath ' + l + '</label>\
                         <input type="number" required class="form-control" id="plan_bath" name="plan_bath[]" placeholder="Plan Bath">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="plan_bed">Plan Bed ' + l + '</label>\
                         <input type="number" required class="form-control" id="plan_bed" name="plan_bed[]" placeholder="Plan Bed">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="plan_availability">Plan Availability ' + l + '</label>\
-                        <select name="plan_availability[]" required id="plan_availability" class="custom-select">\
+                        <select name="plan_availability[]" required id="plan_availability" class="form-select">\
                             <option id="">Plan Availability</option>\
                             <option value="1">Yes</option>\
                             <option value="0">No</option>\
                         </select>\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3">\
+                <div class="col-md-3 mt-3 mb-3">\
                     <div class="form-group">\
                         <label for="plan_terrace_balcony">Terrace / Balcony ' + l + '</label>\
-                        <select name="plan_terrace_balcony[]" required id="plan_terrace_balcony" class="custom-select">\
+                        <select name="plan_terrace_balcony[]" required id="plan_terrace_balcony" class="form-select">\
                             <option id="">Terrace / Balcony</option>\
                             <option value="Terrace">Terrace</option>\
                             <option value="Balcony">Balcony</option>\
@@ -555,7 +554,9 @@
                         </select>\
                     </div>\
                 </div>\
-                <div class="col-md-12"><hr></div>\
+                <button type="button" style="padding: 7px; width:130px; margin: 10px auto" name="btn_remove_property_floor_plan" id="' +
+                        l + '" class="btn btn-xs btn-danger btn_remove_property_floor_plan "><i class="bx bxs-trash"></i></button>\
+                <div class="col-md-12 my-2"><hr></div>\
             </div>\
         ');
     });

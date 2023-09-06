@@ -131,9 +131,9 @@ class AdminController extends Controller
         return view('admin.assignment-edit', compact('assigment','architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents'));
 
     }
-    // public function updateAssignment(Request $request, $id)
-    // {
+    public function updateAssignment(Request $request, $id)
+    {
 
-    //     return $this->propertyController->update($request, $id);
-    // }
+        return $this->propertyController->update($request, $id);
+    }
 }

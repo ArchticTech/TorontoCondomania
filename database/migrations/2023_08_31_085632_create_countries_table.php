@@ -19,7 +19,6 @@ class CreateCountriesTable extends Migration
             $table->unsignedTinyInteger('is_main');
             $table->unsignedTinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by')->default(0);
-            $table->datetime('created_date');
             $table->timestamps();
         });
     }
