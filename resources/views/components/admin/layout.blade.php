@@ -121,13 +121,13 @@
                             <li class="menu-item">
                                 <a href="/secure-zone/property/add" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div>Add Property</div>
+                                    <div>Add</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="/secure-zone/property" class="menu-link">
                                     <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
-                                    <div data-i18n="Layouts">View Property</div>
+                                    <div data-i18n="Layouts">View </div>
                                 </a>
                             </li>
 
@@ -143,13 +143,13 @@
                             <li class="menu-item">
                                 <a href="/secure-zone/assigment/add" class="menu-link ">
                                     <i class="menu-icon tf-icons bx bx-image-add"></i>
-                                    <div data-i18n="Layouts">Add Assignment</div>
+                                    <div data-i18n="Layouts">Add</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="/secure-zone/assigment" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-image-alt"></i>
-                                    <div data-i18n="Layouts">View Assignments</div>
+                                    <div data-i18n="Layouts">View</div>
                                 </a>
                             </li>
 
@@ -163,15 +163,15 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="/secure-zone/rentals/add" class="menu-link menu-toggle">
+                                <a href="/secure-zone/rentals/add" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-plus-circle"></i>
-                                    <div data-i18n="Layouts">Add Rentals</div>
+                                    <div data-i18n="Layouts">Add</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="/secure-zone/rentals" class="menu-link menu-toggle">
+                                <a href="/secure-zone/rentals" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-info-circle"></i>
-                                    <div data-i18n="Layouts">View Rentals</div>
+                                    <div data-i18n="Layouts">View</div>
                                 </a>
                             </li>
 

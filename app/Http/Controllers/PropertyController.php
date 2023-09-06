@@ -122,28 +122,28 @@ class PropertyController extends Controller
 
         $saved = $property->save();
 
-        if($saved && $request->input('prop_feature'))
-        {
-            $this->addFeatures($request->input('prop_feature'), $property);
-        }
+        // if($saved && $request->input('prop_feature'))
+        // {
+        //     $this->addFeatures($request->input('prop_feature'), $property);
+        // }
 
         return [
             'saved' => $saved,   // This will be true or false
             'property' => $property,  // This will be the saved Property object
         ];
     }
-    
-    public function addFeatures($features, $property)
-    {
-        foreach($features as $feature) {
-            $propertyFeature = new PropertyFeature([
-                'prop_feature' => $feature,
-                'status' => 1
-            ]);
 
-            $property->propertyFeatures()->save($propertyFeature);
-        }
-    }
+    // public function addFeatures($features, $property)
+    // {
+    //     foreach($features as $feature) {
+    //         $propertyFeature = new PropertyFeature([
+    //             'prop_feature' => $feature,
+    //             'status' => 1
+    //         ]);
+
+    //         $property->propertyFeatures()->save($propertyFeature);
+    //     }
+    // }
 
     /**
      * Display the specified resource.
@@ -190,7 +190,7 @@ class PropertyController extends Controller
         $property->no_of_suites = $request->input('no_of_suites');
         $property->est_occupancy_month = $request->input('est_occupancy_month');
         $property->est_occupancy_year = $request->input('est_occupancy_year');
-        
+
         $property->vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
         $property->public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
         $property->const_start_date = now()->parse($request->input('const_start_date'))->toDateString();

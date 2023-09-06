@@ -105,19 +105,17 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_type">Select Property Type</label>
                                             <select name="prop_type" class="form-select" id="prop_type">
-                                                <option value="Condo">Condo</option>
-                                                <option value="Townhouse">Townhouse</option>
-                                                <option value="Condo-Townhomes">Condo Townhomes</option>
-                                                <option value="Single-family">Single family</option>
+                                                @foreach ($propertyTypeEnums as $value)
+                                                <option value="{{ $value }}">{{ $value }}</option>
+                                            @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_status">Select Property Status</label>
                                             <select name="prop_status" class="form-select" id="prop_status">
-                                                <option value="Pre-Construction">Pre-Construction</option>
-                                                <option value="Under-Construction">Under-Construction
-                                                </option>
-                                                <option value="Ready to move">Ready to move</option>
+                                                @foreach ($propertyStatusEnums as $value)
+                                                <option value="{{ $value }}">{{ $value }}</option>
+                                            @endforeach
                                             </select>
                                         </div>
 
@@ -193,8 +191,8 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
-                                            <label for="hot_property">Hot Property</label>
-                                            <select name="is_hot" class="form-select" id="hot_property"
+                                            <label for="is_hot">Hot Property</label>
+                                            <select name="is_hot" class="form-select" id="is_hot"
                                                 aria-label="Default select example">
                                                 <option value="">Hot Property</option>
                                                 <option value="1" selected>Yes</option>
@@ -400,7 +398,7 @@
                                                         style="font-size: 12px;color: grey;">(If No Purchased Date :
                                                         01/01/2020)</span></label>
                                                     <input type="date" class="form-control" id="assign_purchased_date"
-                                                        required value="0" name="assign_purchased_date"
+                                                        required name="assign_purchased_date"
                                                         placeholder="Assignment Purchased Date">
                                             </div>
                                         </div>

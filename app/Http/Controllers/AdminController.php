@@ -49,12 +49,12 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
-        
+
         $propertyTypeEnums = Property::getPropertyTypeEnums();
         $propertyStatusEnums = Property::getPropertyStatusEnums();
 
-        return view('admin.property-add', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        return view('admin.property-add', compact('architects', 'cities',
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents',
         'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function storeProperty(Request $request)
@@ -77,14 +77,14 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
-        
+
         $propertyTypeEnums = Property::getPropertyTypeEnums();
         $propertyStatusEnums = Property::getPropertyStatusEnums();
 
         $property = $this->propertyController->get($id);
 
-        return view('admin.property-edit', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        return view('admin.property-edit', compact('architects', 'cities',
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents',
         'property', 'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function updateProperty(Request $request, $id)
@@ -97,7 +97,7 @@ class AdminController extends Controller
         }
         else {
             return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
-        }   
+        }
     }
 
     // Assigments CRUD
@@ -117,12 +117,13 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
-        
+
         $propertyTypeEnums = Property::getPropertyTypeEnums();
         $propertyStatusEnums = Property::getPropertyStatusEnums();
 
-        return view('admin.assigment-add', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+
+        return view('admin.assigment-add', compact('architects', 'cities',
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents',
         'propertyTypeEnums', 'propertyStatusEnums'));
     }
 
@@ -146,14 +147,14 @@ class AdminController extends Controller
         $developments = Development::all();
         $interiorDesigners = InteriorDesigner::all();
         $propertyAgents = PropertyAgent::all();
-        
+
         $propertyTypeEnums = Property::getPropertyTypeEnums();
         $propertyStatusEnums = Property::getPropertyStatusEnums();
 
         $assignment = $this->assignmentController->get($id);
 
-        return view('admin.assignment-edit', compact('architects', 'cities', 
-        'developers', 'developments', 'interiorDesigners', 'propertyAgents', 
+        return view('admin.assignment-edit', compact('architects', 'cities',
+        'developers', 'developments', 'interiorDesigners', 'propertyAgents',
         'assignment', 'propertyTypeEnums', 'propertyStatusEnums'));
     }
     public function updateAssignment(Request $request, $id)
@@ -166,6 +167,6 @@ class AdminController extends Controller
         }
         else {
             return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
-        }   
+        }
     }
 }

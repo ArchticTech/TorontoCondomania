@@ -48,7 +48,7 @@
                                     <div class="col-md-4 mt-3 mb-3">
                                         <div class="form-group">
                                             <label for="prop_name">Property Image</label>
-                                            <input type="file" required class="form-control" id="prop_image"
+                                            <input type="file" class="form-control" id="prop_image"
                                                 name="prop_image" placeholder="Property Image" value="">
 
                                             <input type="hidden" name="prop_imageName" value="{{ $property->prop_image }}">
@@ -130,10 +130,10 @@
                                             </option>
                                             <option value="Townhouse" @if ($property->prop_type == 'Townhouse') selected @endif>
                                                 Townhouse</option>
-                                            <option value="Condo-Townhomes"
-                                                @if ($property->prop_type == 'Condo-Townhomes') selected @endif>Condo Townhomes</option>
-                                            <option value="Single-family"
-                                                @if ($property->prop_type == 'Single-family') selected @endif>Single family</option>
+                                            <option value="Condo Townhomes"
+                                                @if ($property->prop_type == 'Condo Townhomes') selected @endif>Condo Townhomes</option>
+                                            <option value="Single Family"
+                                                @if ($property->prop_type == 'Single Family') selected @endif>Single family</option>
                                         </select>
                                     </div>
                                     <div class="mb-3 mt-3 col-md-4">
@@ -382,17 +382,15 @@
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="no_of_beds">No of Beds</label>
-                                            <input type="number" class="form-control" id="no_of_beds"
-                                                required  name="no_of_beds"
-                                                value="{{ $property->no_of_beds }}">
+                                            <input type="number" class="form-control" id="no_of_beds" required
+                                                name="no_of_beds" value="{{ $property->no_of_beds }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="no_of_baths">No of Baths</label>
-                                            <input type="number" class="form-control" id="no_of_baths"
-                                                required  name="no_of_baths"
-                                                value="{{ $property->no_of_baths }}">
+                                            <input type="number" class="form-control" id="no_of_baths" required
+                                                name="no_of_baths" value="{{ $property->no_of_baths }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
@@ -405,33 +403,33 @@
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_iframe">Property Location Iframe</label>
-                                            <textarea name="prop_iframe" required id="prop_iframe" rows="5" class="form-control" > {{ $property->prop_iframe }}</textarea>
+                                            <textarea name="prop_iframe" required id="prop_iframe" rows="5" class="form-control"> {{ $property->prop_iframe }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_title">Property Meta Title</label>
-                                            <textarea name="prop_meta_title" id="prop_meta_title" rows="1" class="form-control" >{{ $property->prop_meta_title }}</textarea>
+                                            <textarea name="prop_meta_title" id="prop_meta_title" rows="1" class="form-control">{{ $property->prop_meta_title }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_description">Property Meta
                                                 Description</label>
-                                            <textarea name="prop_meta_description" id="prop_meta_description" rows="2" class="form-control" >{{ $property->prop_meta_description }}</textarea>
+                                            <textarea name="prop_meta_description" id="prop_meta_description" rows="2" class="form-control">{{ $property->prop_meta_description }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_keywords">Property Meta
                                                 Keywords</label>
-                                            <textarea name="prop_meta_keywords" id="prop_meta_keywords" rows="1" class="form-control" >{{ $property->prop_meta_keywords }}</textarea>
+                                            <textarea name="prop_meta_keywords" id="prop_meta_keywords" rows="1" class="form-control">{{ $property->prop_meta_keywords }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_meta_tags">Property Meta Tags</label>
-                                            <textarea name="prop_meta_tags" id="prop_meta_tags" rows="3" class="form-control" >{{ $property->prop_meta_tags }}</textarea>
+                                            <textarea name="prop_meta_tags" id="prop_meta_tags" rows="3" class="form-control">{{ $property->prop_meta_tags }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
@@ -496,7 +494,8 @@
                                             id="add_property_floor_plan" class="btn btn-xs btn-success mt-2"><i
                                                 class="bx bx-plus"></i></button>
                                     </div>
-                                    <div class="col-md-12 mb-3 mt-3" style="display: flex; align-items: center; justify-content: center">
+                                    <div class="col-md-12 mb-3 mt-3"
+                                        style="display: flex; align-items: center; justify-content: center">
 
                                         <button type="submit" style="margin-top: 5rem;padding: 0.5rem 5rem 0.5rem 5rem;"
                                             class="btn btn-success" id="add_property_button">Update

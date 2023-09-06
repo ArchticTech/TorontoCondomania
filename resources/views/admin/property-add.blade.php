@@ -103,20 +103,17 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_type">Select Property Type</label>
                                             <select name="prop_type" class="form-select" id="prop_type">
-                                                <option>Select Property Type</option>
-                                                <option value="Condo">Condo</option>
-                                                <option value="Townhouse">Townhouse</option>
-                                                <option value="Condo-Townhomes">Condo Townhomes</option>
-                                                <option value="Single-family">Single family</option>
+                                                @foreach ($propertyTypeEnums as $value)
+                                                    <option value="{{ $value }}">{{ $value }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_status">Select Property Status</label>
                                             <select name="prop_status" class="form-select" id="prop_status">
-                                                <option value="Pre-Construction">Pre-Construction</option>
-                                                <option value="Under-Construction">Under-Construction
-                                                </option>
-                                                <option value="Ready to move">Ready to move</option>
+                                                @foreach ($propertyStatusEnums as $value)
+                                                    <option value="{{ $value }}">{{ $value }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -336,17 +333,15 @@
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="no_of_beds">No of Beds</label>
-                                                <input type="number" class="form-control" id="no_of_beds"
-                                                    required value="0" name="no_of_beds"
-                                                    placeholder="No of Beds">
+                                                <input type="number" class="form-control" id="no_of_beds" required
+                                                    value="0" name="no_of_beds" placeholder="No of Beds">
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="no_of_baths">No of Baths</label>
-                                                <input type="number" class="form-control" id="no_of_baths"
-                                                    required value="0" name="no_of_baths"
-                                                    placeholder="No of Baths">
+                                                <input type="number" class="form-control" id="no_of_baths" required
+                                                    value="0" name="no_of_baths" placeholder="No of Baths">
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3">
@@ -360,7 +355,7 @@
                                             <div class="form-group">
                                                 <label for="prop_iframe">Property Location Iframe</label>
                                                 <textarea name="prop_iframe" required placeholder="Property Location Iframe" id="prop_iframe" rows="5"
-                                                    class="form-control"> </textarea>
+                                                    class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3">
@@ -455,7 +450,8 @@
                                                 id="add_property_floor_plan" class="btn btn-xs btn-success mt-2"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
-                                        <div class="col-md-12 mb-3 mt-3" style="display: flex; align-items: center; justify-content: center">
+                                        <div class="col-md-12 mb-3 mt-3"
+                                            style="display: flex; align-items: center; justify-content: center">
 
                                             <button type="submit"
                                                 style="margin-top: 5rem;padding: 0.5rem 5rem 0.5rem 5rem;"

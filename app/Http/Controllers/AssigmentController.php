@@ -63,9 +63,13 @@ class AssigmentController extends Controller
         $assignment->assign_purchased_date = $request->input('assign_purchased_date');
         $assignment->assign_cooperation_percentage = $request->input('assign_cooperation_percentage');
         $assignment->assign_deposit_paid = $request->input('assign_deposit_paid');
-        
+
         $assignmentSaved = $assignment->save();
 
         return ($assignmentSaved && $propertySaved);
+    }
+
+    public function get($id){
+        return Assignment::find($id);
     }
 }
