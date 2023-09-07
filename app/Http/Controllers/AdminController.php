@@ -79,7 +79,8 @@ class AdminController extends Controller
 
         $data['property'] = $this->propertyController->get($id);
         
-        $data['features'] = $data['property']->propertyFeatures();
+        $data['features'] = $data['property']->propertyFeatures;
+        $data['details'] = $data['property']->propertyDescriptions;
 
         return view('admin.property-edit', $data);
     }

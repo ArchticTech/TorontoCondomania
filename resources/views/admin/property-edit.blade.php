@@ -49,7 +49,7 @@
                                         <div class="form-group">
                                             <label for="prop_name">Property Image</label>
                                             <input type="file" class="form-control" id="prop_image"
-                                                name="prop_image" placeholder="Property Image" value="">
+                                                name="prop_image" placeholder="Property Image">
 
                                             <input type="hidden" name="prop_imageName" value="{{ $property->prop_image }}">
 
@@ -444,12 +444,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="property_feature_tbody">
-
+                                                @foreach ($features as $feature)
+                                                    <tr id="row{{ $loop->iteration }}">
+                                                        <td><input type="text" placeholder="Property Feature" name="prop_feature[]" class="form-control prop_feature" value="{{ $feature->prop_feature }}"/></td>
+                                                        <td style="text-align: center;">
+                                                            <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_prop_feature" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger btn_remove_prop_feature"><i class="bx bxs-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                         <button type="button" name="add_property_feature"
-                                            style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                            id="add_property_feature" class="btn btn-xs btn-success mt-2"><i
+                                            style="float: right;padding: 6px 21px;"
+                                            id="add_property_feature" class="btn btn-xs btn-success mt-3"><i
                                                 class="bx bx-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
@@ -464,12 +471,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="property_detail_tbody">
-
+                                                @foreach ($details as $detail)
+                                                    <tr id="row{{ $loop->iteration }}">
+                                                        <td><input type="text" placeholder="Property Detail" name="prop_detail[]" class="form-control prop_detail" value="{{ $detail->prop_description }}"/></td>
+                                                        <td style="text-align: center;">
+                                                            <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_prop_detail" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger btn_remove_prop_detail"><i class="bx bxs-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                         <button type="button" name="add_property_detail"
-                                            style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                            id="add_property_detail" class="btn btn-xs btn-success mt-2"><i
+                                            style="float: right;padding: 6px 21px;"
+                                            id="add_property_detail" class="btn btn-xs btn-success mt-3"><i
                                                 class="bx bx-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
@@ -479,8 +493,8 @@
 
                                         </div>
                                         <button type="button" name="add_property_image"
-                                            style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                            id="add_property_image" class="btn btn-xs btn-success mt-2"><i
+                                            style="float: right;padding: 6px 21px;"
+                                            id="add_property_image" class="btn btn-xs btn-success mt-3"><i
                                                 class="bx bx-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
@@ -490,8 +504,8 @@
 
                                         </div>
                                         <button type="button" name="add_property_floor_plan"
-                                            style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                            id="add_property_floor_plan" class="btn btn-xs btn-success mt-2"><i
+                                            style="float: right;padding: 6px 21px;"
+                                            id="add_property_floor_plan" class="btn btn-xs btn-success mt-3"><i
                                                 class="bx bx-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3"

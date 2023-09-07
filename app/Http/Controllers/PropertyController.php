@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\File;
 use App\Models\Property;
 use App\Models\Assigment;
 use App\Models\PropertyFeature;
+use App\Models\PropertyDescription;
+use App\Models\PropertyImage;
+use App\Models\PropertyFloorPlan;
 
 class PropertyController extends Controller
 {
@@ -73,10 +76,12 @@ class PropertyController extends Controller
         $min_deposit_percentage = $request->input('min_deposit_percentage');
         $no_of_beds = $request->input('no_of_beds');
         $no_of_baths = $request->input('no_of_baths');
-
-        $image = $request->file('prop_image');
-        $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $prop_imageName);
+        
+        $prop_imageName = '';
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
+        {
+            $prop_imageName = $this->saveImage($request->file('prop_image'));
+        }
 
         $property = new Property([
             'prop_code' => $prop_code,
@@ -123,27 +128,26 @@ class PropertyController extends Controller
 
         $saved = $property->save();
 
-        if($saved && $request->input('prop_feature'))
+        if($saved)
         {
-            $this->addFeatures($request->input('prop_feature'), $property);
+            if ($request->input('prop_feature'))
+            {
+                $this->addFeatures($request->input('prop_feature'), $property);
+            }
+            if ($request->input('prop_detail'))
+            {
+                $this->addDetails($request->input('prop_detail'), $property);
+            }
+            // if ($request->file('property_image'))
+            // {
+            //     $this->addImages($request->file('property_image'), $property);
+            // }
         }
 
         return [
             'saved' => $saved,   // This will be true or false
             'property' => $property,  // This will be the saved Property object
         ];
-    }
-    
-    public function addFeatures($features, $property)
-    {
-        foreach($features as $feature) {
-            $propertyFeature = new PropertyFeature([
-                'prop_feature' => $feature,
-                'status' => 1
-            ]);
-
-            $property->propertyFeatures()->save($propertyFeature);
-        }
     }
 
     /**
@@ -218,19 +222,33 @@ class PropertyController extends Controller
         $property->no_of_beds = $request->input('no_of_beds');
         $property->no_of_baths = $request->input('no_of_baths');
 
-        $imagePath = public_path('images/' . $request->input('prop_imageName'));
-
-        if (File::exists($imagePath)) {
-            // Delete the image if it exists
-            File::delete($imagePath);
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
+        {
+            $prop_imageName = $this->saveImage($request->file('prop_image'));
+            $property->prop_image = $prop_imageName;
+            
+            $imagePath = public_path('images/' . $request->input('prop_imageName'));
+            if (File::exists($imagePath)) {
+                // Delete the image if it exists
+                File::delete($imagePath);
+            }
         }
 
-        $image = $request->file('prop_image');
-        $prop_imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $prop_imageName);
-        $property->prop_image = $prop_imageName;
-
         $saved = $property->save();
+
+        $this->removeFeatures($property);
+        $this->removeDetails($property);
+        if($saved)
+        {
+            if ($request->input('prop_feature'))
+            {
+                $this->addFeatures($request->input('prop_feature'), $property);
+            }
+            if ($request->input('prop_detail'))
+            {
+                $this->addDetails($request->input('prop_detail'), $property);
+            }
+        }
 
         return [
             'saved' => $saved,   // This will be true or false
@@ -238,4 +256,63 @@ class PropertyController extends Controller
         ];
     }
 
+    public function saveImage($image)
+    {
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        return $imageName;
+    }
+
+    public function addFeatures($features, $property)
+    {
+        foreach($features as $feature) {
+
+            $propertyFeature = new PropertyFeature([
+                'prop_feature' => $feature,
+                'status' => 1
+            ]);
+
+            $property->propertyFeatures()->save($propertyFeature);
+        }
+    }
+    public function removeFeatures($property)
+    {
+        $property->propertyFeatures()->delete();
+        return;
+    }
+    
+    public function addDetails($details, $property)
+    {
+        foreach($details as $detail) {
+
+            $propertyDescription = new PropertyDescription([
+                'prop_description' => $detail,
+                'status' => 1
+            ]);
+
+            $property->propertyDescriptions()->save($propertyDescription);
+        }
+    }
+    public function removeDetails($property)
+    {
+        $property->propertyDescriptions()->delete();
+        return;
+    }
+
+    public function addImages($images, $property)
+    {
+        foreach($images as $image) {
+            $imageName = $this->saveImage($image);
+            $propertyImage = new PropertyImage([
+                'image' => $imageName,
+                'status' => 1
+            ]);
+
+            $property->propertyImages()->save($propertyImage);
+        }
+    }
+    public function removeImages($property)
+    {
+        return;
+    }
 }
