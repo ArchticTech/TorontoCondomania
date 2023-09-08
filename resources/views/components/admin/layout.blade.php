@@ -179,14 +179,14 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link ">
+                        <a href="/secure-zone/consulting-form" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-user-voice"></i>
                             <div data-i18n="Layouts">Consulting Form</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="/secure-zone/subscription" class="menu-link">
+                        <a href="/secure-zone/subscription-form" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
                             <div data-i18n="Layouts">Subscription Form</div>
                         </a>
@@ -224,11 +224,7 @@
                                     <div>Notifications</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="pages-account-settings-connections.html" class="menu-link">
-                                    <div>Connections</div>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -309,21 +305,12 @@
                                             <span class="align-middle">Settings</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
+
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
+                                        <a class="dropdown-item" href="/secure-zone/logout">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -434,7 +421,7 @@
 <script>
     @if (isset($features))
         var i = {{count($features)}} + 1;
-    @else 
+    @else
         var i = 1;
     @endif
     $("#add_property_feature").click(function() {
@@ -456,9 +443,37 @@
         $('#row' + button_id + '').remove();
     });
 
+
+    //rent features
+    @if (isset($features))
+        var z = {{count($features)}} + 1;
+    @else
+        var z = 1;
+    @endif
+    $("#add_rent_feature").click(function() {
+        $('#property_feature_tbody').append('<tr id="row' + z + '">\
+            <td>\
+                <input type="text" placeholder="Rent Feature" name="rent_feature[]" class="form-control rent_feature" />\
+            </td>\
+            <td style="text-align: center">\
+                <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_feature" id="' + z + '" class="btn btn-xs btn-danger btn_remove_prop_feature">\
+                    <i class="bx bxs-trash"></i>\
+                </button>\
+            </td>\
+        </tr>');
+        z++;
+    });
+
+    $(document).on('click', '.btn_remove_rent_feature', function() {
+        var button_id = $(this).attr("id");
+        $('#row' + button_id + '').remove();
+    });
+
+    //end rent features
+
     @if (isset($details))
         var j = {{count($details)}} + 1;
-    @else 
+    @else
         var j = 1;
     @endif
     $("#add_property_detail").click(function() {
@@ -498,6 +513,28 @@
         var button_id = $(this).attr("id");
         $('#image_row' + button_id + '').remove();
     });
+
+    //RENT IMAGE
+    var y = 0;
+    $("#add_rent_image").click(function() {
+        y++;
+        $('#rent_image_row').append('\
+            <div class="col-md-4" id="image_row' + y + '">\
+                <div class="form-group">\
+                    <label for="prop_name">Rent Image ' + y +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_image" id="' +
+            y + '" class="btn btn-xs btn-danger m-1 btn_remove_rent_image"><i class="bx bxs-trash"></i></button></label>\
+                    <input type="file"  class="form-control property_image" id="prop_image" name="property_image[]" placeholder="Rent Image">\
+                </div>\
+            </div>');
+    });
+
+    $(document).on('click', '.btn_remove_rent_image', function() {
+        var button_id = $(this).attr("id");
+        $('#image_row' + button_id + '').remove();
+    });
+
+    //END RENT IMAGE
 
     var l = 0;
     $("#add_property_floor_plan").click(function() {

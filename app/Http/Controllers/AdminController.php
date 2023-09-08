@@ -50,6 +50,8 @@ class AdminController extends Controller
 
         return view('admin.index', compact('architects', 'cities', 'developers', 'developments', 'interiorDesigners', 'propertyAgents', 'country'));
     }
+
+    //Property CRUD
     public function viewProperty()
     {
         $properties = $this->propertyController->all();
@@ -148,4 +150,25 @@ class AdminController extends Controller
             return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
         }
     }
+
+    //consulting form
+    public function consultingForm()
+    {
+
+        return view('admin.consulting-form');
+    }
+
+    //subscription Form
+    public function subscriptionForm()
+    {
+
+        return view('admin.subscription-form');
+    }
+
+    public function login()
+    {
+
+        return view('admin.login');
+    }
+
 }

@@ -13,7 +13,7 @@
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Assignments</h3>
+
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -170,7 +170,7 @@
 
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
-                                                <label for="vip_launch_date">Vip launch Date <span
+                                                <label for="vip_launch_date">Vip launch Date<span
                                                         style="font-size: 12px;color: grey;">(If No Vip
                                                         launch Date : 01/01/2020)</span></label>
                                                 <input class="form-control" required value="2020-01-01"
@@ -180,7 +180,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
-                                                <label for="public_launch_date">Public launch Date <span
+                                                <label for="public_launch_date">Public launch Date<span
                                                         style="font-size: 12px;color: grey;">(If No Public
                                                         launch Date : 01/01/2020)</span></label>
                                                 <input class="form-control" value="2020-01-01" id="public_launch_date"
@@ -190,7 +190,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
-                                                <label for="const_start_date">Construction Start Date <span
+                                                <label for="const_start_date">Construction Start Date<span
                                                         style="font-size: 12px;color: grey;">(If No
                                                         Construction Start Date : 01/01/2020)</span></label>
                                                 <input class="form-control" value="2020-01-01" id="const_start_date"
