@@ -47,7 +47,7 @@
                                                         <td>{{ $assigment->assign_tentative_occ_date->format('Y-m-d')}}</td>
                                                         <td>{{ $assigment->assign_purchased_date->format('Y-m-d')}}</td>
                                                         <td>{{ $assigment->assign_cooperation_percentage}}%</td>
-                                                        <td><a href="{{ route('admin.assigment.edit', $assigment->id) }}"><i class='bx bxs-edit'></i></a></td>
+                                                        <td><a href="{{ route('admin.assignment.edit', $assigment->id) }}"><i class='bx bxs-edit'></i></a></td>
                                                     </tr>
                                                     @endif
                                                     @endforeach

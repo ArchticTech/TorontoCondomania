@@ -47,7 +47,8 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="city_id">Select City</label>
-                                            <select name="city_id" class="form-select" id="city_id">
+                                            <select name="city_id" required class="form-select" id="city_id">
+                                                <option id="" value="">Select City</option>
                                                 @foreach ($cities as $city)
                                                     <option value="{{ $city->id }}">{{ $city->city_name }}</option>
                                                 @endforeach
@@ -55,7 +56,8 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="development_id">Select Development</label>
-                                            <select name="development_id" class="form-select" id="development_id">
+                                            <select required name="development_id" class="form-select" id="development_id">
+                                                <option id="" value="">Select Development</option>
                                                 @foreach ($developments as $development)
                                                     <option value="{{ $development->id }}">
                                                         {{ $development->development_name }}</option>
@@ -64,7 +66,8 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="developer_id">Select Developer</label>
-                                            <select name="developer_id" class="form-select" id="developer_id">
+                                            <select name="developer_id" required class="form-select" id="developer_id">
+                                                <option id="" value="">Select Developer</option>
                                                 @foreach ($developers as $developer)
                                                     <option value="{{ $developer->id }}">{{ $developer->developer_name }}
                                                     </option>
@@ -73,7 +76,8 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="architects_id">Select Architect</label>
-                                            <select name="architects_id" class="form-select" id="architects_id">
+                                            <select name="architects_id" required class="form-select" id="architects_id">
+                                                <option id="" value="">Select Architect</option>
                                                 @foreach ($architects as $architect)
                                                     <option value="{{ $architect->id }}">{{ $architect->architects_name }}
                                                     </option>
@@ -83,8 +87,9 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="interior_designer_id">Select interior
                                                 Design</label>
-                                            <select name="interior_designer_id" class="form-select"
+                                            <select name="interior_designer_id" required class="form-select"
                                                 id="interior_designer_id">
+                                                <option id="" value="">Select Interior Designer</option>
                                                 @foreach ($interiorDesigners as $interiorDesigner)
                                                     <option value="{{ $interiorDesigner->id }}">
                                                         {{ $interiorDesigner->interior_designer_name }}</option>
@@ -93,7 +98,8 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_agent_id">Select Property Agent</label>
-                                            <select name="prop_agent_id" class="form-select" id="prop_agent_id">
+                                            <select name="prop_agent_id" required class="form-select" id="prop_agent_id">
+                                                <option id="" value="">Select Property Agent</option>
                                                 @foreach ($propertyAgents as $propertyAgent)
                                                     <option value="{{ $propertyAgent->id }}">
                                                         {{ $propertyAgent->agent_name }}</option>
@@ -102,7 +108,8 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_type">Select Property Type</label>
-                                            <select name="prop_type" class="form-select" id="prop_type">
+                                            <select name="prop_type" required class="form-select" id="prop_type">
+                                                <option value="">Select Property Type</option>
                                                 @foreach ($propertyTypeEnums as $value)
                                                     <option value="{{ $value }}">{{ $value }}</option>
                                                 @endforeach
@@ -110,7 +117,8 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_status">Select Property Status</label>
-                                            <select name="prop_status" class="form-select" id="prop_status">
+                                            <select name="prop_status" required class="form-select" id="prop_status">
+                                                <option value="">Select Property Status</option>
                                                 @foreach ($propertyStatusEnums as $value)
                                                     <option value="{{ $value }}">{{ $value }}</option>
                                                 @endforeach
@@ -143,9 +151,9 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="est_occupancy_year">Estimate Occupency
                                                 Year</label>
-                                            <select name="est_occupancy_year" class="form-select"
+                                            <select name="est_occupancy_year" required class="form-select"
                                                 id="est_occupancy_year">
-                                                <option selected>Estimate Occupency Year</option>
+                                                <option value="">Estimate Occupency Year</option>
                                                 <option value="2022">2022</option>
                                                 <option value="2023">2023</option>
                                                 <option value="2024">2024</option>
@@ -190,10 +198,10 @@
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="hot_property">Hot Property</label>
-                                            <select name="is_hot" class="form-select" id="hot_property"
+                                            <select name="is_hot" required class="form-select" id="hot_property"
                                                 aria-label="Default select example">
-                                                {{-- <option selected>Hot Property</option> --}}
-                                                <option value="1" selected>Yes</option>
+                                                <option value="">Hot Property</option>
+                                                <option value="1">Yes</option>
                                                 <option value="0">No</option>
                                             </select>
                                         </div>
@@ -201,6 +209,7 @@
                                             <label for="vip_featured_promotion">Vip/Featured/Promotion</label>
                                             <select class="form-select" name="vip_featured_promotion"
                                                 id="vip_featured_promotion" required>
+                                                <option value="">Vip/Featured/Promotion</option>
                                                 <option value="Vip">Vip</option>
                                                 <option value="Featured">Featured</option>
                                                 <option value="Promotion">Promotion</option>
@@ -209,20 +218,23 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="sale_rent">Sale/Rent</label>
                                             <select name="sale_rent" required id="sale_rent" class="form-select">
-                                                <option value="Sale" selected>Sale</option>
+                                                <option value="">Sale/Rent</option>
+                                                <option value="Sale" >Sale</option>
                                                 <option value="Rent">Rent</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="sold_out">Sold Out</label>
                                             <select name="sold_out" required id="sold_out" class="form-select">
+                                                <option value="">Sold Out</option>
                                                 <option value="1">Yes</option>
-                                                <option value="0" selected>No</option>
+                                                <option value="0">No</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="status">Status</label>
                                             <select name="status" required id="status" class="form-select">
+                                                <option value="">Status</option>
                                                 <option value="1">Active</option>
                                                 <option value="0">In Active</option>
                                             </select>

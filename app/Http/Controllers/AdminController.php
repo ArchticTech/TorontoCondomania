@@ -13,6 +13,7 @@ use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
 use App\Models\Property;
+use Carbon\Carbon;
 
 
 class AdminController extends Controller
@@ -20,8 +21,8 @@ class AdminController extends Controller
     private $propertyController, $assigmentController;
     public function __construct(PropertyController $propertyController, AssigmentController $assigmentController)
     {
-        $this->propertyController = $propertyController;
         $this->assigmentController = $assigmentController;
+        $this->propertyController = $propertyController;
     }
     private function getFormData()
     {
@@ -63,6 +64,7 @@ class AdminController extends Controller
     }
     public function storeProperty(Request $request)
     {
+        // dd($request->all());
         $result = $this->propertyController->store($request);
 
         if ($result['saved']) {
@@ -78,7 +80,7 @@ class AdminController extends Controller
         $data = $this->getFormData();
 
         $data['property'] = $this->propertyController->get($id);
-        
+
         $data['features'] = $data['property']->propertyFeatures;
         $data['details'] = $data['property']->propertyDescriptions;
 
@@ -94,7 +96,7 @@ class AdminController extends Controller
         }
         else {
             return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
-        }   
+        }
     }
 
     // Assigments CRUD
@@ -115,27 +117,28 @@ class AdminController extends Controller
 
     public function storeAssigment(Request $request)
     {
+
         $assigmentSaved = $this->assigmentController->store($request);
 
         if ($assigmentSaved) {
-            return redirect()->route('admin.assigment.view')
+            return redirect()->route('admin.assignment.view')
                 ->with('message', 'Assigment Added Successfully');
         } else {
-            return redirect()->route('admin.assigment.add')
+            return redirect()->route('admin.assignment.add')
                 ->with('message', 'Assigment Failed to Add');
         }
     }
-    public function editAssignment($id)
+    public function editAssigment($id)
     {
         $data = $this->getFormData();
 
-        $data['assignment'] = $this->assignmentController->get($id);
+        $data['assignment'] = $this->assigmentController->get($id);
 
         return view('admin.assignment-edit', $data);
     }
     public function updateAssignment(Request $request, $id)
     {
-        $assignmentSaved = $this->assignmentController->update($request, $id);
+        $assignmentSaved = $this->assigmentController->update($request, $id);
 
         if ($assignmentSaved) {
             return redirect()->route('admin.assignment.view')
@@ -143,6 +146,6 @@ class AdminController extends Controller
         }
         else {
             return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
-        }   
+        }
     }
 }

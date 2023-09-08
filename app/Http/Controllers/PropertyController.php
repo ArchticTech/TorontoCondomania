@@ -76,9 +76,9 @@ class PropertyController extends Controller
         $min_deposit_percentage = $request->input('min_deposit_percentage');
         $no_of_beds = $request->input('no_of_beds');
         $no_of_baths = $request->input('no_of_baths');
-        
+
         $prop_imageName = '';
-        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
         {
             $prop_imageName = $this->saveImage($request->file('prop_image'));
         }
@@ -195,7 +195,7 @@ class PropertyController extends Controller
         $property->no_of_suites = $request->input('no_of_suites');
         $property->est_occupancy_month = $request->input('est_occupancy_month');
         $property->est_occupancy_year = $request->input('est_occupancy_year');
-        
+
         $property->vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
         $property->public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
         $property->const_start_date = now()->parse($request->input('const_start_date'))->toDateString();
@@ -222,11 +222,11 @@ class PropertyController extends Controller
         $property->no_of_beds = $request->input('no_of_beds');
         $property->no_of_baths = $request->input('no_of_baths');
 
-        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
         {
             $prop_imageName = $this->saveImage($request->file('prop_image'));
             $property->prop_image = $prop_imageName;
-            
+
             $imagePath = public_path('images/' . $request->input('prop_imageName'));
             if (File::exists($imagePath)) {
                 // Delete the image if it exists
@@ -280,7 +280,7 @@ class PropertyController extends Controller
         $property->propertyFeatures()->delete();
         return;
     }
-    
+
     public function addDetails($details, $property)
     {
         foreach($details as $detail) {

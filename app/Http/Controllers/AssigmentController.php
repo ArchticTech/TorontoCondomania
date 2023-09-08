@@ -24,7 +24,9 @@ class AssigmentController extends Controller
     }
     public function get($id)
     {
-        return Assignment::find($id);
+        $assignment =  Assignment::find($id);
+        $assignment->assign_tentative_occ_date = Carbon::parse($assignment->assign_tentative_occ_date)->format('Y-m-d');
+        return $assignment;
     }
     public function store(Request $request)
     {
@@ -40,8 +42,8 @@ class AssigmentController extends Controller
             'assign_unit_no' => $request->input('assign_unit_no'),
             'assign_floor_no' => $request->input('assign_floor_no'),
             'assign_purchase_price' => $request->input('assign_purchase_price'),
-            'assign_tentative_occ_date' => $request->input('assign_tentative_occ_date'),
-            'assign_purchased_date' => $request->input('assign_purchased_date'),
+            'assign_tentative_occ_date' => now()->parse($request->input('assign_tentative_occ_date'))->toDateString(),
+            'assign_purchased_date' => now()->parse($request->input('assign_purchased_date'))->toDateString(),
             'assign_cooperation_percentage' => $request->input('assign_cooperation_percentage'),
             'assign_deposit_paid' => $request->input('assign_deposit_paid')
         ]);
@@ -66,7 +68,7 @@ class AssigmentController extends Controller
         $assignment->assign_purchased_date = $request->input('assign_purchased_date');
         $assignment->assign_cooperation_percentage = $request->input('assign_cooperation_percentage');
         $assignment->assign_deposit_paid = $request->input('assign_deposit_paid');
-        
+
         $assignmentSaved = $assignment->save();
 
         return ($assignmentSaved && $propertySaved);
