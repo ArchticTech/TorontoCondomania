@@ -577,6 +577,25 @@
         l++;
     });
 
+    @if (isset($rentalfeatures))
+        var z = {{count($rentalfeatures)}} + 1;
+    @else 
+        var z = 1;
+    @endif
+    $("#add_rent_feature").click(function() {
+        $('#property_feature_tbody').append('<tr id="row' + z + '">\
+            <td>\
+                <input type="text" placeholder="Rent Feature" name="rent_feature[]" class="form-control rent_feature" />\
+            </td>\
+            <td style="text-align: center">\
+                <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_feature" id="' + z + '" class="btn btn-xs btn-danger btn_remove_prop_feature">\
+                    <i class="bx bxs-trash"></i>\
+                </button>\
+            </td>\
+        </tr>');
+        z++;
+    });
+
     $(document).on('click', '.btn_remove_property_floor_plan', function() {
         var button_id = $(this).attr("id");
         $('#property_floor_plan_row' + button_id + '').remove();

@@ -17,11 +17,12 @@ use App\Models\Property;
 
 class AdminController extends Controller
 {
-    private $propertyController, $assignmentController;
-    public function __construct(PropertyController $propertyController, AssignmentController $assignmentController)
+    private $propertyController, $assignmentController, $rentalController;
+    public function __construct(PropertyController $propertyController, AssignmentController $assignmentController, RentalController $rentalController)
     {
         $this->propertyController = $propertyController;
         $this->assignmentController = $assignmentController;
+        $this->rentalController = $rentalController;
     }
     private function getFormData()
     {
@@ -151,5 +152,66 @@ class AdminController extends Controller
         else {
             return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
         }   
+    }
+
+    public function viewRental()
+    {
+        $rentals = $this->rentalController->all();
+
+        return view('admin.rentals-view', ['rentals' => $rentals]);
+    }
+    public function addRental()
+    {
+        return view('admin.rentals-add');
+    }
+    public function storeRental(Request $request)
+    {
+        $saved = $this->rentalController->store($request);
+
+        if ($saved) {
+            return redirect()->route('admin.rentals.view')
+                ->with('message', 'Rental Added Successfully!');
+        } else {
+            return redirect()->route('admin.rentals.add')
+                ->with('message', 'Rental Failed to Add!');
+        }
+    }
+    public function editRental($id)
+    {
+        $rental = $this->rentalController->get($id);
+
+        return view('admin.rental-edit', ['rental' => $rental]);
+    }
+    public function updateRental(Request $request, $id)
+    {
+        $saved = $this->rentalController->update($request, $id);
+
+        if ($saved) {
+            return redirect()->route('admin.rentals.view')
+                ->with('message', 'Rental Updated Successfully!');
+        } else {
+            return redirect()->route('admin.rentals.update')
+                ->with('message', 'Rental Failed to Update!');
+        } 
+    }
+
+    // Consulting form
+    public function consultingForm()
+    {
+
+        return view('admin.consulting-form');
+    }
+
+    // Subscription Form
+    public function subscriptionForm()
+    {
+
+        return view('admin.subscription-form');
+    }
+
+    public function login()
+    {
+
+        return view('admin.login');
     }
 }

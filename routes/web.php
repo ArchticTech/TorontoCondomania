@@ -32,11 +32,11 @@ Route::prefix('secure-zone')->group(function () {
     Route::prefix('rentals')->group(function () {
         // Routes within the 'secure-zone/property' group
         //Assigments CRUD routes
-        Route::get('', [AdminController::class, 'viewRentals'])->name('admin.rentals.view');
-        Route::get('add', [AdminController::class, 'addRentals'])->name('admin.rentals.add');
-        Route::post('store', [AdminController::class, 'storeRentals'])->name('admin.rentals.store');
-        Route::get('edit/{id}', [AdminController::class, 'editRentals'])->name('admin.rentals.edit');
-        Route::PUT('update/{id}', [AdminController::class, 'updateRentals'])->name('admin.rentals.update');
+        Route::get('', [AdminController::class, 'viewRental'])->name('admin.rentals.view');
+        Route::get('add', [AdminController::class, 'addRental'])->name('admin.rentals.add');
+        Route::post('store', [AdminController::class, 'storeRental'])->name('admin.rentals.store');
+        Route::get('edit/{id}', [AdminController::class, 'editRental'])->name('admin.rentals.edit');
+        Route::PUT('update/{id}', [AdminController::class, 'updateRental'])->name('admin.rentals.update');
     });
 });
 
