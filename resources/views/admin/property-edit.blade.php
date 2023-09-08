@@ -53,7 +53,7 @@
 
                                             <input type="hidden" name="prop_imageName" value="{{ $property->prop_image }}">
 
-                                            <img class="img img-fluid m-2" width="50px" height="40px"
+                                            <img class="img img-fluid my-2" width="253px"
                                                 src="{{ asset('images/' . $property->prop_image) }}" />
                                         </div>
                                     </div>
@@ -490,7 +490,19 @@
                                         <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
                                             Property Images</p>
                                         <div class="row" id="property_image_row">
-
+                                            @foreach ($images as $image)
+                                                <div class="col-md-4" id="image_row{{ $loop->iteration }}">
+                                                    <div class="form-group">
+                                                        <label for="prop_name">
+                                                            Property Image {{ $loop->iteration }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <button type="button" style="padding: 6px 10px" name="btn_remove_prop_image" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger m-1 btn_remove_prop_image"><i class="bx bxs-trash"></i></button>
+                                                        </label>
+                                                        <input type="hidden" name="propertyImageName[]" value="{{$image->image}}" />
+                                                        <input type="file" class="form-control property_image" id="prop_image" name="property_image[]" placeholder="Property Image" />
+                                                        <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $image->image) }}" />
+                                                    </div>
+                                                </div>                                            
+                                            @endforeach
                                         </div>
                                         <button type="button" name="add_property_image"
                                             style="float: right;padding: 6px 21px;"

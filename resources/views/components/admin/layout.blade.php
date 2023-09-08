@@ -462,7 +462,6 @@
         var j = 1;
     @endif
     $("#add_property_detail").click(function() {
-        j++;
         $('#property_detail_tbody').append('<tr id="row' + j + '">\
             <td>\
                 <input type="text" placeholder="Property Detail" name="prop_detail[]" class="form-control prop_detail" />\
@@ -473,6 +472,7 @@
                 </button>\
             </td>\
         </tr>');
+        j++;
     });
 
     $(document).on('click', '.btn_remove_prop_detail', function() {
@@ -480,9 +480,12 @@
         $('#row' + button_id + '').remove();
     });
 
-    var k = 0;
+    @if (isset($images))
+        var k = {{count($images)}} + 1;
+    @else 
+        var k = 1;
+    @endif
     $("#add_property_image").click(function() {
-        k++;
         $('#property_image_row').append('\
             <div class="col-md-4" id="image_row' + k + '">\
                 <div class="form-group">\
@@ -492,6 +495,7 @@
                     <input type="file"  class="form-control property_image" id="prop_image" name="property_image[]" placeholder="Property Image">\
                 </div>\
             </div>');
+        k++;
     });
 
     $(document).on('click', '.btn_remove_prop_image', function() {

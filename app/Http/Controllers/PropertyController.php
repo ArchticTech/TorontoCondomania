@@ -138,10 +138,10 @@ class PropertyController extends Controller
             {
                 $this->addDetails($request->input('prop_detail'), $property);
             }
-            // if ($request->file('property_image'))
-            // {
-            //     $this->addImages($request->file('property_image'), $property);
-            // }
+            if ($request->file('property_image'))
+            {
+                $this->addImages($request->file('property_image'), $property);
+            }
         }
 
         return [
@@ -238,6 +238,8 @@ class PropertyController extends Controller
 
         $this->removeFeatures($property);
         $this->removeDetails($property);
+        $this->removeImages($request->input('propertyImageName'), $property);
+        
         if($saved)
         {
             if ($request->input('prop_feature'))
@@ -247,6 +249,10 @@ class PropertyController extends Controller
             if ($request->input('prop_detail'))
             {
                 $this->addDetails($request->input('prop_detail'), $property);
+            }
+            if ($request->file('property_image'))
+            {
+                $this->addImages($request->file('property_image'), $property);
             }
         }
 
@@ -258,7 +264,7 @@ class PropertyController extends Controller
 
     public function saveImage($image)
     {
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
         return $imageName;
     }
@@ -311,8 +317,19 @@ class PropertyController extends Controller
             $property->propertyImages()->save($propertyImage);
         }
     }
-    public function removeImages($property)
+    public function removeImages($imageNames, $property)
     {
+        $oldImages = $property->propertyImages->pluck('image')->toArray();
+        $deletedImages = $imageNames ? array_diff($oldImages, $imageNames) : $oldImages;
+        foreach($deletedImages as $image) {
+            $imagePath = public_path('images/' . $image);
+            if (File::exists($imagePath)) {
+                // Delete the image if it exists
+                File::delete($imagePath);
+            }
+
+            $property->propertyImages()->where('image', $image)->delete();
+        }
         return;
     }
 }

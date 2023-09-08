@@ -17,11 +17,11 @@ use App\Models\Property;
 
 class AdminController extends Controller
 {
-    private $propertyController, $assigmentController;
-    public function __construct(PropertyController $propertyController, AssigmentController $assigmentController)
+    private $propertyController, $assignmentController;
+    public function __construct(PropertyController $propertyController, AssigmentController $assignmentController)
     {
         $this->propertyController = $propertyController;
-        $this->assigmentController = $assigmentController;
+        $this->assignmentController = $assignmentController;
     }
     private function getFormData()
     {
@@ -81,6 +81,7 @@ class AdminController extends Controller
         
         $data['features'] = $data['property']->propertyFeatures;
         $data['details'] = $data['property']->propertyDescriptions;
+        $data['images'] = $data['property']->propertyImages;
 
         return view('admin.property-edit', $data);
     }
