@@ -20,14 +20,14 @@ Route::prefix('secure-zone')->group(function () {
         Route::PUT('update/{id}', [AdminController::class, 'updateProperty'])->name('admin.property.update');
     });
 
-    Route::prefix('assigment')->group(function () {
+    Route::prefix('assignment')->group(function () {
         // Routes within the 'secure-zone/property' group
         //Assigments CRUD routes
-        Route::get('', [AdminController::class, 'viewAssigments'])->name('admin.assigment.view');
-        Route::get('add', [AdminController::class, 'addAssigment'])->name('admin.assigment.add');
-        Route::post('store', [AdminController::class, 'storeAssigment'])->name('admin.assigment.store');
-        Route::get('edit/{id}', [AdminController::class, 'editAssigment'])->name('admin.assigment.edit');
-        Route::PUT('update/{id}', [AdminController::class, 'updateAssignment'])->name('admin.assigment.update');
+        Route::get('', [AdminController::class, 'viewAssignments'])->name('admin.assignment.view');
+        Route::get('add', [AdminController::class, 'addAssignment'])->name('admin.assignment.add');
+        Route::post('store', [AdminController::class, 'storeAssignment'])->name('admin.assignment.store');
+        Route::get('edit/{id}', [AdminController::class, 'editAssignment'])->name('admin.assignment.edit');
+        Route::PUT('update/{id}', [AdminController::class, 'updateAssignment'])->name('admin.assignment.update');
     });
     Route::prefix('rentals')->group(function () {
         // Routes within the 'secure-zone/property' group

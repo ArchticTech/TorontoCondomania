@@ -119,15 +119,15 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="/secure-zone/property/add" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div>Add</div>
+                                <a href="{{route('admin.property.view')}}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
+                                    <div data-i18n="Layouts">View </div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="/secure-zone/property" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
-                                    <div data-i18n="Layouts">View </div>
+                                <a href="{{route('admin.property.add')}}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
+                                    <div>Add</div>
                                 </a>
                             </li>
 
@@ -135,21 +135,21 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="#" class="menu-link menu-toggle">
+                        <a href="" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bxs-building-house"></i>
                             <div>Assignments</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="/secure-zone/assigment/add" class="menu-link ">
-                                    <i class="menu-icon tf-icons bx bx-image-add"></i>
-                                    <div data-i18n="Layouts">Add</div>
+                                <a href="{{route('admin.assignment.view')}}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
+                                    <div data-i18n="Layouts">View</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="/secure-zone/assigment" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-image-alt"></i>
-                                    <div data-i18n="Layouts">View</div>
+                                <a href="{{route('admin.assignment.add')}}" class="menu-link ">
+                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
+                                    <div data-i18n="Layouts">Add</div>
                                 </a>
                             </li>
 
@@ -163,15 +163,15 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="/secure-zone/rentals/add" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-plus-circle"></i>
-                                    <div data-i18n="Layouts">Add</div>
+                                <a href="{{route('admin.rentals.view')}}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
+                                    <div data-i18n="Layouts">View</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="/secure-zone/rentals" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-info-circle"></i>
-                                    <div data-i18n="Layouts">View</div>
+                                <a href="{{route('admin.rentals.add')}}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
+                                    <div data-i18n="Layouts">Add</div>
                                 </a>
                             </li>
 
@@ -503,63 +503,66 @@
         $('#image_row' + button_id + '').remove();
     });
 
-    var l = 0;
+    @if (isset($images))
+        var l = {{count($images)}} + 1;
+    @else 
+        var l = 1;
+    @endif
     $("#add_property_floor_plan").click(function() {
-        l++;
         $('#property_floor_plan_image_row').append('\
             <div class="row" id="property_floor_plan_row' + l + '">\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan ' + l + '</h5></div>\
+                <div class="col-xl-3 col-md-8 my-3">\
                     <div class="form-group">\
-                        <label for="property_floor_plan">Floor Plan ' + l +
-            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>\
+                        <label for="property_floor_plan">Floor Plan Image</label>\
                         <input type="file" class="form-control floor_plan_image" id="prop_image" name="floor_plan_image[]" required placeholder="Floor Plan">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-3 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_suite_no">Suite No ' + l + '</label>\
+                        <label for="plan_suite_no">Suite No</label>\
                         <input type="text" required class="form-control" id="plan_suite_no" name="plan_suite_no[]" placeholder="Suite No">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-6 col-md-12 my-3">\
                     <div class="form-group">\
-                        <label for="plan_suite_name">Suite Name ' + l + '</label>\
+                        <label for="plan_suite_name">Suite Name</label>\
                         <input type="text" required class="form-control" id="plan_suite_name" name="plan_suite_name[]" placeholder="Suite Name">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_sq_ft">Plan Sq. Ft ' + l + '</label>\
+                        <label for="plan_sq_ft">Plan Sq. Ft</label>\
                         <input type="number" required class="form-control" id="plan_sq_ft" name="plan_sq_ft[]" placeholder="Plan Sq. Ft">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_bath">Plan Bath ' + l + '</label>\
+                        <label for="plan_bath">Plan Bath</label>\
                         <input type="number" required class="form-control" id="plan_bath" name="plan_bath[]" placeholder="Plan Bath">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_bed">Plan Bed ' + l + '</label>\
+                        <label for="plan_bed">Plan Bed</label>\
                         <input type="number" required class="form-control" id="plan_bed" name="plan_bed[]" placeholder="Plan Bed">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_availability">Plan Availability ' + l + '</label>\
+                        <label for="plan_availability">Plan Availability</label>\
                         <select name="plan_availability[]" required id="plan_availability" class="form-select">\
-                            <option id="">Plan Availability</option>\
+                            <option value="">Plan Availability</option>\
                             <option value="1">Yes</option>\
                             <option value="0">No</option>\
                         </select>\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-4 col-md-8 my-3">\
                     <div class="form-group">\
-                        <label for="plan_terrace_balcony">Terrace / Balcony ' + l + '</label>\
+                        <label for="plan_terrace_balcony">Terrace / Balcony</label>\
                         <select name="plan_terrace_balcony[]" required id="plan_terrace_balcony" class="form-select">\
-                            <option id="">Terrace / Balcony</option>\
+                            <option value="">Terrace / Balcony</option>\
                             <option value="Terrace">Terrace</option>\
                             <option value="Balcony">Balcony</option>\
                             <option value="-">-</option>\
@@ -571,6 +574,7 @@
                 <div class="col-md-12 my-2"><hr></div>\
             </div>\
         ');
+        l++;
     });
 
     $(document).on('click', '.btn_remove_property_floor_plan', function() {

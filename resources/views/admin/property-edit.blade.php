@@ -4,21 +4,11 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h1 class="m-0">Edit Property</h1>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Properties</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
+                                <h2 class="card-title m-0">Edit Property</h2>
                             </div>
                             <div class="card-body">
                                 {{-- action="{{ route('admin.property.update', $property->id) }}"  --}}
@@ -498,7 +488,6 @@
                                                             <button type="button" style="padding: 6px 10px" name="btn_remove_prop_image" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger m-1 btn_remove_prop_image"><i class="bx bxs-trash"></i></button>
                                                         </label>
                                                         <input type="hidden" name="propertyImageName[]" value="{{$image->image}}" />
-                                                        <input type="file" class="form-control property_image" id="prop_image" name="property_image[]" placeholder="Property Image" />
                                                         <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $image->image) }}" />
                                                     </div>
                                                 </div>                                            
@@ -513,6 +502,66 @@
                                         <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
                                             Property Floor Plan</p>
                                         <div id="property_floor_plan_image_row">
+                                            
+                                        @foreach ($floorPlans as $floorPlan)
+                                            <div class="row" id="property_floor_plan_row{{ $loop->iteration }}">
+                                                <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan {{ $loop->iteration }}</h5></div>
+
+                                                <input type="hidden" name="floorPlanID[]" value="{{$floorPlan->id}}" />
+                                                  
+                                                <div class="col-md-3 my-3">
+                                                    <div class="form-group">
+                                                      <label for="plan_suite_no">Suite No</label>
+                                                      <input readOnly value="{{$floorPlan->plan_suite_no}}" type="text" required="" class="form-control" id="plan_suite_no" placeholder="Suite No" />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-9 my-3">
+                                                    <div class="form-group">
+                                                      <label for="plan_suite_name">Suite Name</label>
+                                                      <input readOnly value="{{$floorPlan->plan_suite_name}}" type="text" required="" class="form-control" id="plan_suite_name" placeholder="Suite Name" />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-3 my-3">
+                                                    <div class="form-group">
+                                                      <label for="plan_sq_ft">Plan Sq. Ft</label>
+                                                      <input readOnly value="{{$floorPlan->plan_sq_ft}}" type="number" required="" class="form-control" id="plan_sq_ft" placeholder="Plan Sq. Ft" />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-3 my-3">
+                                                    <div class="form-group">
+                                                      <label for="plan_bath">Plan Bath</label>
+                                                      <input readOnly value="{{$floorPlan->plan_bath}}" type="number" required="" class="form-control" id="plan_bath" placeholder="Plan Bath" />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-3 my-3">
+                                                    <div class="form-group">
+                                                      <label for="plan_bed">Plan Bed</label>
+                                                      <input readOnly value="{{$floorPlan->plan_bed}}" type="number" required="" class="form-control" id="plan_bed" placeholder="Plan Bed" />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-3 my-3">
+                                                    <div class="form-group">
+                                                      <label for="plan_availability">Plan Availability</label>
+                                                      <input readOnly value="{{$floorPlan->plan_availability}}" type="text" required="" class="form-control" id="plan_availability" placeholder="Plan Bed" />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-6 my-3">
+                                                    <div class="form-group">
+                                                        <label for="property_floor_plan" class="d-block">Floor Plan Image</label>
+                                                        <img class="img img-fluid my-2 mx-auto" width="auto" style="max-height: 200px" src="{{ asset('images/' . $floorPlan->floor_plan_image) }}" />
+                                                    </div>
+                                                </div>
+                                                  <div class="col-md-6 my-3">
+                                                    <div class="form-group">
+                                                      <label for="plan_terrace_balcony">Terrace / Balcony</label>
+                                                      <input readOnly value="{{$floorPlan->plan_terrace_balcony}}" type="text" required="" class="form-control" id="plan_terrace_balcony" placeholder="Plan Bed" />
+                                                    </div>
+                                                  </div>
+                                                  <button type="button" style="padding: 7px; width: 130px; margin: 10px auto;" name="btn_remove_property_floor_plan" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger btn_remove_property_floor_plan">
+                                                    <i class="bx bxs-trash"></i>
+                                                  </button><div class="col-md-12 my-2"><hr /></div>
+                                            </div>                                                
+                                        @endforeach
 
                                         </div>
                                         <button type="button" name="add_property_floor_plan"

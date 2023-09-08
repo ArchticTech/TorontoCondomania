@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\PropertyController;
-use App\Http\Controllers\AssigmentController;
+use App\Http\Controllers\AssignmentController;
 use App\Models\Architect;
 use App\Models\City;
 use App\Models\Developer;
@@ -18,7 +18,7 @@ use App\Models\Property;
 class AdminController extends Controller
 {
     private $propertyController, $assignmentController;
-    public function __construct(PropertyController $propertyController, AssigmentController $assignmentController)
+    public function __construct(PropertyController $propertyController, AssignmentController $assignmentController)
     {
         $this->propertyController = $propertyController;
         $this->assignmentController = $assignmentController;
@@ -82,6 +82,7 @@ class AdminController extends Controller
         $data['features'] = $data['property']->propertyFeatures;
         $data['details'] = $data['property']->propertyDescriptions;
         $data['images'] = $data['property']->propertyImages;
+        $data['floorPlans'] = $data['property']->propertyFloorPlans;
 
         return view('admin.property-edit', $data);
     }
@@ -98,32 +99,32 @@ class AdminController extends Controller
         }   
     }
 
-    // Assigments CRUD
+    // Assignments CRUD
 
-    public function viewAssigments()
+    public function viewAssignments()
     {
-        $assigments = $this->assigmentController->all();
+        $assignments = $this->assignmentController->all();
 
-        return view('admin.assigment-view', ['assigments' => $assigments]);
+        return view('admin.assigment-view', ['assignments' => $assignments]);
     }
 
-    public function addAssigment()
+    public function addAssignment()
     {
         $data = $this->getFormData();
 
         return view('admin.assigment-add', $data);
     }
 
-    public function storeAssigment(Request $request)
+    public function storeAssignment(Request $request)
     {
-        $assigmentSaved = $this->assigmentController->store($request);
+        $assignmentSaved = $this->assignmentController->store($request);
 
-        if ($assigmentSaved) {
-            return redirect()->route('admin.assigment.view')
-                ->with('message', 'Assigment Added Successfully');
+        if ($assignmentSaved) {
+            return redirect()->route('admin.assignment.view')
+                ->with('message', 'Assignment Added Successfully');
         } else {
-            return redirect()->route('admin.assigment.add')
-                ->with('message', 'Assigment Failed to Add');
+            return redirect()->route('admin.assignment.add')
+                ->with('message', 'Assignment Failed to Add');
         }
     }
     public function editAssignment($id)
@@ -131,6 +132,11 @@ class AdminController extends Controller
         $data = $this->getFormData();
 
         $data['assignment'] = $this->assignmentController->get($id);
+        
+        $data['features'] = $data['assignment']->property->propertyFeatures;
+        $data['details'] = $data['assignment']->property->propertyDescriptions;
+        $data['images'] = $data['assignment']->property->propertyImages;
+        $data['floorPlans'] = $data['assignment']->property->propertyFloorPlans;
 
         return view('admin.assignment-edit', $data);
     }
