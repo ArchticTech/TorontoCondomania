@@ -332,4 +332,8 @@ class PropertyController extends Controller
         }
         return;
     }
+    public function addFloorPlans($floorPlans, $property)
+    {
+        
+    }
 }
