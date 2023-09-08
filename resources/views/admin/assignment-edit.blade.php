@@ -543,8 +543,8 @@
                                                 </tbody>
                                             </table>
                                             <button type="button" name="add_property_feature"
-                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_property_feature" class="btn btn-xs btn-success mt-2"><i
+                                                style="float: right;padding: 6px 21px;"
+                                                id="add_property_feature" class="btn btn-xs btn-success mt-3"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3">
@@ -562,8 +562,8 @@
                                                 </tbody>
                                             </table>
                                             <button type="button" name="add_property_detail"
-                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_property_detail" class="btn btn-xs btn-success mt-2"><i
+                                                style="float: right;padding: 6px 21px;"
+                                                id="add_property_detail" class="btn btn-xs btn-success mt-3"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mt-3 mb-3">
@@ -574,8 +574,8 @@
 
                                             </div>
                                             <button type="button" name="add_property_image"
-                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_property_image" class="btn btn-xs btn-success mt-2"><i
+                                                style="float: right;padding: 6px 21px;"
+                                                id="add_property_image" class="btn btn-xs btn-success mt-3"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mt-3 mb-3">
@@ -586,8 +586,8 @@
 
                                             </div>
                                             <button type="button" name="add_assignment_floor_plan"
-                                                style="float: right;margin-right: 1rem;padding: 6px 10px 6px 10px;"
-                                                id="add_assignment_floor_plan" class="btn btn-xs btn-success mt-2"><i
+                                                style="float: right;padding: 6px 21px;"
+                                                id="add_assignment_floor_plan" class="btn btn-xs btn-success mt-3"><i
                                                     class="bx bx-plus"></i></button>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3"

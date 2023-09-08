@@ -364,10 +364,10 @@
 
                 @if (session()->has('message'))
                     <div id="myNotification"
-                        class="fixed-top start-50 translate-middle-x bg-primary text-white text-center px-5 py-3"
+                        class="fixed-top start-50 translate-middle-x text-white text-center px-5 py-4"
                         style="z-index: 2000; border-radius: 0.375rem; box-shadow: rgb(135 148 163 / 30%) 0px 0px 0.75rem 0.25rem; top: 50px;
-    text-transform: capitalize; font-size: 21px;">
-                        <p id="message">{{ session('message') }}</p>
+                                background-color: #5f61e69e; font-weight: bold; text-transform: capitalize; font-size: 21px;">
+                        <p id="message" style="margin-bottom: 0">{{ session('message') }}</p>
                     </div>
                 @endif
 
@@ -432,9 +432,12 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 <script>
-    var i = 1;
+    @if (isset($features))
+        var i = {{count($features)}} + 1;
+    @else 
+        var i = 1;
+    @endif
     $("#add_property_feature").click(function() {
-        i++;
         $('#property_feature_tbody').append('<tr id="row' + i + '">\
             <td>\
                 <input type="text" placeholder="Property Feature" name="prop_feature[]" class="form-control prop_feature" />\
@@ -445,6 +448,7 @@
                 </button>\
             </td>\
         </tr>');
+        i++;
     });
 
     $(document).on('click', '.btn_remove_prop_feature', function() {
@@ -452,7 +456,11 @@
         $('#row' + button_id + '').remove();
     });
 
-    var j = 1;
+    @if (isset($details))
+        var j = {{count($details)}} + 1;
+    @else 
+        var j = 1;
+    @endif
     $("#add_property_detail").click(function() {
         j++;
         $('#property_detail_tbody').append('<tr id="row' + j + '">\

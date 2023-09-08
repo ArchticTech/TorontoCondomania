@@ -16,9 +16,7 @@ class CreatePropertyImagesTable extends Migration
         Schema::create('property_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('property_id');
-            $table->text('prop_image');
-            $table->string('prop_image_name', 200)->default('');
-            $table->boolean('is_assignment')->default(false);
+            $table->string('image', 200)->default(null);
             $table->boolean('status')->default(true);
             $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();

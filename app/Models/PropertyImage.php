@@ -11,9 +11,7 @@ class PropertyImage extends Model
 
     protected $fillable = [
         'property_id',
-        'prop_image',
-        'prop_image_name',
-        'is_assignment',
+        'image',
         'status',
         'created_by',
     ];
