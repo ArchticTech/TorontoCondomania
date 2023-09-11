@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\AssignmentController;
 use App\Models\Architect;
@@ -13,6 +15,7 @@ use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
 use App\Models\Property;
+use App\Models\User;
 
 
 class AdminController extends Controller
@@ -214,20 +217,72 @@ class AdminController extends Controller
     // Consulting form
     public function consultingForm()
     {
-
         return view('admin.consulting-form');
     }
 
     // Subscription Form
     public function subscriptionForm()
     {
-
         return view('admin.subscription-form');
     }
 
     public function login()
     {
-
         return view('admin.login');
     }
+
+     //Autenticate User
+     public function authenticate(Request $request)
+     {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed
+            if (Auth::user()->isAdmin()) {
+                // Redirect to the admin dashboard
+                return redirect()->route('admin.dashboard');
+            } else {
+                // Handle non-admin users (e.g., show an error message)
+                Auth::logout();
+                return redirect()->route('admin.login')->with('message', 'Access Denied as You are not admin');
+            }
+        }
+     }
+ 
+    //Register Admin
+    public function register()
+    {
+        return view('admin.signup');
+    }
+ 
+     public function store(Request $request)
+     {
+        $formFields = $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => 'required|confirmed|min:5',
+        ]);
+
+        //Hash password
+        $formFields['password'] = bcrypt($formFields['password']);
+
+        //Create User
+        $user = User::create($formFields);
+
+        //Login
+        // auth()->login($user);
+
+        return redirect()->route('admin.login')->with('message', 'User created and logged in!');
+     }
+ 
+     //Logout User
+     public function logout(Request $request)
+     {
+         auth()->logout();
+         $request->session()->invalidate();
+         $request->session()->regenerateToken();
+ 
+         return redirect('/')->with('message', 'You have been logged out!');
+     }
+ 
 }
