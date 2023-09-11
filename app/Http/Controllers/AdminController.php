@@ -80,6 +80,10 @@ class AdminController extends Controller
 
         $data['property'] = $this->propertyController->get($id);
         
+        if(!$data['property'])
+            return redirect()->route('admin.property.view')
+                ->with('message', 'Property Not Found!');
+        
         $data['features'] = $data['property']->propertyFeatures;
         $data['details'] = $data['property']->propertyDescriptions;
         $data['images'] = $data['property']->propertyImages;
@@ -133,6 +137,10 @@ class AdminController extends Controller
         $data = $this->getFormData();
 
         $data['assignment'] = $this->assignmentController->get($id);
+
+        if(!$data['assignment'])
+            return redirect()->route('admin.assignment.view')
+                ->with('message', 'Assignment Not Found!');
         
         $data['features'] = $data['assignment']->property->propertyFeatures;
         $data['details'] = $data['assignment']->property->propertyDescriptions;
@@ -180,7 +188,15 @@ class AdminController extends Controller
     {
         $rental = $this->rentalController->get($id);
 
-        return view('admin.rental-edit', ['rental' => $rental]);
+        if(!$rental)
+            return redirect()->route('admin.rentals.view')
+                ->with('message', 'Rental Not Found!');
+
+        $rentalFeatures = $rental->rentalFeatures;
+        $rentalImages = $rental->rentalImages;
+
+        return view('admin.rental-edit', ['rental' => $rental, 
+            'rentalFeatures' => $rentalFeatures, 'rentalImages' => $rentalImages]);
     }
     public function updateRental(Request $request, $id)
     {

@@ -8,7 +8,7 @@
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-                                <h2 class="card-title m-0">Edit Property</h2>
+                                <h2 class="card-title m-0">Update Property</h2>
                             </div>
                             <div class="card-body">
                                 {{-- action="{{ route('admin.property.update', $property->id) }}"  --}}
@@ -436,7 +436,7 @@
                                             <tbody id="property_feature_tbody">
                                                 @foreach ($features as $feature)
                                                     <tr id="row{{ $loop->iteration }}">
-                                                        <td><input type="text" placeholder="Property Feature" name="prop_feature[]" class="form-control prop_feature" value="{{ $feature->prop_feature }}"/></td>
+                                                        <td><input type="text" placeholder="Property Feature" name="rent_feature[]" class="form-control prop_feature" value="{{ $feature->prop_feature }}"/></td>
                                                         <td style="text-align: center;">
                                                             <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_prop_feature" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger btn_remove_prop_feature"><i class="bx bxs-trash"></i></button>
                                                         </td>

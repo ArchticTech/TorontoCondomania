@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RentFeatures extends Model
+class RentalFeature extends Model
 {
     use HasFactory;
 
-    protected $table = 'rent_features';
+    protected $table = 'rental_features';
     protected $fillable = [
         'rental_id',
         'feature',
         'created_by',
     ];
 
-    public function property()
+    public function rental()
     {
         return $this->belongsTo(Rental::class);
     }

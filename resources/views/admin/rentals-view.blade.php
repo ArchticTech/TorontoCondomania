@@ -6,8 +6,15 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h1 class="m-0">View Rentals</h1>
+                    <div class="col-sm-6 mb-4 mb-sm-0">
+                        <h1 class="m-0">Rentals</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{route('admin.rentals.add')}}" 
+                        class="btn btn-primary ms-auto d-block me-auto me-sm-2" 
+                        style="font-size: 16px; padding: 9px 27px; width: fit-content">
+                        <i class='me-2 mb-1 bx bxs-plus-circle'></i>
+                        Add New Rental</a>
                     </div>
                 </div>
                 <div class="row">

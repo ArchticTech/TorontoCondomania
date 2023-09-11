@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rental;
-use App\Models\RentFeatures;
+use App\Models\RentalFeature;
+use App\Models\RentalImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class RentalController extends Controller
 {
@@ -64,6 +66,9 @@ class RentalController extends Controller
             if ($request->input('rent_feature')) {
                 $this->addFeatures($request->input('rent_feature'), $rental);
             }
+            if ($request->file('rental_image')) {
+                $this->addImages($request->file('rental_image'), $rental);
+            }
         }
 
         return $saved;
@@ -104,29 +109,73 @@ class RentalController extends Controller
 
         $saved = $rental->save();
 
+        $this->removeFeatures($rental);
+        $this->removeImages($request->input('rentalImageName'), $rental);
         if ($saved) {
             if ($request->input('rent_feature')) {
                 $this->addFeatures($request->input('rent_feature'), $rental);
+            }
+            if ($request->file('rental_image')) {
+                $this->addImages($request->file('rental_image'), $rental);
             }
         }
 
         return $saved;
     }
 
+    public function saveImage($image)
+    {
+        if($image)
+        {
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            return $imageName;
+        }
+        return '';
+    }
+
     public function addFeatures($features, $rental)
     {
         foreach ($features as $feature) {
 
-            $rentFeatures = new RentFeatures([
+            $rentalFeature = new RentalFeature([
                 'feature' => $feature
             ]);
 
-            $rental->rentFeatures()->save($rentFeatures);
+            $rental->rentalFeatures()->save($rentalFeature);
         }
     }
     public function removeFeatures($rental)
     {
-        $rental->rentFeatures()->delete();
+        $rental->rentalFeatures()->delete();
+        return;
+    }
+
+    public function addImages($images, $rental)
+    {
+        foreach($images as $image) {
+            $imageName = $this->saveImage($image);
+            $rentalImage = new RentalImage([
+                'image' => $imageName,
+                'status' => 1
+            ]);
+
+            $rental->rentalImages()->save($rentalImage);
+        }
+    }
+    public function removeImages($imageNames, $rental)
+    {
+        $oldImages = $rental->rentalImages->pluck('image')->toArray();
+        $deletedImages = $imageNames ? array_diff($oldImages, $imageNames) : $oldImages;
+        foreach($deletedImages as $image) {
+            $imagePath = public_path('images/' . $image);
+            if (File::exists($imagePath)) {
+                // Delete the image if it exists
+                File::delete($imagePath);
+            }
+
+            $rental->rentalImages()->where('image', $image)->delete();
+        }
         return;
     }
 }

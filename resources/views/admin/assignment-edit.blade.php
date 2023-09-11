@@ -8,7 +8,7 @@
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-                                <h2 class="card-title m-0">Edit Assignment</h2>
+                                <h2 class="card-title m-0">Update Assignment</h2>
                             </div>
                             <div class="card-body">
                                 <form method="POST" id="property_add" enctype="multipart/form-data"

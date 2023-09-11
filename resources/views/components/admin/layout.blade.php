@@ -113,69 +113,24 @@
                     <!-- Main pages -->
 
                     <li class="menu-item">
-                        <a href="#" class="menu-link menu-toggle">
+                        <a  href="{{route('admin.property.view')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx bx-building-house"></i>
                             <div>Property</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{route('admin.property.view')}}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
-                                    <div data-i18n="Layouts">View </div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{route('admin.property.add')}}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div>Add</div>
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li class="menu-item">
-                        <a href="" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                            <div>Assignments</div>
+                        <a href="{{route('admin.assignment.view')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                            <div>Assignment</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{route('admin.assignment.view')}}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
-                                    <div data-i18n="Layouts">View</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{route('admin.assignment.add')}}" class="menu-link ">
-                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div data-i18n="Layouts">Add</div>
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li class="menu-item">
-                        <a href="#" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bxs-buildings"></i>
-                            <div data-i18n="Account Settings">Rentals</div>
+                        <a href="{{route('admin.rentals.view')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                            <div>Rental</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{route('admin.rentals.view')}}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
-                                    <div data-i18n="Layouts">View</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{route('admin.rentals.add')}}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div data-i18n="Layouts">Add</div>
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li class="menu-item">
@@ -577,62 +532,48 @@
         l++;
     });
 
-    @if (isset($rentalfeatures))
-        var z = {{count($rentalfeatures)}} + 1;
-    @else 
-        var z = 1;
-    @endif
-    $("#add_rent_feature").click(function() {
-        $('#property_feature_tbody').append('<tr id="row' + z + '">\
-            <td>\
-                <input type="text" placeholder="Rent Feature" name="rent_feature[]" class="form-control rent_feature" />\
-            </td>\
-            <td style="text-align: center">\
-                <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_feature" id="' + z + '" class="btn btn-xs btn-danger btn_remove_prop_feature">\
-                    <i class="bx bxs-trash"></i>\
-                </button>\
-            </td>\
-        </tr>');
-        z++;
-    });
-
     $(document).on('click', '.btn_remove_property_floor_plan', function() {
         var button_id = $(this).attr("id");
         $('#property_floor_plan_row' + button_id + '').remove();
     });
 
-    // $("#property_add").submit(function(e) {
-    //     e.preventDefault();
-    //     $("#add_property_button").empty();
-    //     $("#add_property_button").append('<i class="bx bxs-error-circle"></i>');
-    //     document.getElementById("add_property_button").disabled = true;
+    @if (isset($rentalFeatures))
+        var y = {{count($rentalFeatures)}} + 1;
+    @else 
+        var y = 1;
+    @endif
+    $("#add_rent_feature").click(function() {
+        $('#property_feature_tbody').append('<tr id="row' + y + '">\
+            <td>\
+                <input type="text" placeholder="Rent Feature" name="rent_feature[]" class="form-control rent_feature" />\
+            </td>\
+            <td style="text-align: center">\
+                <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_feature" id="' + y + '" class="btn btn-xs btn-danger btn_remove_prop_feature">\
+                    <i class="bx bxs-trash"></i>\
+                </button>\
+            </td>\
+        </tr>');
+        y++;
+    });
 
-    //     var formData = new FormData(this);
-    //     var encodedIframe = encodeURIComponent(formData.get('prop_iframe'));
+    @if (isset($rentalImages))
+        var z = {{count($rentalImages)}} + 1;
+    @else 
+        var z = 1;
+    @endif
+    $("#add_rental_image").click(function() {
+        $('#rental_image_row').append('\
+            <div class="col-md-4" id="image_row' + z + '">\
+                <div class="form-group">\
+                    <label for="prop_name">Rental Image ' + z +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" style="padding: 6px 10px" name="btn_remove_prop_image" id="' +
+            z + '" class="btn btn-xs btn-danger m-1 btn_remove_prop_image"><i class="bx bxs-trash"></i></button></label>\
+                    <input type="file"  class="form-control rental_image" id="prop_image" name="rental_image[]" placeholder="Rental Image">\
+                </div>\
+            </div>');
+        z++;
+    });
 
-    //     formData.set('prop_iframe', encodedIframe);
-
-    //     $.ajax({
-    //         url: '{{ route('admin.property.store') }}',
-    //         enctype: 'multipart/form-data',
-    //         data: formData,
-    //         type: 'POST',
-    //         contentType: false,
-    //         processData: false,
-    //         success: (res) => {
-    //             // console.log(res);
-    //             window.location.href = "{{ route('admin.property.view') }}";
-
-    //             $("#add_property_button").empty();
-    //             $("#add_property_button").append('Add Property');
-    //             document.getElementById("add_property_button").disabled = false;
-    //             $("#property_add")[0].reset();
-    //         },
-    //         error: (res) => {
-    //             console.log(res);
-    //         }
-    //     });
-    // });
 </script>
 
 </html>

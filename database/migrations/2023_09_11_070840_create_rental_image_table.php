@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRentFeaturesTable extends Migration
+class CreateRentalImageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateRentFeaturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rental_features', function (Blueprint $table) {
+        Schema::create('rental_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rental_id')->default(1);
-            $table->text('feature');
+            $table->string('image', 300)->default(null);
             $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateRentFeaturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rent_features');
+        Schema::dropIfExists('rental_image');
     }
 }
