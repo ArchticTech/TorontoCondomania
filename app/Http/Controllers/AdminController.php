@@ -13,8 +13,9 @@ use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
 use App\Models\Property;
+use App\Models\User;
 use Carbon\Carbon;
-
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -23,6 +24,7 @@ class AdminController extends Controller
     {
         $this->assigmentController = $assigmentController;
         $this->propertyController = $propertyController;
+
     }
     private function getFormData()
     {
@@ -165,10 +167,65 @@ class AdminController extends Controller
         return view('admin.subscription-form');
     }
 
+     //show login form
     public function login()
     {
-
         return view('admin.login');
     }
+     //Autenticate User
+    public function authenticate(Request $request)
+    {
+        $formFields = $request->validate([
+
+            'email' => ['required', 'email'],
+            'password' => 'required',
+        ]);
+
+        if (auth()->attempt($formFields)) {
+            $request->session()->regenerate();
+            return redirect('/secure-zonw')->with('message', 'You are now logged in!');
+        }
+
+        return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
+    }
+
+      //Register Admin
+      public function register()
+      {
+          return view('admin.signup');
+      }
+
+    public function store(Request $request)
+    {
+        $formFields = $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => 'required|confirmed|min:5',
+            // 'password_confirmation' => 'same|password'
+        ]);
+
+        //Hash password
+        $formFields['password'] = bcrypt($formFields['password']);
+
+        //Create User
+        $user = User::create($formFields);
+
+        //Login
+        auth()->login($user);
+
+        return redirect('/')->with('message', 'User created and logged in!');
+    }
+
+    //Logout User
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('message', 'You have been logged out!');
+    }
+
+
 
 }
