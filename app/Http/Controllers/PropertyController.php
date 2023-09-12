@@ -21,7 +21,7 @@ class PropertyController extends Controller
      */
     public function all()
     {
-        return Property::all();
+        return Property::where('is_assignment', 0)->get();
     }
 
     /**

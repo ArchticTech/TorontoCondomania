@@ -15,10 +15,15 @@ class CreateRentalImageTable extends Migration
     {
         Schema::create('rental_images', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('rental_id')->default(1);
+            $table->unsignedBigInteger('rental_id');
             $table->string('image', 300)->default(null);
             $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
+            
+            $table->foreign('rental_id')
+                ->references('id')
+                ->on('rentals')
+                ->onDelete('cascade');
         });
     }
 
@@ -29,6 +34,6 @@ class CreateRentalImageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rental_image');
+        Schema::dropIfExists('rental_images');
     }
 }

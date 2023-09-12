@@ -47,24 +47,6 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const notification = document.getElementById("myNotification");
-
-            // Function to show the notification
-            function showNotification() {
-                notification.style.display = "block";
-
-                // Hide the notification after 3 seconds
-                setTimeout(() => {
-                    notification.style.display = "none";
-                }, 3000);
-            }
-
-            // Initialize the notification
-            showNotification();
-        });
-    </script>
 </head>
 
 <body>
@@ -95,12 +77,10 @@
 
                 <div class="menu-inner-shadow"></div>
 
-
-
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="/secure-zone" class="menu-link">
+                        <a href="{{route('admin.property.view')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -134,14 +114,14 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link ">
+                        <a href="{{route('admin.consultingForm')}}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-user-voice"></i>
                             <div data-i18n="Layouts">Consulting Form</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="/secure-zone/subscription" class="menu-link">
+                        <a href="{{route('admin.subscriptionForm')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
                             <div data-i18n="Layouts">Subscription Form</div>
                         </a>
@@ -195,7 +175,8 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl 
+                navbar-detached align-items-center bg-navbar-theme mb-4"
                     id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
@@ -217,10 +198,8 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
                             <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+                                <a style="background-color: #eee; color: #333; padding: 7px 21px; border-radius: 7px;" 
+                                href="{{route('home')}}">Visit Website</a>
                             </li>
 
                             <!-- User -->
@@ -278,7 +257,8 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
+                                        <a class="dropdown-item" href="{{route('admin.logout')}}"
+                                        style="color: rgba(167, 0, 0, 0.644);">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -291,7 +271,7 @@
                 </nav>
 
                 <!-- / Navbar -->
-                <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                {{-- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
@@ -301,34 +281,11 @@
                             <a href="index" class="nav-link">Home</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" data-toggle="dropdown" href="#">
-                                <i class="fas fa-caret-square-down"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <div class="dropdown-divider"></div>
-                                <a href="../signout.php" class="dropdown-item">
-                                    <i class="fas fa-power-off mr-2"></i> LogOut
-                                </a>
+                </nav> --}}
 
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-
-                @if (session()->has('message'))
-                    <div id="myNotification"
-                        class="fixed-top start-50 translate-middle-x text-white text-center px-5 py-4"
-                        style="z-index: 2000; border-radius: 0.375rem; box-shadow: rgb(135 148 163 / 30%) 0px 0px 0.75rem 0.25rem; top: 50px;
-                                background-color: #5f61e69e; font-weight: bold; text-transform: capitalize; font-size: 21px;">
-                        <p id="message" style="margin-bottom: 0">{{ session('message') }}</p>
-                    </div>
-                @endif
+                @include('components.admin.notificationPrompt')
 
                 @yield('content')
-
-
 
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">

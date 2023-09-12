@@ -24,7 +24,7 @@ class AdminMiddleware
                 return redirect()->route('admin.login')->with('message', 'Access Denied as You are not admin');
             }
         } else {
-            return redirect()->route('admin.login')->with('message', 'Please Login Firsts');
+            return redirect()->route('admin.login')->with('message', 'Please Login First');
         }
     }
 }

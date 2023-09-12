@@ -165,7 +165,7 @@ class AdminController extends Controller
         }   
     }
 
-    public function viewRental()
+    public function viewRentals()
     {
         $rentals = $this->rentalController->all();
 
@@ -228,7 +228,12 @@ class AdminController extends Controller
 
     public function login()
     {
-        return view('admin.login');
+        if (Auth::user() && Auth::user()->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        }
+        else {
+            return view('admin.login');
+        }
     }
 
      //Autenticate User
@@ -244,9 +249,10 @@ class AdminController extends Controller
             } else {
                 // Handle non-admin users (e.g., show an error message)
                 Auth::logout();
-                return redirect()->route('admin.login')->with('message', 'Access Denied as You are not admin');
+                return redirect()->route('admin.login')->with('message', 'Access Denied. You are not an Admin');
             }
         }
+        return redirect()->route('admin.login')->with('message', 'Incorrect Email or Password');
      }
  
     //Register Admin
@@ -272,7 +278,7 @@ class AdminController extends Controller
         //Login
         // auth()->login($user);
 
-        return redirect()->route('admin.login')->with('message', 'User created and logged in!');
+        return redirect()->route('admin.login')->with('message', 'You are now Registered!');
      }
  
      //Logout User
@@ -282,7 +288,7 @@ class AdminController extends Controller
          $request->session()->invalidate();
          $request->session()->regenerateToken();
  
-         return redirect('/')->with('message', 'You have been logged out!');
+         return redirect()->route('admin.login')->with('message', 'You have been logged out!');
      }
  
 }

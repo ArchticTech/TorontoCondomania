@@ -50,7 +50,8 @@
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
-                <!-- Register -->
+                @include('components.admin.notificationPrompt')
+                <!-- Login -->
                 <div class="card">
                     <div class="card-body">
                         <!-- Logo -->
@@ -127,6 +128,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
 </body>
 
 </html>

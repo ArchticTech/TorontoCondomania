@@ -3,27 +3,27 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\RentalController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');;
 
-//admin registration
+// Admin Registration
 Route::get('/register', [AdminController::class, 'register'])->name('admin.signup');
 Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
 
 Route::prefix('secure-zone')->group(function () {
 
+    Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::post('/authenticate', [AdminController::class, 'authenticate'])->name('admin.authenticate');
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::middleware('admin')->group(function () {
 
         // Routes within the 'secure-zone' group
-        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-        //consulting forms
+        // Consulting forms
         Route::get('/consulting-form', [AdminController::class, 'consultingForm'])->name('admin.consultingForm');
-
-        //subscription form
+        // Subscription form
         Route::get('/subscription-form', [AdminController::class, 'subscriptionForm'])->name('admin.subscriptionForm');
 
         Route::prefix('property')->group(function () {
@@ -39,22 +39,20 @@ Route::prefix('secure-zone')->group(function () {
         Route::prefix('assignment')->group(function () {
             // Routes within the 'secure-zone/property' group
             //Assigments CRUD routes
-            Route::get('', [AdminController::class, 'viewAssigments'])->name('admin.assignment.view');
-            Route::get('add', [AdminController::class, 'addAssigment'])->name('admin.assignment.add');
-            Route::post('store', [AdminController::class, 'storeAssigment'])->name('admin.assignment.store');
-            Route::get('edit/{id}', [AdminController::class, 'editAssigment'])->name('admin.assignment.edit');
+            Route::get('', [AdminController::class, 'viewAssignments'])->name('admin.assignment.view');
+            Route::get('add', [AdminController::class, 'addAssignment'])->name('admin.assignment.add');
+            Route::post('store', [AdminController::class, 'storeAssignment'])->name('admin.assignment.store');
+            Route::get('edit/{id}', [AdminController::class, 'editAssignment'])->name('admin.assignment.edit');
             Route::PUT('update/{id}', [AdminController::class, 'updateAssignment'])->name('admin.assignment.update');
         });
         Route::prefix('rentals')->group(function () {
             // Routes within the 'secure-zone/property' group
             //Assigments CRUD routes
-            Route::get('', [RentalController::class, 'viewRentals'])->name('admin.rentals.view');
-            Route::get('add', [RentalController::class, 'addRentals'])->name('admin.rentals.add');
-            Route::post('store', [RentalController::class, 'storeRentals'])->name('admin.rentals.store');
-            Route::get('edit/{id}', [RentalController::class, 'editRentals'])->name('admin.rentals.edit');
-            Route::PUT('update/{id}', [RentalController::class, 'updateRentals'])->name('admin.rentals.update');
+            Route::get('', [AdminController::class, 'viewRentals'])->name('admin.rentals.view');
+            Route::get('add', [AdminController::class, 'addRental'])->name('admin.rentals.add');
+            Route::post('store', [AdminController::class, 'storeRental'])->name('admin.rentals.store');
+            Route::get('edit/{id}', [AdminController::class, 'editRental'])->name('admin.rentals.edit');
+            Route::PUT('update/{id}', [AdminController::class, 'updateRental'])->name('admin.rentals.update');
         });
     });
-    Route::get('/', [AdminController::class, 'login'])->name('admin.login');
-    Route::post('/authenticate', [AdminController::class, 'authenticate'])->name('admin.authenticate');
 });
