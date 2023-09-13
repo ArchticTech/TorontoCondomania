@@ -3,8 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ApiController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');;
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('api')->group(function () {
+
+    Route::get('getAllProperties', [ApiController::class, 'getAllProperties'])->name('api.allProperties');
+});
 
 // Admin Registration
 Route::get('/register', [AdminController::class, 'register'])->name('admin.signup');

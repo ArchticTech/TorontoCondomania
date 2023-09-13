@@ -30,12 +30,12 @@ class AdminController extends Controller
     private function getFormData()
     {
         return [
-            'architects' => Architect::all(),
-            'cities' => City::all(),
-            'developers' => Developer::all(),
-            'developments' => Development::all(),
-            'interiorDesigners' => InteriorDesigner::all(),
-            'propertyAgents' => PropertyAgent::all(),
+            'architects' => Architect::orderby('architects_name', 'asc')->get(),
+            'cities' => City::orderBy('city_name', 'asc')->get(),
+            'developers' => Developer::orderby('developer_name', 'asc')->get(),
+            'developments' => Development::orderby('development_name', 'asc')->get(),
+            'interiorDesigners' => InteriorDesigner::orderby('interior_designer_name', 'asc')->get(),
+            'propertyAgents' => PropertyAgent::orderby('agent_name', 'asc')->get(),
             'propertyTypeEnums' => Property::getPropertyTypeEnums(),
             'propertyStatusEnums' => Property::getPropertyStatusEnums(),
         ];
