@@ -9,7 +9,8 @@ class ApiController extends Controller
 {
     public function getAllProperties()
     {
-        $properties = Property::where('is_assignment', 0)->get();
+        $properties = Property::with('City', 'Architect', 'Developer', 'Development')
+            ->where('is_assignment', 0)->get();
         return $properties;
     }
 }

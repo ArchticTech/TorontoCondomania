@@ -344,6 +344,21 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 <script>
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: initialLatitude, lng: initialLongitude },
+        zoom: 15,
+    });
+
+    const latitudeInput = document.getElementById('latitude');
+    const longitudeInput = document.getElementById('longitude');
+
+    map.addListener('click', (event) => {
+        const latLng = event.latLng;
+        latitudeInput.value = latLng.lat();
+        longitudeInput.value = latLng.lng();
+    });
+</script>
+<script>
     @if (isset($features))
         var i = {{count($features)}} + 1;
     @else 
