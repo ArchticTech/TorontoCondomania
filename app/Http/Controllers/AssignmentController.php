@@ -3,34 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\PropertyController;
-
 use App\Models\Assignment;
 use App\Models\Property;
 use Carbon\Carbon;
 
 class AssignmentController extends Controller
 {
-    private $propertyController;
-    public function __construct(PropertyController $propertyController)
-    {
-        $this->propertyController = $propertyController;
-    }
-    public function all()
+    public static function all()
     {
         $assignments = Assignment::with('property')->get();
 
         return $assignments;
     }
-    public function get($id)
+    public static function get($id)
     {
         $assignment =  Assignment::find($id);
         $assignment->assign_tentative_occ_date = Carbon::parse($assignment->assign_tentative_occ_date)->format('Y-m-d');
         return $assignment;
     }
-    public function store(Request $request)
+    public static function store(Request $request)
     {
-        $result = $this->propertyController->store($request);
+        $result = PropertyController::store($request);
 
         $propertySaved = $result['saved'];
         $property = $result['property'];
@@ -53,11 +46,11 @@ class AssignmentController extends Controller
 
         return ($assignmentSaved && $propertySaved);
     }
-    public function update(Request $request, $id)
+    public static function update(Request $request, $id)
     {
         $assignment = Assignment::findOrFail($id);
 
-        $result = $this->propertyController->update($request, $assignment->property_id);
+        $result = PropertyController::update($request, $assignment->property_id);
 
         $propertySaved = $result['saved'];
 

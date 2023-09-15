@@ -19,7 +19,7 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function all()
+    public static function all()
     {
         return Property::where('is_assignment', 0)->get();
     }
@@ -30,7 +30,7 @@ class PropertyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public static function store(Request $request)
     {
         $date = now();
 
@@ -169,7 +169,7 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get($id)
+    public static function get($id)
     {
         return Property::find($id);
     }
@@ -181,7 +181,7 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public static function update(Request $request, $id)
     {
         // Find the property by its ID
         $property = Property::find($id);

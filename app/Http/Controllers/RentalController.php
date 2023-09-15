@@ -11,18 +11,18 @@ use Illuminate\Support\Facades\File;
 class RentalController extends Controller
 {
     //Rentals CRUD Operation
-    public function all()
+    public static function all()
     {
         return Rental::all();
         return view('admin.rentals-view', ['rentals' => $rentals]);
     }
 
-    public function addRentals()
+    public static function addRentals()
     {
         return view('admin.rentals-add');
     }
 
-    public function store(Request $request)
+    public static function store(Request $request)
     {
         $rent_address = $request->input('rent_address');
         $rent_iframe = $request->input('rent_iframe');
@@ -74,12 +74,12 @@ class RentalController extends Controller
         return $saved;
     }
 
-    public function get($id)
+    public static function get($id)
     {
         return Rental::find($id);
     }
 
-    public function update(Request $request, $id)
+    public static function update(Request $request, $id)
     {
         // Find the rental by its ID
         $rental = Rental::find($id);

@@ -10,6 +10,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('api')->group(function () {
 
     Route::get('getAllProperties', [ApiController::class, 'getAllProperties'])->name('api.allProperties');
+    Route::get('getProperty/{id}', [ApiController::class, 'getProperty'])->name('api.getProperty');
 });
 
 // Admin Registration

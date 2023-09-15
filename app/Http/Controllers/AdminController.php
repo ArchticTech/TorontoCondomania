@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PropertyController;
-use App\Http\Controllers\AssignmentController;
 use App\Models\Architect;
 use App\Models\City;
 use App\Models\Developer;
@@ -20,13 +18,6 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    private $propertyController, $assignmentController, $rentalController;
-    public function __construct(PropertyController $propertyController, AssignmentController $assignmentController, RentalController $rentalController)
-    {
-        $this->propertyController = $propertyController;
-        $this->assignmentController = $assignmentController;
-        $this->rentalController = $rentalController;
-    }
     private function getFormData()
     {
         return [
@@ -55,7 +46,7 @@ class AdminController extends Controller
     }
     public function viewProperty()
     {
-        $properties = $this->propertyController->all();
+        $properties = PropertyController::all();
 
         return view('admin.property-view', ['properties' => $properties]);
     }
@@ -67,7 +58,7 @@ class AdminController extends Controller
     }
     public function storeProperty(Request $request)
     {
-        $result = $this->propertyController->store($request);
+        $result = PropertyController::store($request);
 
         if ($result['saved']) {
             return redirect()->route('admin.property.view')
@@ -81,7 +72,7 @@ class AdminController extends Controller
     {
         $data = $this->getFormData();
 
-        $data['property'] = $this->propertyController->get($id);
+        $data['property'] = PropertyController::get($id);
         
         if(!$data['property'])
             return redirect()->route('admin.property.view')
@@ -96,7 +87,7 @@ class AdminController extends Controller
     }
     public function updateProperty(Request $request, $id)
     {
-        $result = $this->propertyController->update($request, $id);
+        $result = PropertyController::update($request, $id);
 
         if ($result['saved']) {
             return redirect()->route('admin.property.view')
@@ -111,7 +102,7 @@ class AdminController extends Controller
 
     public function viewAssignments()
     {
-        $assignments = $this->assignmentController->all();
+        $assignments = AssignmentController::all();
 
         return view('admin.assigment-view', ['assignments' => $assignments]);
     }
@@ -125,7 +116,7 @@ class AdminController extends Controller
 
     public function storeAssignment(Request $request)
     {
-        $assignmentSaved = $this->assignmentController->store($request);
+        $assignmentSaved = AssignmentController::store($request);
 
         if ($assignmentSaved) {
             return redirect()->route('admin.assignment.view')
@@ -139,7 +130,7 @@ class AdminController extends Controller
     {
         $data = $this->getFormData();
 
-        $data['assignment'] = $this->assignmentController->get($id);
+        $data['assignment'] = AssignmentController::get($id);
 
         if(!$data['assignment'])
             return redirect()->route('admin.assignment.view')
@@ -154,7 +145,7 @@ class AdminController extends Controller
     }
     public function updateAssignment(Request $request, $id)
     {
-        $assignmentSaved = $this->assignmentController->update($request, $id);
+        $assignmentSaved = AssignmentController::update($request, $id);
 
         if ($assignmentSaved) {
             return redirect()->route('admin.assignment.view')
@@ -167,7 +158,7 @@ class AdminController extends Controller
 
     public function viewRentals()
     {
-        $rentals = $this->rentalController->all();
+        $rentals = RentalController::all();
 
         return view('admin.rentals-view', ['rentals' => $rentals]);
     }
@@ -177,7 +168,7 @@ class AdminController extends Controller
     }
     public function storeRental(Request $request)
     {
-        $saved = $this->rentalController->store($request);
+        $saved = RentalController::store($request);
 
         if ($saved) {
             return redirect()->route('admin.rentals.view')
@@ -189,7 +180,7 @@ class AdminController extends Controller
     }
     public function editRental($id)
     {
-        $rental = $this->rentalController->get($id);
+        $rental = RentalController::get($id);
 
         if(!$rental)
             return redirect()->route('admin.rentals.view')
@@ -203,7 +194,7 @@ class AdminController extends Controller
     }
     public function updateRental(Request $request, $id)
     {
-        $saved = $this->rentalController->update($request, $id);
+        $saved = RentalController::update($request, $id);
 
         if ($saved) {
             return redirect()->route('admin.rentals.view')
