@@ -14,7 +14,7 @@ class ApiController extends Controller
         $properties = PropertyController::all();
 
         $properties = BriefPropertyResource::collection($properties);
-        
+
         return $properties;
     }
     public function getProperty($id)
@@ -22,7 +22,7 @@ class ApiController extends Controller
         $property = PropertyController::get($id);
 
         $property = DetailedPropertyResource::make($property);
-        
+
         return $property;
     }
 }

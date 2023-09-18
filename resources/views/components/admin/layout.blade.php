@@ -80,7 +80,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="{{route('admin.property.view')}}" class="menu-link">
+                        <a href="{{ route('admin.property.view') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -93,47 +93,47 @@
                     <!-- Main pages -->
 
                     <li class="menu-item">
-                        <a  href="{{route('admin.property.view')}}" class="menu-link">
+                        <a href="{{ route('admin.property.view') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx bx-building-house"></i>
                             <div>Property</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.assignment.view')}}" class="menu-link">
+                        <a href="{{ route('admin.assignment.view') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx bx-building-house"></i>
                             <div>Assignment</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.rentals.view')}}" class="menu-link">
+                        <a href="{{ route('admin.rentals.view') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx bx-building-house"></i>
                             <div>Rental</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.consultingForm')}}" class="menu-link ">
+                        <a href="{{ route('admin.consultingForm') }}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-user-voice"></i>
                             <div data-i18n="Layouts">Consulting Form</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.subscriptionForm')}}" class="menu-link">
+                        <a href="{{ route('admin.subscriptionForm') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
                             <div data-i18n="Layouts">Subscription Form</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link ">
+                        <a href="" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div data-i18n="Layouts">Reserved Floor Plans</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link ">
+                        <a href="{{ route('admin.propertyInfo') }}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bxs-building-house"></i>
                             <div data-i18n="Layouts">Property Information</div>
                         </a>
@@ -144,7 +144,7 @@
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <a href="" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-dock-top"></i>
                             <div>Account Settings</div>
                         </a>
@@ -175,7 +175,7 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl 
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl
                 navbar-detached align-items-center bg-navbar-theme mb-4"
                     id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -198,8 +198,8 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
                             <li class="nav-item lh-1 me-3">
-                                <a style="background-color: #eee; color: #333; padding: 7px 21px; border-radius: 7px;" 
-                                href="{{route('home')}}">Visit Website</a>
+                                <a style="background-color: #eee; color: #333; padding: 7px 21px; border-radius: 7px;"
+                                    href="{{ route('home') }}">Visit Website</a>
                             </li>
 
                             <!-- User -->
@@ -257,8 +257,8 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{route('admin.logout')}}"
-                                        style="color: rgba(167, 0, 0, 0.644);">
+                                        <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                                            style="color: rgba(167, 0, 0, 0.644);">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -345,7 +345,10 @@
 </body>
 <script>
     const map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: initialLatitude, lng: initialLongitude },
+        center: {
+            lat: initialLatitude,
+            lng: initialLongitude
+        },
         zoom: 15,
     });
 
@@ -360,8 +363,8 @@
 </script>
 <script>
     @if (isset($features))
-        var i = {{count($features)}} + 1;
-    @else 
+        var i = {{ count($features) }} + 1;
+    @else
         var i = 1;
     @endif
     $("#add_property_feature").click(function() {
@@ -384,8 +387,8 @@
     });
 
     @if (isset($details))
-        var j = {{count($details)}} + 1;
-    @else 
+        var j = {{ count($details) }} + 1;
+    @else
         var j = 1;
     @endif
     $("#add_property_detail").click(function() {
@@ -408,8 +411,8 @@
     });
 
     @if (isset($images))
-        var k = {{count($images)}} + 1;
-    @else 
+        var k = {{ count($images) }} + 1;
+    @else
         var k = 1;
     @endif
     $("#add_property_image").click(function() {
@@ -431,14 +434,15 @@
     });
 
     @if (isset($images))
-        var l = {{count($images)}} + 1;
-    @else 
+        var l = {{ count($images) }} + 1;
+    @else
         var l = 1;
     @endif
     $("#add_property_floor_plan").click(function() {
         $('#property_floor_plan_image_row').append('\
             <div class="row" id="property_floor_plan_row' + l + '">\
-                <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan ' + l + '</h5></div>\
+                <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan ' + l +
+            '</h5></div>\
                 <div class="col-xl-3 col-md-8 my-3">\
                     <div class="form-group">\
                         <label for="property_floor_plan">Floor Plan Image</label>\
@@ -497,7 +501,7 @@
                     </div>\
                 </div>\
                 <button type="button" style="padding: 7px; width:130px; margin: 10px auto" name="btn_remove_property_floor_plan" id="' +
-                        l + '" class="btn btn-xs btn-danger btn_remove_property_floor_plan "><i class="bx bxs-trash"></i></button>\
+            l + '" class="btn btn-xs btn-danger btn_remove_property_floor_plan "><i class="bx bxs-trash"></i></button>\
                 <div class="col-md-12 my-2"><hr></div>\
             </div>\
         ');
@@ -510,8 +514,8 @@
     });
 
     @if (isset($rentalFeatures))
-        var y = {{count($rentalFeatures)}} + 1;
-    @else 
+        var y = {{ count($rentalFeatures) }} + 1;
+    @else
         var y = 1;
     @endif
     $("#add_rent_feature").click(function() {
@@ -529,8 +533,8 @@
     });
 
     @if (isset($rentalImages))
-        var z = {{count($rentalImages)}} + 1;
-    @else 
+        var z = {{ count($rentalImages) }} + 1;
+    @else
         var z = 1;
     @endif
     $("#add_rental_image").click(function() {
@@ -545,7 +549,130 @@
             </div>');
         z++;
     });
+</script>
 
+<script>
+    $(document).ready(function() {
+        $(".edit_cityBtn").click(function() {
+            var cityId = $(this).data("city-id");
+
+            // Hide the current data and display the input field for editing
+            $("#city-name-" + cityId).hide();
+            $("#edit-city-name-" + cityId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save_cityBtn[data-city-id='" + cityId + "']").show();
+        });
+        // $(".save_cityBtn").click(function() {
+        //     var cityId = $(this).data("city-id");
+        //     var cityName = $('#edit-city-name-' + cityId).val();
+        //     var cityStatus = $('#edit-city-status-' + cityId).val();
+
+        //     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        //     const data = {
+        //         id: cityId,
+        //         city: cityName,
+        //         status: cityStatus
+        //     };
+        //     console.log(data);
+
+        //     fetch('{{route('admin.city.update')}}', {
+        //             method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 "X-CSRF-TOKEN": csrfToken
+        //             },
+        //             body: JSON.stringify(data)
+        //         }).then((response) => {
+        //             if (!response.ok) {
+        //                 throw new Error("Network response was not ok!");
+        //             }
+        //             return response.json();
+        //         })
+        //         .then((data) => {
+
+        //             // Hide the current data and display the input field for editing
+        //             $("#city-name-" + cityId).show();
+        //             $("#edit-city-name-" + cityId).hide();
+
+        //             // Hide the "Edit" button and display the "Save" button
+        //             $(this).hide();
+        //             $(".edit_cityBtn[data-city-id='" + cityId + "']").show();
+        //         })
+        // });
+
+        //edit development
+        $(".edit-development-button").click(function() {
+            var developmentId = $(this).data("development-id");
+
+            // Hide the current data and display the input field for editing
+            $("#development-name-" + developmentId).hide();
+            $("#edit-development-name-" + developmentId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-development-button[data-development-id='" + developmentId + "']").show();
+        });
+
+        //edit developer
+        $(".edit-developer-button").click(function() {
+            var developerId = $(this).data("developer-id");
+
+            // Hide the current data and display the input field for editing
+            $("#developer-name-" + developerId).hide();
+            $("#edit-developer-name-" + developerId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-developer-button[data-developer-id='" + developerId + "']").show();
+        });
+
+        //edit architect
+        $(".edit-architect-button").click(function() {
+            var architectId = $(this).data("architect-id");
+
+            // Hide the current data and display the input field for editing
+            $("#architect-name-" + architectId).hide();
+            $("#edit-architect-name-" + architectId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-architect-button[data-architect-id='" + architectId + "']").show();
+        });
+
+        //edit interiordesigner
+        $(".edit-interiorDesigner-button").click(function() {
+            var interiorDesignerId = $(this).data("interiorDesigner-id");
+
+            // Hide the current data and display the input field for editing
+            $("#interiorDesigner-name-" + interiorDesignerId).hide();
+            $("#edit-interiorDesigner-name-" + interiorDesignerId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-interiorDesigner-button[data-interiorDesigner-id='" + interiorDesignerId + "']")
+                .show();
+        });
+
+        // $(".save-button").click(function () {
+        //     var cityId = $(this).data("city-id");
+
+        //     // Update the data (You may need an AJAX request here to save the changes)
+        //     var updatedValue = $("#edit-city-name-" + cityId).val();
+        //     // Perform an AJAX request to update the data in the database
+        //     // ...
+
+        //     // Update the displayed data and toggle visibility
+        //     $("#city-name-" + cityId).text(updatedValue).show();
+        //     $("#edit-city-name-" + cityId).hide();
+
+        //     // Hide the "Save" button and display the "Edit" button
+        //     $(this).hide();
+        //     $(".edit-button[data-city-id='" + cityId + "']").show();
+        // });
+    });
 </script>
 
 </html>

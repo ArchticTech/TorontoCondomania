@@ -32,6 +32,8 @@ Route::prefix('secure-zone')->group(function () {
         Route::get('/consulting-form', [AdminController::class, 'consultingForm'])->name('admin.consultingForm');
         // Subscription form
         Route::get('/subscription-form', [AdminController::class, 'subscriptionForm'])->name('admin.subscriptionForm');
+        // Property Information
+        Route::get('/property-information', [AdminController::class, 'propertyInfo'])->name('admin.propertyInfo');
 
         Route::prefix('property')->group(function () {
             // Routes within the 'secure-zone/property' group
@@ -60,6 +62,20 @@ Route::prefix('secure-zone')->group(function () {
             Route::post('store', [AdminController::class, 'storeRental'])->name('admin.rentals.store');
             Route::get('edit/{id}', [AdminController::class, 'editRental'])->name('admin.rentals.edit');
             Route::PUT('update/{id}', [AdminController::class, 'updateRental'])->name('admin.rentals.update');
+        });
+
+        Route::prefix('city')->group(function () {
+            // Routes within the 'secure-zone/city' group
+            // City CRUD routes
+            Route::post('store', [AdminController::class, 'storeCity'])->name('admin.city.store');
+            Route::post('update', [AdminController::class, 'updateCity'])->name('admin.city.update');
+        });
+
+        Route::prefix('development')->group(function () {
+            // Routes within the 'secure-zone/city' group
+            // City CRUD routes
+            Route::post('store', [AdminController::class, 'storedevelopment'])->name('admin.development.store');
+            Route::PUT('update/{id}', [AdminController::class, 'updatedevelopment'])->name('admin.development.update');
         });
     });
 });

@@ -73,11 +73,11 @@ class AdminController extends Controller
         $data = $this->getFormData();
 
         $data['property'] = PropertyController::get($id);
-        
-        if(!$data['property'])
+
+        if (!$data['property'])
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Not Found!');
-        
+
         $data['features'] = $data['property']->propertyFeatures;
         $data['details'] = $data['property']->propertyDescriptions;
         $data['images'] = $data['property']->propertyImages;
@@ -92,10 +92,9 @@ class AdminController extends Controller
         if ($result['saved']) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Updated Successfully');
-        }
-        else {
+        } else {
             return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
-        }   
+        }
     }
 
     // Assignments CRUD
@@ -132,10 +131,10 @@ class AdminController extends Controller
 
         $data['assignment'] = AssignmentController::get($id);
 
-        if(!$data['assignment'])
+        if (!$data['assignment'])
             return redirect()->route('admin.assignment.view')
                 ->with('message', 'Assignment Not Found!');
-        
+
         $data['features'] = $data['assignment']->property->propertyFeatures;
         $data['details'] = $data['assignment']->property->propertyDescriptions;
         $data['images'] = $data['assignment']->property->propertyImages;
@@ -150,10 +149,9 @@ class AdminController extends Controller
         if ($assignmentSaved) {
             return redirect()->route('admin.assignment.view')
                 ->with('message', 'Assignment Updated Successfully');
-        }
-        else {
+        } else {
             return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
-        }   
+        }
     }
 
     public function viewRentals()
@@ -182,15 +180,17 @@ class AdminController extends Controller
     {
         $rental = RentalController::get($id);
 
-        if(!$rental)
+        if (!$rental)
             return redirect()->route('admin.rentals.view')
                 ->with('message', 'Rental Not Found!');
 
         $rentalFeatures = $rental->rentalFeatures;
         $rentalImages = $rental->rentalImages;
 
-        return view('admin.rental-edit', ['rental' => $rental, 
-            'rentalFeatures' => $rentalFeatures, 'rentalImages' => $rentalImages]);
+        return view('admin.rental-edit', [
+            'rental' => $rental,
+            'rentalFeatures' => $rentalFeatures, 'rentalImages' => $rentalImages
+        ]);
     }
     public function updateRental(Request $request, $id)
     {
@@ -202,13 +202,28 @@ class AdminController extends Controller
         } else {
             return redirect()->route('admin.rentals.update')
                 ->with('message', 'Rental Failed to Update!');
-        } 
+        }
     }
 
     // Consulting form
     public function consultingForm()
     {
         return view('admin.consulting-form');
+    }
+
+    // Property Information
+    public function propertyInfo()
+    {
+        $cities = City::paginate(5, ['*'], 'city_page');
+        $developments = Development::paginate(5, ['*'], 'development_page');
+        $developers = Developer::paginate(5, ['*'], 'developer_page');
+        $architects = Architect::paginate(5, ['*'], 'architect_page');
+        $interiorDesigners = InteriorDesigner::paginate(5, ['*'], 'interior_designer_page');
+
+        return view('admin.property-info', [
+            'cities' => $cities, 'developments' => $developments, 'developers' => $developers, 'architects' => $architects,
+            'interiorDesigners' => $interiorDesigners
+        ]);
     }
 
     // Subscription Form
@@ -221,15 +236,14 @@ class AdminController extends Controller
     {
         if (Auth::user() && Auth::user()->isAdmin()) {
             return redirect()->route('admin.dashboard');
-        }
-        else {
+        } else {
             return view('admin.login');
         }
     }
 
-     //Autenticate User
-     public function authenticate(Request $request)
-     {
+    //Autenticate User
+    public function authenticate(Request $request)
+    {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -244,16 +258,16 @@ class AdminController extends Controller
             }
         }
         return redirect()->route('admin.login')->with('message', 'Incorrect Email or Password');
-     }
- 
+    }
+
     //Register Admin
     public function register()
     {
         return view('admin.signup');
     }
- 
-     public function store(Request $request)
-     {
+
+    public function store(Request $request)
+    {
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
@@ -270,16 +284,38 @@ class AdminController extends Controller
         // auth()->login($user);
 
         return redirect()->route('admin.login')->with('message', 'You are now Registered!');
-     }
- 
-     //Logout User
-     public function logout(Request $request)
-     {
-         auth()->logout();
-         $request->session()->invalidate();
-         $request->session()->regenerateToken();
- 
-         return redirect()->route('admin.login')->with('message', 'You have been logged out!');
-     }
- 
+    }
+
+    //Logout User
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login')->with('message', 'You have been logged out!');
+    }
+
+
+    //Property Information
+
+    public function storeCity(Request $request,$id)
+    {
+        dd($request->all());
+    }
+    public function updateCity(Request $request,$id)
+    {
+        dd($request->all());
+    }
+
+    public function storedevelopment(Request $request)
+    {
+        dd($request->all());
+
+    }
+    public function updatedevelopment(Request $request, $id)
+    {
+        dd($request->all());
+
+    }
 }
