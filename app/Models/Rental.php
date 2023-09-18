@@ -30,7 +30,12 @@ class Rental extends Model
         'created_by',
     ];
 
-    public function rentFeatures(){
-        return $this->hasMany(RentFeatures::class);
+    public function rentalFeatures()
+    {
+        return $this->hasMany(RentalFeature::class);
+    }
+    public function rentalImages()
+    {
+        return $this->hasMany(RentalImage::class);
     }
 }

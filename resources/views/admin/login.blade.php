@@ -50,7 +50,8 @@
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
-                <!-- Register -->
+                @include('components.admin.notificationPrompt')
+                <!-- Login -->
                 <div class="card">
                     <div class="card-body">
                         <!-- Logo -->
@@ -59,14 +60,14 @@
                                 <span class="app-brand-logo demo">
                                     <div>
                                         <img src="{{ asset('admin/assets/img/logo.png') }}"
-                                            style="width: 70px; height: 70px;" class="p-1" />
+                                            style="height: 70px;" class="p-1" />
                                     </div>
                                 </span>
-                                <span class="app-brand-text demo text-body fw-bolder">TCM</span>
+                                <span class="app-brand-text text-body fw-bolder" style="font-size: 27px">TorontoCondomania</span>
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Welcome to TCM! 👋</h4>
+                        <h4 class="mb-2">Welcome to TCM Admin Panel</h4>
                         <p class="mb-4">Please sign-in to your account</p>
 
                         <form id="formAuthentication" class="mb-3" action="{{ route('admin.authenticate') }}"
@@ -98,13 +99,6 @@
                                 <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                             </div>
                         </form>
-
-                        <p class="text-center">
-                            <span>New on our platform?</span>
-                            <a href="{{ route('admin.signup') }}">
-                                <span>Create an account</span>
-                            </a>
-                        </p>
                     </div>
                 </div>
                 <!-- /Register -->
@@ -134,6 +128,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
 </body>
 
 </html>

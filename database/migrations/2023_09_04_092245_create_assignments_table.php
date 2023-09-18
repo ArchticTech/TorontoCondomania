@@ -15,7 +15,7 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->integer('property_id');
+            $table->unsignedBigInteger('property_id');
             $table->integer('assign_unit_no');
             $table->integer('assign_floor_no');
             $table->integer('assign_purchase_price');
@@ -25,6 +25,11 @@ class CreateAssignmentsTable extends Migration
             $table->integer('assign_deposit_paid');
             $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
+
+            $table->foreign('property_id')
+                ->references('id')
+                ->on('property')
+                ->onDelete('cascade');
         });
     }
 

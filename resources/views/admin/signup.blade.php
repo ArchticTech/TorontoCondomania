@@ -60,22 +60,22 @@
                                 <span class="app-brand-logo demo">
                                     <div>
                                         <img src="{{ asset('admin/assets/img/logo.png') }}"
-                                            style="width: 70px; height: 70px;" class="p-1" />
+                                            style="height: 70px;" class="p-1" />
                                     </div>
                                 </span>
-                                <span class="app-brand-text demo text-body fw-bolder">TCM</span>
+                                <span class="app-brand-text text-body fw-bolder" style="font-size: 27px">TorontoCondomania</span>
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Adventure starts here 🚀</h4>
-                        <p class="mb-4">Make your app management easy and fun!</p>
+                        <h4 class="mb-2">User Registeration</h4>
+                        <p class="mb-4">Fill the Information to Register</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('admin.store') }}" method="POST">
+                        <form id="registerationForm" class="mb-3" action="{{ route('admin.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Enter your username" autofocus />
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    placeholder="Enter your Name" autofocus />
                                 @error('name')
                                     <span class="text-danger text-xs mt-1">{{ $message }}</span>
                                 @enderror

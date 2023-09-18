@@ -47,24 +47,6 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const notification = document.getElementById("myNotification");
-
-            // Function to show the notification
-            function showNotification() {
-                notification.style.display = "block";
-
-                // Hide the notification after 3 seconds
-                setTimeout(() => {
-                    notification.style.display = "none";
-                }, 3000);
-            }
-
-            // Initialize the notification
-            showNotification();
-        });
-    </script>
 </head>
 
 <body>
@@ -95,12 +77,10 @@
 
                 <div class="menu-inner-shadow"></div>
 
-
-
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="/secure-zone" class="menu-link">
+                        <a href="{{route('admin.property.view')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -113,80 +93,35 @@
                     <!-- Main pages -->
 
                     <li class="menu-item">
-                        <a href="#" class="menu-link menu-toggle">
+                        <a  href="{{route('admin.property.view')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx bx-building-house"></i>
                             <div>Property</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="/secure-zone/property/add" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
-                                    <div>Add</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/secure-zone/property" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bxs-calendar-event"></i>
-                                    <div data-i18n="Layouts">View </div>
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li class="menu-item">
-                        <a href="#" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                            <div>Assignments</div>
+                        <a href="{{route('admin.assignment.view')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                            <div>Assignment</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="/secure-zone/assigment/add" class="menu-link ">
-                                    <i class="menu-icon tf-icons bx bx-image-add"></i>
-                                    <div data-i18n="Layouts">Add</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/secure-zone/assigment" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-image-alt"></i>
-                                    <div data-i18n="Layouts">View</div>
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li class="menu-item">
-                        <a href="#" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bxs-buildings"></i>
-                            <div data-i18n="Account Settings">Rentals</div>
+                        <a href="{{route('admin.rentals.view')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                            <div>Rental</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="/secure-zone/rentals/add" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-plus-circle"></i>
-                                    <div data-i18n="Layouts">Add</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/secure-zone/rentals" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-info-circle"></i>
-                                    <div data-i18n="Layouts">View</div>
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li class="menu-item">
-                        <a href="/secure-zone/consulting-form" class="menu-link ">
+                        <a href="{{route('admin.consultingForm')}}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-user-voice"></i>
                             <div data-i18n="Layouts">Consulting Form</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="/secure-zone/subscription-form" class="menu-link">
+                        <a href="{{route('admin.subscriptionForm')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
                             <div data-i18n="Layouts">Subscription Form</div>
                         </a>
@@ -224,7 +159,11 @@
                                     <div>Notifications</div>
                                 </a>
                             </li>
-
+                            <li class="menu-item">
+                                <a href="pages-account-settings-connections.html" class="menu-link">
+                                    <div>Connections</div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -236,7 +175,8 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl 
+                navbar-detached align-items-center bg-navbar-theme mb-4"
                     id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
@@ -258,10 +198,8 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
                             <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+                                <a style="background-color: #eee; color: #333; padding: 7px 21px; border-radius: 7px;" 
+                                href="{{route('home')}}">Visit Website</a>
                             </li>
 
                             <!-- User -->
@@ -305,12 +243,22 @@
                                             <span class="align-middle">Settings</span>
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <span class="d-flex align-items-center align-middle">
+                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                                <span class="flex-grow-1 align-middle">Billing</span>
+                                                <span
+                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                            </span>
+                                        </a>
+                                    </li>
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/secure-zone/logout">
+                                        <a class="dropdown-item" href="{{route('admin.logout')}}"
+                                        style="color: rgba(167, 0, 0, 0.644);">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -323,7 +271,7 @@
                 </nav>
 
                 <!-- / Navbar -->
-                <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                {{-- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
@@ -333,34 +281,11 @@
                             <a href="index" class="nav-link">Home</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" data-toggle="dropdown" href="#">
-                                <i class="fas fa-caret-square-down"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <div class="dropdown-divider"></div>
-                                <a href="../signout.php" class="dropdown-item">
-                                    <i class="fas fa-power-off mr-2"></i> LogOut
-                                </a>
+                </nav> --}}
 
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-
-                @if (session()->has('message'))
-                    <div id="myNotification"
-                        class="fixed-top start-50 translate-middle-x text-white text-center px-5 py-4"
-                        style="z-index: 2000; border-radius: 0.375rem; box-shadow: rgb(135 148 163 / 30%) 0px 0px 0.75rem 0.25rem; top: 50px;
-                                background-color: #5f61e69e; font-weight: bold; text-transform: capitalize; font-size: 21px;">
-                        <p id="message" style="margin-bottom: 0">{{ session('message') }}</p>
-                    </div>
-                @endif
+                @include('components.admin.notificationPrompt')
 
                 @yield('content')
-
-
 
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
@@ -419,9 +344,24 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 <script>
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: initialLatitude, lng: initialLongitude },
+        zoom: 15,
+    });
+
+    const latitudeInput = document.getElementById('latitude');
+    const longitudeInput = document.getElementById('longitude');
+
+    map.addListener('click', (event) => {
+        const latLng = event.latLng;
+        latitudeInput.value = latLng.lat();
+        longitudeInput.value = latLng.lng();
+    });
+</script>
+<script>
     @if (isset($features))
         var i = {{count($features)}} + 1;
-    @else
+    @else 
         var i = 1;
     @endif
     $("#add_property_feature").click(function() {
@@ -443,41 +383,12 @@
         $('#row' + button_id + '').remove();
     });
 
-
-    //rent features
-    @if (isset($features))
-        var z = {{count($features)}} + 1;
-    @else
-        var z = 1;
-    @endif
-    $("#add_rent_feature").click(function() {
-        $('#property_feature_tbody').append('<tr id="row' + z + '">\
-            <td>\
-                <input type="text" placeholder="Rent Feature" name="rent_feature[]" class="form-control rent_feature" />\
-            </td>\
-            <td style="text-align: center">\
-                <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_feature" id="' + z + '" class="btn btn-xs btn-danger btn_remove_prop_feature">\
-                    <i class="bx bxs-trash"></i>\
-                </button>\
-            </td>\
-        </tr>');
-        z++;
-    });
-
-    $(document).on('click', '.btn_remove_rent_feature', function() {
-        var button_id = $(this).attr("id");
-        $('#row' + button_id + '').remove();
-    });
-
-    //end rent features
-
     @if (isset($details))
         var j = {{count($details)}} + 1;
-    @else
+    @else 
         var j = 1;
     @endif
     $("#add_property_detail").click(function() {
-        j++;
         $('#property_detail_tbody').append('<tr id="row' + j + '">\
             <td>\
                 <input type="text" placeholder="Property Detail" name="prop_detail[]" class="form-control prop_detail" />\
@@ -488,6 +399,7 @@
                 </button>\
             </td>\
         </tr>');
+        j++;
     });
 
     $(document).on('click', '.btn_remove_prop_detail', function() {
@@ -495,9 +407,12 @@
         $('#row' + button_id + '').remove();
     });
 
-    var k = 0;
+    @if (isset($images))
+        var k = {{count($images)}} + 1;
+    @else 
+        var k = 1;
+    @endif
     $("#add_property_image").click(function() {
-        k++;
         $('#property_image_row').append('\
             <div class="col-md-4" id="image_row' + k + '">\
                 <div class="form-group">\
@@ -507,6 +422,7 @@
                     <input type="file"  class="form-control property_image" id="prop_image" name="property_image[]" placeholder="Property Image">\
                 </div>\
             </div>');
+        k++;
     });
 
     $(document).on('click', '.btn_remove_prop_image', function() {
@@ -514,85 +430,66 @@
         $('#image_row' + button_id + '').remove();
     });
 
-    //RENT IMAGE
-    var y = 0;
-    $("#add_rent_image").click(function() {
-        y++;
-        $('#rent_image_row').append('\
-            <div class="col-md-4" id="image_row' + y + '">\
-                <div class="form-group">\
-                    <label for="prop_name">Rent Image ' + y +
-            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_image" id="' +
-            y + '" class="btn btn-xs btn-danger m-1 btn_remove_rent_image"><i class="bx bxs-trash"></i></button></label>\
-                    <input type="file"  class="form-control property_image" id="prop_image" name="property_image[]" placeholder="Rent Image">\
-                </div>\
-            </div>');
-    });
-
-    $(document).on('click', '.btn_remove_rent_image', function() {
-        var button_id = $(this).attr("id");
-        $('#image_row' + button_id + '').remove();
-    });
-
-    //END RENT IMAGE
-
-    var l = 0;
+    @if (isset($images))
+        var l = {{count($images)}} + 1;
+    @else 
+        var l = 1;
+    @endif
     $("#add_property_floor_plan").click(function() {
-        l++;
         $('#property_floor_plan_image_row').append('\
             <div class="row" id="property_floor_plan_row' + l + '">\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan ' + l + '</h5></div>\
+                <div class="col-xl-3 col-md-8 my-3">\
                     <div class="form-group">\
-                        <label for="property_floor_plan">Floor Plan ' + l +
-            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>\
+                        <label for="property_floor_plan">Floor Plan Image</label>\
                         <input type="file" class="form-control floor_plan_image" id="prop_image" name="floor_plan_image[]" required placeholder="Floor Plan">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-3 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_suite_no">Suite No ' + l + '</label>\
+                        <label for="plan_suite_no">Suite No</label>\
                         <input type="text" required class="form-control" id="plan_suite_no" name="plan_suite_no[]" placeholder="Suite No">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-6 col-md-12 my-3">\
                     <div class="form-group">\
-                        <label for="plan_suite_name">Suite Name ' + l + '</label>\
+                        <label for="plan_suite_name">Suite Name</label>\
                         <input type="text" required class="form-control" id="plan_suite_name" name="plan_suite_name[]" placeholder="Suite Name">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_sq_ft">Plan Sq. Ft ' + l + '</label>\
+                        <label for="plan_sq_ft">Plan Sq. Ft</label>\
                         <input type="number" required class="form-control" id="plan_sq_ft" name="plan_sq_ft[]" placeholder="Plan Sq. Ft">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_bath">Plan Bath ' + l + '</label>\
+                        <label for="plan_bath">Plan Bath</label>\
                         <input type="number" required class="form-control" id="plan_bath" name="plan_bath[]" placeholder="Plan Bath">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_bed">Plan Bed ' + l + '</label>\
+                        <label for="plan_bed">Plan Bed</label>\
                         <input type="number" required class="form-control" id="plan_bed" name="plan_bed[]" placeholder="Plan Bed">\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-2 col-md-4 my-3">\
                     <div class="form-group">\
-                        <label for="plan_availability">Plan Availability ' + l + '</label>\
+                        <label for="plan_availability">Plan Availability</label>\
                         <select name="plan_availability[]" required id="plan_availability" class="form-select">\
-                            <option id="">Plan Availability</option>\
+                            <option value="">Plan Availability</option>\
                             <option value="1">Yes</option>\
                             <option value="0">No</option>\
                         </select>\
                     </div>\
                 </div>\
-                <div class="col-md-3 mt-3 mb-3">\
+                <div class="col-xl-4 col-md-8 my-3">\
                     <div class="form-group">\
-                        <label for="plan_terrace_balcony">Terrace / Balcony ' + l + '</label>\
+                        <label for="plan_terrace_balcony">Terrace / Balcony</label>\
                         <select name="plan_terrace_balcony[]" required id="plan_terrace_balcony" class="form-select">\
-                            <option id="">Terrace / Balcony</option>\
+                            <option value="">Terrace / Balcony</option>\
                             <option value="Terrace">Terrace</option>\
                             <option value="Balcony">Balcony</option>\
                             <option value="-">-</option>\
@@ -604,6 +501,7 @@
                 <div class="col-md-12 my-2"><hr></div>\
             </div>\
         ');
+        l++;
     });
 
     $(document).on('click', '.btn_remove_property_floor_plan', function() {
@@ -611,38 +509,43 @@
         $('#property_floor_plan_row' + button_id + '').remove();
     });
 
-    // $("#property_add").submit(function(e) {
-    //     e.preventDefault();
-    //     $("#add_property_button").empty();
-    //     $("#add_property_button").append('<i class="bx bxs-error-circle"></i>');
-    //     document.getElementById("add_property_button").disabled = true;
+    @if (isset($rentalFeatures))
+        var y = {{count($rentalFeatures)}} + 1;
+    @else 
+        var y = 1;
+    @endif
+    $("#add_rent_feature").click(function() {
+        $('#property_feature_tbody').append('<tr id="row' + y + '">\
+            <td>\
+                <input type="text" placeholder="Rent Feature" name="rent_feature[]" class="form-control rent_feature" />\
+            </td>\
+            <td style="text-align: center">\
+                <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_rent_feature" id="' + y + '" class="btn btn-xs btn-danger btn_remove_prop_feature">\
+                    <i class="bx bxs-trash"></i>\
+                </button>\
+            </td>\
+        </tr>');
+        y++;
+    });
 
-    //     var formData = new FormData(this);
-    //     var encodedIframe = encodeURIComponent(formData.get('prop_iframe'));
+    @if (isset($rentalImages))
+        var z = {{count($rentalImages)}} + 1;
+    @else 
+        var z = 1;
+    @endif
+    $("#add_rental_image").click(function() {
+        $('#rental_image_row').append('\
+            <div class="col-md-4" id="image_row' + z + '">\
+                <div class="form-group">\
+                    <label for="prop_name">Rental Image ' + z +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" style="padding: 6px 10px" name="btn_remove_prop_image" id="' +
+            z + '" class="btn btn-xs btn-danger m-1 btn_remove_prop_image"><i class="bx bxs-trash"></i></button></label>\
+                    <input type="file"  class="form-control rental_image" id="prop_image" name="rental_image[]" placeholder="Rental Image">\
+                </div>\
+            </div>');
+        z++;
+    });
 
-    //     formData.set('prop_iframe', encodedIframe);
-
-    //     $.ajax({
-    //         url: '{{ route('admin.property.store') }}',
-    //         enctype: 'multipart/form-data',
-    //         data: formData,
-    //         type: 'POST',
-    //         contentType: false,
-    //         processData: false,
-    //         success: (res) => {
-    //             // console.log(res);
-    //             window.location.href = "{{ route('admin.property.view') }}";
-
-    //             $("#add_property_button").empty();
-    //             $("#add_property_button").append('Add Property');
-    //             document.getElementById("add_property_button").disabled = false;
-    //             $("#property_add")[0].reset();
-    //         },
-    //         error: (res) => {
-    //             console.log(res);
-    //         }
-    //     });
-    // });
 </script>
 
 </html>

@@ -7,8 +7,15 @@
                     <section class="content">
                         <div class="container-fluid">
                             <div class="row mb-2">
-                                <div class="col-sm-12">
-                                    <h1 class="m-0">View Assigments</h1>
+                                <div class="col-sm-6 mb-4 mb-sm-0">
+                                    <h1 class="m-0">Assignments</h1>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="{{route('admin.assignment.add')}}" 
+                                    class="btn btn-primary ms-auto d-block me-auto me-sm-2" 
+                                    style="font-size: 16px; padding: 9px 27px; width: fit-content">
+                                    <i class='me-2 mb-1 bx bxs-plus-circle'></i>
+                                    Add New Assignment</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -32,22 +39,22 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($assigments as $assigment)
+                                                    @foreach ($assignments as $assignment)
 
-                                                    @if ($assigment->property != NULL)
+                                                    @if ($assignment->property != NULL)
 
 
                                                     <tr>
-                                                        <td>{{ $assigment->id }}</td>
-                                                        <td>{{ $assigment->property->prop_name}}</td>
-                                                        <td>{{ $assigment->property->city->city_name}}</td>
-                                                        <td>{{ $assigment->property->prop_address}}</td>
-                                                        <td>{{ $assigment->property->prop_type}}</td>
-                                                        <td>{{ $assigment->assign_purchase_price}}</td>
-                                                        <td>{{ $assigment->assign_tentative_occ_date->format('Y-m-d')}}</td>
-                                                        <td>{{ $assigment->assign_purchased_date->format('Y-m-d')}}</td>
-                                                        <td>{{ $assigment->assign_cooperation_percentage}}%</td>
-                                                        <td><a href="{{ route('admin.assignment.edit', $assigment->id) }}"><i class='bx bxs-edit'></i></a></td>
+                                                        <td>{{ $assignment->id }}</td>
+                                                        <td>{{ $assignment->property->prop_name}}</td>
+                                                        <td>{{ $assignment->property->city->city_name}}</td>
+                                                        <td>{{ $assignment->property->prop_address}}</td>
+                                                        <td>{{ $assignment->property->prop_type}}</td>
+                                                        <td>{{ $assignment->assign_purchase_price}}</td>
+                                                        <td>{{ $assignment->assign_tentative_occ_date->format('Y-m-d')}}</td>
+                                                        <td>{{ $assignment->assign_purchased_date->format('Y-m-d')}}</td>
+                                                        <td>{{ $assignment->assign_cooperation_percentage}}%</td>
+                                                        <td><a href="{{ route('admin.assignment.edit', $assignment->id) }}"><i class='bx bxs-edit'></i></a></td>
                                                     </tr>
                                                     @endif
                                                     @endforeach

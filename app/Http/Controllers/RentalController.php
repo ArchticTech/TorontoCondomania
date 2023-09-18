@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rental;
-use App\Models\RentFeatures;
+use App\Models\RentalFeature;
+use App\Models\RentalImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class RentalController extends Controller
 {
     //Rentals CRUD Operation
-    public function viewRentals()
+    public static function all()
     {
-        $rentals = Rental::all();
+        return Rental::all();
         return view('admin.rentals-view', ['rentals' => $rentals]);
     }
 
-    public function addRentals()
+    public static function addRentals()
     {
         return view('admin.rentals-add');
     }
 
-    public function storeRentals(Request $request)
+    public static function store(Request $request)
     {
         $rent_address = $request->input('rent_address');
         $rent_iframe = $request->input('rent_iframe');
@@ -58,31 +60,26 @@ class RentalController extends Controller
             'smoking_policy' => $smoking_policy,
         ]);
 
-        // dd($request->input('rent_feature'), $rental);
         $saved = $rental->save();
-
-
+        
         if ($saved) {
             if ($request->input('rent_feature')) {
                 $this->addFeatures($request->input('rent_feature'), $rental);
             }
+            if ($request->file('rental_image')) {
+                $this->addImages($request->file('rental_image'), $rental);
+            }
         }
-        if ($saved) {
-            return redirect()->route('admin.rentals.view')
-                ->with('message', 'Rental Added Successfully!');
-        } else {
-            return redirect()->route('admin.rentals.add')
-                ->with('message', 'Rental Failed to Add!');
-        }
+
+        return $saved;
     }
 
-    public function editRentals($id)
+    public static function get($id)
     {
-        $rental = Rental::find($id);
-        return view('admin.rental-edit', ['rental' => $rental]);
+        return Rental::find($id);
     }
 
-    public function updateRentals(Request $request, $id)
+    public static function update(Request $request, $id)
     {
         // Find the rental by its ID
         $rental = Rental::find($id);
@@ -112,35 +109,73 @@ class RentalController extends Controller
 
         $saved = $rental->save();
 
+        $this->removeFeatures($rental);
+        $this->removeImages($request->input('rentalImageName'), $rental);
         if ($saved) {
             if ($request->input('rent_feature')) {
                 $this->addFeatures($request->input('rent_feature'), $rental);
             }
+            if ($request->file('rental_image')) {
+                $this->addImages($request->file('rental_image'), $rental);
+            }
         }
 
-        // if ($saved) {
-        //     return redirect()->route('admin.rentals.view')
-        //         ->with('message', 'Rental Updated Successfully!');
-        // } else {
-        //     return redirect()->route('admin.rentals.update')
-        //         ->with('message', 'Rental Failed to Update!');
-        // }
+        return $saved;
+    }
+
+    public function saveImage($image)
+    {
+        if($image)
+        {
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            return $imageName;
+        }
+        return '';
     }
 
     public function addFeatures($features, $rental)
     {
         foreach ($features as $feature) {
 
-            $rentFeatures = new RentFeatures([
+            $rentalFeature = new RentalFeature([
                 'feature' => $feature
             ]);
 
-            $rental->rentFeatures()->save($rentFeatures);
+            $rental->rentalFeatures()->save($rentalFeature);
         }
     }
     public function removeFeatures($rental)
     {
-        $rental->rentFeatures()->delete();
+        $rental->rentalFeatures()->delete();
+        return;
+    }
+
+    public function addImages($images, $rental)
+    {
+        foreach($images as $image) {
+            $imageName = $this->saveImage($image);
+            $rentalImage = new RentalImage([
+                'image' => $imageName,
+                'status' => 1
+            ]);
+
+            $rental->rentalImages()->save($rentalImage);
+        }
+    }
+    public function removeImages($imageNames, $rental)
+    {
+        $oldImages = $rental->rentalImages->pluck('image')->toArray();
+        $deletedImages = $imageNames ? array_diff($oldImages, $imageNames) : $oldImages;
+        foreach($deletedImages as $image) {
+            $imagePath = public_path('images/' . $image);
+            if (File::exists($imagePath)) {
+                // Delete the image if it exists
+                File::delete($imagePath);
+            }
+
+            $rental->rentalImages()->where('image', $image)->delete();
+        }
         return;
     }
 }

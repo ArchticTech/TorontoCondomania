@@ -4,21 +4,11 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h1 class="m-0">Add Assignment</h1>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
+                                <h2 class="card-title m-0">Add Assignment</h2>
                             </div>
                             <div class="card-body">
                                 <form method="POST" id="property_add" enctype="multipart/form-data"
@@ -49,7 +39,7 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="city_id">Select City</label>
                                             <select name="city_id" required class="form-select" id="city_id">
-                                                <option id="">Select City</option>
+                                                <option value="">Select City</option>
                                                 @foreach ($cities as $city)
                                                     <option value="{{ $city->id }}">{{ $city->city_name }}</option>
                                                 @endforeach
@@ -58,7 +48,7 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="development_id">Select Development</label>
                                             <select name="development_id" required class="form-select" id="development_id">
-                                                <option id="">Select Development</option>
+                                                <option value="">Select Development</option>
                                                 @foreach ($developments as $development)
                                                     <option value="{{ $development->id }}">
                                                         {{ $development->development_name }}</option>
@@ -68,7 +58,7 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="developer_id">Select Developer</label>
                                             <select name="developer_id" required class="form-select" id="developer_id">
-                                                <option id="">Select Developer</option>
+                                                <option value="">Select Developer</option>
                                                 @foreach ($developers as $developer)
                                                     <option value="{{ $developer->id }}">{{ $developer->developer_name }}
                                                     </option>
@@ -78,7 +68,7 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="architects_id">Select Architect</label>
                                             <select name="architects_id" required class="form-select" id="architects_id">
-                                                <option id="">Select Architect</option>
+                                                <option value="">Select Architect</option>
                                                 @foreach ($architects as $architect)
                                                     <option value="{{ $architect->id }}">
                                                         {{ $architect->architects_name }}
@@ -91,7 +81,7 @@
                                                 Design</label>
                                             <select name="interior_designer_id" required class="form-select"
                                                 id="interior_designer_id">
-                                                <option id="">Select Interior Designer</option>
+                                                <option value="">Select Interior Designer</option>
                                                 @foreach ($interiorDesigners as $interiorDesigner)
                                                     <option value="{{ $interiorDesigner->id }}">
                                                         {{ $interiorDesigner->interior_designer_name }}</option>
@@ -101,7 +91,7 @@
                                         <div class="mb-3 mt-3 col-md-4">
                                             <label for="prop_agent_id">Select Property Agent</label>
                                             <select name="prop_agent_id" required class="form-select" id="prop_agent_id">
-                                                <option id="">Select Property Agent</option>
+                                                <option value="">Select Property Agent</option>
                                                 @foreach ($propertyAgents as $propertyAgent)
                                                     <option value="{{ $propertyAgent->id }}">
                                                         {{ $propertyAgent->agent_name }}</option>
@@ -170,7 +160,7 @@
 
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
-                                                <label for="vip_launch_date">Vip launch Date<span
+                                                <label for="vip_launch_date">Vip launch Date <span
                                                         style="font-size: 12px;color: grey;">(If No Vip
                                                         launch Date : 01/01/2020)</span></label>
                                                 <input class="form-control" required value="2020-01-01"
@@ -180,7 +170,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
-                                                <label for="public_launch_date">Public launch Date<span
+                                                <label for="public_launch_date">Public launch Date <span
                                                         style="font-size: 12px;color: grey;">(If No Public
                                                         launch Date : 01/01/2020)</span></label>
                                                 <input class="form-control" value="2020-01-01" id="public_launch_date"
@@ -190,7 +180,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3 mt-3">
                                             <div class="form-group">
-                                                <label for="const_start_date">Construction Start Date<span
+                                                <label for="const_start_date">Construction Start Date <span
                                                         style="font-size: 12px;color: grey;">(If No
                                                         Construction Start Date : 01/01/2020)</span></label>
                                                 <input class="form-control" value="2020-01-01" id="const_start_date"
@@ -405,7 +395,7 @@
                                                 <label for="assign_purchased_date">Assign Purchased Date <span
                                                         style="font-size: 12px;color: grey;">(If No Purchased Date :
                                                         01/01/2020)</span></label>
-                                                    <input type="date" class="form-control" id="assign_purchased_date"
+                                                    <input type="date" value="2020-01-01" class="form-control" id="assign_purchased_date"
                                                         required name="assign_purchased_date"
                                                         placeholder="Assignment Purchased Date">
                                             </div>

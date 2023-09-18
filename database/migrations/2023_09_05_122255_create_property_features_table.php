@@ -20,6 +20,11 @@ class CreatePropertyFeaturesTable extends Migration
             $table->boolean('status')->default(true);
             $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
+
+            $table->foreign('property_id')
+                ->references('id')
+                ->on('property')
+                ->onDelete('cascade');
         });
     }
 

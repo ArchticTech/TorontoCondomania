@@ -26,6 +26,11 @@ class CreatePropertyFloorPlansTable extends Migration
             $table->string('plan_terrace_balcony', 50)->default('0');
             $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
+
+            $table->foreign('property_id')
+                ->references('id')
+                ->on('property')
+                ->onDelete('cascade');
         });
 
     }

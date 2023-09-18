@@ -18,13 +18,13 @@ class AdminMiddleware
     {
         if (Auth::check()) {
 
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->isAdmin()) {
                 return $next($request);
             } else {
-                return redirect('/secure-zone/login')->with('message', 'Access Denied as You are not admin');
+                return redirect()->route('admin.login')->with('message', 'Access Denied as You are not admin');
             }
         } else {
-            return redirect()->route('admin.login')->with('message', 'Please Login Firsts');
+            return redirect()->route('admin.login')->with('message', 'Please Login First');
         }
     }
 }

@@ -24,18 +24,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-
                                         <tr>
-                                            <td>ID</td>
-                                            <td>Subscription Email</td>
-                                            <td>Active / Inactive</td>
-                                            <td>Created At</td>
+                                            <td colspan="4" class="text-center">No data to display</td>
                                         </tr>
-
-
-
                                     </tbody>
                                 </table>
                             </div>

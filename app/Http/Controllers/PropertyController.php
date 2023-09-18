@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use App\Models\Property;
-use App\Models\Assigment;
+use App\Models\Assignment;
 use App\Models\PropertyFeature;
 use App\Models\PropertyDescription;
 use App\Models\PropertyImage;
@@ -19,9 +19,9 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function all()
+    public static function all()
     {
-        return Property::all();
+        return Property::where('is_assignment', 0)->get();
     }
 
     /**
@@ -30,7 +30,7 @@ class PropertyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public static function store(Request $request)
     {
         $date = now();
 
@@ -76,9 +76,9 @@ class PropertyController extends Controller
         $min_deposit_percentage = $request->input('min_deposit_percentage');
         $no_of_beds = $request->input('no_of_beds');
         $no_of_baths = $request->input('no_of_baths');
-
+        
         $prop_imageName = '';
-        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
         {
             $prop_imageName = $this->saveImage($request->file('prop_image'));
         }
@@ -138,10 +138,23 @@ class PropertyController extends Controller
             {
                 $this->addDetails($request->input('prop_detail'), $property);
             }
-            // if ($request->file('property_image'))
-            // {
-            //     $this->addImages($request->file('property_image'), $property);
-            // }
+            if ($request->file('property_image'))
+            {
+                $this->addImages($request->file('property_image'), $property);
+            }
+            if ($request->input('plan_suite_name'))
+            {
+                $this->addFloorPlans(
+                    $request->file('floor_plan_image'),
+                    $request->input('plan_suite_no'),
+                    $request->input('plan_suite_name'),
+                    $request->input('plan_sq_ft'),
+                    $request->input('plan_bath'),
+                    $request->input('plan_bed'),
+                    $request->input('plan_availability'),
+                    $request->input('plan_terrace_balcony'), 
+                    $property);
+            }
         }
 
         return [
@@ -156,7 +169,7 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get($id)
+    public static function get($id)
     {
         return Property::find($id);
     }
@@ -168,7 +181,7 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public static function update(Request $request, $id)
     {
         // Find the property by its ID
         $property = Property::find($id);
@@ -195,7 +208,7 @@ class PropertyController extends Controller
         $property->no_of_suites = $request->input('no_of_suites');
         $property->est_occupancy_month = $request->input('est_occupancy_month');
         $property->est_occupancy_year = $request->input('est_occupancy_year');
-
+        
         $property->vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
         $property->public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
         $property->const_start_date = now()->parse($request->input('const_start_date'))->toDateString();
@@ -222,11 +235,11 @@ class PropertyController extends Controller
         $property->no_of_beds = $request->input('no_of_beds');
         $property->no_of_baths = $request->input('no_of_baths');
 
-        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
         {
             $prop_imageName = $this->saveImage($request->file('prop_image'));
             $property->prop_image = $prop_imageName;
-
+            
             $imagePath = public_path('images/' . $request->input('prop_imageName'));
             if (File::exists($imagePath)) {
                 // Delete the image if it exists
@@ -238,6 +251,9 @@ class PropertyController extends Controller
 
         $this->removeFeatures($property);
         $this->removeDetails($property);
+        $this->removeImages($request->input('propertyImageName'), $property);
+        $this->removefloorPlans($request->input('floorPlanID'), $property);
+        
         if($saved)
         {
             if ($request->input('prop_feature'))
@@ -247,6 +263,23 @@ class PropertyController extends Controller
             if ($request->input('prop_detail'))
             {
                 $this->addDetails($request->input('prop_detail'), $property);
+            }
+            if ($request->file('property_image'))
+            {
+                $this->addImages($request->file('property_image'), $property);
+            }
+            if ($request->input('plan_suite_name'))
+            {
+                $this->addFloorPlans(
+                    $request->file('floor_plan_image'),
+                    $request->input('plan_suite_no'),
+                    $request->input('plan_suite_name'),
+                    $request->input('plan_sq_ft'),
+                    $request->input('plan_bath'),
+                    $request->input('plan_bed'),
+                    $request->input('plan_availability'),
+                    $request->input('plan_terrace_balcony'), 
+                    $property);
             }
         }
 
@@ -258,9 +291,13 @@ class PropertyController extends Controller
 
     public function saveImage($image)
     {
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $imageName);
-        return $imageName;
+        if($image)
+        {
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            return $imageName;
+        }
+        return '';
     }
 
     public function addFeatures($features, $property)
@@ -280,7 +317,7 @@ class PropertyController extends Controller
         $property->propertyFeatures()->delete();
         return;
     }
-
+    
     public function addDetails($details, $property)
     {
         foreach($details as $detail) {
@@ -311,8 +348,58 @@ class PropertyController extends Controller
             $property->propertyImages()->save($propertyImage);
         }
     }
-    public function removeImages($property)
+    public function removeImages($imageNames, $property)
     {
+        $oldImages = $property->propertyImages->pluck('image')->toArray();
+        $deletedImages = $imageNames ? array_diff($oldImages, $imageNames) : $oldImages;
+        foreach($deletedImages as $image) {
+            $imagePath = public_path('images/' . $image);
+            if (File::exists($imagePath)) {
+                // Delete the image if it exists
+                File::delete($imagePath);
+            }
+
+            $property->propertyImages()->where('image', $image)->delete();
+        }
+        return;
+    }
+    public function addFloorPlans($planImages, $suiteNumbers, $suiteNames, $planSizes, $planBaths, 
+                                    $planBeds, $planAvailabilities, $planTerraceBalconies, $property)
+    {
+        $plansCount = count($suiteNames);
+        for ($i = 0; $i < $plansCount; $i++) {
+
+            $imageName = $this->saveImage($planImages[$i]);
+            $propertyFloorPlan = new PropertyFloorPlan([
+                'floor_plan_image' => $imageName,
+                'plan_suite_no' => $suiteNumbers[$i],
+                'plan_suite_name' => $suiteNames[$i],
+                'plan_sq_ft' => $planSizes[$i],
+                'plan_bath' => $planBaths[$i],
+                'plan_bed' => $planBeds[$i],
+                'plan_availability' => $planAvailabilities[$i],
+                'plan_terrace_balcony' => $planTerraceBalconies[$i],
+            ]);
+
+            $property->propertyFloorPlans()->save($propertyFloorPlan);
+        }
+    }
+    public function removeFloorPlans($floorPlanID, $property)
+    {
+        $oldFloorPlans = $property->propertyFloorPlans->pluck('id')->toArray();
+        $deletedPlans = $floorPlanID ? array_diff($oldFloorPlans, $floorPlanID) : $oldFloorPlans;
+        
+        foreach($deletedPlans as $planID) {
+            $plan = PropertyFloorPlan::find($planID);
+            
+            $imagePath = public_path('images/' . $plan->floor_plan_image);
+            if (File::exists($imagePath)) {
+                // Delete the image if it exists
+                File::delete($imagePath);
+            }
+
+            $plan->delete();
+        }
         return;
     }
 }

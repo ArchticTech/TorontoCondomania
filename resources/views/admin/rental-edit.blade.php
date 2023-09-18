@@ -4,21 +4,11 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h1 class="m-0">Edit Property</h1>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
+                                <h2 class="card-title m-0">Update Rental</h2>
                             </div>
                             <div class="card-body">
                                 {{-- action="{{ route('admin.property.update', $property->id) }}"  --}}
@@ -154,7 +144,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="property_feature_tbody">
-
+                                                @foreach ($rentalFeatures as $rentalFeature)
+                                                    <tr id="row1">
+                                                        <td>
+                                                            <input type="text" placeholder="Rent Feature" name="rent_feature[]" 
+                                                            class="form-control rent_feature" value="{{$rentalFeature->feature}}">
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <button type="button" style="padding: 6px 10px" name="btn_remove_rent_feature" 
+                                                            id="{{$loop->iteration}}" class="btn btn-xs btn-danger btn_remove_prop_feature"> 
+                                                            <i class="bx bxs-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                         <button type="button" name="add_rent_feature"
@@ -165,11 +167,22 @@
                                     <div class="col-md-12 mt-3 mb-3">
                                         <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Rent Images
                                         </p>
-                                        <div class="row" id="rent_image_row">
-
+                                        <div class="row" id="rental_image_row">
+                                            @foreach ($rentalImages as $rentalImage)
+                                                <div class="col-md-4" id="image_row{{ $loop->iteration }}">
+                                                    <div class="form-group">
+                                                        <label for="prop_name">
+                                                            Rental Image {{ $loop->iteration }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <button type="button" style="padding: 6px 10px" name="btn_remove_prop_image" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger m-1 btn_remove_prop_image"><i class="bx bxs-trash"></i></button>
+                                                        </label>
+                                                        <input type="hidden" name="rentalImageName[]" value="{{$rentalImage->image}}" />
+                                                        <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $rentalImage->image) }}" />
+                                                    </div>
+                                                </div>                                            
+                                            @endforeach
                                         </div>
-                                        <button type="button" name="add_rent_image"
-                                            style="float: right;padding: 6px 21px;" id="add_rent_image"
+                                        <button type="button" name="add_rental_image"
+                                            style="float: right;padding: 6px 21px;" id="add_rental_image"
                                             class="btn btn-xs btn-success mt-3"><i class="bx bx-plus"></i></button>
                                     </div>
 

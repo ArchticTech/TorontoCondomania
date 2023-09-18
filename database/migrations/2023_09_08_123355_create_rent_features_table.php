@@ -13,12 +13,17 @@ class CreateRentFeaturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rent_features', function (Blueprint $table) {
+        Schema::create('rental_features', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('rental_id')->default(0);
+            $table->unsignedBigInteger('rental_id');
             $table->text('feature');
             $table->unsignedBigInteger('created_by')->default(1);
             $table->timestamps();
+            
+            $table->foreign('rental_id')
+                ->references('id')
+                ->on('rentals')
+                ->onDelete('cascade');
         });
     }
 
@@ -29,6 +34,6 @@ class CreateRentFeaturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rent_features');
+        Schema::dropIfExists('rental_features');
     }
 }

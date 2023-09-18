@@ -63,7 +63,7 @@ class Property extends Model
     }
     public function architect()
     {
-        return $this->belongsTo(Architect::class);
+        return $this->belongsTo(Architect::class, 'architects_id');
     }
     public function developer()
     {
@@ -79,7 +79,7 @@ class Property extends Model
     }
     public function property_agent()
     {
-        return $this->belongsTo(PropertyAgent::class);
+        return $this->belongsTo(PropertyAgent::class, 'prop_agent_id');
     }
 
     public function propertyFeatures()

@@ -3,20 +3,11 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h1 class="m-0">Add Rentals</h1>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12"><br>
                         <div class="card card-default">
                             <div class="card-header">
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
+                                <h2 class="card-title m-0">Add Rental</h2>
                             </div>
                             <div class="card-body">
                                 <form method="POST" id="property_add" enctype="multipart/form-data"
@@ -161,13 +152,11 @@
                                         <div class="col-md-12 mt-3 mb-3">
                                             <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Rent Images
                                             </p>
-                                            <div class="row" id="rent_image_row">
-
+                                            <div class="row" id="rental_image_row">
                                             </div>
-                                            <button type="button" name="add_rent_image"
-                                                style="float: right;padding: 6px 21px;"
-                                                id="add_rent_image" class="btn btn-xs btn-success mt-3"><i
-                                                class="bx bx-plus"></i></button>
+                                            <button type="button" name="add_rental_image"
+                                                style="float: right;padding: 6px 21px;" id="add_rental_image"
+                                                class="btn btn-xs btn-success mt-3"><i class="bx bx-plus"></i></button>
                                         </div>
 
                                         <div class="col-md-12 mb-3 mt-3"
