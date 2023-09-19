@@ -299,7 +299,8 @@ class AdminController extends Controller
 
     //Property Information
 
-    public function storeCity(Request $request,$id)
+    //City
+    public function storeCity(Request $request)
     {
         dd($request->all());
     }
@@ -308,6 +309,7 @@ class AdminController extends Controller
         dd($request->all());
     }
 
+    //Development
     public function storedevelopment(Request $request)
     {
         dd($request->all());

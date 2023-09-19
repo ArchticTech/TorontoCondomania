@@ -564,44 +564,6 @@
             $(this).hide();
             $(".save_cityBtn[data-city-id='" + cityId + "']").show();
         });
-        // $(".save_cityBtn").click(function() {
-        //     var cityId = $(this).data("city-id");
-        //     var cityName = $('#edit-city-name-' + cityId).val();
-        //     var cityStatus = $('#edit-city-status-' + cityId).val();
-
-        //     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        //     const data = {
-        //         id: cityId,
-        //         city: cityName,
-        //         status: cityStatus
-        //     };
-        //     console.log(data);
-
-        //     fetch('{{route('admin.city.update')}}', {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //                 "X-CSRF-TOKEN": csrfToken
-        //             },
-        //             body: JSON.stringify(data)
-        //         }).then((response) => {
-        //             if (!response.ok) {
-        //                 throw new Error("Network response was not ok!");
-        //             }
-        //             return response.json();
-        //         })
-        //         .then((data) => {
-
-        //             // Hide the current data and display the input field for editing
-        //             $("#city-name-" + cityId).show();
-        //             $("#edit-city-name-" + cityId).hide();
-
-        //             // Hide the "Edit" button and display the "Save" button
-        //             $(this).hide();
-        //             $(".edit_cityBtn[data-city-id='" + cityId + "']").show();
-        //         })
-        // });
 
         //edit development
         $(".edit-development-button").click(function() {

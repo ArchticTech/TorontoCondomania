@@ -68,7 +68,7 @@ Route::prefix('secure-zone')->group(function () {
             // Routes within the 'secure-zone/city' group
             // City CRUD routes
             Route::post('store', [AdminController::class, 'storeCity'])->name('admin.city.store');
-            Route::post('update', [AdminController::class, 'updateCity'])->name('admin.city.update');
+            Route::put('update/{id}', [AdminController::class, 'updateCity'])->name('admin.city.update');
         });
 
         Route::prefix('development')->group(function () {

@@ -56,25 +56,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($cities as $city)
-                                            <tr style="text-align: center;">
-                                                <td>{{ $city->id }}</td>
-                                                <td>{{ $city->city_name }}</td>
-                                                <td>
-                                                    <input type="checkbox" {{ $city->status == 1 ? 'checked' : '' }} disabled>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                        onclick="editCity({{ $city->id }}, '{{ $city->city_name }}', {{ $city->status }})"
-                                                        class="btn btn-primary btn-sm">
-                                                        <i class="bx bxs-edit"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach --}}
-                                        <form action="#">
-                                            @foreach ($cities as $city)
-                                                <meta name="csrf-token" content="{{ csrf_token() }}">
+                                        @foreach ($cities as $city)
+                                        <form method="POST"
+                                        action="{{ route('admin.city.update', ['id'=>$city->id]) }}">
+                                        @csrf
+                                        @method('put')
                                                 <tr id="city-row-{{ $city->id }}" style="text-align: center;">
                                                     <td>{{ $city->id }}</td>
                                                     <td>
@@ -94,14 +80,14 @@
                                                             data-city-id="{{ $city->id }}">
                                                             <i class="bx bxs-edit"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-success btn-sm save_cityBtn"
+                                                        <button type="submit" class="btn btn-success btn-sm save_cityBtn"
                                                             data-city-id="{{ $city->id }}" style="display: none;">
                                                             <i class="bx bx-check"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
-                                            @endforeach
-                                        </form>
+                                            </form>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <!-- Display Pagination Links -->
@@ -162,22 +148,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($developments as $development)
-                                            <tr style="text-align: center;">
-                                                <td>{{ $development->id }}</td>
-                                                <td>{{ $development->development_name }}</td>
-                                                <td><input type="checkbox"
-                                                        {{ $development->status == 1 ? 'checked' : '' }}>
-                                                </td>
-                                                <td><button type="button"
-                                                        onclick="edit_development({{ $development->id }}, '{{ $development->development_name }}', {{ $development->status }})"
-                                                        class="btn btn-primary btn-sm"><i
-                                                            class="bx bxs-edit"></i></button>
-                                                </td>
-                                            </tr>
-                                        @endforeach --}}
                                         @foreach ($developments as $development)
-                                            <form method="POST" action="{{ route('admin.development.update', ['id'=>$development->id]) }}">
+                                            <form method="POST"
+                                                action="{{ route('admin.development.update', ['id' => $development->id]) }}">
                                                 @csrf
                                                 @method('put')
                                                 <tr id="development-row-{{ $development->id }}"
@@ -273,18 +246,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($developers as $developer)
-                                            <tr style="text-align: center;">
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $developer->developer_name }}</td>
-                                                <td><input type="checkbox" {{ $developer->status == 1 ? 'checked' : '' }}>
-                                                </td>
-                                                <td><button type="button"
-                                                        onclick="edit_developer({{ $developer->id }}, '{{ $developer->developer_name }}', {{ $developer->status }})"
-                                                        class="btn btn-primary btn-sm"><i
-                                                            class="bx bxs-edit"></i></button></td>
-                                            </tr>
-                                        @endforeach --}}
                                         <form action="#">
                                             @foreach ($developers as $developer)
                                                 <tr style="text-align: center;">
@@ -375,18 +336,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($architects as $architect)
-                                            <tr style="text-align: center;">
-                                                <td>{{ $architect->id }}</td>
-                                                <td>{{ $architect->architects_name }}</td>
-                                                <td><input type="checkbox" {{ $architect->status == 1 ? 'checked' : '' }}>
-                                                </td>
-                                                <td><button type="button"
-                                                        onclick="edit_architects({{ $architect->id }}, '{{ $architect->architects_name }}', {{ $architect->status }})"
-                                                        class="btn btn-primary btn-sm"><i
-                                                            class="bx bxs-edit"></i></button></td>
-                                            </tr>
-                                        @endforeach --}}
                                         <form action="#">
                                             @foreach ($architects as $architect)
                                                 <tr style="text-align: center;">
@@ -481,19 +430,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($interiorDesigners as $interiorDesigner)
-                                            <tr style="text-align: center;">
-                                                <td>{{ $interiorDesigner->id }}</td>
-                                                <td>{{ $interiorDesigner->interior_designer_name }}</td>
-                                                <td><input type="checkbox"
-                                                        {{ $interiorDesigner->status == 1 ? 'checked' : '' }}></td>
-                                                <td><button type="button"
-                                                        onclick="edit_interior_designer({{ $interiorDesigner->id }}, '{{ $interiorDesigner->interior_designer_name }}', {{ $interiorDesigner->status }})"
-                                                        class="btn btn-primary btn-sm"><i
-                                                            class="bx bxs-edit"></i></button></td>
-                                            </tr>
-                                        @endforeach --}}
-
                                         @foreach ($interiorDesigners as $interiorDesigner)
                                             <form action="">
                                                 <tr style="text-align: center;">
