@@ -25,4 +25,21 @@ class ApiController extends Controller
         
         return $property;
     }
+    // Assignments
+    public function getAllAssignments()
+    {
+        $assignments = AssignmentController::all();
+
+        $assignments = BriefAssignmentResource::collection($assignments);
+
+        return $assignments;
+    }
+    public function getAssignment($id)
+    {
+        $property = PropertyController::get($id);
+
+        $property = DetailedAssignmentResource::make($property);
+
+        return $property;
+    }
 }
