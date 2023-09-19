@@ -47,6 +47,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/cxub8byx9xbvcwbawottw3z5tmbe225szfibji06em9yh3mu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
 <body>
@@ -343,6 +344,25 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
+
+<script type="text/javascript">
+    tinymce.init({
+    selector: 'textarea.tinymce-editor',
+    height: 300,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount', 'image'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+    content_css: '//www.tiny.cloud/css/codepen.min.css'
+});
+</script>
+
 <script>
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: initialLatitude, lng: initialLongitude },

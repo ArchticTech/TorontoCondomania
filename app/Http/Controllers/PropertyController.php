@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\File;
 use App\Models\Property;
 use App\Models\Assignment;
 use App\Models\PropertyFeature;
-use App\Models\PropertyDescription;
 use App\Models\PropertyImage;
 use App\Models\PropertyFloorPlan;
 
@@ -36,6 +35,7 @@ class PropertyController extends Controller
 
         $prop_code = $request->input('prop_code');
         $prop_name = $request->input('prop_name');
+        $description = $request->input('prop_description');
         $city_id = $request->input('city_id');
         $development_id = $request->input('development_id');
         $developer_id = $request->input('developer_id');
@@ -87,6 +87,7 @@ class PropertyController extends Controller
             'prop_code' => $prop_code,
             'prop_name' => $prop_name,
             'prop_image' => $prop_imageName,
+            'description' => $description,
             'city_id' => $city_id,
             'development_id' => $development_id,
             'developer_id' => $developer_id,
@@ -133,10 +134,6 @@ class PropertyController extends Controller
             if ($request->input('prop_feature'))
             {
                 propertycontroller::addFeatures($request->input('prop_feature'), $property);
-            }
-            if ($request->input('prop_detail'))
-            {
-                propertycontroller::addDetails($request->input('prop_detail'), $property);
             }
             if ($request->file('property_image'))
             {
@@ -194,6 +191,7 @@ class PropertyController extends Controller
         // Update the property attributes with new values
         $property->prop_code = $request->input('prop_code');
         $property->prop_name = $request->input('prop_name');
+        $property->description = $request->input('prop_description');
         $property->city_id = $request->input('city_id');
         $property->development_id = $request->input('development_id');
         $property->developer_id = $request->input('developer_id');
@@ -250,7 +248,6 @@ class PropertyController extends Controller
         $saved = $property->save();
 
         PropertyController::removeFeatures($property);
-        propertycontroller::removeDetails($property);
         propertycontroller::removeImages($request->input('propertyImageName'), $property);
         propertycontroller::removefloorPlans($request->input('floorPlanID'), $property);
         
@@ -259,10 +256,6 @@ class PropertyController extends Controller
             if ($request->input('prop_feature'))
             {
                 propertycontroller::addFeatures($request->input('prop_feature'), $property);
-            }
-            if ($request->input('prop_detail'))
-            {
-                propertycontroller::addDetails($request->input('prop_detail'), $property);
             }
             if ($request->file('property_image'))
             {
@@ -315,24 +308,6 @@ class PropertyController extends Controller
     public static function removeFeatures($property)
     {
         $property->propertyFeatures()->delete();
-        return;
-    }
-    
-    public static function addDetails($details, $property)
-    {
-        foreach($details as $detail) {
-
-            $propertyDescription = new PropertyDescription([
-                'prop_description' => $detail,
-                'status' => 1
-            ]);
-
-            $property->propertyDescriptions()->save($propertyDescription);
-        }
-    }
-    public static function removeDetails($property)
-    {
-        $property->propertyDescriptions()->delete();
         return;
     }
 

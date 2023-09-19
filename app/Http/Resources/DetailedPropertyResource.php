@@ -15,13 +15,14 @@ class DetailedPropertyResource extends JsonResource
     public function toArray($request)
     {
         $features = $this->propertyFeatures->pluck('prop_feature');
-        $descriptions = $this->propertyDescriptions->pluck('prop_description');
         $imageUrls = $this->propertyImages->pluck('image');
 
         return [
             'id' => $this->id,
+            'code' => $this->prop_code,
             'name' => $this->prop_name,
             'image' => $this->prop_image,
+            'description' => $this->description,
             'type' => $this->prop_type,
             'address' => $this->prop_address,
             'status' => $this->prop_status,
@@ -50,13 +51,12 @@ class DetailedPropertyResource extends JsonResource
             'price_from' => $this->prop_price_from,
             'price_to' => $this->prop_price_to,
             'city' => $this->city->city_name,
-            'development' => $this->property_agent->agent_name,
-            'developer' => $this->property_agent->agent_name,
-            'architect' => $this->property_agent->agent_name,
-            'designer' => $this->property_agent->agent_name,
-            'agent' => $this->property_agent->agent_name,
+            'development' => $this->development->development_name,
+            'developer' => $this->developer->developer_name,
+            'architect' => $this->architect->architects_name,
+            'designer' => $this->interior_designer->interior_designer_name,
+            'agent' => BriefAgentResource::make($this->property_agent),
             'features' => $features->toArray(),
-            'descriptions' => $descriptions->toArray(),
             'images' => $imageUrls->toArray(),
         ];
     }

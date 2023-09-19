@@ -79,7 +79,6 @@ class AdminController extends Controller
                 ->with('message', 'Property Not Found!');
         
         $data['features'] = $data['property']->propertyFeatures;
-        $data['details'] = $data['property']->propertyDescriptions;
         $data['images'] = $data['property']->propertyImages;
         $data['floorPlans'] = $data['property']->propertyFloorPlans;
 
@@ -137,7 +136,6 @@ class AdminController extends Controller
                 ->with('message', 'Assignment Not Found!');
         
         $data['features'] = $data['assignment']->property->propertyFeatures;
-        $data['details'] = $data['assignment']->property->propertyDescriptions;
         $data['images'] = $data['assignment']->property->propertyImages;
         $data['floorPlans'] = $data['assignment']->property->propertyFloorPlans;
 
