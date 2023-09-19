@@ -80,7 +80,7 @@ class PropertyController extends Controller
         $prop_imageName = '';
         if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
         {
-            $prop_imageName = $this->saveImage($request->file('prop_image'));
+            $prop_imageName = propertycontroller::saveImage($request->file('prop_image'));
         }
 
         $property = new Property([
@@ -132,19 +132,19 @@ class PropertyController extends Controller
         {
             if ($request->input('prop_feature'))
             {
-                $this->addFeatures($request->input('prop_feature'), $property);
+                propertycontroller::addFeatures($request->input('prop_feature'), $property);
             }
             if ($request->input('prop_detail'))
             {
-                $this->addDetails($request->input('prop_detail'), $property);
+                propertycontroller::addDetails($request->input('prop_detail'), $property);
             }
             if ($request->file('property_image'))
             {
-                $this->addImages($request->file('property_image'), $property);
+                propertycontroller::addImages($request->file('property_image'), $property);
             }
             if ($request->input('plan_suite_name'))
             {
-                $this->addFloorPlans(
+                propertycontroller::addFloorPlans(
                     $request->file('floor_plan_image'),
                     $request->input('plan_suite_no'),
                     $request->input('plan_suite_name'),
@@ -237,7 +237,7 @@ class PropertyController extends Controller
 
         if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
         {
-            $prop_imageName = $this->saveImage($request->file('prop_image'));
+            $prop_imageName = propertycontroller::saveImage($request->file('prop_image'));
             $property->prop_image = $prop_imageName;
             
             $imagePath = public_path('images/' . $request->input('prop_imageName'));
@@ -249,28 +249,28 @@ class PropertyController extends Controller
 
         $saved = $property->save();
 
-        $this->removeFeatures($property);
-        $this->removeDetails($property);
-        $this->removeImages($request->input('propertyImageName'), $property);
-        $this->removefloorPlans($request->input('floorPlanID'), $property);
+        PropertyController::removeFeatures($property);
+        propertycontroller::removeDetails($property);
+        propertycontroller::removeImages($request->input('propertyImageName'), $property);
+        propertycontroller::removefloorPlans($request->input('floorPlanID'), $property);
         
         if($saved)
         {
             if ($request->input('prop_feature'))
             {
-                $this->addFeatures($request->input('prop_feature'), $property);
+                propertycontroller::addFeatures($request->input('prop_feature'), $property);
             }
             if ($request->input('prop_detail'))
             {
-                $this->addDetails($request->input('prop_detail'), $property);
+                propertycontroller::addDetails($request->input('prop_detail'), $property);
             }
             if ($request->file('property_image'))
             {
-                $this->addImages($request->file('property_image'), $property);
+                propertycontroller::addImages($request->file('property_image'), $property);
             }
             if ($request->input('plan_suite_name'))
             {
-                $this->addFloorPlans(
+                propertycontroller::addFloorPlans(
                     $request->file('floor_plan_image'),
                     $request->input('plan_suite_no'),
                     $request->input('plan_suite_name'),
@@ -289,7 +289,7 @@ class PropertyController extends Controller
         ];
     }
 
-    public function saveImage($image)
+    public static function saveImage($image)
     {
         if($image)
         {
@@ -300,7 +300,7 @@ class PropertyController extends Controller
         return '';
     }
 
-    public function addFeatures($features, $property)
+    public static function addFeatures($features, $property)
     {
         foreach($features as $feature) {
 
@@ -312,13 +312,13 @@ class PropertyController extends Controller
             $property->propertyFeatures()->save($propertyFeature);
         }
     }
-    public function removeFeatures($property)
+    public static function removeFeatures($property)
     {
         $property->propertyFeatures()->delete();
         return;
     }
     
-    public function addDetails($details, $property)
+    public static function addDetails($details, $property)
     {
         foreach($details as $detail) {
 
@@ -330,16 +330,16 @@ class PropertyController extends Controller
             $property->propertyDescriptions()->save($propertyDescription);
         }
     }
-    public function removeDetails($property)
+    public static function removeDetails($property)
     {
         $property->propertyDescriptions()->delete();
         return;
     }
 
-    public function addImages($images, $property)
+    public static function addImages($images, $property)
     {
         foreach($images as $image) {
-            $imageName = $this->saveImage($image);
+            $imageName = propertycontroller::saveImage($image);
             $propertyImage = new PropertyImage([
                 'image' => $imageName,
                 'status' => 1
@@ -348,7 +348,7 @@ class PropertyController extends Controller
             $property->propertyImages()->save($propertyImage);
         }
     }
-    public function removeImages($imageNames, $property)
+    public static function removeImages($imageNames, $property)
     {
         $oldImages = $property->propertyImages->pluck('image')->toArray();
         $deletedImages = $imageNames ? array_diff($oldImages, $imageNames) : $oldImages;
@@ -363,13 +363,13 @@ class PropertyController extends Controller
         }
         return;
     }
-    public function addFloorPlans($planImages, $suiteNumbers, $suiteNames, $planSizes, $planBaths, 
+    public static function addFloorPlans($planImages, $suiteNumbers, $suiteNames, $planSizes, $planBaths, 
                                     $planBeds, $planAvailabilities, $planTerraceBalconies, $property)
     {
         $plansCount = count($suiteNames);
         for ($i = 0; $i < $plansCount; $i++) {
 
-            $imageName = $this->saveImage($planImages[$i]);
+            $imageName = propertycontroller::saveImage($planImages[$i]);
             $propertyFloorPlan = new PropertyFloorPlan([
                 'floor_plan_image' => $imageName,
                 'plan_suite_no' => $suiteNumbers[$i],
@@ -384,7 +384,7 @@ class PropertyController extends Controller
             $property->propertyFloorPlans()->save($propertyFloorPlan);
         }
     }
-    public function removeFloorPlans($floorPlanID, $property)
+    public static function removeFloorPlans($floorPlanID, $property)
     {
         $oldFloorPlans = $property->propertyFloorPlans->pluck('id')->toArray();
         $deletedPlans = $floorPlanID ? array_diff($oldFloorPlans, $floorPlanID) : $oldFloorPlans;
