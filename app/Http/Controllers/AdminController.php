@@ -214,11 +214,11 @@ class AdminController extends Controller
     // Property Information
     public function propertyInfo()
     {
-        $cities = City::paginate(5, ['*'], 'city_page');
-        $developments = Development::paginate(5, ['*'], 'development_page');
-        $developers = Developer::paginate(5, ['*'], 'developer_page');
-        $architects = Architect::paginate(5, ['*'], 'architect_page');
-        $interiorDesigners = InteriorDesigner::paginate(5, ['*'], 'interior_designer_page');
+        $cities = City::orderBy('created_at', 'desc')->paginate(5, ['*'], 'city_page');
+        $developments = Development::orderBy('created_at', 'desc')->paginate(5, ['*'], 'development_page');
+        $developers = Developer::orderBy('created_at', 'desc')->paginate(5, ['*'], 'developer_page');
+        $architects = Architect::orderBy('created_at', 'desc')->paginate(5, ['*'], 'architect_page');
+        $interiorDesigners = InteriorDesigner::orderBy('created_at', 'desc')->paginate(5, ['*'], 'interior_designer_page');
 
         return view('admin.property-info', [
             'cities' => $cities, 'developments' => $developments, 'developers' => $developers, 'architects' => $architects,
@@ -302,22 +302,212 @@ class AdminController extends Controller
     //City
     public function storeCity(Request $request)
     {
-        dd($request->all());
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'city_name' => 'required|string|max:255',
+            'city_status' => 'boolean', // Assuming 'city_status' is the checkbox field name.
+        ]);
+
+        // Create a new City instance and set its attributes
+        $city = new City();
+        $city->city_name = $validatedData['city_name'];
+        $city->country_id = 1;
+        $city->status = $request->has('city_status') ? 1 : 0;
+        $saved = $city->save();
+
+        if ($saved) {
+            return redirect()->back()->with('message', 'City added successfully!');
+        }
+        return redirect()->back()->with('message', 'Failed to add city!');
     }
-    public function updateCity(Request $request,$id)
+
+    public function updateCity(Request $request, $id)
     {
-        dd($request->all());
+        // Validate the request data
+        $validatedData = $request->validate([
+            'city_name' => 'required|string|max:255',
+            'status' => 'boolean',
+        ]);
+
+        // Convert the checkbox value from 'on' to '1' if it's checked
+        $validatedData['status'] = $request->has('status') ? 1 : 0;
+
+        // Update the record
+        $saved = City::where('id', $id)->update($validatedData);
+
+        if ($saved) {
+            return redirect()->back()->with('message', 'City updated successfully!');
+        }
+        return redirect()->back()->with('message', 'City update failed!');
     }
 
     //Development
     public function storedevelopment(Request $request)
     {
-        dd($request->all());
+
+
+            // Validate the request data
+            $validatedData = $request->validate([
+                'development_name' => 'required|string|max:255',
+                'development_status' => 'boolean',
+            ]);
+
+            // Create a new City instance and set its attributes
+            $development = new Development();
+            $development->development_name = $validatedData['development_name'];
+            $development->status = $request->has('development_status') ? 1 : 0;
+            $saved = $development->save();
+
+            if ($saved) {
+                return redirect()->back()->with('message', 'Development added successfully!');
+            }
+            return redirect()->back()->with('message', 'Failed to add development!');
 
     }
     public function updatedevelopment(Request $request, $id)
     {
-        dd($request->all());
+        // Validate the request data
+        $validatedData = $request->validate([
+            'development_name' => 'required|string|max:255',
+            'status' => 'boolean',
+        ]);
 
+        // Convert the checkbox value from 'on' to '1' if it's checked
+        $validatedData['status'] = $request->has('status') ? 1 : 0;
+
+        // Update the record
+        $saved = Development::where('id', $id)->update($validatedData);
+
+        if ($saved) {
+            return redirect()->back()->with('message', 'Development updated successfully!');
+        }
+        return redirect()->back()->with('message', 'Development update failed!');
+    }
+
+    //Developers
+    public function storedevelopers(Request $request)
+    {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'developer_name' => 'required|string|max:255',
+                'status' => 'boolean',
+            ]);
+
+            // Create a new City instance and set its attributes
+            $developer = new Developer();
+            $developer->developer_name = $validatedData['developer_name'];
+            $developer->status = $request->has('status') ? 1 : 0;
+            $saved = $developer->save();
+
+            if ($saved) {
+                return redirect()->back()->with('message', 'Developer added successfully!');
+            }
+            return redirect()->back()->with('message', 'Failed to add developer!');
+
+    }
+    public function updatedevelopers(Request $request, $id)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'developer_name' => 'required|string|max:255',
+            'status' => 'boolean',
+        ]);
+
+        // Convert the checkbox value from 'on' to '1' if it's checked
+        $validatedData['status'] = $request->has('status') ? 1 : 0;
+
+        // Update the record
+        $saved = Developer::where('id', $id)->update($validatedData);
+
+        if ($saved) {
+            return redirect()->back()->with('message', 'Developer updated successfully!');
+        }
+        return redirect()->back()->with('message', 'Developer update failed!');
+    }
+
+
+    //Architect
+    public function storearchitect(Request $request)
+    {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'architects_name' => 'required|string|max:255',
+                'status' => 'boolean',
+            ]);
+
+            // Create a new City instance and set its attributes
+            $architect = new Architect();
+            $architect->architects_name = $validatedData['architects_name'];
+            $architect->status = $request->has('status') ? 1 : 0;
+            $saved = $architect->save();
+
+            if ($saved) {
+                return redirect()->back()->with('message', 'Architect added successfully!');
+            }
+            return redirect()->back()->with('message', 'Failed to add Architect!');
+
+    }
+    public function updatearchitect(Request $request, $id)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'architects_name' => 'required|string|max:255',
+            'status' => 'boolean',
+        ]);
+
+        // Convert the checkbox value from 'on' to '1' if it's checked
+        $validatedData['status'] = $request->has('status') ? 1 : 0;
+
+        // Update the record
+        $saved = Architect::where('id', $id)->update($validatedData);
+
+        if ($saved) {
+            return redirect()->back()->with('message', 'Architect updated successfully!');
+        }
+        return redirect()->back()->with('message', 'Architect update failed!');
+    }
+
+
+    //Interior Designer
+    public function storeinteriorDesigner(Request $request)
+    {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'interior_designer_name' => 'required|string|max:255',
+                'status' => 'boolean',
+            ]);
+
+            // Create a new City instance and set its attributes
+            $interiorDesigner = new InteriorDesigner();
+            $interiorDesigner->interior_designer_name = $validatedData['interior_designer_name'];
+            $interiorDesigner->status = $request->has('status') ? 1 : 0;
+            $saved = $interiorDesigner->save();
+
+            if ($saved) {
+                return redirect()->back()->with('message', 'Interior Designer added successfully!');
+            }
+            return redirect()->back()->with('message', 'Failed to add interior designer!');
+
+    }
+    public function updateinteriorDesigner(Request $request, $id)
+    {
+        // dd($request->all());
+        // Validate the request data
+        $validatedData = $request->validate([
+            'interior_designer_name' => 'required|string|max:255',
+            'status' => 'boolean',
+        ]);
+
+        // Convert the checkbox value from 'on' to '1' if it's checked
+        $validatedData['status'] = $request->has('status') ? 1 : 0;
+
+        // Update the record
+        $saved = InteriorDesigner::where('id', $id)->update($validatedData);
+
+        if ($saved) {
+            return redirect()->back()->with('message', 'Architect updated successfully!');
+        }
+        return redirect()->back()->with('message', 'Architect update failed!');
     }
 }

@@ -11,6 +11,9 @@ Route::prefix('api')->group(function () {
 
     Route::get('getAllProperties', [ApiController::class, 'getAllProperties'])->name('api.allProperties');
     Route::get('getProperty/{id}', [ApiController::class, 'getProperty'])->name('api.getProperty');
+
+    Route::get('getAllAssignments', [ApiController::class, 'getAllAssignments'])->name('api.allAssignments');
+    Route::get('getAssignment/{id}', [ApiController::class, 'getAssignment'])->name('api.getAssignments');
 });
 
 // Admin Registration
@@ -76,6 +79,27 @@ Route::prefix('secure-zone')->group(function () {
             // City CRUD routes
             Route::post('store', [AdminController::class, 'storedevelopment'])->name('admin.development.store');
             Route::PUT('update/{id}', [AdminController::class, 'updatedevelopment'])->name('admin.development.update');
+        });
+
+        Route::prefix('developers')->group(function () {
+            // Routes within the 'secure-zone/city' group
+            // City CRUD routes
+            Route::post('store', [AdminController::class, 'storedevelopers'])->name('admin.developers.store');
+            Route::PUT('update/{id}', [AdminController::class, 'updatedevelopers'])->name('admin.developers.update');
+        });
+
+        Route::prefix('architect')->group(function () {
+            // Routes within the 'secure-zone/city' group
+            // City CRUD routes
+            Route::post('store', [AdminController::class, 'storearchitect'])->name('admin.architect.store');
+            Route::PUT('update/{id}', [AdminController::class, 'updatearchitect'])->name('admin.architect.update');
+        });
+
+        Route::prefix('interiorDesigner')->group(function () {
+            // Routes within the 'secure-zone/city' group
+            // City CRUD routes
+            Route::post('store', [AdminController::class, 'storeinteriorDesigner'])->name('admin.interiorDesigner.store');
+            Route::PUT('update/{id}', [AdminController::class, 'updateinteriorDesigner'])->name('admin.interiorDesigner.update');
         });
     });
 });

@@ -80,7 +80,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="{{ route('admin.property.view') }}" class="menu-link">
+                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -94,21 +94,21 @@
 
                     <li class="menu-item">
                         <a href="{{ route('admin.property.view') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                            <i class="menu-icon tf-icons bx bxs-city"></i>
                             <div>Property</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
                         <a href="{{ route('admin.assignment.view') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                            <i class="menu-icon tf-icons bx bx-table"></i>
                             <div>Assignment</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
                         <a href="{{ route('admin.rentals.view') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                            <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div>Rental</div>
                         </a>
                     </li>
@@ -154,16 +154,7 @@
                                     <div>Account</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="pages-account-settings-notifications.html" class="menu-link">
-                                    <div>Notifications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="pages-account-settings-connections.html" class="menu-link">
-                                    <div>Connections</div>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -269,19 +260,6 @@
                         </ul>
                     </div>
                 </nav>
-
-                <!-- / Navbar -->
-                {{-- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                                    class="fas fa-bars"></i></a>
-                        </li>
-                        <li class="nav-item d-none d-sm-inline-block">
-                            <a href="index" class="nav-link">Home</a>
-                        </li>
-                    </ul>
-                </nav> --}}
 
                 @include('components.admin.notificationPrompt')
 
@@ -594,6 +572,7 @@
         //edit architect
         $(".edit-architect-button").click(function() {
             var architectId = $(this).data("architect-id");
+            console.log(architectId);
 
             // Hide the current data and display the input field for editing
             $("#architect-name-" + architectId).hide();
@@ -606,7 +585,8 @@
 
         //edit interiordesigner
         $(".edit-interiorDesigner-button").click(function() {
-            var interiorDesignerId = $(this).data("interiorDesigner-id");
+            var interiorDesignerId = $(this).data("interiordesigner-id");
+            console.log(interiorDesignerId);
 
             // Hide the current data and display the input field for editing
             $("#interiorDesigner-name-" + interiorDesignerId).hide();

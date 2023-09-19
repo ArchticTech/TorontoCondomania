@@ -18,7 +18,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="#" novalidate>
+                                <form method="POST" action="{{ route('admin.city.store') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
@@ -30,18 +31,15 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                            <div class="form-group text-center">
                                                 <label for="city_status col-md-12">Active / Inactive</label><br>
-                                                <input type="checkbox" required id="city_status" name="city_status">
+                                                <input type="checkbox" id="city_status" name="city_status">
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
-
                                             <button type="submit" style="margin-top:1rem;padding: 0.2rem 5rem 0.2rem 5rem;"
-                                                name="add_city_button" class="btn btn-primary ms-auto  me-auto me-sm-2"
-                                                id="add_city_button">Add
+                                                class="btn btn-primary ms-auto  me-auto me-sm-2">Add
                                                 City</button>
-
                                         </div>
 
                                     </div>
@@ -57,12 +55,12 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($cities as $city)
-                                        <form method="POST"
-                                        action="{{ route('admin.city.update', ['id'=>$city->id]) }}">
-                                        @csrf
-                                        @method('put')
+                                            <form method="POST"
+                                                action="{{ route('admin.city.update', ['id' => $city->id]) }}">
+                                                @csrf
+                                                @method('put')
                                                 <tr id="city-row-{{ $city->id }}" style="text-align: center;">
-                                                    <td>{{ $city->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>
                                                         <span
                                                             id="city-name-{{ $city->id }}">{{ $city->city_name }}</span>
@@ -71,7 +69,7 @@
                                                             value="{{ $city->city_name }}" style="display: none;">
                                                     </td>
                                                     <td>
-                                                        <input name="city_status" type="checkbox"
+                                                        <input name="status" type="checkbox" value="1"
                                                             id="edit-city-status-{{ $city->id }}"
                                                             {{ $city->status == 1 ? 'checked' : '' }}>
                                                     </td>
@@ -108,7 +106,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="#" novalidate>
+                                <form method="POST" action="{{ route('admin.development.store') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
@@ -121,19 +120,16 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                            <div class="form-group text-center">
                                                 <label for="development_status col-md-12">Active / Inactive</label><br>
-                                                <input type="checkbox" required id="development_status"
-                                                    name="development_status">
+                                                <input type="checkbox" id="development_status" name="development_status">
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
 
                                             <button type="submit"
                                                 style="margin-top:1rem;padding: 0.2rem 5rem 0.2rem 5rem;"
-                                                name="add_development_button"
-                                                class="btn btn-primary ms-auto  me-auto me-sm-2"
-                                                id="add_development_button">Add Development</button>
+                                                class="btn btn-primary ms-auto  me-auto me-sm-2">Add Development</button>
 
                                         </div>
                                     </div>
@@ -155,7 +151,7 @@
                                                 @method('put')
                                                 <tr id="development-row-{{ $development->id }}"
                                                     style="text-align: center;">
-                                                    <td>{{ $development->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>
                                                         <span
                                                             id="development-name-{{ $development->id }}">{{ $development->development_name }}</span>
@@ -166,7 +162,7 @@
                                                             style="display: none;">
                                                     </td>
                                                     <td>
-                                                        <input name="development_status" type="checkbox"
+                                                        <input name="status" type="checkbox" value="1"
                                                             {{ $development->status == 1 ? 'checked' : '' }}>
                                                     </td>
                                                     <td>
@@ -206,7 +202,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="../../flaski" novalidate>
+                                <form method="POST" action="{{ route('admin.developers.store') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
@@ -219,19 +216,16 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                            <div class="form-group text-center">
                                                 <label for="developer_status col-md-12">Active / Inactive</label><br>
-                                                <input type="checkbox" required id="developer_status"
-                                                    name="developer_status">
+                                                <input type="checkbox" id="developer_status" name="status">
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
 
                                             <button type="submit"
                                                 style="margin-top:1rem;padding: 0.2rem 5rem 0.2rem 5rem;"
-                                                name="add_developer_button"
-                                                class="btn btn-primary ms-auto  me-auto me-sm-2"
-                                                id="add_developer_button">Add Developer</button>
+                                                class="btn btn-primary ms-auto  me-auto me-sm-2">Add Developer</button>
 
                                         </div>
                                     </div>
@@ -246,10 +240,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <form action="#">
-                                            @foreach ($developers as $developer)
+
+                                        @foreach ($developers as $developer)
+                                            <form method="POST"
+                                                action="{{ route('admin.developers.update', ['id' => $developer->id]) }}">
+                                                @csrf
+                                                @method('put')
                                                 <tr style="text-align: center;">
-                                                    <td>{{ $developer->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>
                                                         <span
                                                             id="developer-name-{{ $developer->id }}">{{ $developer->developer_name }}</span>
@@ -259,7 +257,7 @@
                                                             style="display: none;">
                                                     </td>
                                                     <td>
-                                                        <input name="developer_status" type="checkbox"
+                                                        <input name="status" type="checkbox" value="1"
                                                             {{ $developer->status == 1 ? 'checked' : '' }}>
                                                     </td>
                                                     <td>
@@ -268,7 +266,7 @@
                                                             data-developer-id="{{ $developer->id }}">
                                                             <i class="bx bxs-edit"></i>
                                                         </button>
-                                                        <button type="button"
+                                                        <button type="submit"
                                                             class="btn btn-success btn-sm save-developer-button"
                                                             data-developer-id="{{ $developer->id }}"
                                                             style="display: none;">
@@ -276,8 +274,9 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-                                            @endforeach
-                                        </form>
+                                            </form>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                                 <!-- Display Pagination Links -->
@@ -296,7 +295,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="../../flaski" novalidate>
+                                <form method="POST" action="{{ route('admin.architect.store') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
@@ -309,19 +309,16 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                            <div class="form-group text-center">
                                                 <label for="architects_status col-md-12">Active / Inactive</label><br>
-                                                <input type="checkbox" required id="architects_status"
-                                                    name="architects_status">
+                                                <input type="checkbox" id="architects_status" name="status">
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
 
                                             <button type="submit"
                                                 style="margin-top:1rem;padding: 0.2rem 5rem 0.2rem 5rem;"
-                                                name="add_architects_button"
-                                                class="btn btn-primary ms-auto  me-auto me-sm-2"
-                                                id="add_architects_button">Add Architect</button>
+                                                class="btn btn-primary ms-auto  me-auto me-sm-2">Add Architect</button>
 
                                         </div>
                                     </div>
@@ -336,20 +333,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <form action="#">
-                                            @foreach ($architects as $architect)
+
+                                        @foreach ($architects as $architect)
+                                            <form method="POST"
+                                                action="{{ route('admin.architect.update', ['id' => $architect->id]) }}">
+                                                @csrf
+                                                @method('put')
                                                 <tr style="text-align: center;">
-                                                    <td>{{ $architect->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>
                                                         <span
                                                             id="architect-name-{{ $architect->id }}">{{ $architect->architects_name }}</span>
-                                                        <input type="text" class="form-control" name="architect_name"
+                                                        <input type="text" class="form-control" name="architects_name"
                                                             id="edit-architect-name-{{ $architect->id }}"
                                                             value="{{ $architect->architects_name }}"
                                                             style="display: none;">
                                                     </td>
                                                     <td>
-                                                        <input name="architect_status" type="checkbox"
+                                                        <input name="status" type="checkbox" value="1"
                                                             {{ $architect->status == 1 ? 'checked' : '' }}>
                                                     </td>
                                                     <td>
@@ -358,7 +359,7 @@
                                                             data-architect-id="{{ $architect->id }}">
                                                             <i class="bx bxs-edit"></i>
                                                         </button>
-                                                        <button type="button"
+                                                        <button type="submit"
                                                             class="btn btn-success btn-sm save-architect-button"
                                                             data-architect-id="{{ $architect->id }}"
                                                             style="display: none;">
@@ -366,8 +367,8 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-                                            @endforeach
-                                        </form>
+                                            </form>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <!-- Display Pagination Links -->
@@ -389,7 +390,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="#" novalidate>
+                                <form method="POST" action="{{ route('admin.interiorDesigner.store') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
@@ -402,11 +404,10 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                            <div class="form-group text-center">
                                                 <label for="interior_designer_status col-md-12">Active /
                                                     Inactive</label><br>
-                                                <input type="checkbox" required id="interior_designer_status"
-                                                    name="interior_designer_status">
+                                                <input type="checkbox" id="status" name="interior_designer_status">
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -431,31 +432,34 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($interiorDesigners as $interiorDesigner)
-                                            <form action="">
+                                            <form method="POST"
+                                                action="{{ route('admin.interiorDesigner.update', ['id' => $architect->id]) }}">
+                                                @csrf
+                                                @method('put')
                                                 <tr style="text-align: center;">
-                                                    <td>{{ $interiorDesigner->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>
                                                         <span
                                                             id="interiorDesigner-name-{{ $interiorDesigner->id }}">{{ $interiorDesigner->interior_designer_name }}</span>
                                                         <input type="text" class="form-control"
-                                                            name="interiorDesigner_name"
+                                                            name="interior_designer_name"
                                                             id="edit-interiorDesigner-name-{{ $interiorDesigner->id }}"
                                                             value="{{ $interiorDesigner->interior_designer_name }}"
                                                             style="display: none;">
                                                     </td>
                                                     <td>
-                                                        <input name="interiorDesigner_status" type="checkbox"
+                                                        <input name="status" type="checkbox" value="1"
                                                             {{ $interiorDesigner->status == 1 ? 'checked' : '' }}>
                                                     </td>
                                                     <td>
                                                         <button type="button"
                                                             class="btn btn-primary btn-sm edit-interiorDesigner-button"
-                                                            data-interiorDesigner-id="{{ $interiorDesigner->id }}">
+                                                            data-interiordesigner-id="{{ $interiorDesigner->id }}">
                                                             <i class="bx bxs-edit"></i>
                                                         </button>
-                                                        <button type="button"
+                                                        <button type="submit"
                                                             class="btn btn-success btn-sm save-interiorDesigner-button"
-                                                            data-interiorDesigner-id="{{ $interiorDesigner->id }}"
+                                                            data-interiordesigner-id="{{ $interiorDesigner->id }}"
                                                             style="display: none;">
                                                             <i class="bx bx-check"></i>
                                                         </button>
