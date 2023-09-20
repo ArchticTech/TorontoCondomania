@@ -360,8 +360,10 @@
                                         <div class="col-md-12 mb-3 mt-3">
                                             <div class="form-group">
                                                 <label for="prop_iframe">Property Location Iframe</label>
-                                                <textarea name="prop_iframe" required placeholder="Property Location Iframe" id="prop_iframe" rows="5"
-                                                    class="form-control"></textarea>
+                                                <input type="text" id="addressInput" placeholder="Enter an address">
+                                                <div id="geocodeButton">Geocode</div>
+                                                <div id="recommendations"></div>
+                                                <div id="mapbox" style="width: 100%; height: 400px;"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3">

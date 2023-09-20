@@ -31,7 +31,6 @@
         class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}"
         class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
@@ -47,7 +46,11 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
+    
     <script src="https://cdn.tiny.cloud/1/cxub8byx9xbvcwbawottw3z5tmbe225szfibji06em9yh3mu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -59,15 +62,13 @@
             <!-- Menu -->
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-                <div class="app-brand demo">
-                    <a href="#" class="app-brand-link">
+                <div class="app-brand demo px-0">
+                    <a href="#" class="app-brand-link p-3">
                         <span class="app-brand-logo demo">
-                            <div>
-                                <img src="{{ asset('admin/assets/img/logo.png') }}" style="width: 70px; height: 70px;"
-                                    class="p-1" />
-                            </div>
+                            <img src="{{ asset('admin/assets/img/logo.png') }}" style="width: auto; height: 53px;"
+                                class="p-1" />
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">TCM</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Toronto Condomania</span>
                     </a>
 
                     <a href="javascript:void(0);"
@@ -81,7 +82,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="{{route('admin.property.view')}}" class="menu-link">
+                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -94,47 +95,47 @@
                     <!-- Main pages -->
 
                     <li class="menu-item">
-                        <a  href="{{route('admin.property.view')}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                        <a href="{{ route('admin.property.view') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bxs-city"></i>
                             <div>Property</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.assignment.view')}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                        <a href="{{ route('admin.assignment.view') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
                             <div>Assignment</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.rentals.view')}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx bx-building-house"></i>
+                        <a href="{{ route('admin.rentals.view') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div>Rental</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.consultingForm')}}" class="menu-link ">
+                        <a href="{{ route('admin.consultingForm') }}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-user-voice"></i>
                             <div data-i18n="Layouts">Consulting Form</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{route('admin.subscriptionForm')}}" class="menu-link">
+                        <a href="{{ route('admin.subscriptionForm') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
                             <div data-i18n="Layouts">Subscription Form</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link ">
+                        <a href="" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div data-i18n="Layouts">Reserved Floor Plans</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link ">
+                        <a href="{{ route('admin.propertyInfo') }}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bxs-building-house"></i>
                             <div data-i18n="Layouts">Property Information</div>
                         </a>
@@ -145,7 +146,7 @@
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <a href="" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-dock-top"></i>
                             <div>Account Settings</div>
                         </a>
@@ -155,16 +156,7 @@
                                     <div>Account</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="pages-account-settings-notifications.html" class="menu-link">
-                                    <div>Notifications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="pages-account-settings-connections.html" class="menu-link">
-                                    <div>Connections</div>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -176,7 +168,7 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl 
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl
                 navbar-detached align-items-center bg-navbar-theme mb-4"
                     id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -199,8 +191,8 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
                             <li class="nav-item lh-1 me-3">
-                                <a style="background-color: #eee; color: #333; padding: 7px 21px; border-radius: 7px;" 
-                                href="{{route('home')}}">Visit Website</a>
+                                <a style="background-color: #eee; color: #333; padding: 7px 21px; border-radius: 7px;"
+                                    href="{{ route('home') }}">Visit Website</a>
                             </li>
 
                             <!-- User -->
@@ -258,8 +250,8 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{route('admin.logout')}}"
-                                        style="color: rgba(167, 0, 0, 0.644);">
+                                        <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                                            style="color: rgba(167, 0, 0, 0.644);">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -270,19 +262,6 @@
                         </ul>
                     </div>
                 </nav>
-
-                <!-- / Navbar -->
-                {{-- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                                    class="fas fa-bars"></i></a>
-                        </li>
-                        <li class="nav-item d-none d-sm-inline-block">
-                            <a href="index" class="nav-link">Home</a>
-                        </li>
-                    </ul>
-                </nav> --}}
 
                 @include('components.admin.notificationPrompt')
 
@@ -362,26 +341,10 @@
     content_css: '//www.tiny.cloud/css/codepen.min.css'
 });
 </script>
-
-<script>
-    const map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: initialLatitude, lng: initialLongitude },
-        zoom: 15,
-    });
-
-    const latitudeInput = document.getElementById('latitude');
-    const longitudeInput = document.getElementById('longitude');
-
-    map.addListener('click', (event) => {
-        const latLng = event.latLng;
-        latitudeInput.value = latLng.lat();
-        longitudeInput.value = latLng.lng();
-    });
-</script>
 <script>
     @if (isset($features))
-        var i = {{count($features)}} + 1;
-    @else 
+        var i = {{ count($features) }} + 1;
+    @else
         var i = 1;
     @endif
     $("#add_property_feature").click(function() {
@@ -404,8 +367,8 @@
     });
 
     @if (isset($details))
-        var j = {{count($details)}} + 1;
-    @else 
+        var j = {{ count($details) }} + 1;
+    @else
         var j = 1;
     @endif
     $("#add_property_detail").click(function() {
@@ -428,8 +391,8 @@
     });
 
     @if (isset($images))
-        var k = {{count($images)}} + 1;
-    @else 
+        var k = {{ count($images) }} + 1;
+    @else
         var k = 1;
     @endif
     $("#add_property_image").click(function() {
@@ -451,14 +414,15 @@
     });
 
     @if (isset($images))
-        var l = {{count($images)}} + 1;
-    @else 
+        var l = {{ count($images) }} + 1;
+    @else
         var l = 1;
     @endif
     $("#add_property_floor_plan").click(function() {
         $('#property_floor_plan_image_row').append('\
             <div class="row" id="property_floor_plan_row' + l + '">\
-                <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan ' + l + '</h5></div>\
+                <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan ' + l +
+            '</h5></div>\
                 <div class="col-xl-3 col-md-8 my-3">\
                     <div class="form-group">\
                         <label for="property_floor_plan">Floor Plan Image</label>\
@@ -517,7 +481,7 @@
                     </div>\
                 </div>\
                 <button type="button" style="padding: 7px; width:130px; margin: 10px auto" name="btn_remove_property_floor_plan" id="' +
-                        l + '" class="btn btn-xs btn-danger btn_remove_property_floor_plan "><i class="bx bxs-trash"></i></button>\
+            l + '" class="btn btn-xs btn-danger btn_remove_property_floor_plan "><i class="bx bxs-trash"></i></button>\
                 <div class="col-md-12 my-2"><hr></div>\
             </div>\
         ');
@@ -530,8 +494,8 @@
     });
 
     @if (isset($rentalFeatures))
-        var y = {{count($rentalFeatures)}} + 1;
-    @else 
+        var y = {{ count($rentalFeatures) }} + 1;
+    @else
         var y = 1;
     @endif
     $("#add_rent_feature").click(function() {
@@ -549,8 +513,8 @@
     });
 
     @if (isset($rentalImages))
-        var z = {{count($rentalImages)}} + 1;
-    @else 
+        var z = {{ count($rentalImages) }} + 1;
+    @else
         var z = 1;
     @endif
     $("#add_rental_image").click(function() {
@@ -565,7 +529,189 @@
             </div>');
         z++;
     });
+</script>
 
+<script>
+    $(document).ready(function() {
+        $(".edit_cityBtn").click(function() {
+            var cityId = $(this).data("city-id");
+
+            // Hide the current data and display the input field for editing
+            $("#city-name-" + cityId).hide();
+            $("#edit-city-name-" + cityId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save_cityBtn[data-city-id='" + cityId + "']").show();
+        });
+
+        //edit development
+        $(".edit-development-button").click(function() {
+            var developmentId = $(this).data("development-id");
+
+            // Hide the current data and display the input field for editing
+            $("#development-name-" + developmentId).hide();
+            $("#edit-development-name-" + developmentId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-development-button[data-development-id='" + developmentId + "']").show();
+        });
+
+        //edit developer
+        $(".edit-developer-button").click(function() {
+            var developerId = $(this).data("developer-id");
+
+            // Hide the current data and display the input field for editing
+            $("#developer-name-" + developerId).hide();
+            $("#edit-developer-name-" + developerId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-developer-button[data-developer-id='" + developerId + "']").show();
+        });
+
+        //edit architect
+        $(".edit-architect-button").click(function() {
+            var architectId = $(this).data("architect-id");
+            console.log(architectId);
+
+            // Hide the current data and display the input field for editing
+            $("#architect-name-" + architectId).hide();
+            $("#edit-architect-name-" + architectId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-architect-button[data-architect-id='" + architectId + "']").show();
+        });
+
+        //edit interiordesigner
+        $(".edit-interiorDesigner-button").click(function() {
+            var interiorDesignerId = $(this).data("interiordesigner-id");
+            console.log(interiorDesignerId);
+
+            // Hide the current data and display the input field for editing
+            $("#interiorDesigner-name-" + interiorDesignerId).hide();
+            $("#edit-interiorDesigner-name-" + interiorDesignerId).show();
+
+            // Hide the "Edit" button and display the "Save" button
+            $(this).hide();
+            $(".save-interiorDesigner-button[data-interiorDesigner-id='" + interiorDesignerId + "']")
+                .show();
+        });
+
+        // $(".save-button").click(function () {
+        //     var cityId = $(this).data("city-id");
+
+        //     // Update the data (You may need an AJAX request here to save the changes)
+        //     var updatedValue = $("#edit-city-name-" + cityId).val();
+        //     // Perform an AJAX request to update the data in the database
+        //     // ...
+
+        //     // Update the displayed data and toggle visibility
+        //     $("#city-name-" + cityId).text(updatedValue).show();
+        //     $("#edit-city-name-" + cityId).hide();
+
+        //     // Hide the "Save" button and display the "Edit" button
+        //     $(this).hide();
+        //     $(".edit-button[data-city-id='" + cityId + "']").show();
+        // });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Define a MapApp object to encapsulate map-related functionality
+        const MapApp = {
+            map: null,
+            marker: null,
+            recommendations: null,
+
+            init: function () {
+                mapboxgl.accessToken = 'pk.eyJ1IjoiaHV6YWlmYTUzIiwiYSI6ImNsbXJmOW1iOTA3Nm4ybHFtN2V0bHV0dG8ifQ.9a5LJmvzUyGGCH1Av-TKbA';
+
+                this.map = new mapboxgl.Map({
+                    container: 'mapbox', // Container ID
+                    style: 'mapbox://styles/mapbox/streets-v11', // Map style URL
+                    center: [-80.042869, 43.718371],
+                    zoom: 7
+                });
+
+                this.map.addControl(new mapboxgl.NavigationControl());
+
+                this.recommendations = $('#recommendations');
+                this.setupEventHandlers();
+            },
+
+            setupEventHandlers: function () {
+                const self = this;
+                const addressInput = $('#addressInput');
+                const geocodeButton = $('#geocodeButton');
+
+                geocodeButton.click(function () {
+                    const address = addressInput.val();
+
+                    // Perform geocoding using Mapbox Geocoding API
+                    $.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${mapboxgl.accessToken}`,
+                        function (data) {
+                            const result = data.features;
+
+                            if (result) {
+                                self.recommendations.empty();
+                                // Display the result
+                                $.each(result, function (index, location) {
+                                    self.recommendations.append(`<p class="selectedRecommendation"
+                                        data-lat="${location.center[1]}" data-long="${location.center[0]}">
+                                        ${location.place_name}</p>`);
+                                });
+                            } else {
+                                // Handle no results found
+                                self.recommendations.html('No results found.');
+                            }
+                        }
+                    ).fail(function (error) {
+                        console.error('Error:', error);
+                        self.recommendations.html('An error occurred.');
+                    });
+                });
+
+                this.map.on('load', function () {
+                    // Use event delegation for click events on dynamic elements
+                    self.recommendations.on('click', '.selectedRecommendation', function (event) {
+                        const selectedRecommendation = $(event.currentTarget);
+                        self.selectLocationOnMap(selectedRecommendation);
+                    });
+                });
+            },
+
+            selectLocationOnMap: function (selectedRecommendation) {
+                const lat = $(selectedRecommendation).data('lat');
+                const long = $(selectedRecommendation).data('long');
+
+                if (this.marker) {
+                    this.marker.remove();
+                }
+
+                this.marker = new mapboxgl.Marker({
+                    color: '#6449e7', // Marker color
+                    draggable: true, // Allow the user to drag the marker
+                })
+                .setLngLat([long, lat])
+                .addTo(this.map);
+
+                this.recommendations.empty();
+
+                this.map.flyTo({
+                    center: [long, lat], // Marker's coordinates
+                    zoom: 14,     // Desired zoom level
+                    essential: true      // Set to true for smooth animation
+                });
+            }
+        };
+
+        // Initialize the MapApp object
+        MapApp.init();
+    });
 </script>
 
 </html>
