@@ -30,7 +30,7 @@ class BriefPropertyResource extends JsonResource
             'baths' => $this->no_of_baths,
             'price_from' => $this->prop_price_from,
             'price_to' => $this->prop_price_to,
-            'agent' => $this->property_agent->agent_name,
+            'agent' => BriefAgentResource::make($this->property_agent),
         ];
     }
 }
