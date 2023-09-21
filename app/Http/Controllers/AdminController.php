@@ -338,24 +338,22 @@ class AdminController extends Controller
     //Development
     public function storedevelopment(Request $request)
     {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'development_name' => 'required|string|max:255',
+            'development_status' => 'boolean',
+        ]);
 
+        // Create a new City instance and set its attributes
+        $development = new Development();
+        $development->development_name = $validatedData['development_name'];
+        $development->status = $request->has('development_status') ? 1 : 0;
+        $saved = $development->save();
 
-            // Validate the request data
-            $validatedData = $request->validate([
-                'development_name' => 'required|string|max:255',
-                'development_status' => 'boolean',
-            ]);
-
-            // Create a new City instance and set its attributes
-            $development = new Development();
-            $development->development_name = $validatedData['development_name'];
-            $development->status = $request->has('development_status') ? 1 : 0;
-            $saved = $development->save();
-
-            if ($saved) {
-                return redirect()->back()->with('message', 'Development added successfully!');
-            }
-            return redirect()->back()->with('message', 'Failed to add development!');
+        if ($saved) {
+            return redirect()->back()->with('message', 'Development added successfully!');
+        }
+        return redirect()->back()->with('message', 'Failed to add development!');
 
     }
     public function updatedevelopment(Request $request, $id)

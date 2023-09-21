@@ -400,7 +400,12 @@
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_iframe">Property Location Iframe</label>
-                                            <textarea name="prop_iframe" required id="prop_iframe" rows="5" class="form-control"> {{ $property->prop_iframe }}</textarea>
+                                            <input type="text" id="addressInput" placeholder="Enter an address">
+                                            <button id="geocodeButton">Geocode</button>
+                                            <div id="recommendations"></div>
+                                            <div id="mapbox" style="width: 100%; height: 400px;"></div>
+                                            <input type="hidden" id="latInput" name="latitude" value="{{ $property->latitude }}">
+                                            <input type="hidden" id="longInput" name="longitude" value="{{ $property->longitude }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">

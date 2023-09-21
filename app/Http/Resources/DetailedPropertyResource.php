@@ -25,6 +25,8 @@ class DetailedPropertyResource extends JsonResource
             'description' => $this->description,
             'type' => $this->prop_type,
             'address' => $this->prop_address,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
             'status' => $this->prop_status,
             'stories' => $this->no_of_stories,
             'suites' => $this->no_of_suites,

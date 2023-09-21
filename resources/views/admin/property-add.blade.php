@@ -361,9 +361,11 @@
                                             <div class="form-group">
                                                 <label for="prop_iframe">Property Location Iframe</label>
                                                 <input type="text" id="addressInput" placeholder="Enter an address">
-                                                <div id="geocodeButton">Geocode</div>
+                                                <button id="geocodeButton">Geocode</button>
                                                 <div id="recommendations"></div>
                                                 <div id="mapbox" style="width: 100%; height: 400px;"></div>
+                                                <input type="hidden" id="latInput" name="latitude">
+                                                <input type="hidden" id="longInput" name="longitude">
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3 mt-3">

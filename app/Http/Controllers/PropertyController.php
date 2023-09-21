@@ -42,8 +42,11 @@ class PropertyController extends Controller
         $architects_id = $request->input('architects_id');
         $interior_designer_id = $request->input('interior_designer_id');
         $prop_agent_id = $request->input('prop_agent_id');
+
         $prop_address = $request->input('prop_address');
-        $prop_iframe = $request->input('prop_iframe');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+
         $prop_type = $request->input('prop_type');
         $prop_status = $request->input('prop_status');
         $no_of_stories = $request->input('no_of_stories');
@@ -95,7 +98,8 @@ class PropertyController extends Controller
             'interior_designer_id' => $interior_designer_id,
             'prop_agent_id' => $prop_agent_id,
             'prop_address' => $prop_address,
-            'prop_iframe' => $prop_iframe,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
             'prop_type' => $prop_type,
             'prop_status' => $prop_status,
             'no_of_stories' => $no_of_stories,
@@ -198,8 +202,11 @@ class PropertyController extends Controller
         $property->architects_id = $request->input('architects_id');
         $property->interior_designer_id = $request->input('interior_designer_id');
         $property->prop_agent_id = $request->input('prop_agent_id');
+
         $property->prop_address = $request->input('prop_address');
-        $property->prop_iframe = $request->input('prop_iframe');
+        $property->latitude = $request->input('latitude');
+        $property->longitude = $request->input('longitude');
+
         $property->prop_type = $request->input('prop_type');
         $property->prop_status = $request->input('prop_status');
         $property->no_of_stories = $request->input('no_of_stories');

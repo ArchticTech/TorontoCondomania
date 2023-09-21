@@ -626,6 +626,8 @@
             map: null,
             marker: null,
             recommendations: null,
+            latInput: null,
+            longInput: null,
 
             init: function () {
                 mapboxgl.accessToken = 'pk.eyJ1IjoiaHV6YWlmYTUzIiwiYSI6ImNsbXJmOW1iOTA3Nm4ybHFtN2V0bHV0dG8ifQ.9a5LJmvzUyGGCH1Av-TKbA';
@@ -640,13 +642,33 @@
                 this.map.addControl(new mapboxgl.NavigationControl());
 
                 this.recommendations = $('#recommendations');
+                
+                this.setInitialLocation();
                 this.setupEventHandlers();
+
+            },
+            
+            setInitialLocation: function () {
+                this.latInput = $('#latInput');
+                this.longInput = $('#longInput');
+
+                const lat = this.latInput.val();
+                const long = this.longInput.val();
+                
+                if(lat != "" && long != "")
+                {
+                    this.setMarker(lat, long);
+                }
             },
 
             setupEventHandlers: function () {
                 const self = this;
                 const addressInput = $('#addressInput');
                 const geocodeButton = $('#geocodeButton');
+
+                geocodeButton.click(function(event) {
+                    event.preventDefault();
+                });
 
                 geocodeButton.click(function () {
                     const address = addressInput.val();
@@ -679,14 +701,18 @@
                     // Use event delegation for click events on dynamic elements
                     self.recommendations.on('click', '.selectedRecommendation', function (event) {
                         const selectedRecommendation = $(event.currentTarget);
-                        self.selectLocationOnMap(selectedRecommendation);
+                        const lat = $(selectedRecommendation).data('lat');
+                        const long = $(selectedRecommendation).data('long');
+
+                        self.selectLocationOnMap(lat, long);
                     });
                 });
             },
 
-            selectLocationOnMap: function (selectedRecommendation) {
-                const lat = $(selectedRecommendation).data('lat');
-                const long = $(selectedRecommendation).data('long');
+            setMarker: function (lat, long) {
+                
+                this.latInput.val(lat);
+                this.longInput.val(long);
 
                 if (this.marker) {
                     this.marker.remove();
@@ -706,7 +732,19 @@
                     zoom: 14,     // Desired zoom level
                     essential: true      // Set to true for smooth animation
                 });
-            }
+                this.marker.on('dragend', this.updateMarkerCoordinates.bind(this));
+            },
+            
+            updateMarkerCoordinates: function () {
+                const updatedLngLat = this.marker.getLngLat();
+
+                // Access the latitude and longitude
+                const lat = updatedLngLat.lat;
+                const long = updatedLngLat.lng;
+
+                this.latInput.val(lat);
+                this.longInput.val(long);
+            },
         };
 
         // Initialize the MapApp object

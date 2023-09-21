@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDescriptionToPropertyTable extends Migration
+class AddLatLongToPropertyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddDescriptionToPropertyTable extends Migration
     public function up()
     {
         Schema::table('property', function (Blueprint $table) {
-            $table->text('description')->nullable()->after('prop_image');
+            $table->decimal('latitude', 10, 8)->nullable()->after('prop_address');
+            $table->decimal('longitude', 11, 8)->nullable()->after('latitude');
+            $table->dropColumn('prop_iframe');
         });
     }
 
@@ -26,7 +28,9 @@ class AddDescriptionToPropertyTable extends Migration
     public function down()
     {
         Schema::table('property', function (Blueprint $table) {
-            $table->dropColumn('description');
+            $table->dropColumn('latitude');
+            $table->dropColumn('longitude');
+            $table->text('prop_iframe');
         });
     }
 }
