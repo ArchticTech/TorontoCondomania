@@ -20,6 +20,8 @@ class BriefPropertyResource extends JsonResource
             'image' => $this->prop_image,
             'type' => $this->prop_type,
             'address' => $this->prop_address,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
             'status' => $this->prop_status,
             'est_occupancy_year' => $this->est_occupancy_year,
             'vip_featured_promotion' => $this->vip_featured_promotion,

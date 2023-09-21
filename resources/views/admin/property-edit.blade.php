@@ -385,6 +385,13 @@
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
+                                            <label for="prop_description">Property Description</label>
+                                            <textarea name="prop_description" id="prop_description" rows="5"
+                                                class="form-control tinymce-editor">{{ $property->description }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3 mt-3">
+                                        <div class="form-group">
                                             <label for="prop_address">Property Address</label>
                                             <input type="text" required class="form-control" id="prop_address"
                                                 name="prop_address" value="{{ $property->prop_address }}">
@@ -393,7 +400,12 @@
                                     <div class="col-md-12 mb-3 mt-3">
                                         <div class="form-group">
                                             <label for="prop_iframe">Property Location Iframe</label>
-                                            <textarea name="prop_iframe" required id="prop_iframe" rows="5" class="form-control"> {{ $property->prop_iframe }}</textarea>
+                                            <input type="text" id="addressInput" placeholder="Enter an address">
+                                            <button id="geocodeButton">Geocode</button>
+                                            <div id="recommendations"></div>
+                                            <div id="mapbox" style="width: 100%; height: 400px;"></div>
+                                            <input type="hidden" id="latInput" name="latitude" value="{{ $property->latitude }}">
+                                            <input type="hidden" id="longInput" name="longitude" value="{{ $property->longitude }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">
@@ -447,33 +459,6 @@
                                         <button type="button" name="add_property_feature"
                                             style="float: right;padding: 6px 21px;"
                                             id="add_property_feature" class="btn btn-xs btn-success mt-3"><i
-                                                class="bx bx-plus"></i></button>
-                                    </div>
-                                    <div class="col-md-12 mb-3 mt-3">
-                                        <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
-                                            Property Description</p>
-                                        <table class="table table-bordered table-hover" id="property_detail_table">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center;">Property
-                                                        Description</th>
-                                                    <th style="text-align: center;">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="property_detail_tbody">
-                                                @foreach ($details as $detail)
-                                                    <tr id="row{{ $loop->iteration }}">
-                                                        <td><input type="text" placeholder="Property Detail" name="prop_detail[]" class="form-control prop_detail" value="{{ $detail->prop_description }}"/></td>
-                                                        <td style="text-align: center;">
-                                                            <button type="button" style="padding: 6px 10px 6px 10px;" name="btn_remove_prop_detail" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger btn_remove_prop_detail"><i class="bx bxs-trash"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <button type="button" name="add_property_detail"
-                                            style="float: right;padding: 6px 21px;"
-                                            id="add_property_detail" class="btn btn-xs btn-success mt-3"><i
                                                 class="bx bx-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 mb-3 mt-3">

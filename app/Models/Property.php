@@ -12,6 +12,7 @@ class Property extends Model
         'prop_code',
         'prop_name',
         'prop_image',
+        'description',
         'city_id',
         'development_id',
         'developer_id',
@@ -19,7 +20,8 @@ class Property extends Model
         'interior_designer_id',
         'prop_agent_id',
         'prop_address',
-        'prop_iframe',
+        'latitude',
+        'longitude',
         'prop_meta_title',
         'prop_meta_description',
         'prop_meta_keywords',
@@ -85,10 +87,6 @@ class Property extends Model
     public function propertyFeatures()
     {
         return $this->hasMany(PropertyFeature::class);
-    }
-    public function propertyDescriptions()
-    {
-        return $this->hasMany(PropertyDescription::class);
     }
     public function propertyImages()
     {

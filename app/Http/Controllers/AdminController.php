@@ -15,7 +15,6 @@ use App\Models\Country;
 use App\Models\Property;
 use App\Models\User;
 
-
 class AdminController extends Controller
 {
     private function getFormData()
@@ -73,13 +72,12 @@ class AdminController extends Controller
         $data = $this->getFormData();
 
         $data['property'] = PropertyController::get($id);
-
-        if (!$data['property'])
+        
+        if(!$data['property'])
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Not Found!');
-
+        
         $data['features'] = $data['property']->propertyFeatures;
-        $data['details'] = $data['property']->propertyDescriptions;
         $data['images'] = $data['property']->propertyImages;
         $data['floorPlans'] = $data['property']->propertyFloorPlans;
 
@@ -92,9 +90,10 @@ class AdminController extends Controller
         if ($result['saved']) {
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Updated Successfully');
-        } else {
-            return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
         }
+        else {
+            return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
+        }   
     }
 
     // Assignments CRUD
@@ -131,12 +130,11 @@ class AdminController extends Controller
 
         $data['assignment'] = AssignmentController::get($id);
 
-        if (!$data['assignment'])
+        if(!$data['assignment'])
             return redirect()->route('admin.assignment.view')
                 ->with('message', 'Assignment Not Found!');
-
+        
         $data['features'] = $data['assignment']->property->propertyFeatures;
-        $data['details'] = $data['assignment']->property->propertyDescriptions;
         $data['images'] = $data['assignment']->property->propertyImages;
         $data['floorPlans'] = $data['assignment']->property->propertyFloorPlans;
 
@@ -149,9 +147,10 @@ class AdminController extends Controller
         if ($assignmentSaved) {
             return redirect()->route('admin.assignment.view')
                 ->with('message', 'Assignment Updated Successfully');
-        } else {
-            return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
         }
+        else {
+            return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
+        }   
     }
 
     public function viewRentals()
@@ -180,17 +179,15 @@ class AdminController extends Controller
     {
         $rental = RentalController::get($id);
 
-        if (!$rental)
+        if(!$rental)
             return redirect()->route('admin.rentals.view')
                 ->with('message', 'Rental Not Found!');
 
         $rentalFeatures = $rental->rentalFeatures;
         $rentalImages = $rental->rentalImages;
 
-        return view('admin.rental-edit', [
-            'rental' => $rental,
-            'rentalFeatures' => $rentalFeatures, 'rentalImages' => $rentalImages
-        ]);
+        return view('admin.rental-edit', ['rental' => $rental, 
+            'rentalFeatures' => $rentalFeatures, 'rentalImages' => $rentalImages]);
     }
     public function updateRental(Request $request, $id)
     {
@@ -202,28 +199,13 @@ class AdminController extends Controller
         } else {
             return redirect()->route('admin.rentals.update')
                 ->with('message', 'Rental Failed to Update!');
-        }
+        } 
     }
 
     // Consulting form
     public function consultingForm()
     {
         return view('admin.consulting-form');
-    }
-
-    // Property Information
-    public function propertyInfo()
-    {
-        $cities = City::orderBy('created_at', 'desc')->paginate(5, ['*'], 'city_page');
-        $developments = Development::orderBy('created_at', 'desc')->paginate(5, ['*'], 'development_page');
-        $developers = Developer::orderBy('created_at', 'desc')->paginate(5, ['*'], 'developer_page');
-        $architects = Architect::orderBy('created_at', 'desc')->paginate(5, ['*'], 'architect_page');
-        $interiorDesigners = InteriorDesigner::orderBy('created_at', 'desc')->paginate(5, ['*'], 'interior_designer_page');
-
-        return view('admin.property-info', [
-            'cities' => $cities, 'developments' => $developments, 'developers' => $developers, 'architects' => $architects,
-            'interiorDesigners' => $interiorDesigners
-        ]);
     }
 
     // Subscription Form
@@ -236,14 +218,15 @@ class AdminController extends Controller
     {
         if (Auth::user() && Auth::user()->isAdmin()) {
             return redirect()->route('admin.dashboard');
-        } else {
+        }
+        else {
             return view('admin.login');
         }
     }
 
-    //Autenticate User
-    public function authenticate(Request $request)
-    {
+     //Autenticate User
+     public function authenticate(Request $request)
+     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -258,16 +241,16 @@ class AdminController extends Controller
             }
         }
         return redirect()->route('admin.login')->with('message', 'Incorrect Email or Password');
-    }
-
+     }
+ 
     //Register Admin
     public function register()
     {
         return view('admin.signup');
     }
-
-    public function store(Request $request)
-    {
+ 
+     public function store(Request $request)
+     {
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
@@ -284,22 +267,32 @@ class AdminController extends Controller
         // auth()->login($user);
 
         return redirect()->route('admin.login')->with('message', 'You are now Registered!');
-    }
-
-    //Logout User
-    public function logout(Request $request)
+     }
+ 
+     //Logout User
+     public function logout(Request $request)
+     {
+         auth()->logout();
+         $request->session()->invalidate();
+         $request->session()->regenerateToken();
+ 
+         return redirect()->route('admin.login')->with('message', 'You have been logged out!');
+     }
+ 
+     // Property Information
+    public function propertyInfo()
     {
-        auth()->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $cities = City::orderBy('created_at', 'desc')->paginate(5, ['*'], 'city_page');
+        $developments = Development::orderBy('created_at', 'desc')->paginate(5, ['*'], 'development_page');
+        $developers = Developer::orderBy('created_at', 'desc')->paginate(5, ['*'], 'developer_page');
+        $architects = Architect::orderBy('created_at', 'desc')->paginate(5, ['*'], 'architect_page');
+        $interiorDesigners = InteriorDesigner::orderBy('created_at', 'desc')->paginate(5, ['*'], 'interior_designer_page');
 
-        return redirect()->route('admin.login')->with('message', 'You have been logged out!');
+        return view('admin.property-info', [
+            'cities' => $cities, 'developments' => $developments, 'developers' => $developers, 'architects' => $architects,
+            'interiorDesigners' => $interiorDesigners
+        ]);
     }
-
-
-    //Property Information
-
-    //City
     public function storeCity(Request $request)
     {
 
@@ -345,24 +338,22 @@ class AdminController extends Controller
     //Development
     public function storedevelopment(Request $request)
     {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'development_name' => 'required|string|max:255',
+            'development_status' => 'boolean',
+        ]);
 
+        // Create a new City instance and set its attributes
+        $development = new Development();
+        $development->development_name = $validatedData['development_name'];
+        $development->status = $request->has('development_status') ? 1 : 0;
+        $saved = $development->save();
 
-            // Validate the request data
-            $validatedData = $request->validate([
-                'development_name' => 'required|string|max:255',
-                'development_status' => 'boolean',
-            ]);
-
-            // Create a new City instance and set its attributes
-            $development = new Development();
-            $development->development_name = $validatedData['development_name'];
-            $development->status = $request->has('development_status') ? 1 : 0;
-            $saved = $development->save();
-
-            if ($saved) {
-                return redirect()->back()->with('message', 'Development added successfully!');
-            }
-            return redirect()->back()->with('message', 'Failed to add development!');
+        if ($saved) {
+            return redirect()->back()->with('message', 'Development added successfully!');
+        }
+        return redirect()->back()->with('message', 'Failed to add development!');
 
     }
     public function updatedevelopment(Request $request, $id)

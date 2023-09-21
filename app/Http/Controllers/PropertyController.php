@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\File;
 use App\Models\Property;
 use App\Models\Assignment;
 use App\Models\PropertyFeature;
-use App\Models\PropertyDescription;
 use App\Models\PropertyImage;
 use App\Models\PropertyFloorPlan;
 
@@ -36,14 +35,18 @@ class PropertyController extends Controller
 
         $prop_code = $request->input('prop_code');
         $prop_name = $request->input('prop_name');
+        $description = $request->input('prop_description');
         $city_id = $request->input('city_id');
         $development_id = $request->input('development_id');
         $developer_id = $request->input('developer_id');
         $architects_id = $request->input('architects_id');
         $interior_designer_id = $request->input('interior_designer_id');
         $prop_agent_id = $request->input('prop_agent_id');
+
         $prop_address = $request->input('prop_address');
-        $prop_iframe = $request->input('prop_iframe');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+
         $prop_type = $request->input('prop_type');
         $prop_status = $request->input('prop_status');
         $no_of_stories = $request->input('no_of_stories');
@@ -87,6 +90,7 @@ class PropertyController extends Controller
             'prop_code' => $prop_code,
             'prop_name' => $prop_name,
             'prop_image' => $prop_imageName,
+            'description' => $description,
             'city_id' => $city_id,
             'development_id' => $development_id,
             'developer_id' => $developer_id,
@@ -94,7 +98,8 @@ class PropertyController extends Controller
             'interior_designer_id' => $interior_designer_id,
             'prop_agent_id' => $prop_agent_id,
             'prop_address' => $prop_address,
-            'prop_iframe' => $prop_iframe,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
             'prop_type' => $prop_type,
             'prop_status' => $prop_status,
             'no_of_stories' => $no_of_stories,
@@ -133,10 +138,6 @@ class PropertyController extends Controller
             if ($request->input('prop_feature'))
             {
                 propertycontroller::addFeatures($request->input('prop_feature'), $property);
-            }
-            if ($request->input('prop_detail'))
-            {
-                propertycontroller::addDetails($request->input('prop_detail'), $property);
             }
             if ($request->file('property_image'))
             {
@@ -194,14 +195,18 @@ class PropertyController extends Controller
         // Update the property attributes with new values
         $property->prop_code = $request->input('prop_code');
         $property->prop_name = $request->input('prop_name');
+        $property->description = $request->input('prop_description');
         $property->city_id = $request->input('city_id');
         $property->development_id = $request->input('development_id');
         $property->developer_id = $request->input('developer_id');
         $property->architects_id = $request->input('architects_id');
         $property->interior_designer_id = $request->input('interior_designer_id');
         $property->prop_agent_id = $request->input('prop_agent_id');
+
         $property->prop_address = $request->input('prop_address');
-        $property->prop_iframe = $request->input('prop_iframe');
+        $property->latitude = $request->input('latitude');
+        $property->longitude = $request->input('longitude');
+
         $property->prop_type = $request->input('prop_type');
         $property->prop_status = $request->input('prop_status');
         $property->no_of_stories = $request->input('no_of_stories');
@@ -250,7 +255,6 @@ class PropertyController extends Controller
         $saved = $property->save();
 
         PropertyController::removeFeatures($property);
-        propertycontroller::removeDetails($property);
         propertycontroller::removeImages($request->input('propertyImageName'), $property);
         propertycontroller::removefloorPlans($request->input('floorPlanID'), $property);
         
@@ -259,10 +263,6 @@ class PropertyController extends Controller
             if ($request->input('prop_feature'))
             {
                 propertycontroller::addFeatures($request->input('prop_feature'), $property);
-            }
-            if ($request->input('prop_detail'))
-            {
-                propertycontroller::addDetails($request->input('prop_detail'), $property);
             }
             if ($request->file('property_image'))
             {
@@ -315,24 +315,6 @@ class PropertyController extends Controller
     public static function removeFeatures($property)
     {
         $property->propertyFeatures()->delete();
-        return;
-    }
-    
-    public static function addDetails($details, $property)
-    {
-        foreach($details as $detail) {
-
-            $propertyDescription = new PropertyDescription([
-                'prop_description' => $detail,
-                'status' => 1
-            ]);
-
-            $property->propertyDescriptions()->save($propertyDescription);
-        }
-    }
-    public static function removeDetails($property)
-    {
-        $property->propertyDescriptions()->delete();
         return;
     }
 

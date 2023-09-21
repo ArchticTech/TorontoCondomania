@@ -31,7 +31,6 @@
         class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}"
         class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
@@ -47,6 +46,11 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
+    
+    <script src="https://cdn.tiny.cloud/1/cxub8byx9xbvcwbawottw3z5tmbe225szfibji06em9yh3mu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -58,15 +62,13 @@
             <!-- Menu -->
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-                <div class="app-brand demo">
-                    <a href="#" class="app-brand-link">
+                <div class="app-brand demo px-0">
+                    <a href="#" class="app-brand-link p-3">
                         <span class="app-brand-logo demo">
-                            <div>
-                                <img src="{{ asset('admin/assets/img/logo.png') }}" style="width: 70px; height: 70px;"
-                                    class="p-1" />
-                            </div>
+                            <img src="{{ asset('admin/assets/img/logo.png') }}" style="width: auto; height: 53px;"
+                                class="p-1" />
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">TCM</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Toronto Condomania</span>
                     </a>
 
                     <a href="javascript:void(0);"
@@ -321,23 +323,23 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
-<script>
-    const map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: initialLatitude,
-            lng: initialLongitude
-        },
-        zoom: 15,
-    });
 
-    const latitudeInput = document.getElementById('latitude');
-    const longitudeInput = document.getElementById('longitude');
-
-    map.addListener('click', (event) => {
-        const latLng = event.latLng;
-        latitudeInput.value = latLng.lat();
-        longitudeInput.value = latLng.lng();
-    });
+<script type="text/javascript">
+    tinymce.init({
+    selector: 'textarea.tinymce-editor',
+    height: 300,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount', 'image'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+    content_css: '//www.tiny.cloud/css/codepen.min.css'
+});
 </script>
 <script>
     @if (isset($features))
@@ -614,6 +616,139 @@
         //     $(this).hide();
         //     $(".edit-button[data-city-id='" + cityId + "']").show();
         // });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Define a MapApp object to encapsulate map-related functionality
+        const MapApp = {
+            map: null,
+            marker: null,
+            recommendations: null,
+            latInput: null,
+            longInput: null,
+
+            init: function () {
+                mapboxgl.accessToken = 'pk.eyJ1IjoiaHV6YWlmYTUzIiwiYSI6ImNsbXJmOW1iOTA3Nm4ybHFtN2V0bHV0dG8ifQ.9a5LJmvzUyGGCH1Av-TKbA';
+
+                this.map = new mapboxgl.Map({
+                    container: 'mapbox', // Container ID
+                    style: 'mapbox://styles/mapbox/streets-v11', // Map style URL
+                    center: [-80.042869, 43.718371],
+                    zoom: 7
+                });
+
+                this.map.addControl(new mapboxgl.NavigationControl());
+
+                this.recommendations = $('#recommendations');
+                
+                this.setInitialLocation();
+                this.setupEventHandlers();
+
+            },
+            
+            setInitialLocation: function () {
+                this.latInput = $('#latInput');
+                this.longInput = $('#longInput');
+
+                const lat = this.latInput.val();
+                const long = this.longInput.val();
+                
+                if(lat != "" && long != "")
+                {
+                    this.setMarker(lat, long);
+                }
+            },
+
+            setupEventHandlers: function () {
+                const self = this;
+                const addressInput = $('#addressInput');
+                const geocodeButton = $('#geocodeButton');
+
+                geocodeButton.click(function(event) {
+                    event.preventDefault();
+                });
+
+                geocodeButton.click(function () {
+                    const address = addressInput.val();
+
+                    // Perform geocoding using Mapbox Geocoding API
+                    $.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${mapboxgl.accessToken}`,
+                        function (data) {
+                            const result = data.features;
+
+                            if (result) {
+                                self.recommendations.empty();
+                                // Display the result
+                                $.each(result, function (index, location) {
+                                    self.recommendations.append(`<p class="selectedRecommendation"
+                                        data-lat="${location.center[1]}" data-long="${location.center[0]}">
+                                        ${location.place_name}</p>`);
+                                });
+                            } else {
+                                // Handle no results found
+                                self.recommendations.html('No results found.');
+                            }
+                        }
+                    ).fail(function (error) {
+                        console.error('Error:', error);
+                        self.recommendations.html('An error occurred.');
+                    });
+                });
+
+                this.map.on('load', function () {
+                    // Use event delegation for click events on dynamic elements
+                    self.recommendations.on('click', '.selectedRecommendation', function (event) {
+                        const selectedRecommendation = $(event.currentTarget);
+                        const lat = $(selectedRecommendation).data('lat');
+                        const long = $(selectedRecommendation).data('long');
+
+                        self.selectLocationOnMap(lat, long);
+                    });
+                });
+            },
+
+            setMarker: function (lat, long) {
+                
+                this.latInput.val(lat);
+                this.longInput.val(long);
+
+                if (this.marker) {
+                    this.marker.remove();
+                }
+
+                this.marker = new mapboxgl.Marker({
+                    color: '#6449e7', // Marker color
+                    draggable: true, // Allow the user to drag the marker
+                })
+                .setLngLat([long, lat])
+                .addTo(this.map);
+
+                this.recommendations.empty();
+
+                this.map.flyTo({
+                    center: [long, lat], // Marker's coordinates
+                    zoom: 14,     // Desired zoom level
+                    essential: true      // Set to true for smooth animation
+                });
+                this.marker.on('dragend', this.updateMarkerCoordinates.bind(this));
+            },
+            
+            updateMarkerCoordinates: function () {
+                const updatedLngLat = this.marker.getLngLat();
+
+                // Access the latitude and longitude
+                const lat = updatedLngLat.lat;
+                const long = updatedLngLat.lng;
+
+                this.latInput.val(lat);
+                this.longInput.val(long);
+            },
+        };
+
+        // Initialize the MapApp object
+        MapApp.init();
     });
 </script>
 
