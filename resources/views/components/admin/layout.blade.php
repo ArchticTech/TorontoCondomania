@@ -704,7 +704,7 @@
                         const lat = $(selectedRecommendation).data('lat');
                         const long = $(selectedRecommendation).data('long');
 
-                        self.selectLocationOnMap(lat, long);
+                        self.setMarker(lat, long);
                     });
                 });
             },
