@@ -13,7 +13,21 @@
                             <div class="card-body">
                                 <form method="POST" id="property_add" enctype="multipart/form-data"
                                     action="{{ route('admin.assignment.store') }}">
-                                    <div class="row">
+                                    @component('components.admin.propertyForm')
+
+                                        @slot('formName', 'Assignment')
+
+                                        @slot('architects', $architects)
+                                        @slot('cities', $cities)
+                                        @slot('developers', $developers)
+                                        @slot('developments', $developments)
+                                        @slot('interiorDesigners', $interiorDesigners)
+                                        @slot('propertyAgents', $propertyAgents)
+                                        @slot('propertyTypeEnums', $propertyTypeEnums)
+                                        @slot('propertyStatusEnums', $propertyStatusEnums)
+
+                                    @endcomponent
+                                    {{-- <div class="row">
                                         @csrf
                                         <div class="col-md-4 mb-3 mt-3 ">
                                             <div class="form-group">
@@ -509,7 +523,7 @@
                                                 Assignment</button>
 
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </form>
                             </div>
                         </div>
