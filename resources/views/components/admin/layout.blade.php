@@ -46,11 +46,48 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
-    
-    <script src="https://cdn.tiny.cloud/1/cxub8byx9xbvcwbawottw3z5tmbe225szfibji06em9yh3mu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    
+
+    <script src="https://cdn.tiny.cloud/1/cxub8byx9xbvcwbawottw3z5tmbe225szfibji06em9yh3mu/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        .has-search .form-control {
+            padding-left: 2.375rem;
+            margin: .4rem 0
+        }
+
+        .has-search .form-control:focus {
+            border: none;
+            padding-left: 2.375rem;
+        }
+
+        .has-search .form-control-feedback {
+            outline: none;
+            border: none;
+            background: transparent;
+            position: absolute;
+            z-index: 2;
+            display: block;
+            width: 2.375rem;
+            height: 2.375rem;
+            line-height: 2.375rem;
+            text-align: center;
+            pointer-events: none;
+            color: #aaa;
+        }
+
+        .has-search #recommendations {
+            display: none;
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid lightgray;
+        }
+    </style>
+
+
+
 </head>
 
 <body>
@@ -326,20 +363,20 @@
 
 <script type="text/javascript">
     tinymce.init({
-    selector: 'textarea.tinymce-editor',
-    height: 300,
-    menubar: false,
-    plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table paste code help wordcount', 'image'
-    ],
-    toolbar: 'undo redo | formatselect | ' +
-        'bold italic backcolor | alignleft aligncenter ' +
-        'alignright alignjustify | bullist numlist outdent indent | ' +
-        'removeformat | help',
-    content_css: '//www.tiny.cloud/css/codepen.min.css'
-});
+        selector: 'textarea.tinymce-editor',
+        height: 300,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount', 'image'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        content_css: '//www.tiny.cloud/css/codepen.min.css'
+    });
 </script>
 <script>
     @if (isset($features))
@@ -620,7 +657,7 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Define a MapApp object to encapsulate map-related functionality
         const MapApp = {
             map: null,
@@ -629,8 +666,9 @@
             latInput: null,
             longInput: null,
 
-            init: function () {
-                mapboxgl.accessToken = 'pk.eyJ1IjoiaHV6YWlmYTUzIiwiYSI6ImNsbXJmOW1iOTA3Nm4ybHFtN2V0bHV0dG8ifQ.9a5LJmvzUyGGCH1Av-TKbA';
+            init: function() {
+                mapboxgl.accessToken =
+                    'pk.eyJ1IjoiaHV6YWlmYTUzIiwiYSI6ImNsbXJmOW1iOTA3Nm4ybHFtN2V0bHV0dG8ifQ.9a5LJmvzUyGGCH1Av-TKbA';
 
                 this.map = new mapboxgl.Map({
                     container: 'mapbox', // Container ID
@@ -642,26 +680,25 @@
                 this.map.addControl(new mapboxgl.NavigationControl());
 
                 this.recommendations = $('#recommendations');
-                
+
                 this.setInitialLocation();
                 this.setupEventHandlers();
 
             },
-            
-            setInitialLocation: function () {
+
+            setInitialLocation: function() {
                 this.latInput = $('#latInput');
                 this.longInput = $('#longInput');
 
                 const lat = this.latInput.val();
                 const long = this.longInput.val();
-                
-                if(lat != "" && long != "")
-                {
+
+                if (lat != "" && long != "") {
                     this.setMarker(lat, long);
                 }
             },
 
-            setupEventHandlers: function () {
+            setupEventHandlers: function() {
                 const self = this;
                 const addressInput = $('#addressInput');
                 const geocodeButton = $('#geocodeButton');
@@ -670,18 +707,18 @@
                     event.preventDefault();
                 });
 
-                geocodeButton.click(function () {
+                geocodeButton.click(function() {
                     const address = addressInput.val();
 
                     // Perform geocoding using Mapbox Geocoding API
                     $.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${mapboxgl.accessToken}`,
-                        function (data) {
+                        function(data) {
                             const result = data.features;
 
                             if (result) {
                                 self.recommendations.empty();
                                 // Display the result
-                                $.each(result, function (index, location) {
+                                $.each(result, function(index, location) {
                                     self.recommendations.append(`<p class="selectedRecommendation"
                                         data-lat="${location.center[1]}" data-long="${location.center[0]}">
                                         ${location.place_name}</p>`);
@@ -691,15 +728,16 @@
                                 self.recommendations.html('No results found.');
                             }
                         }
-                    ).fail(function (error) {
+                    ).fail(function(error) {
                         console.error('Error:', error);
                         self.recommendations.html('An error occurred.');
                     });
                 });
 
-                this.map.on('load', function () {
+                this.map.on('load', function() {
                     // Use event delegation for click events on dynamic elements
-                    self.recommendations.on('click', '.selectedRecommendation', function (event) {
+                    self.recommendations.on('click', '.selectedRecommendation', function(
+                        event) {
                         const selectedRecommendation = $(event.currentTarget);
                         const lat = $(selectedRecommendation).data('lat');
                         const long = $(selectedRecommendation).data('long');
@@ -709,8 +747,8 @@
                 });
             },
 
-            setMarker: function (lat, long) {
-                
+            setMarker: function(lat, long) {
+
                 this.latInput.val(lat);
                 this.longInput.val(long);
 
@@ -719,23 +757,23 @@
                 }
 
                 this.marker = new mapboxgl.Marker({
-                    color: '#6449e7', // Marker color
-                    draggable: true, // Allow the user to drag the marker
-                })
-                .setLngLat([long, lat])
-                .addTo(this.map);
+                        color: '#6449e7', // Marker color
+                        draggable: true, // Allow the user to drag the marker
+                    })
+                    .setLngLat([long, lat])
+                    .addTo(this.map);
 
                 this.recommendations.empty();
 
                 this.map.flyTo({
                     center: [long, lat], // Marker's coordinates
-                    zoom: 14,     // Desired zoom level
-                    essential: true      // Set to true for smooth animation
+                    zoom: 14, // Desired zoom level
+                    essential: true // Set to true for smooth animation
                 });
                 this.marker.on('dragend', this.updateMarkerCoordinates.bind(this));
             },
-            
-            updateMarkerCoordinates: function () {
+
+            updateMarkerCoordinates: function() {
                 const updatedLngLat = this.marker.getLngLat();
 
                 // Access the latitude and longitude
@@ -749,6 +787,17 @@
 
         // Initialize the MapApp object
         MapApp.init();
+    });
+</script>
+<script>
+    // Get references to the button and recommendations div
+    const geocodeButton = document.getElementById('geocodeButton');
+    const recommendationsDiv = document.getElementById('recommendations');
+
+    // Add a click event listener to the geocodeButton
+    geocodeButton.addEventListener('click', function() {
+        // Show the recommendations div when the button is clicked
+        recommendationsDiv.style.display = 'block';
     });
 </script>
 

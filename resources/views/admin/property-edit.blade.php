@@ -14,9 +14,28 @@
                                 {{-- action="{{ route('admin.property.update', $property->id) }}"  --}}
                                 <form method="POST" id="property_add" enctype="multipart/form-data"
                                     action="{{ route('admin.property.update', ['id' => $property->id]) }}" />
-                                <div class="row">
-                                    @csrf
-                                    @method('PUT')
+                                @method('PUT')
+                                @component('components.admin.propertyForm')
+                                    @slot('formName', 'Property')
+
+                                    @slot('property', $property)
+
+                                    @slot('features', $features)
+                                    @slot('images', $images)
+                                    @slot('floorPlans', $floorPlans)
+
+                                    @slot('architects', $architects)
+                                    @slot('features', $features)
+                                    @slot('cities', $cities)
+                                    @slot('developers', $developers)
+                                    @slot('developments', $developments)
+                                    @slot('interiorDesigners', $interiorDesigners)
+                                    @slot('propertyAgents', $propertyAgents)
+                                    @slot('propertyTypeEnums', $propertyTypeEnums)
+                                    @slot('propertyStatusEnums', $propertyStatusEnums)
+                                @endcomponent
+                                {{-- <div class="row">
+
                                     <div class="col-md-4 mt-3 mb-3">
                                         <div class="form-group">
                                             <label for="prop_code">Property Code</label>
@@ -475,7 +494,7 @@
                                                         <input type="hidden" name="propertyImageName[]" value="{{$image->image}}" />
                                                         <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $image->image) }}" />
                                                     </div>
-                                                </div>                                            
+                                                </div>
                                             @endforeach
                                         </div>
                                         <button type="button" name="add_property_image"
@@ -487,13 +506,13 @@
                                         <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">
                                             Property Floor Plan</p>
                                         <div id="property_floor_plan_image_row">
-                                            
+
                                         @foreach ($floorPlans as $floorPlan)
                                             <div class="row" id="property_floor_plan_row{{ $loop->iteration }}">
                                                 <div class="col-12"><h5 class="mb-0 mt-3">Floor Plan {{ $loop->iteration }}</h5></div>
 
                                                 <input type="hidden" name="floorPlanID[]" value="{{$floorPlan->id}}" />
-                                                  
+
                                                 <div class="col-md-3 my-3">
                                                     <div class="form-group">
                                                       <label for="plan_suite_no">Suite No</label>
@@ -545,7 +564,7 @@
                                                   <button type="button" style="padding: 7px; width: 130px; margin: 10px auto;" name="btn_remove_property_floor_plan" id="{{ $loop->iteration }}" class="btn btn-xs btn-danger btn_remove_property_floor_plan">
                                                     <i class="bx bxs-trash"></i>
                                                   </button><div class="col-md-12 my-2"><hr /></div>
-                                            </div>                                                
+                                            </div>
                                         @endforeach
 
                                         </div>
@@ -562,7 +581,7 @@
                                             Property</button>
 
                                     </div>
-                                </div>
+                                </div> --}}
                                 </form>
                             </div>
                         </div>
