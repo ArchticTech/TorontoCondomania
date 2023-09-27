@@ -24,7 +24,7 @@
     <div class="col-md-4 mb-3 mt-3">
         <div class="form-group">
             <label for="prop_name">{{ $formName }} Image</label>
-            <input type="file" required class="form-control" id="prop_image" name="prop_image"
+            <input type="file" class="form-control" id="prop_image" name="prop_image"
                 placeholder="{{ $formName }} Image" />
             @isset($property)
                 {{-- value="{{ $property->prop_image }}" --}}
@@ -33,8 +33,8 @@
 
                 <input type="hidden" name="prop_imageName" value="{{ $property->prop_image }}">
 
-                <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $property->prop_image) }}"
-                @endisset />
+                <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $property->prop_image) }}"/>
+                @endisset
         </div>
     </div>
     <div class="mb-3 mt-3 col-md-4">
@@ -280,9 +280,8 @@
                 <option value="0" @if ($property->is_hot == '0') selected @endif>No
                 </option>
             @else
-                <option value="">Hot Property</option>
-                <option value="1">Yes</option>
                 <option value="0">No</option>
+                <option value="1">Yes</option>
             @endif
         </select>
     </div>
@@ -297,7 +296,6 @@
                 <option value="Promotion" @if ($property->vip_featured_promotion == 'Promotion') selected @endif>
                     Promotion</option>
             @else
-                <option value="">Vip/Featured/Promotion</option>
                 <option value="Vip">Vip</option>
                 <option value="Featured">Featured</option>
                 <option value="Promotion">Promotion</option>
@@ -313,7 +311,6 @@
                 <option value="Rent" @if ($property->sale_rent == 'Rent') selected @endif>Rent
                 </option>
             @else
-                <option value="">Sale/Rent</option>
                 <option value="Sale">Sale</option>
                 <option value="Rent">Rent</option>
             @endif
@@ -328,9 +325,8 @@
                 <option value="0" @if ($property->sold_out == 0) selected @endif>No
                 </option>
             @else
-                <option value="">Sold Out</option>
-                <option value="1">Yes</option>
                 <option value="0">No</option>
+                <option value="1">Yes</option>
             @endif
         </select>
     </div>
@@ -343,7 +339,6 @@
                 <option value="0" @if ($property->status == 0) selected @endif>In
                     Active</option>
             @else
-                <option value="">Status</option>
                 <option value="1">Active</option>
                 <option value="0">In Active</option>
             @endif

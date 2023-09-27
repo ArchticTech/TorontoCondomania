@@ -60,6 +60,7 @@ class DetailedPropertyResource extends JsonResource
             'agent' => BriefAgentResource::make($this->property_agent),
             'features' => $features->toArray(),
             'images' => $imageUrls->toArray(),
+            'floorPlan' => FloorPlanResource::collection($this->propertyFloorPlans)
         ];
     }
 }
