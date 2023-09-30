@@ -24,16 +24,24 @@
     <div class="col-md-4 mb-3 mt-3">
         <div class="form-group">
             <label for="prop_name">{{ $formName }} Image</label>
+            @if (isset($property))
+            <input type="file" class="form-control" id="prop_image" name="prop_image" placeholder="Property Image">
+
+                <input type="hidden" name="prop_imageName" value="{{ $property->prop_image }}">
+
+                <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $property->prop_image) }}" />
+            @else
             <input type="file" class="form-control" id="prop_image" name="prop_image"
-                placeholder="{{ $formName }} Image" />
-            @isset($property)
+            placeholder="{{ $formName }} Image" />
+            @endif
+            {{-- @isset($property)
                 value="{{ $property->prop_image }}"
                 <input type="file" class="form-control" id="prop_image" name="prop_image" placeholder="Property Image">
 
                 <input type="hidden" name="prop_imageName" value="{{ $property->prop_image }}">
 
                 <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $property->prop_image) }}" />
-            @endisset
+            @endisset --}}
         </div>
     </div>
     <div class="mb-3 mt-3 col-md-4">
@@ -555,12 +563,13 @@
                 <button class="bx bx-search form-control-feedback" id="geocodeButton"></button>
                 <input type="text" class="form-control" id="addressInput" placeholder="Find address">
 
+                <div id="recommendations"></div>
             </div>
             <div id="mapbox" style="width: 100%; height: 400px;"></div>
             <input
                 @isset($property)
-                                                value="{{ $property->latitude }}"
-                                            @endisset
+                  value="{{ $property->latitude }}"
+                @endisset
                 type="hidden" id="latInput" name="latitude">
             <input
                 @isset($property)

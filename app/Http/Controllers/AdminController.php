@@ -14,6 +14,7 @@ use App\Models\PropertyAgent;
 use App\Models\Country;
 use App\Models\Property;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -31,6 +32,12 @@ class AdminController extends Controller
         ];
     }
 
+    public function clearSessionMessage()
+    {
+        Session::forget('message');
+
+        return response()->json(['message' => 'Session message cleared! controller']);
+    }
     public function dashboard()
     {
         $architects = Architect::count();
@@ -72,11 +79,11 @@ class AdminController extends Controller
         $data = $this->getFormData();
 
         $data['property'] = PropertyController::get($id);
-        
+
         if(!$data['property'])
             return redirect()->route('admin.property.view')
                 ->with('message', 'Property Not Found!');
-        
+
         $data['features'] = $data['property']->propertyFeatures;
         $data['images'] = $data['property']->propertyImages;
         $data['floorPlans'] = $data['property']->propertyFloorPlans;
@@ -92,8 +99,9 @@ class AdminController extends Controller
                 ->with('message', 'Property Updated Successfully');
         }
         else {
-            return redirect()->route('admin.property.update')->with('message', 'Property Failed to Update');
-        }   
+            return redirect()->route('admin.property.update')
+            ->with('message', 'Property Failed to Update');
+        }
     }
 
     // Assignments CRUD
@@ -133,7 +141,7 @@ class AdminController extends Controller
         if(!$data['assignment'])
             return redirect()->route('admin.assignment.view')
                 ->with('message', 'Assignment Not Found!');
-        
+
         $data['features'] = $data['assignment']->property->propertyFeatures;
         $data['images'] = $data['assignment']->property->propertyImages;
         $data['floorPlans'] = $data['assignment']->property->propertyFloorPlans;
@@ -150,7 +158,7 @@ class AdminController extends Controller
         }
         else {
             return redirect()->route('admin.assignment.update')->with('message', 'Assignment Failed to Update');
-        }   
+        }
     }
 
     public function viewRentals()
@@ -186,7 +194,7 @@ class AdminController extends Controller
         $rentalFeatures = $rental->rentalFeatures;
         $rentalImages = $rental->rentalImages;
 
-        return view('admin.rental-edit', ['rental' => $rental, 
+        return view('admin.rental-edit', ['rental' => $rental,
             'rentalFeatures' => $rentalFeatures, 'rentalImages' => $rentalImages]);
     }
     public function updateRental(Request $request, $id)
@@ -199,7 +207,7 @@ class AdminController extends Controller
         } else {
             return redirect()->route('admin.rentals.update')
                 ->with('message', 'Rental Failed to Update!');
-        } 
+        }
     }
 
     // Consulting form
@@ -242,13 +250,13 @@ class AdminController extends Controller
         }
         return redirect()->route('admin.login')->with('message', 'Incorrect Email or Password');
      }
- 
+
     //Register Admin
     public function register()
     {
         return view('admin.signup');
     }
- 
+
      public function store(Request $request)
      {
         $formFields = $request->validate([
@@ -268,17 +276,17 @@ class AdminController extends Controller
 
         return redirect()->route('admin.login')->with('message', 'You are now Registered!');
      }
- 
+
      //Logout User
      public function logout(Request $request)
      {
          auth()->logout();
          $request->session()->invalidate();
          $request->session()->regenerateToken();
- 
+
          return redirect()->route('admin.login')->with('message', 'You have been logged out!');
      }
- 
+
      // Property Information
     public function propertyInfo()
     {
