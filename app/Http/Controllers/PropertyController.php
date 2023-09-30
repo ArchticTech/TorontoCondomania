@@ -79,9 +79,9 @@ class PropertyController extends Controller
         $min_deposit_percentage = $request->input('min_deposit_percentage');
         $no_of_beds = $request->input('no_of_beds');
         $no_of_baths = $request->input('no_of_baths');
-        
+
         $prop_imageName = '';
-        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
         {
             $prop_imageName = propertycontroller::saveImage($request->file('prop_image'));
         }
@@ -153,7 +153,7 @@ class PropertyController extends Controller
                     $request->input('plan_bath'),
                     $request->input('plan_bed'),
                     $request->input('plan_availability'),
-                    $request->input('plan_terrace_balcony'), 
+                    $request->input('plan_terrace_balcony'),
                     $property);
             }
         }
@@ -213,7 +213,7 @@ class PropertyController extends Controller
         $property->no_of_suites = $request->input('no_of_suites');
         $property->est_occupancy_month = $request->input('est_occupancy_month');
         $property->est_occupancy_year = $request->input('est_occupancy_year');
-        
+
         $property->vip_launch_date = now()->parse($request->input('vip_launch_date'))->toDateString();
         $property->public_launch_date = now()->parse($request->input('public_launch_date'))->toDateString();
         $property->const_start_date = now()->parse($request->input('const_start_date'))->toDateString();
@@ -240,11 +240,11 @@ class PropertyController extends Controller
         $property->no_of_beds = $request->input('no_of_beds');
         $property->no_of_baths = $request->input('no_of_baths');
 
-        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid()) 
+        if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
         {
             $prop_imageName = propertycontroller::saveImage($request->file('prop_image'));
             $property->prop_image = $prop_imageName;
-            
+
             $imagePath = public_path('images/' . $request->input('prop_imageName'));
             if (File::exists($imagePath)) {
                 // Delete the image if it exists
@@ -257,7 +257,7 @@ class PropertyController extends Controller
         PropertyController::removeFeatures($property);
         propertycontroller::removeImages($request->input('propertyImageName'), $property);
         propertycontroller::removefloorPlans($request->input('floorPlanID'), $property);
-        
+
         if($saved)
         {
             if ($request->input('prop_feature'))
@@ -278,7 +278,7 @@ class PropertyController extends Controller
                     $request->input('plan_bath'),
                     $request->input('plan_bed'),
                     $request->input('plan_availability'),
-                    $request->input('plan_terrace_balcony'), 
+                    $request->input('plan_terrace_balcony'),
                     $property);
             }
         }
@@ -345,7 +345,7 @@ class PropertyController extends Controller
         }
         return;
     }
-    public static function addFloorPlans($planImages, $suiteNumbers, $suiteNames, $planSizes, $planBaths, 
+    public static function addFloorPlans($planImages, $suiteNumbers, $suiteNames, $planSizes, $planBaths,
                                     $planBeds, $planAvailabilities, $planTerraceBalconies, $property)
     {
         $plansCount = count($suiteNames);
@@ -370,10 +370,10 @@ class PropertyController extends Controller
     {
         $oldFloorPlans = $property->propertyFloorPlans->pluck('id')->toArray();
         $deletedPlans = $floorPlanID ? array_diff($oldFloorPlans, $floorPlanID) : $oldFloorPlans;
-        
+
         foreach($deletedPlans as $planID) {
             $plan = PropertyFloorPlan::find($planID);
-            
+
             $imagePath = public_path('images/' . $plan->floor_plan_image);
             if (File::exists($imagePath)) {
                 // Delete the image if it exists
