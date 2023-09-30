@@ -79,6 +79,10 @@ class PropertyController extends Controller
         $min_deposit_percentage = $request->input('min_deposit_percentage');
         $no_of_beds = $request->input('no_of_beds');
         $no_of_baths = $request->input('no_of_baths');
+        $prop_meta_title = $request->input('prop_meta_title');
+        $prop_meta_description = $request->input('prop_meta_description');
+        $prop_meta_keywords = $request->input('prop_meta_keywords');
+        $prop_meta_tags = $request->input('prop_meta_tags');
 
         $prop_imageName = '';
         if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
@@ -128,7 +132,11 @@ class PropertyController extends Controller
             'locker_price' => $locker_price,
             'min_deposit_percentage' => $min_deposit_percentage,
             'no_of_beds' => $no_of_beds,
-            'no_of_baths' => $no_of_baths
+            'no_of_baths' => $no_of_baths,
+            'prop_meta_title' => $prop_meta_title,
+            'prop_meta_description' => $prop_meta_description,
+            'prop_meta_keywords' => $prop_meta_keywords,
+            'prop_meta_tags' => $prop_meta_tags
         ]);
 
         $saved = $property->save();
@@ -239,6 +247,10 @@ class PropertyController extends Controller
         $property->min_deposit_percentage = $request->input('min_deposit_percentage');
         $property->no_of_beds = $request->input('no_of_beds');
         $property->no_of_baths = $request->input('no_of_baths');
+        $property->prop_meta_title = $request->input('prop_meta_title');
+        $property->prop_meta_description = $request->input('prop_meta_description');
+        $property->prop_meta_keywords = $request->input('prop_meta_keywords');
+        $property->prop_meta_tags = $request->input('prop_meta_tags');
 
         if ($request->hasFile('prop_image') && $request->file('prop_image')->isValid())
         {

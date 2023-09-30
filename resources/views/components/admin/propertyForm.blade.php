@@ -573,11 +573,7 @@
         <div class="form-group">
             <label for="prop_meta_title">{{ $formName }} Meta Title</label>
             <textarea name="prop_meta_title" placeholder="{{ $formName }} Meta Title" id="prop_meta_title" rows="1"
-                class="form-control">
-                                @isset($property)
-{{ $property->prop_meta_title }}
-@endisset
-                                </textarea>
+                class="form-control">@isset($property){{ $property->prop_meta_title }}@endisset</textarea>
         </div>
     </div>
     <div class="col-md-12 mb-3 mt-3">
@@ -585,11 +581,7 @@
             <label for="prop_meta_description">{{ $formName }} Meta
                 Description</label>
             <textarea name="prop_meta_description" id="prop_meta_description" placeholder="{{ $formName }} Meta Description"
-                class="form-control">
-@isset($property)
-{{ $property->prop_meta_description }}
-@endisset
-</textarea>
+                class="form-control">@isset($property){{ $property->prop_meta_description }}@endisset</textarea>
         </div>
     </div>
     <div class="col-md-12 mb-3 mt-3">
@@ -597,22 +589,14 @@
             <label for="prop_meta_keywords">{{ $formName }} Meta
                 Keywords</label>
             <textarea name="prop_meta_keywords" placeholder="{{ $formName }} Meta Keywords" id="prop_meta_keywords"
-                rows="1" class="form-control">
-                                @isset($property)
-{{ $property->prop_meta_keywords }}
-@endisset
-                                </textarea>
+                rows="1" class="form-control">@isset($property){{ $property->prop_meta_keywords }}@endisset</textarea>
         </div>
     </div>
     <div class="col-md-12 mb-3 mt-3">
         <div class="form-group">
             <label for="prop_meta_tags">{{ $formName }} Meta Tags</label>
             <textarea name="prop_meta_tags" placeholder="{{ $formName }} Meta Tags" id="prop_meta_tags" rows="3"
-                class="form-control">
-                                @isset($property)
-{{ $property->prop_meta_tags }}
-@endisset
-                                </textarea>
+                class="form-control">@isset($property){{ $property->prop_meta_tags }}@endisset</textarea>
         </div>
     </div>
     <div class="col-md-12 mb-3 mt-3">
