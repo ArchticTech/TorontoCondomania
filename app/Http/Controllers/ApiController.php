@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BriefAssignmentResource;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Http\Resources\BriefPropertyResource;
+use App\Http\Resources\DetailedAssignmentResource;
 use App\Http\Resources\DetailedPropertyResource;
 
 class ApiController extends Controller
@@ -14,15 +16,15 @@ class ApiController extends Controller
         $properties = PropertyController::all();
 
         $properties = BriefPropertyResource::collection($properties);
-        
+
         return $properties;
     }
-    public function getProperty($id)
+    public function getProperty($slug)
     {
-        $property = PropertyController::get($id);
+        $property = PropertyController::get($slug);
 
         $property = DetailedPropertyResource::make($property);
-        
+
         return $property;
     }
     // Assignments

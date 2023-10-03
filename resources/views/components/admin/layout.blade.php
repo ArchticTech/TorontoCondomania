@@ -80,9 +80,23 @@
 
         .has-search #recommendations {
             display: none;
-            margin: 1rem 0;
-            padding: 1rem;
-            border: 1px solid lightgray;
+            /* margin: 1rem 0; */
+            /* padding: 1rem; */
+            border: 1px solid #d9dee3;
+            border-radius: .3rem;
+            margin-bottom: 10px;
+        }
+
+        .has-search p{
+            cursor: pointer;
+            margin: .5rem;
+            color: #000;
+            font-style: bold;
+            padding: 0.5rem 1rem;
+        }
+        .has-search p:hover{
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: .5rem;
         }
     </style>
 

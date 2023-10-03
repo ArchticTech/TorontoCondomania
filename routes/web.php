@@ -10,15 +10,17 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('api')->group(function () {
 
     Route::get('getAllProperties', [ApiController::class, 'getAllProperties'])->name('api.allProperties');
-    Route::get('getProperty/{id}', [ApiController::class, 'getProperty'])->name('api.getProperty');
+    Route::get('getProperty/{slug}', [ApiController::class, 'getProperty'])->name('api.getProperty');
 
     Route::get('getAllAssignments', [ApiController::class, 'getAllAssignments'])->name('api.allAssignments');
     Route::get('getAssignment/{id}', [ApiController::class, 'getAssignment'])->name('api.getAssignments');
+
 });
 
 // Admin Registration
 Route::get('/register', [AdminController::class, 'register'])->name('admin.signup');
 Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
+// Route::post('/clear-session-message', [AdminController::class, 'clearSessionMessage']);
 
 Route::prefix('secure-zone')->group(function () {
 
@@ -44,7 +46,7 @@ Route::prefix('secure-zone')->group(function () {
             Route::get('', [AdminController::class, 'viewProperty'])->name('admin.property.view');
             Route::get('add', [AdminController::class, 'addProperty'])->name('admin.property.add');
             Route::post('store', [AdminController::class, 'storeProperty'])->name('admin.property.store');
-            Route::get('edit/{id}', [AdminController::class, 'editProperty'])->name('admin.property.edit');
+            Route::get('edit/{slug}', [AdminController::class, 'editProperty'])->name('admin.property.edit');
             Route::PUT('update/{id}', [AdminController::class, 'updateProperty'])->name('admin.property.update');
         });
 
@@ -54,7 +56,7 @@ Route::prefix('secure-zone')->group(function () {
             Route::get('', [AdminController::class, 'viewAssignments'])->name('admin.assignment.view');
             Route::get('add', [AdminController::class, 'addAssignment'])->name('admin.assignment.add');
             Route::post('store', [AdminController::class, 'storeAssignment'])->name('admin.assignment.store');
-            Route::get('edit/{id}', [AdminController::class, 'editAssignment'])->name('admin.assignment.edit');
+            Route::get('edit/{slug}', [AdminController::class, 'editAssignment'])->name('admin.assignment.edit');
             Route::PUT('update/{id}', [AdminController::class, 'updateAssignment'])->name('admin.assignment.update');
         });
         Route::prefix('rentals')->group(function () {
@@ -63,7 +65,7 @@ Route::prefix('secure-zone')->group(function () {
             Route::get('', [AdminController::class, 'viewRentals'])->name('admin.rentals.view');
             Route::get('add', [AdminController::class, 'addRental'])->name('admin.rentals.add');
             Route::post('store', [AdminController::class, 'storeRental'])->name('admin.rentals.store');
-            Route::get('edit/{id}', [AdminController::class, 'editRental'])->name('admin.rentals.edit');
+            Route::get('edit/{slug}', [AdminController::class, 'editRental'])->name('admin.rentals.edit');
             Route::PUT('update/{id}', [AdminController::class, 'updateRental'])->name('admin.rentals.update');
         });
 

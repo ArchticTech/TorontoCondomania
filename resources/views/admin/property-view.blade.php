@@ -11,8 +11,8 @@
                                     <h1 class="m-0">Properties</h1>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="{{route('admin.property.add')}}" 
-                                    class="btn btn-primary ms-auto d-block me-auto me-sm-2" 
+                                    <a href="{{route('admin.property.add')}}"
+                                    class="btn btn-primary ms-auto d-block me-auto me-sm-2"
                                     style="font-size: 16px; padding: 9px 27px; width: fit-content">
                                     <i class='me-2 mb-1 bx bxs-plus-circle'></i>
                                     Add New Property</a>
@@ -53,7 +53,7 @@
                                                         <td>{{ $property->prop_price_from }}</td>
                                                         <td>{{ $property->prop_price_to }}</td>
                                                         <td>{{ $property->est_occupancy_month }}</td>
-                                                        <td><a href="{{ route('admin.property.edit', $property->id) }}"><i class='bx bxs-edit'></i></a></td>
+                                                        <td><a href="{{ route('admin.property.edit', ['slug' => $property->slug]) }}"><i class='bx bxs-edit'></i></a></td>
                                                     </tr>
                                                     @endforeach
 

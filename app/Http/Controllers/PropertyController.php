@@ -33,6 +33,7 @@ class PropertyController extends Controller
     {
         $date = now();
 
+        $slug = $request->input('prop_name');
         $prop_code = $request->input('prop_code');
         $prop_name = $request->input('prop_name');
         $description = $request->input('prop_description');
@@ -91,6 +92,7 @@ class PropertyController extends Controller
         }
 
         $property = new Property([
+            '$slug' => $slug,
             'prop_code' => $prop_code,
             'prop_name' => $prop_name,
             'prop_image' => $prop_imageName,
@@ -178,9 +180,9 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public static function get($id)
+    public static function get($slug)
     {
-        return Property::find($id);
+        return Property::where('slug', $slug)->firstOrFail();
     }
 
     /**

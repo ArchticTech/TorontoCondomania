@@ -14,8 +14,10 @@ class BriefAssignmentResource extends JsonResource
      */
     public function toArray($request)
     {
+        // $features = $this->propertyFeatures->pluck('prop_feature');
         return [
             'id' => $this->id,
+            'slug' => $this->property->slug,
             'name' => $this->property->prop_name,
             'image' => $this->property->prop_image,
             'type' => $this->property->prop_type,
@@ -34,8 +36,13 @@ class BriefAssignmentResource extends JsonResource
             'purchase_price' => $this->assign_purchase_price,
             'tentative_occ_date' => $this->assign_tentative_occ_date,
             'purchased_date' => $this->assign_purchased_date,
-            'cooperation_percentage	' => $this->assign_cooperation_percentage,
+            'cooperation_percentage' => $this->assign_cooperation_percentage,
             'deposit_paid' => $this->assign_deposit_paid,
+            // 'features' => $features,
+            'agent' => BriefAgentResource::make($this->property->property_agent),
+            'latitude' => $this->property->latitude,
+            'longitude' => $this->property->longitude,
+            'isAssignment' => true,
         ];
     }
 }

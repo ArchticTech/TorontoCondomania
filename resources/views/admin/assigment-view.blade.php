@@ -11,8 +11,8 @@
                                     <h1 class="m-0">Assignments</h1>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="{{route('admin.assignment.add')}}" 
-                                    class="btn btn-primary ms-auto d-block me-auto me-sm-2" 
+                                    <a href="{{route('admin.assignment.add')}}"
+                                    class="btn btn-primary ms-auto d-block me-auto me-sm-2"
                                     style="font-size: 16px; padding: 9px 27px; width: fit-content">
                                     <i class='me-2 mb-1 bx bxs-plus-circle'></i>
                                     Add New Assignment</a>
@@ -54,7 +54,8 @@
                                                         <td>{{ $assignment->assign_tentative_occ_date->format('Y-m-d')}}</td>
                                                         <td>{{ $assignment->assign_purchased_date->format('Y-m-d')}}</td>
                                                         <td>{{ $assignment->assign_cooperation_percentage}}%</td>
-                                                        <td><a href="{{ route('admin.assignment.edit', $assignment->id) }}"><i class='bx bxs-edit'></i></a></td>
+
+                                                        <td><a href="{{ route('admin.assignment.edit', ['slug' => $assignment->property->slug]) }}"><i class='bx bxs-edit'></i></a></td>
                                                     </tr>
                                                     @endif
                                                     @endforeach
