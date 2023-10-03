@@ -19,9 +19,9 @@ class ApiController extends Controller
 
         return $properties;
     }
-    public function getProperty($id)
+    public function getProperty($slug)
     {
-        $property = PropertyController::get($id);
+        $property = PropertyController::get($slug);
 
         $property = DetailedPropertyResource::make($property);
 

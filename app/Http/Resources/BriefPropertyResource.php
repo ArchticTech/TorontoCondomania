@@ -17,6 +17,7 @@ class BriefPropertyResource extends JsonResource
         $features = $this->propertyFeatures->pluck('prop_feature');
         return [
             'id' => $this->id,
+            'slug' => $this->slug,
             'name' => $this->prop_name,
             'code' => $this->prop_code,
             'city' => $this->city_id,

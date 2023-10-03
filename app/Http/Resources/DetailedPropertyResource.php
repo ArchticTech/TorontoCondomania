@@ -19,6 +19,7 @@ class DetailedPropertyResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'slug' => $this->slug,
             'code' => $this->prop_code,
             'name' => $this->prop_name,
             'image' => $this->prop_image,
