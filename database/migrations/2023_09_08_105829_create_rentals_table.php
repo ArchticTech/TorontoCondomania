@@ -16,7 +16,6 @@ class CreateRentalsTable extends Migration
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
             $table->text('rent_address');
-            $table->text('rent_iframe')->nullable();
             $table->string('rent_type', 70);
             $table->integer('rent_beds');
             $table->integer('rent_baths');

@@ -554,7 +554,7 @@
             <div class="form-group has-search">
                 <button class="bx bx-search form-control-feedback" id="geocodeButton"></button>
                 <input type="text" class="form-control" id="addressInput" placeholder="Find address">
-
+                <div id="recommendations"></div>
             </div>
             <div id="mapbox" style="width: 100%; height: 400px;"></div>
             <input
