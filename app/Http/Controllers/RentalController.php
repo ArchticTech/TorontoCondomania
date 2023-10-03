@@ -80,13 +80,11 @@ class RentalController extends Controller
 
     public static function get($slug)
     {
-        // return Rental::find($id);
         return Rental::where('slug', $slug)->firstOrFail();
     }
 
     public static function update(Request $request, $id)
     {
-        // Find the rental by its ID
         $rental = Rental::find($id);
 
         if (!$rental) {

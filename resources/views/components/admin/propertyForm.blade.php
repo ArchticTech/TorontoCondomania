@@ -34,14 +34,6 @@
             <input type="file" class="form-control" id="prop_image" name="prop_image"
             placeholder="{{ $formName }} Image" />
             @endif
-            {{-- @isset($property)
-                value="{{ $property->prop_image }}"
-                <input type="file" class="form-control" id="prop_image" name="prop_image" placeholder="Property Image">
-
-                <input type="hidden" name="prop_imageName" value="{{ $property->prop_image }}">
-
-                <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $property->prop_image) }}" />
-            @endisset --}}
         </div>
     </div>
     <div class="mb-3 mt-3 col-md-4">
@@ -286,9 +278,8 @@
                 <option value="0" @if ($property->is_hot == '0') selected @endif>No
                 </option>
             @else
-                <option value="">Hot Property</option>
+                <option value="0" selected>No</option>
                 <option value="1">Yes</option>
-                <option value="0">No</option>
             @endif
         </select>
     </div>
@@ -303,7 +294,6 @@
                 <option value="Promotion" @if ($property->vip_featured_promotion == 'Promotion') selected @endif>
                     Promotion</option>
             @else
-                <option value="">Vip/Featured/Promotion</option>
                 <option value="Vip">Vip</option>
                 <option value="Featured">Featured</option>
                 <option value="Promotion">Promotion</option>
@@ -319,7 +309,6 @@
                 <option value="Rent" @if ($property->sale_rent == 'Rent') selected @endif>Rent
                 </option>
             @else
-                <option value="">Sale/Rent</option>
                 <option value="Sale">Sale</option>
                 <option value="Rent">Rent</option>
             @endif
@@ -334,9 +323,8 @@
                 <option value="0" @if ($property->sold_out == 0) selected @endif>No
                 </option>
             @else
-                <option value="">Sold Out</option>
-                <option value="1">Yes</option>
                 <option value="0">No</option>
+                <option value="1">Yes</option>
             @endif
         </select>
     </div>
@@ -349,7 +337,6 @@
                 <option value="0" @if ($property->status == 0) selected @endif>In
                     Active</option>
             @else
-                <option value="">Status</option>
                 <option value="1">Active</option>
                 <option value="0">In Active</option>
             @endif
@@ -363,8 +350,8 @@
                 Floor</label>
             <input type="number" class="form-control" id="suites_starting_floor" required
                 @isset($property)
-                                            value="{{ $property->suites_starting_floor }}"
-                                                     @endisset
+                    value="{{ $property->suites_starting_floor }}"
+                @endisset
                 value="0" name="suites_starting_floor" placeholder="Suites Starting Floor">
         </div>
     </div>
@@ -373,8 +360,8 @@
             <label for="suites_per_floor">Suites Per Floor</label>
             <input type="number" class="form-control" id="suites_per_floor" required
                 @isset($property)
-                                            value="{{ $property->suites_per_floor }}"
-                                                     @endisset
+                    value="{{ $property->suites_per_floor }}"
+                @endisset
                 value="0" name="suites_per_floor" placeholder="Suites Per Floor">
         </div>
     </div>
@@ -383,8 +370,8 @@
             <label for="floor_plans">Floor Plans</label>
             <input type="number" required
                 @isset($property)
-                                            value="{{ $property->floor_plans }}"
-                                                     @endisset
+                    value="{{ $property->floor_plans }}"
+                @endisset
                 value="0" class="form-control" id="floor_plans" name="floor_plans" placeholder="Floor Plans">
         </div>
     </div>
@@ -393,8 +380,8 @@
             <label for="prop_price_from">{{ $formName }} Price From</label>
             <input type="number" class="form-control" id="prop_price_from" required
                 @isset($property)
-                                            value="{{ $property->prop_price_from }}"
-                                                     @endisset
+                    value="{{ $property->prop_price_from }}"
+                @endisset
                 value="0" name="prop_price_from" placeholder="{{ $formName }} Price From">
         </div>
     </div>
@@ -403,8 +390,8 @@
             <label for="prop_price_to">{{ $formName }} Price To</label>
             <input type="number" required
                 @isset($property)
-                                            value="{{ $property->prop_price_to }}"
-                                                     @endisset
+                    value="{{ $property->prop_price_to }}"
+                @endisset
                 value="0" class="form-control" id="prop_price_to" name="prop_price_to"
                 placeholder="{{ $formName }} Price To">
         </div>
@@ -414,8 +401,8 @@
             <label for="suite_size_from">Suite Size From</label>
             <input type="number" class="form-control" id="suite_size_from" required
                 @isset($property)
-                                            value="{{ $property->suite_size_from }}"
-                                                     @endisset
+                    value="{{ $property->suite_size_from }}"
+                @endisset
                 value="0" name="suite_size_from" placeholder="Suite Size From">
         </div>
     </div>
@@ -424,8 +411,8 @@
             <label for="suite_size_to">Suite Size To</label>
             <input type="number" required
                 @isset($property)
-                                            value="{{ $property->suite_size_to }}"
-                                                     @endisset
+                    value="{{ $property->suite_size_to }}"
+                @endisset
                 value="0" class="form-control" id="suite_size_to" name="suite_size_to"
                 placeholder="Suite Size To">
         </div>
@@ -435,8 +422,8 @@
             <label for="ceiling_height">Ceiling Height</label>
             <input type="number" class="form-control" id="ceiling_height" required
                 @isset($property)
-                                            value="{{ $property->ceiling_height }}"
-                                                     @endisset
+                    value="{{ $property->ceiling_height }}"
+                @endisset
                 value="0" name="ceiling_height" placeholder="Ceiling Height">
         </div>
     </div>
@@ -446,8 +433,8 @@
                 From</label>
             <input type="number" required
                 @isset($property)
-                                            value="{{ $property->price_per_sqft_from }}"
-                                                     @endisset
+                    value="{{ $property->price_per_sqft_from }}"
+                @endisset
                 value="0" class="form-control" id="price_per_sqft_from" name="price_per_sqft_from"
                 placeholder="Price Per Sq/ft From">
         </div>
@@ -457,8 +444,8 @@
             <label for="price_per_sqft_to">Price Per Sq/ft To</label>
             <input type="number" required
                 @isset($property)
-                                            value="{{ $property->price_per_sqft_to }}"
-                                                     @endisset
+                    value="{{ $property->price_per_sqft_to }}"
+                @endisset
                 value="0" class="form-control" id="price_per_sqft_to" name="price_per_sqft_to"
                 placeholder="Price Per Sq/ft To">
         </div>
@@ -468,8 +455,8 @@
             <label for="parking_price">Parking Price</label>
             <input type="number" required
                 @isset($property)
-                                            value="{{ $property->parking_price }}"
-                                                     @endisset
+                    value="{{ $property->parking_price }}"
+                @endisset
                 value="0" class="form-control" id="parking_price" name="parking_price"
                 placeholder="Parking Price">
         </div>
@@ -479,8 +466,8 @@
             <label for="locker_price">Locker Price</label>
             <input type="number" required
                 @isset($property)
-                                            value="{{ $property->locker_price }}"
-                                                     @endisset
+                    value="{{ $property->locker_price }}"
+                @endisset
                 value="0" class="form-control" id="locker_price" name="locker_price"
                 placeholder="Locker Price">
         </div>
@@ -491,8 +478,8 @@
                 Percentage</label>
             <input type="number" class="form-control" id="min_deposit_percentage" required
                 @isset($property)
-                                            value="{{ $property->min_deposit_percentage }}"
-                                                     @endisset
+                    value="{{ $property->min_deposit_percentage }}"
+                @endisset
                 value="0" name="min_deposit_percentage" placeholder="Min Deposit Percentage">
         </div>
     </div>
@@ -501,8 +488,8 @@
             <label for="no_of_beds">No of Beds</label>
             <input type="number" class="form-control" id="no_of_beds" required
                 @isset($property)
-                                            value="{{ $property->no_of_beds }}"
-                                                     @endisset
+                    value="{{ $property->no_of_beds }}"
+                @endisset
                 value="0" name="no_of_beds" placeholder="No of Beds">
         </div>
     </div>
@@ -511,18 +498,11 @@
             <label for="no_of_baths">No of Baths</label>
             <input type="number" class="form-control" id="no_of_baths" required
                 @isset($property)
-                                            value="{{ $property->no_of_baths }}"
-                                                     @endisset
+                    value="{{ $property->no_of_baths }}"
+                @endisset
                 value="0" name="no_of_baths" placeholder="No of Baths">
         </div>
     </div>
-    {{-- @isset($assignment)
-                                    @component('components.admin.assignmentForm')
-                                        @slot('formName', 'Assignment')
-
-                                        @slot('assignment', $assignment)
-                                    @endcomponent
-                                @endisset --}}
     @if ($formName === 'Assignment')
         @component('components.admin.assignmentForm')
             @slot('formName', 'Assignment')
@@ -538,10 +518,10 @@
         <div class="form-group">
             <label for="prop_description">{{ $formName }} Description</label>
             <textarea name="prop_description" id="prop_description" rows="5" class="form-control tinymce-editor">
-@isset($property)
-{{ $property->description }}
-@endisset
-</textarea>
+            @isset($property)
+            {{ $property->description }}
+            @endisset
+            </textarea>
         </div>
     </div>
     <div class="col-md-12 mb-3 mt-3">
@@ -554,11 +534,9 @@
                 placeholder="{{ $formName }} Address">
         </div>
     </div>
-    <div class="mb-3 mt-3" style="">
+    <div class="mb-3 mt-3" >
         <div class="form-group">
             <label for="prop_iframe">{{ $formName }} Location</label>
-            {{-- <input type="text" class="form-control searchInput" id="addressInput" placeholder="Find address">
-                                            <button class="bx bx-search form-control-feedback" id="geocodeButton"></button> --}}
             <div class="form-group has-search">
                 <button class="bx bx-search form-control-feedback" id="geocodeButton"></button>
                 <input type="text" class="form-control" id="addressInput" placeholder="Find address">
@@ -573,8 +551,8 @@
                 type="hidden" id="latInput" name="latitude">
             <input
                 @isset($property)
-                                                value="{{ $property->longitude }}"
-                                            @endisset
+                    value="{{ $property->longitude }}"
+                @endisset
                 type="hidden" id="longInput" name="longitude">
         </div>
     </div>
