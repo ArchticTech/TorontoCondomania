@@ -18,22 +18,32 @@ class CreateRentalsTable extends Migration
             $table->string('slug')->unique();
             $table->index('slug');
             $table->string('name');
-            $table->text('rent_address');
-            $table->string('rent_type', 70);
-            $table->integer('rent_beds');
-            $table->integer('rent_baths');
-            $table->string('rent_sqft', 50);
-            $table->date('available_date');
+            $table->text('description');
+            $table->text('image');
+
+            $table->text('address');
+            $table->integer('city_id');
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
+
+            $table->enum('type', ['Condo', 'Townhouse', 'Condo Townhomes', 'Single Family']);
+            $table->integer('beds')->default(0);
+            $table->integer('baths')->default(0);
+            $table->integer('sqft')->default(0);
+
+            $table->date('availability_date');
             $table->integer('monthly_rent');
             $table->integer('security_deposit');
-            $table->string('laundry_located', 50);
-            $table->text('rent_description');
-            $table->string('pet_policy', 50);
-            $table->string('smoking_policy', 50);
-            $table->string('lease_length', 50);
-            $table->text('lease_terms');
-            $table->string('rental_status', 50)->default('');
-            $table->integer('created_by')->default(0);
+
+            $table->boolean('basement_available')->default(false);
+            $table->boolean('parking_available')->default(false);
+            $table->boolean('laundry_located')->default(false);
+            $table->boolean('smoking_policy')->default(false);
+            $table->boolean('pet_policy')->default(true);
+
+            $table->boolean('status')->default(true);
+            
+            $table->integer('created_by')->default(1);
             $table->timestamps();
         });
     }

@@ -170,7 +170,12 @@ class AdminController extends Controller
     }
     public function addRental()
     {
-        return view('admin.rentals-add');
+        $data = [
+            'cities' => City::orderBy('city_name', 'asc')->get(),
+            'propertyTypeEnums' => Property::getPropertyTypeEnums(),
+        ];
+
+        return view('admin.rentals-add', $data);
     }
     public function storeRental(Request $request)
     {
