@@ -16,6 +16,13 @@
                                         @csrf
                                         <div class="col-md-4 mb-3 mt-3 ">
                                             <div class="form-group">
+                                                <label for="rent_name">Rent Name</label>
+                                                <input type="text" required class="form-control" id="rent_name"
+                                                    name="name" placeholder="Rent Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3 ">
+                                            <div class="form-group">
                                                 <label for="rent_address">Rent Address</label>
                                                 <input type="text" required class="form-control" id="rent_address"
                                                     name="rent_address" placeholder="Rent Address">

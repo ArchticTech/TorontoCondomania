@@ -15,9 +15,12 @@ class Property extends Migration
     {
         Schema::create('property', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
+            $table->index('slug');
             $table->string('prop_code', 200)->unique();
             $table->string('prop_name', 200);
             $table->text('prop_image');
+            $table->text('description');
             $table->integer('city_id');
             $table->integer('development_id')->default(0);
             $table->integer('developer_id')->default(0);
@@ -25,7 +28,6 @@ class Property extends Migration
             $table->integer('interior_designer_id')->default(0);
             $table->integer('prop_agent_id')->default(0);
             $table->text('prop_address');
-            $table->text('prop_iframe');
             $table->text('prop_meta_title')->nullable();
             $table->text('prop_meta_description')->nullable();
             $table->text('prop_meta_keywords')->nullable();
@@ -60,6 +62,9 @@ class Property extends Migration
             $table->integer('min_deposit_percentage')->default(0);
             $table->integer('no_of_beds')->default(0);
             $table->integer('no_of_baths')->default(0);
+
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
 
             $table->boolean('status')->default(true);
             $table->integer('created_by')->default(1);

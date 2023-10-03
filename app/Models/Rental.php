@@ -4,13 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Rental extends Model
 {
     use HasFactory;
     protected $table = 'rentals';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($rental) {
+            $slug = Str::slug($rental->name);
+            $originalSlug = $slug;
+            $count = 1;
+
+            while (static::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $count;
+                $count++;
+            }
+
+            $rental->slug = $slug;
+        });
+    }
+
     protected $fillable = [
+        'name',
         'rent_address',
         'rent_iframe',
         'rent_type',

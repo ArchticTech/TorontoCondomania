@@ -74,11 +74,12 @@ class AdminController extends Controller
                 ->with('message', 'Property Failed to Add');
         }
     }
-    public function editProperty($id)
+    public function editProperty($slug)
     {
         $data = $this->getFormData();
 
-        $data['property'] = PropertyController::get($id);
+        $data['property'] = PropertyController::get($slug);
+        // $data['property'] = PropertyController::where('slug', $slug)->firstOrFail();
 
         if(!$data['property'])
             return redirect()->route('admin.property.view')
@@ -132,11 +133,11 @@ class AdminController extends Controller
                 ->with('message', 'Assignment Failed to Add');
         }
     }
-    public function editAssignment($id)
+    public function editAssignment($slug)
     {
         $data = $this->getFormData();
 
-        $data['assignment'] = AssignmentController::get($id);
+        $data['assignment'] = AssignmentController::get($slug);
 
         if(!$data['assignment'])
             return redirect()->route('admin.assignment.view')
@@ -163,7 +164,7 @@ class AdminController extends Controller
 
     public function viewRentals()
     {
-        $rentals = RentalController::all();
+        $rentals =  RentalController::all();
 
         return view('admin.rentals-view', ['rentals' => $rentals]);
     }
@@ -183,9 +184,9 @@ class AdminController extends Controller
                 ->with('message', 'Rental Failed to Add!');
         }
     }
-    public function editRental($id)
+    public function editRental($slug)
     {
-        $rental = RentalController::get($id);
+        $rental = RentalController::get($slug);
 
         if(!$rental)
             return redirect()->route('admin.rentals.view')

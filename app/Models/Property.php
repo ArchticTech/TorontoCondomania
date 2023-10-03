@@ -3,13 +3,33 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Property extends Model
 {
     protected $table = 'property';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($property) {
+            $slug = Str::slug($property->prop_name);
+            $originalSlug = $slug;
+            $count = 1;
+
+            while (static::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $count;
+                $count++;
+            }
+
+            $property->slug = $slug;
+        });
+    }
+
     protected $fillable = [
         'prop_code',
+        'slug',
         'prop_name',
         'prop_image',
         'description',

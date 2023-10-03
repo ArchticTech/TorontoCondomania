@@ -83,7 +83,8 @@
             /* margin: 1rem 0; */
             /* padding: 1rem; */
             border: 1px solid #d9dee3;
-            border-radius: .3rem
+            border-radius: .3rem;
+            margin-bottom: 10px;
         }
 
         .has-search p{
@@ -91,12 +92,11 @@
             margin: .5rem;
             color: #000;
             font-style: bold;
-            padding: .3rem 0;
+            padding: 0.5rem 1rem;
         }
         .has-search p:hover{
             background-color: rgba(0, 0, 0, 0.1);
-            padding: .3rem .1rem;
-            border-radius: .5rem
+            border-radius: .5rem;
         }
     </style>
 

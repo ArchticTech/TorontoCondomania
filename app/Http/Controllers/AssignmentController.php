@@ -15,10 +15,20 @@ class AssignmentController extends Controller
 
         return $assignments;
     }
-    public static function get($id)
+    public static function get($slug)
     {
-        $assignment =  Assignment::find($id);
-        $assignment->assign_tentative_occ_date = Carbon::parse($assignment->assign_tentative_occ_date)->format('Y-m-d');
+        // Find the Property record with the given slug
+        // $assignment =  Assignment::find($id);
+        // $assignment =  Assignment::where('slug', $slug)->firstOrFail();
+
+        //new
+        // $property = Property::where('slug', $slug)->firstOrFail();
+        // $assignment = Assignment::find($property->assignment_id);
+        // $assignment->assign_tentative_occ_date = Carbon::parse($assignment->assign_tentative_occ_date)->format('Y-m-d');
+
+        $assignment = Assignment::whereHas('property', function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->first();
         return $assignment;
     }
     public static function store(Request $request)

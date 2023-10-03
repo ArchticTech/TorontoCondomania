@@ -13,8 +13,8 @@ class RentalController extends Controller
     //Rentals CRUD Operation
     public static function all()
     {
-        return Rental::all();
-        return view('admin.rentals-view', ['rentals' => $rentals]);
+        $rentals = Rental::all();
+        return $rentals;
     }
 
     public static function addRentals()
@@ -24,6 +24,8 @@ class RentalController extends Controller
 
     public static function store(Request $request)
     {
+        $slug = $request->input('name');
+        $name = $request->input('name');
         $rent_address = $request->input('rent_address');
         $rent_iframe = $request->input('rent_iframe');
         $rent_type = $request->input('rent_type');
@@ -42,6 +44,8 @@ class RentalController extends Controller
         $smoking_policy = $request->input('smoking_policy');
 
         $rental = new Rental([
+            'slug' => $slug,
+            'name' => $name,
             'rent_address' => $rent_address,
             'rent_iframe' => $rent_iframe,
             'rent_type' => $rent_type,
@@ -61,7 +65,7 @@ class RentalController extends Controller
         ]);
 
         $saved = $rental->save();
-        
+
         if ($saved) {
             if ($request->input('rent_feature')) {
                 $this->addFeatures($request->input('rent_feature'), $rental);
@@ -74,9 +78,10 @@ class RentalController extends Controller
         return $saved;
     }
 
-    public static function get($id)
+    public static function get($slug)
     {
-        return Rental::find($id);
+        // return Rental::find($id);
+        return Rental::where('slug', $slug)->firstOrFail();
     }
 
     public static function update(Request $request, $id)
