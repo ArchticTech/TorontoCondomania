@@ -15,6 +15,9 @@ Route::prefix('api')->group(function () {
     Route::get('getAllAssignments', [ApiController::class, 'getAllAssignments'])->name('api.allAssignments');
     Route::get('getAssignment/{id}', [ApiController::class, 'getAssignment'])->name('api.getAssignments');
 
+    //CITY
+    Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
+
 });
 
 // Admin Registration
