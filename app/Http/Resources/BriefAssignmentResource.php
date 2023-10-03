@@ -14,16 +14,17 @@ class BriefAssignmentResource extends JsonResource
      */
     public function toArray($request)
     {
-        // $features = $this->propertyFeatures->pluck('prop_feature');
+        $features = $this->property->propertyFeatures->pluck('prop_feature');
         return [
             'id' => $this->id,
             'slug' => $this->property->slug,
             'name' => $this->property->prop_name,
+            'code' => $this->property->prop_code,
             'image' => $this->property->prop_image,
             'type' => $this->property->prop_type,
             'address' => $this->property->prop_address,
             'status' => $this->property->prop_status,
-            'est_occupancy_year' => $this->property->est_occupancy_year,
+            'yearBuilt' => $this->property->est_occupancy_year,
             'vip_featured_promotion' => $this->property->vip_featured_promotion,
             'isHot' => $this->property->is_hot,
             'beds' => $this->property->no_of_beds,
@@ -38,7 +39,7 @@ class BriefAssignmentResource extends JsonResource
             'purchased_date' => $this->assign_purchased_date,
             'cooperation_percentage' => $this->assign_cooperation_percentage,
             'deposit_paid' => $this->assign_deposit_paid,
-            // 'features' => $features,
+            'features' => $features,
             'agent' => BriefAgentResource::make($this->property->property_agent),
             'latitude' => $this->property->latitude,
             'longitude' => $this->property->longitude,

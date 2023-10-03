@@ -20,7 +20,7 @@ class BriefPropertyResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->prop_name,
             'code' => $this->prop_code,
-            'city' => $this->city_id,
+            'city' => $this->city->city_name,
             'image' => $this->prop_image,
             'type' => $this->prop_type,
             'address' => $this->prop_address,
