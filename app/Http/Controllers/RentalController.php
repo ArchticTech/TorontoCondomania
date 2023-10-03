@@ -8,6 +8,7 @@ use App\Models\RentalImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
+
 class RentalController extends Controller
 {
     //Rentals CRUD Operation
@@ -24,54 +25,67 @@ class RentalController extends Controller
 
     public static function store(Request $request)
     {
-        $slug = $request->input('name');
-        $name = $request->input('name');
-        $rent_address = $request->input('rent_address');
-        $rent_iframe = $request->input('rent_iframe');
-        $rent_type = $request->input('rent_type');
-        $rent_beds = $request->input('rent_beds');
-        $rent_baths = $request->input('rent_baths');
-        $rent_sqft = $request->input('rent_sqft');
-        $available_date = $request->input('available_date');
-        $security_deposit = $request->input('security_deposit');
-        $laundry_located = $request->input('laundry_located');
-        $rent_description = $request->input('rent_description');
-        $pet_policy = $request->input('pet_policy');
-        $lease_length = $request->input('lease_length');
-        $lease_terms = $request->input('lease_terms');
-        $rental_status = $request->input('rental_status');
+
+        $name = $request->input('rent_name');
+        $description = $request->input('description');
+        // $image = $request->input('image');
+        $image = '';
+        if ($request->hasFile('image') && $request->file('image')->isValid())
+        {
+            $image = RentalController::saveImage($request->file('image'));
+        }
+
+        $address = $request->input('rent_address');
+        $city_id = $request->input('city_id');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+        $type = $request->input('type');
+        $beds = $request->input('rent_beds');
+        $baths = $request->input('rent_baths');
+        $sqft = $request->input('rent_sqft');
+        $availability_date = $request->input('available_date');
         $monthly_rent = $request->input('monthly_rent');
+        $security_deposit = $request->input('security_deposit');
+        $basement_available = $request->input('basement_available');
+        $parking_available = $request->input('parking_available');
+        $laundry_located = $request->input('laundry_located');
         $smoking_policy = $request->input('smoking_policy');
+        $pet_policy = $request->input('pet_policy');
+        $status = $request->input('rental_status');
+        $basement_available = $request->input('basement_available');
 
         $rental = new Rental([
-            'slug' => $slug,
             'name' => $name,
-            'rent_address' => $rent_address,
-            'rent_iframe' => $rent_iframe,
-            'rent_type' => $rent_type,
-            'rent_beds' => $rent_beds,
-            'rent_baths' => $rent_baths,
-            'rent_sqft' => $rent_sqft,
-            'available_date' => $available_date,
-            'security_deposit' => $security_deposit,
-            'laundry_located' => $laundry_located,
-            'rent_description' => $rent_description,
-            'pet_policy' => $pet_policy,
-            'lease_length' => $lease_length,
-            'lease_terms' => $lease_terms,
-            'rental_status' => $rental_status,
+            'description' => $description,
+            'image' => $image,
+            'address' => $address,
+            'city_id' => $city_id,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'type' => $type,
+            'beds' => $beds,
+            'baths' => $baths,
+            'sqft' => $sqft,
+            'availability_date' => $availability_date,
             'monthly_rent' => $monthly_rent,
+            'security_deposit' => $security_deposit,
+            'basement_available' => $basement_available,
+            'parking_available' => $parking_available,
+            'laundry_located' => $laundry_located,
             'smoking_policy' => $smoking_policy,
+            'pet_policy' => $pet_policy,
+            'status' => $status,
+
         ]);
 
         $saved = $rental->save();
 
         if ($saved) {
             if ($request->input('rent_feature')) {
-                $this->addFeatures($request->input('rent_feature'), $rental);
+                RentalController::addFeatures($request->input('rent_feature'), $rental);
             }
             if ($request->file('rental_image')) {
-                $this->addImages($request->file('rental_image'), $rental);
+                RentalController::addImages($request->file('rental_image'), $rental);
             }
         }
 
@@ -112,21 +126,21 @@ class RentalController extends Controller
 
         $saved = $rental->save();
 
-        $this->removeFeatures($rental);
-        $this->removeImages($request->input('rentalImageName'), $rental);
+        RentalController::removeFeatures($rental);
+        RentalController::removeImages($request->input('rentalImageName'), $rental);
         if ($saved) {
             if ($request->input('rent_feature')) {
-                $this->addFeatures($request->input('rent_feature'), $rental);
+                RentalController::addFeatures($request->input('rent_feature'), $rental);
             }
             if ($request->file('rental_image')) {
-                $this->addImages($request->file('rental_image'), $rental);
+                RentalController::addImages($request->file('rental_image'), $rental);
             }
         }
 
         return $saved;
     }
 
-    public function saveImage($image)
+    public static function saveImage($image)
     {
         if($image)
         {
@@ -137,7 +151,7 @@ class RentalController extends Controller
         return '';
     }
 
-    public function addFeatures($features, $rental)
+    public static function addFeatures($features, $rental)
     {
         foreach ($features as $feature) {
 
@@ -148,16 +162,16 @@ class RentalController extends Controller
             $rental->rentalFeatures()->save($rentalFeature);
         }
     }
-    public function removeFeatures($rental)
+    public static function removeFeatures($rental)
     {
         $rental->rentalFeatures()->delete();
         return;
     }
 
-    public function addImages($images, $rental)
+    public static function addImages($images, $rental)
     {
         foreach($images as $image) {
-            $imageName = $this->saveImage($image);
+            $imageName = RentalController::saveImage($image);
             $rentalImage = new RentalImage([
                 'image' => $imageName,
                 'status' => 1
@@ -166,7 +180,7 @@ class RentalController extends Controller
             $rental->rentalImages()->save($rentalImage);
         }
     }
-    public function removeImages($imageNames, $rental)
+    public static function removeImages($imageNames, $rental)
     {
         $oldImages = $rental->rentalImages->pluck('image')->toArray();
         $deletedImages = $imageNames ? array_diff($oldImages, $imageNames) : $oldImages;
