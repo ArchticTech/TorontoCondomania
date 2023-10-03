@@ -17,7 +17,6 @@ Route::prefix('api')->group(function () {
 
     //CITY
     Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
-
 });
 
 // Admin Registration
