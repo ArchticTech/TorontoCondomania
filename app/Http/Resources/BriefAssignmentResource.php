@@ -22,6 +22,7 @@ class BriefAssignmentResource extends JsonResource
             'code' => $this->property->prop_code,
             'image' => $this->property->prop_image,
             'type' => $this->property->prop_type,
+            'city' => $this->property->city->city_name,
             'address' => $this->property->prop_address,
             'status' => $this->property->prop_status,
             'yearBuilt' => $this->property->est_occupancy_year,

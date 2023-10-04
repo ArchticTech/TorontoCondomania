@@ -42,38 +42,13 @@
     <div class="col-md-8 mb-3 mt-3">
         <div class="form-group">
             <label for="rent_address">Rental Address</label>
-            <input type="text" required class="form-control" id="rent_address" name="rent_address"
+            <input type="text" required class="form-control" id="rent_address" name="rent_address" placeholder="Rental Address"
                 @isset($rental)
                     value="{{ $rental->address }}"
                 @endisset>
         </div>
     </div>
-    {{-- <div class="mb-3 mt-3 col-md-4">
-        <label for="city_id">Select City</label>
-        <select name="city_id" required class="form-select" id="city_id">
-            <option value="">Select City</option>
-            @foreach ($cities as $city)
-                <option
-                    @isset($rental)
-                            {{ $rental['city_id'] == $city->id ? 'selected' : '' }}
-                    @endisset
-                    value="{{ $city->id }}">{{ $city->city_name }}</option>
-            @endforeach
-        </select>
-    </div> --}}
-    {{-- <div class="mb-3 mt-3 col-md-4">
-        <label for="city_id">Select City</label>
-        <select name="city_id" required class="form-select" id="city_id">
-            <option value="">Select City</option>
-            @foreach ($cities as $city)
-                <option
-                    @isset($rental)
-                        {{ $rental['city_id'] == $city->id ? 'selected' : '' }}
-                     @endisset
-                    value="{{ $city->id }}">{{ $city->city_name }}</option>
-            @endforeach
-        </select>
-    </div> --}}
+
     <div class="mb-3 mt-3 col-md-4">
         <label for="city_id">Select City</label>
         <select name="city_id" required class="form-select" id="city_id">
@@ -132,7 +107,7 @@
     <div class="col-md-2 mb-3 mt-3">
         <div class="form-group">
             <label for="rent_beds">No Of Beds</label>
-            <input type="number" required class="form-control" id="rent_beds" name="rent_beds"
+            <input type="number" required class="form-control" id="rent_beds" name="rent_beds" placeholder="No of beds"
                 @isset($rental)
                     value="{{ $rental->beds }}"
                 @endisset>
@@ -141,7 +116,7 @@
     <div class="col-md-2 mb-3 mt-3">
         <div class="form-group">
             <label for="rent_baths">No Of Baths</label>
-            <input type="number" required class="form-control" id="rent_baths" name="rent_baths"
+            <input type="number" required class="form-control" id="rent_baths" name="rent_baths" placeholder="No of baths"
                 @isset($rental)
                     value="{{ $rental->baths }}"
                 @endisset>
@@ -150,7 +125,7 @@
     <div class="col-md-4 mb-3 mt-3">
         <div class="form-group">
             <label for="rent_sqft">Rental per Sq/ft</label>
-            <input type="text" class="form-control" id="rent_sqft" required name="rent_sqft"
+            <input type="text" class="form-control" id="rent_sqft" required name="rent_sqft" placeholder="Rental per Sq/ft"
                 @isset($rental)
                     value="{{ $rental->sqft }}"
                 @endisset>
@@ -169,7 +144,7 @@
     <div class="col-md-4 mb-3 mt-3">
         <div class="form-group">
             <label for="monthly_rent">Monthly Rent</label>
-            <input type="number" class="form-control" id="monthly_rent" required name="monthly_rent"
+            <input type="number" class="form-control" id="monthly_rent" required name="monthly_rent" placeholder="Monthly Rent"
                 @isset($rental)
                     value="{{ $rental->monthly_rent }}"
                 @endisset>
@@ -178,7 +153,7 @@
     <div class="col-md-4 mb-3 mt-3">
         <div class="form-group">
             <label for="security_deposit">Security Deposit</label>
-            <input type="number" class="form-control" id="security_deposit" required name="security_deposit"
+            <input type="number" class="form-control" id="security_deposit" required name="security_deposit" placeholder="Security Deposit"
                 @isset($rental)
                     value="{{ $rental->security_deposit }}"
                 @endisset>
