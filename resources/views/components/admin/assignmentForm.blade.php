@@ -67,7 +67,7 @@
             @isset($assignment)
         value="{{ $assignment->assign_purchased_date->toDateString() }}"
             @endisset
-            value="2020-01-01" class="form-control" id="assign_purchased_date" required name="assign_purchased_date"
+           class="form-control" id="assign_purchased_date" required name="assign_purchased_date"
             placeholder="Assignment Purchased Date">
     </div>
 </div>
@@ -80,6 +80,6 @@
             @isset($assignment)
         value="{{ $assignment->assign_tentative_occ_date->toDateString() }}"
             @endisset
-            name="assign_tentative_occ_date" value="2020-01-01" type="date" placeholder="Assign Tentative Occ">
+            name="assign_tentative_occ_date"  type="date" placeholder="Assign Tentative Occ">
     </div>
 </div>

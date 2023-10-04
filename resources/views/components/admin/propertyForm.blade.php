@@ -110,7 +110,6 @@
     <div class="mb-3 mt-3 col-md-4">
         <label for="prop_agent_id">Select {{ $formName }} Agent</label>
         <select name="prop_agent_id" required class="form-select" id="prop_agent_id">
-            <option value="">Select {{ $formName }} Agent</option>
             @foreach ($propertyAgents as $propertyAgent)
                 <option
                     @isset($property)
