@@ -13,10 +13,14 @@
                             <div class="card-body">
                                 <form method="POST" id="property_add" enctype="multipart/form-data"
                                     action="{{ route('admin.rentals.update', ['id' => $rental->id]) }}" />
+                                    @method('put')
                                     @component('components.admin.rentalForm')
 
                                         @slot('cities', $cities)
+                                        @slot('rental', $rental)
                                         @slot('propertyTypeEnums', $propertyTypeEnums)
+                                        @slot('rentalImages', $rentalImages)
+                                        @slot('rentalFeatures', $rentalFeatures)
 
                                     @endcomponent
                                 </form>

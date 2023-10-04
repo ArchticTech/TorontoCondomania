@@ -107,22 +107,60 @@ class RentalController extends Controller
         }
 
         //updating rental
-        $rental->rent_address = $request->input('rent_address');
-        $rental->rent_iframe = $request->input('rent_iframe');
-        $rental->rent_type = $request->input('rent_type');
-        $rental->rent_beds = $request->input('rent_beds');
-        $rental->rent_baths = $request->input('rent_baths');
-        $rental->rent_sqft = $request->input('rent_sqft');
-        $rental->available_date = $request->input('available_date');
-        $rental->security_deposit = $request->input('security_deposit');
-        $rental->laundry_located = $request->input('laundry_located');
-        $rental->rent_description = $request->input('rent_description');
-        $rental->pet_policy = $request->input('pet_policy');
-        $rental->lease_length = $request->input('lease_length');
-        $rental->lease_terms = $request->input('lease_terms');
-        $rental->rental_status = $request->input('rental_status');
+        // $rental->rent_address = $request->input('rent_address');
+        // $rental->rent_iframe = $request->input('rent_iframe');
+        // $rental->rent_type = $request->input('rent_type');
+        // $rental->rent_beds = $request->input('rent_beds');
+        // $rental->rent_baths = $request->input('rent_baths');
+        // $rental->rent_sqft = $request->input('rent_sqft');
+        // $rental->available_date = $request->input('available_date');
+        // $rental->security_deposit = $request->input('security_deposit');
+        // $rental->laundry_located = $request->input('laundry_located');
+        // $rental->rent_description = $request->input('rent_description');
+        // $rental->pet_policy = $request->input('pet_policy');
+        // $rental->lease_length = $request->input('lease_length');
+        // $rental->lease_terms = $request->input('lease_terms');
+        // $rental->rental_status = $request->input('rental_status');
+        // $rental->monthly_rent = $request->input('monthly_rent');
+        // $rental->smoking_policy = $request->input('smoking_policy');
+        $rental->name = $request->input('rent_name');
+        $rental->description = $request->input('description');
+        // $image = $request->input('image');
+        // $rental->image = '';
+        // if ($request->hasFile('image') && $request->file('image')->isValid())
+        // {
+        //     $rental->image = RentalController::saveImage($request->file('image'));
+        // }
+
+        if ($request->hasFile('image') && $request->file('image')->isValid())
+        {
+            $prop_imageName = RentalController::saveImage($request->file('image'));
+            $rental->image = $prop_imageName;
+
+            $imagePath = public_path('images/' . $request->input('image'));
+            if (File::exists($imagePath)) {
+                // Delete the image if it exists
+                File::delete($imagePath);
+            }
+        }
+        $rental->address = $request->input('rent_address');
+        $rental->city_id = $request->input('city_id');
+        $rental->latitude = $request->input('latitude');
+        $rental->longitude = $request->input('longitude');
+        $rental->type = $request->input('type');
+        $rental->beds = $request->input('rent_beds');
+        $rental->baths = $request->input('rent_baths');
+        $rental->sqft = $request->input('rent_sqft');
+        $rental->availability_date = $request->input('available_date');
         $rental->monthly_rent = $request->input('monthly_rent');
+        $rental->security_deposit = $request->input('security_deposit');
+        $rental->basement_available = $request->input('basement_available');
+        $rental->parking_available = $request->input('parking_available');
+        $rental->laundry_located = $request->input('laundry_located');
         $rental->smoking_policy = $request->input('smoking_policy');
+        $rental->pet_policy = $request->input('pet_policy');
+        $rental->status = $request->input('rental_status');
+        $rental->basement_available = $request->input('basement_available');
 
         $saved = $rental->save();
 

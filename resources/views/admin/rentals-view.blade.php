@@ -25,7 +25,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Rent Address</th>
+                                            <th>Rent Name</th>
                                             <th>Rent Type</th>
                                             <th>No Of Beds</th>
                                             <th>No Of Baths</th>
@@ -41,14 +41,14 @@
                                         @foreach ($rentals as $rental)
                                             <tr>
                                                 <td>{{ $rental->id }}</td>
-                                                <td>{{ $rental->rent_address }}</td>
-                                                <td>{{ $rental->rent_type }}</td>
-                                                <td>{{ $rental->rent_beds }}</td>
-                                                <td>{{ $rental->rent_baths }}</td>
-                                                <td>{{ $rental->rent_sqft }}</td>
+                                                <td>{{ $rental->name }}</td>
+                                                <td>{{ $rental->type }}</td>
+                                                <td>{{ $rental->beds }}</td>
+                                                <td>{{ $rental->baths }}</td>
+                                                <td>{{ $rental->sqft }}</td>
                                                 <td>{{ $rental->monthly_rent }}</td>
                                                 <td>{{ $rental->security_deposit }}</td>
-                                                <td>{{ $rental->rental_status }}</td>
+                                                <td>{{ $rental->status }}</td>
                                                 <td><a href="{{ route('admin.rentals.edit',  ['slug' => $rental->slug]) }}"><i
                                                             class='bx bxs-edit'></i></a></td>
                                             </tr>

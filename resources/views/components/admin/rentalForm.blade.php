@@ -10,19 +10,32 @@
         </div>
     </div>
     <div class="col-md-4 mb-3 mt-3 ">
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="image">Rental Image</label>
             <input type="file" required class="form-control" id="image" name="image"
                 @isset($rental)
                     value="{{ $rental->image }}"
                 @endisset>
+        </div> --}}
+        <div class="form-group">
+            <label for="image"> Image</label>
+            @if (isset($rental))
+            <input type="file" class="form-control" id="image" name="image" placeholder="Rental Image">
+
+                <input type="hidden" name="image" value="{{ $rental->image }}">
+
+                <img class="img img-fluid my-2" width="253px" src="{{ asset('images/' . $rental->image) }}" />
+            @else
+            <input type="file" class="form-control" id="image" name="image"
+            placeholder="Rental Image" />
+            @endif
         </div>
     </div>
 
     <div class="col-md-12 mb-3 mt-3">
         <div class="form-group">
             <label for="description">Rental Description</label>
-            <textarea name="description" id="description" rows="5" class="form-control tinymce-editor">@isset($property){{ $property->description }}@endisset</textarea>
+            <textarea name="description" id="description" rows="5" class="form-control tinymce-editor">@isset($rental){{ $rental->description }}@endisset</textarea>
         </div>
     </div>
 
@@ -35,16 +48,41 @@
                 @endisset>
         </div>
     </div>
-    <div class="mb-3 mt-3 col-md-4">
+    {{-- <div class="mb-3 mt-3 col-md-4">
         <label for="city_id">Select City</label>
         <select name="city_id" required class="form-select" id="city_id">
             <option value="">Select City</option>
             @foreach ($cities as $city)
                 <option
-                    @isset($property)
-                                                {{ $property['city_id'] == $city->id ? 'selected' : '' }}
-                                              @endisset
+                    @isset($rental)
+                            {{ $rental['city_id'] == $city->id ? 'selected' : '' }}
+                    @endisset
                     value="{{ $city->id }}">{{ $city->city_name }}</option>
+            @endforeach
+        </select>
+    </div> --}}
+    {{-- <div class="mb-3 mt-3 col-md-4">
+        <label for="city_id">Select City</label>
+        <select name="city_id" required class="form-select" id="city_id">
+            <option value="">Select City</option>
+            @foreach ($cities as $city)
+                <option
+                    @isset($rental)
+                        {{ $rental['city_id'] == $city->id ? 'selected' : '' }}
+                     @endisset
+                    value="{{ $city->id }}">{{ $city->city_name }}</option>
+            @endforeach
+        </select>
+    </div> --}}
+    <div class="mb-3 mt-3 col-md-4">
+        <label for="city_id">Select City</label>
+        <select name="city_id" required class="form-select" id="city_id">
+            <option value="">Select City</option>
+            @foreach ($cities as $city)
+                <option value="{{ $city->id }}"
+                    {{ (isset($rental) && $rental->city_id == $city->id) ? 'selected' : '' }}>
+                    {{ $city->city_name }}
+                </option>
             @endforeach
         </select>
     </div>
@@ -152,10 +190,10 @@
             <label for="laundry_located">Laundry Located</label>
             <select name="laundry_located" class="form-select" id="laundry_located"
                 aria-label="Default select example">
-                @if (isset($property))
-                    <option value="1" @if ($property->laundry_located == '1') selected @endif>Yes
+                @if (isset($rental))
+                    <option value="1" @if ($rental->laundry_located == '1') selected @endif>Yes
                     </option>
-                    <option value="0" @if ($property->laundry_located == '0') selected @endif>No
+                    <option value="0" @if ($rental->laundry_located == '0') selected @endif>No
                     </option>
                 @else
                 <option value="">Laundry Located</option>
@@ -169,10 +207,10 @@
         <div class="form-group">
             <label for="pet_policy">Pet Allowed</label>
             <select name="pet_policy" class="form-select" id="pet_policy" aria-label="Default select example">
-                @if (isset($property))
-                    <option value="1" @if ($property->pet_policy == '1') selected @endif>Yes
+                @if (isset($rental))
+                    <option value="1" @if ($rental->pet_policy == '1') selected @endif>Yes
                     </option>
-                    <option value="0" @if ($property->pet_policy == '0') selected @endif>No
+                    <option value="0" @if ($rental->pet_policy == '0') selected @endif>No
                     </option>
                 @else
                 <option value="">Pet Allowed</option>
@@ -187,10 +225,10 @@
             <label for="smoking_policy">Smoking Allowed</label>
             <select name="smoking_policy" class="form-select" id="smoking_policy"
                 aria-label="Default select example">
-                @if (isset($property))
-                    <option value="1" @if ($property->smoking_policy == '1') selected @endif>Yes
+                @if (isset($rental))
+                    <option value="1" @if ($rental->smoking_policy == '1') selected @endif>Yes
                     </option>
-                    <option value="0" @if ($property->smoking_policy == '0') selected @endif>No
+                    <option value="0" @if ($rental->smoking_policy == '0') selected @endif>No
                     </option>
                 @else
                 <option value="">Smoking Allowed</option>
@@ -205,10 +243,10 @@
             <label for="basement_available">Basement Available</label>
             <select name="basement_available" class="form-select" id="basement_available"
                 aria-label="Default select example">
-                @if (isset($property))
-                    <option value="1" @if ($property->basement_available == '1') selected @endif>Yes
+                @if (isset($rental))
+                    <option value="1" @if ($rental->basement_available == '1') selected @endif>Yes
                     </option>
-                    <option value="0" @if ($property->basement_available == '0') selected @endif>No
+                    <option value="0" @if ($rental->basement_available == '0') selected @endif>No
                     </option>
                 @else
                 <option value="">Basement Available</option>
@@ -223,10 +261,10 @@
             <label for="parking_available">Parking Available</label>
             <select name="parking_available" class="form-select" id="parking_available"
                 aria-label="Default select example">
-                @if (isset($property))
-                    <option value="1" @if ($property->parking_available == '1') selected @endif>Yes
+                @if (isset($rental))
+                    <option value="1" @if ($rental->parking_available == '1') selected @endif>Yes
                     </option>
-                    <option value="0" @if ($property->parking_available == '0') selected @endif>No
+                    <option value="0" @if ($rental->parking_available == '0') selected @endif>No
                     </option>
                 @else
                     <option value="">Parking Available</option>
@@ -240,10 +278,10 @@
         <div class="form-group">
             <label for="rental_status">Rental Status</label>
             <select name="rental_status" class="form-select" id="rental_status" aria-label="Default select example">
-                @if (isset($property))
-                    <option value="1" @if ($property->status == '1') selected @endif>Active
+                @if (isset($rental))
+                    <option value="1" @if ($rental->status == '1') selected @endif>Active
                     </option>
-                    <option value="0" @if ($property->status == '0') selected @endif>Not Active
+                    <option value="0" @if ($rental->status == '0') selected @endif>Not Active
                     </option>
                 @else
                     <option value="">Status</option>
