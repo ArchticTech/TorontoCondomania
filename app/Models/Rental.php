@@ -60,4 +60,8 @@ class Rental extends Model
     {
         return $this->hasMany(RentalImage::class);
     }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

@@ -18,6 +18,8 @@ Route::prefix('api')->group(function () {
     //CITY
     Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
 
+    Route::get('getAllRentals', [ApiController::class, 'getAllRentals'])->name('api.allRentals');
+    Route::get('getRental/{slug}', [ApiController::class, 'getRental'])->name('api.getRental');
 });
 
 // Admin Registration

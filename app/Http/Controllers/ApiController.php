@@ -6,6 +6,8 @@ use App\Http\Resources\BriefAssignmentResource;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Http\Resources\BriefPropertyResource;
+use App\Http\Resources\BriefRentalResource;
+use App\Http\Resources\DetailedRentalResource;
 use App\Http\Resources\DetailedAssignmentResource;
 use App\Http\Resources\DetailedPropertyResource;
 use App\Models\City;
@@ -28,7 +30,8 @@ class ApiController extends Controller
 
         return $property;
     }
-    // Assignments
+
+    //ASSIGNMENT MODULE API
     public function getAllAssignments()
     {
         $assignments = AssignmentController::all();
@@ -48,12 +51,6 @@ class ApiController extends Controller
 
     public function getCity($name)
     {
-        // $city = City::get($name);
-
-        // $city = Property::all($city);
-
-        // return $city;
-        // $city = City::where('city_name', $name)->first();
         $city = City::whereRaw('city_name COLLATE utf8mb4_general_ci LIKE ?', ["%$name%"])->first();
 
         $propertyCount = 0;
@@ -62,5 +59,24 @@ class ApiController extends Controller
             // $propertyCount now contains the count of properties in the specified city
         }
         return $propertyCount;
+    }
+
+    //RENTALS MODULE API
+    public function getAllRentals()
+    {
+        $rentals = RentalController::all();
+
+        $rentals = BriefRentalResource::collection($rentals);
+
+        return $rentals;
+    }
+
+    public function getRental($slug)
+    {
+        $rental = RentalController::get($slug);
+
+        $rental = DetailedRentalResource::make($rental);
+
+        return $rental;
     }
 }
