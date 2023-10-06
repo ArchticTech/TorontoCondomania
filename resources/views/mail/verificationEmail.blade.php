@@ -1,7 +1,16 @@
-<p>Hello {{ $user->name }},</p>
+@component('mail::message')
+# Email Verification
 
-<p>Please click the following link to verify your email address:</p>
+Hello, {{ $name }}
 
-<a href="{{ $verification_link }}">{{ $verification_link }}</a>
+Please click the button below to verify your email address:
 
-<p>If you didn't create an account, you can safely ignore this email.</p>
+@component('mail::button', ['url' => $verification_link])
+Verify Email
+@endcomponent
+
+If you did not create an account, no further action is required.
+
+Thanks,<br>
+{{ config('app.name') }}
+@endcomponent

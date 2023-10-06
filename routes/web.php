@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -21,7 +22,11 @@ Route::prefix('api')->group(function () {
     //CITY
     Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
 
-    Route::get('register/{name}/{email}/{password}', [HomeController::class, 'register'])->name('api.register');
+    Route::get('register/{name}/{email}/{password}', [UserController::class, 'register'])->name('api.register');
+
+    Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
+        ->name('verification.verify')
+        ->middleware(['auth', 'signed']);
 });
 
 // Admin Registration
