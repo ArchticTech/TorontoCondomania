@@ -11,6 +11,10 @@ use App\Http\Resources\DetailedRentalResource;
 use App\Http\Resources\DetailedAssignmentResource;
 use App\Http\Resources\DetailedPropertyResource;
 use App\Models\City;
+use App\Models\FavoriteProperty;
+use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
@@ -78,5 +82,55 @@ class ApiController extends Controller
         $rental = DetailedRentalResource::make($rental);
 
         return $rental;
+    }
+
+    //Client favorite api
+    public function storeFavorite($id)
+    {
+        $user = Auth::user();
+        $userId = $user['id'];
+
+        // Create a new favorite record
+        FavoriteProperty::create([
+            'user_id' => $userId,
+            'property_id' => $id,
+        ]);
+
+        // Return a response, e.g., a success message
+        return response()->json(['message' => 'Added to Favorites successfully']);
+    }
+
+
+    public function getAllFavorites()
+    {
+        $user = Auth::user();
+
+        return response()->json($user->favorites);
+    }
+
+    public function deleteFavorite($id)
+    {
+        try {
+            $user = Auth::user();
+            $userId = $user['id'];
+            // $favorite = FavoriteProperty::findOrFail($user && $id);
+            // $favorite = FavoriteProperty::find([$userId, $id]);
+            $favorite = FavoriteProperty::where('user_id', $userId)
+                ->where('property_id', $id)
+                ->delete();
+            // dd($favorite);
+
+            // Delete the favorite record
+            // $favorite->delete();
+
+            // Return a success response
+            return response()->json(['message' => 'Favorite property deleted successfully']);
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the favorite record is not found
+            return response()->json(['error' => 'Favorite property not found'], 404);
+        } catch (\Exception $e) {
+            // Handle other exceptions
+            return response()->json(['error' => 'An error occurred' ,$e], 500);
+        }
     }
 }

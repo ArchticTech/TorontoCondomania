@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->role == 1;
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(FavoriteProperty::class);
+    }
 }

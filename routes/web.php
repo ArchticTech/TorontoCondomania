@@ -14,12 +14,17 @@ Route::prefix('api')->group(function () {
 
     Route::get('getAllAssignments', [ApiController::class, 'getAllAssignments'])->name('api.allAssignments');
     Route::get('getAssignment/{id}', [ApiController::class, 'getAssignment'])->name('api.getAssignments');
-  
+
     Route::get('getAllRentals', [ApiController::class, 'getAllRentals'])->name('api.allRentals');
     Route::get('getRental/{slug}', [ApiController::class, 'getRental'])->name('api.getRental');
 
     //CITY
     Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
+
+    //Favorite Table
+    Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
+    Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
+    Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');
 });
 
 // Admin Registration
