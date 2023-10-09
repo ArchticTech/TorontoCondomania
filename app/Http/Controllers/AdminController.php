@@ -498,7 +498,6 @@ class AdminController extends Controller
     }
     public function updateinteriorDesigner(Request $request, $id)
     {
-        // dd($request->all());
         // Validate the request data
         $validatedData = $request->validate([
             'interior_designer_name' => 'required|string|max:255',
