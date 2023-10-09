@@ -27,7 +27,8 @@ Route::prefix('api')->group(function () {
     Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
     Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');
 
-    Route::get('register/{name}/{email}/{password}', [UserController::class, 'register'])->name('api.register');
+    Route::get('register/{name}/{email}/{password}', 
+    [UserController::class, 'register'])->name('api.register');
 
     Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
         ->name('verification.verify')

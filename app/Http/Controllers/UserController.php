@@ -20,19 +20,36 @@ class UserController extends Controller
      */
     public function register($name, $email, $password)
     {
-        // Create a new user
-        $user = User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => Hash::make($password),
-            'email_verification_token' => Str::random(60), // Generate a unique token for email verification
-        ]);
+        $user = User::where('email', $email)->first();
+        $msg = '';
+
+        if(!$user)
+        {
+            // Create a new user
+            $user = User::create([
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+                'email_verification_token' => Str::random(60), // Generate a unique token for email verification
+            ]);
+            $msg = "new_user_created";
+        }
+        else if ($user->email_verified_at != null)
+        {
+            return response()->json([
+                "error"=> [
+                "code"=> "user_already_exists",
+            ]], 409);
+        }
+        else {
+            $msg = "user_not_verified";
+        }
         Auth::login($user);
         // Send an email with a verification link
         $this->sendVerificationEmail($user);
 
         // Return a response indicating successful registration
-        return response()->json(['message' => 'Registration successful. Please check your email for verification.'], 201);
+        return response()->json(['msg' => $msg], 201);
     }
 
     protected function sendVerificationEmail($user)
