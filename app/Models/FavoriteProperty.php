@@ -9,23 +9,6 @@ class FavoriteProperty extends Model
 {
     use HasFactory;
 
-    // protected $table = 'favorites_property';
-    // protected $primaryKey = ['user_id', 'property_id'];
-
-    // protected $fillable = [
-    //     'user_id',
-    //     'property_id',
-    // ];
-
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
-
-    // public function property()
-    // {
-    //     return $this->belongsTo(Property::class);
-    // }
     protected $table = 'favorites_property';
 
     // Disable automatic primary key detection
