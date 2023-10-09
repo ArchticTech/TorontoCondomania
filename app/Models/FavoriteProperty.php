@@ -35,6 +35,7 @@ class FavoriteProperty extends Model
     public $incrementing = false;
 
     protected $fillable = [
+        'id',
         'user_id',
         'property_id',
     ];
@@ -46,7 +47,7 @@ class FavoriteProperty extends Model
 
     public function property()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsTo(Property::class, 'property_id');
     }
 
     // Override the getKeyName method to specify the composite primary key

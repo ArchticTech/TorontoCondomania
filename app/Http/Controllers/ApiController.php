@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BriefAssignmentResource;
+use App\Http\Resources\BriefFavouriteResource;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Http\Resources\BriefPropertyResource;
@@ -15,6 +16,7 @@ use App\Models\FavoriteProperty;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -87,8 +89,8 @@ class ApiController extends Controller
     //Client favorite api
     public function storeFavorite($id)
     {
-        $user = Auth::user();
-        $userId = $user['id'];
+        // $user = Auth::user();
+        $userId = 1;
 
         // Create a new favorite record
         FavoriteProperty::create([
@@ -103,19 +105,32 @@ class ApiController extends Controller
 
     public function getAllFavorites()
     {
-        $user = Auth::user();
+        // User is authenticated
+        //$user = auth()->user();
+        $userId = 1;
 
-        return response()->json($user->favorites);
+        // Retrieve all favorites for the user
+        $favorites = FavoriteProperty::where('user_id', $userId)->get();
+
+        // Iterate through favorites and delete invalid property IDs
+        $favFiltered = $favorites->filter(function ($favorite) {
+            return $favorite->property !== null; // Replace with your condition
+        });
+
+        // dd($fav);
+        $favorites = BriefFavouriteResource::collection($favFiltered);
+
+        return $favorites;
     }
 
     public function deleteFavorite($id)
     {
         try {
-            $user = Auth::user();
-            $userId = $user['id'];
+            // $user = Auth::user();
+            $userId = 1;
             // $favorite = FavoriteProperty::findOrFail($user && $id);
             // $favorite = FavoriteProperty::find([$userId, $id]);
-            $favorite = FavoriteProperty::where('user_id', $userId)
+            FavoriteProperty::where('user_id', $userId)
                 ->where('property_id', $id)
                 ->delete();
             // dd($favorite);
@@ -130,7 +145,7 @@ class ApiController extends Controller
             return response()->json(['error' => 'Favorite property not found'], 404);
         } catch (\Exception $e) {
             // Handle other exceptions
-            return response()->json(['error' => 'An error occurred' ,$e], 500);
+            return response()->json(['error' => 'An error occurred', $e], 500);
         }
     }
 }
