@@ -22,13 +22,21 @@ Route::prefix('api')->group(function () {
     //CITY
     Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
 
-    //Favorite Table
-    Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
-    Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
-    Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');
+    Route::middleware(['checkToken'])->group(function () {
+        //Favorite Table
+        Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
+        Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
+        Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');
+    });
 
-    Route::get('register/{name}/{email}/{password}', 
+    Route::get('register/{name}/{email}/{password}',
     [UserController::class, 'register'])->name('api.register');
+    
+    Route::get('authenticate/{email}/{password}', 
+    [UserController::class, 'authenticate'])->name('api.authenticate');
+    
+    Route::get('resendEmail/{email}', 
+    [UserController::class, 'resendEmail'])->name('api.resendEmail');
 
     Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
         ->name('verification.verify')

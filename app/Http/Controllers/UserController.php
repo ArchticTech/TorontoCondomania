@@ -29,7 +29,7 @@ class UserController extends Controller
             $user = User::create([
                 'name' => $name,
                 'email' => $email,
-                'password' => $password,
+                'password' => bcrypt($password),
                 'email_verification_token' => Str::random(60), // Generate a unique token for email verification
             ]);
             $msg = "new_user_created";
@@ -44,12 +44,30 @@ class UserController extends Controller
         else {
             $msg = "user_not_verified";
         }
-        Auth::login($user);
         // Send an email with a verification link
         $this->sendVerificationEmail($user);
 
         // Return a response indicating successful registration
         return response()->json(['msg' => $msg], 201);
+    }
+    public function authenticate($email, $password)
+    {
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $user = auth()->user();
+        
+            if ($user->email_verified_at !== null) {
+                // User's email is verified, generate a token
+                $token = $user->createToken('authToken')->plainTextToken;
+        
+                return response()->json(['token' => $token], 200);
+            } else {
+                // User's email is not verified
+                return response()->json(['error' => 'email_not_verified'], 401);
+            }
+        } else {
+            // Authentication failed
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
     }
 
     protected function sendVerificationEmail($user)
@@ -76,6 +94,15 @@ class UserController extends Controller
             return response()->json(['success', 'Email verified successfully.']);
         } else {
             return response()->json(['error', 'Email verification failed.']);
+        }
+    }
+    public function resendEmail($email)
+    {
+        $user = User::where('email', $email)->first();
+        
+        if($user && $user->email_verified_at == null)
+        {
+            $this->sendVerificationEmail($user);
         }
     }
 }
