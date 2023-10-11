@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\ConsultationController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -25,6 +26,9 @@ Route::prefix('api')->group(function () {
     Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
     Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
     Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');
+
+    // Consultation api
+    Route::post('/addConsultingForm', [ApiController::class, 'storeConsultation'])->name('admin.consultingForm.add');
 });
 
 // Admin Registration
@@ -44,11 +48,15 @@ Route::prefix('secure-zone')->group(function () {
         Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
         // Consulting forms
-        Route::get('/consulting-form', [AdminController::class, 'consultingForm'])->name('admin.consultingForm');
+        Route::get('/consulting-form', [ApiController::class, 'showAllConsultation'])->name('admin.consultingForm');
+        // Route::resource('/consultations', 'App\Http\Controllers\ContactConsultationController');
+
         // Subscription form
         Route::get('/subscription-form', [AdminController::class, 'subscriptionForm'])->name('admin.subscriptionForm');
         // Property Information
         Route::get('/property-information', [AdminController::class, 'propertyInfo'])->name('admin.propertyInfo');
+        // Property Information
+        Route::get('/reserved-floor-plan', [AdminController::class, 'reservedFloorPlans'])->name('admin.reservedFloorPlans');
 
         Route::prefix('property')->group(function () {
             // Routes within the 'secure-zone/property' group

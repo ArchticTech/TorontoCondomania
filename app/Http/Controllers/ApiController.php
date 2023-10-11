@@ -12,6 +12,7 @@ use App\Http\Resources\DetailedRentalResource;
 use App\Http\Resources\DetailedAssignmentResource;
 use App\Http\Resources\DetailedPropertyResource;
 use App\Models\City;
+use App\Models\ContactConsultation;
 use App\Models\FavoriteProperty;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -48,11 +49,11 @@ class ApiController extends Controller
     }
     public function getAssignment($id)
     {
-        $property = PropertyController::get($id);
+        $assignment = AssignmentController::get($id);
 
-        $property = DetailedAssignmentResource::make($property);
+        $assignment = DetailedAssignmentResource::make($assignment);
 
-        return $property;
+        return $assignment;
     }
 
     public function getCity($name)
@@ -146,6 +147,32 @@ class ApiController extends Controller
         } catch (\Exception $e) {
             // Handle other exceptions
             return response()->json(['error' => 'An error occurred', $e], 500);
+        }
+    }
+
+    public function showAllConsultation()
+    {
+        // Get all records from tbl_contact_consultation
+        $consultations = ContactConsultation::all();
+
+        return view('admin.consulting-form', compact('consultations'));
+    }
+
+    public function storeConsultation(Request $request)
+    {
+        // Validate the request data
+        // $request->validate([
+        //     'full_name' => 'required',
+        //     'phone_no' => 'required',
+        //     'email_address' => 'required',
+        //     'message_consultation' => 'required',
+        //     'created_date' => 'required',
+        // ]);
+        try {
+            ContactConsultation::create($request->all());
+            return response()->json(['message' => 'Consultation added successfully'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while saving the consultation.' , $e], 500);
         }
     }
 }

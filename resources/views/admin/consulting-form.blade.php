@@ -16,21 +16,32 @@
                                 <table id="tables"
                                     class="table table-bordered table-sm table-hover">
                                     <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Full Name</th>
-                                            <th>Phone Number</th>
-                                            <th>Email Address</th>
-                                            <th>Response</th>
-                                            <th>Looking for Purchase</th>
-                                            <th>Message</th>
-                                            <th>Created At</th>
+                                        <tr >
+                                            <th style="color: #000">ID</th>
+                                            <th style="color: #000">Full Name</th>
+                                            <th style="color: #000">Phone Number</th>
+                                            <th style="color: #000">Email Address</th>
+                                            <th style="color: #000">Response</th>
+                                            <th style="color: #000">Broker</th>
+                                            <th style="color: #000">Looking for Purchase</th>
+                                            <th style="color: #000">Message</th>
+                                            <th style="color: #000">Created At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($consultations as $consultation)
                                             <tr>
-                                                <td colspan="8" class="text-center">No data to display</td>
+                                                <td>{{ $consultation->id }}</td>
+                                                <td>{{ $consultation->full_name }}</td>
+                                                <td>{{ $consultation->phone_no }}</td>
+                                                <td>{{ $consultation->email_address }}</td>
+                                                <td>{{ $consultation->call_response }}</td>
+                                                <td>{{ $consultation->isBroker }}</td>
+                                                <td>{{ $consultation->looking_for_purchase }}</td>
+                                                <td>{{ $consultation->message_consultation }}</td>
+                                                <td>{{ $consultation->created_at }}</td>
                                             </tr>
+                                            @endforeach
                                     </tbody>
                                 </table>
                             </div>

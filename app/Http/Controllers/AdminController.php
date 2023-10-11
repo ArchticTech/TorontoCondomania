@@ -223,15 +223,21 @@ class AdminController extends Controller
     }
 
     // Consulting form
-    public function consultingForm()
-    {
-        return view('admin.consulting-form');
-    }
+    // public function consultingForm()
+    // {
+    //     return view('admin.consulting-form');
+    // }
 
     // Subscription Form
     public function subscriptionForm()
     {
         return view('admin.subscription-form');
+    }
+
+    // Reserved floor plans
+    public function reservedFloorPlans()
+    {
+        return view('admin.reserved-floor-plans');
     }
 
     public function login()
