@@ -7,6 +7,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [ApiController::class, 'login'])->name('login');
 
 Route::prefix('api')->group(function () {
 
@@ -22,7 +23,7 @@ Route::prefix('api')->group(function () {
     //CITY
     Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
 
-    Route::middleware(['checkToken'])->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
         //Favorite Table
         Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
         Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');

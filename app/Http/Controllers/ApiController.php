@@ -133,4 +133,9 @@ class ApiController extends Controller
             return response()->json(['error' => 'An error occurred' ,$e], 500);
         }
     }
+
+    public function login()
+    {
+        return response()->json(['error' => 'invalid_token'], 401);
+    }
 }

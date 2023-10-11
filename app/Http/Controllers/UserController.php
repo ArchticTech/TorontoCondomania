@@ -37,9 +37,8 @@ class UserController extends Controller
         else if ($user->email_verified_at != null)
         {
             return response()->json([
-                "error"=> [
-                "code"=> "user_already_exists",
-            ]], 409);
+                "error" => "user_already_exists"
+            ], 409);
         }
         else {
             $msg = "user_not_verified";
@@ -62,6 +61,7 @@ class UserController extends Controller
                 return response()->json(['token' => $token], 200);
             } else {
                 // User's email is not verified
+                $this->sendVerificationEmail($user);
                 return response()->json(['error' => 'email_not_verified'], 401);
             }
         } else {
