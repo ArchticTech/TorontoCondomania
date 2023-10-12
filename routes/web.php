@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\FloorPlanResvervationController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -28,7 +29,10 @@ Route::prefix('api')->group(function () {
     Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');
 
     // Consultation api
-    Route::post('/addConsultingForm', [ApiController::class, 'storeConsultation'])->name('admin.consultingForm.add');
+    Route::post('/addConsultingForm', [ApiController::class, 'storeConsultation'])->name('admin.addConsultingForm');
+
+    // floor plan api
+    Route::post('/addFloorPlanReservation', [FloorPlanResvervationController::class, 'store'])->name('admin.addFloorPlanReservation');
 });
 
 // Admin Registration

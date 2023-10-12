@@ -43,14 +43,14 @@ class DetailedAssignmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'property' => DetailedPropertyResource::make($this->property),
             'unit_no' => $this->assign_unit_no,
             'floor_no' => $this->assign_floor_no,
             'purchase_price' => $this->assign_purchase_price,
             'tentative_occ_date' => $this->assign_tentative_occ_date,
             'purchased_date' => $this->assign_purchased_date,
-            'cooperation_percentage	' => $this->assign_cooperation_percentage,
+            'cooperation_percentage' => $this->assign_cooperation_percentage,
             'deposit_paid' => $this->assign_deposit_paid,
+            'property' => DetailedPropertyResource::make($this->property),
         ];
     }
 }
