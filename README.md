@@ -65,36 +65,73 @@
 - Successfully completed the development of the admin section.
 - Launched the admin section on the staging server for evaluation.
 
+**In Next JS Client Side Application**
+- Installed the Next.js application, setting the foundation for further development.
+
 ## Wednesday, September 13:
 **In Laravel Admin and APIs:**
 - Developed the GetAllProperties API for efficient property data retrieval.
+
+**In Next JS Client Side Application**
+- Skillfully displayed property listings for users to browse and explore.
 
 ## Thursday, September 14:
 **In Laravel Admin and APIs:**
 - Implemented essential changes in the Properties API to enhance its functionality.
 
+**In Next JS Client Side Application**
+- Efficiently resolved image-related issues to ensure smooth user interactions.
+- Introduced global variables for consistent data management.
+- Updated API URLs for enhanced functionality.
+- Successfully resolved build errors, ensuring a seamless user experience.
+
 ## Friday, September 15:
 **In Laravel Admin and APIs:**
 - Successfully introduced a Single Property Data Get API for precise data retrieval.
 
+**In Next JS Client Side Application**
+- Fetched essential API data to populate the Property View Page with accurate property information.
+
 ## Monday, September 18:
 **In Laravel Admin and APIs:**
 - Implemented strategic changes in the Detailed Property Resource for a more comprehensive property management system.
+
+**In Next JS Client Side Application**
+- Made minor modifications to the Property Display Page to enhance its presentation.
+- Added property images and created a user-friendly image popup feature for property details.
 
 ## Tuesday, September 19:
 **In Laravel Admin and APIs:**
 - Partially merged code related to Masam's property information, paving the way for further enhancements.
 - Skillfully introduced a TinyMCE text editor to streamline property description management.
 
+**In Next JS Client Side Application**
+- Successfully implemented the Single Property Display Page, offering a comprehensive view of individual properties.
+- Changed the background image for a more visually appealing layout.
+
 ## Wednesday, September 20:
 **In Laravel Admin and APIs:**
 - Seamlessly integrated Mapbox into the project, enhancing map functionality.
+
+**In Next JS Client Side Application**
+- Made substantial edits to the main page, including all its associated pages and components, to provide a more polished and cohesive user interface.
 
 ## Thursday, September 21:
 **In Laravel Admin and APIs:**
 - Added essential latitude and longitude data to the API for improved location-based services.
 - Diligently resolved issues related to pagination for a smoother user experience.
 - Successfully completed the integration of MapBox, enhancing map-related functionalities.
+
+**In Next JS Client Side Application**
+- Successfully completed the integration of maps, enhancing location-based functionalities.
+
+## Thursday, September 22:
+**In Next JS Client Side Application**
+- Updated the content on the home page for improved user experience.
+
+## Tuesday, September 25:
+**In Next JS Client Side Application**
+
 
 ## Tuesday, September 26:
 
