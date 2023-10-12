@@ -11,7 +11,6 @@ Route::get('/login', [ApiController::class, 'login'])->name('login');
 
 Route::prefix('api')->group(function () {
 
-    Route::get('getAllProperties', [ApiController::class, 'getAllProperties'])->name('api.allProperties');
     Route::get('getProperty/{slug}', [ApiController::class, 'getProperty'])->name('api.getProperty');
 
     Route::get('getAllAssignments', [ApiController::class, 'getAllAssignments'])->name('api.allAssignments');
@@ -25,6 +24,7 @@ Route::prefix('api')->group(function () {
 
     Route::middleware(['auth:sanctum'])->group(function () {
         //Favorite Table
+    Route::get('getAllProperties', [ApiController::class, 'getAllProperties'])->name('api.allProperties');
         Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
         Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
         Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');

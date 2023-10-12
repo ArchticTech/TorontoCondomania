@@ -47,7 +47,7 @@ class UserController extends Controller
         $this->sendVerificationEmail($user);
 
         // Return a response indicating successful registration
-        return response()->json(['msg' => $msg], 201);
+        return response()->json(['msg' => $msg]);
     }
     public function authenticate($email, $password)
     {
@@ -62,11 +62,11 @@ class UserController extends Controller
             } else {
                 // User's email is not verified
                 $this->sendVerificationEmail($user);
-                return response()->json(['error' => 'email_not_verified'], 401);
+                return response()->json(['error' => 'email_not_verified']);
             }
         } else {
             // Authentication failed
-            return response()->json(['error' => 'invalid_credentials'], 401);
+            return response()->json(['error' => 'invalid_credentials']);
         }
     }
 
