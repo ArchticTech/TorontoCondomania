@@ -239,6 +239,9 @@
 
 **In Next JS Client Side Application**
 - Created an API for user registration, enhancing the registration process.
+- Successfully fixed a bug related to the checkbox filter, ensuring accurate filtering of rental properties.
+- Integrated a global filter into the rental module on the main page for a more efficient property search experience.
+- Designed and integrated a visually appealing client dashboard to enhance the user interface.
 
 ## Monday, October 09:
 
@@ -246,9 +249,14 @@
 - Introduced the favorite property feature, allowing users to conveniently mark and manage their preferred properties.
 - Streamlined development efforts by merging the Masam branch into the main branch.
 - Made minor enhancements to the UserController for improved user management.
+- Developed the necessary APIs and backend functionality to support the favorite property module.
+- Ensured data synchronization between the frontend and backend for a consistent user experience.
 
 **In Next JS Client Side Application**
 - Developed the registration functionality, making it easier for users to join the platform.
+- Integrated the favorite property module into the user interface, allowing users to mark and manage their preferred properties.
+- Implemented user-friendly features for property favoriting.
+- Ensured seamless integration with the backend through APIs.
 
 ## Tuesday, October 10:
 
@@ -257,20 +265,30 @@
 
 **In Next JS Client Side Application**
 - Implemented registration and email verification pop-up functionality, enhancing user account management.
+- About Us Page Redesigned that was provided by UI/UX designer.
 
 ## Wednesday, October 11:
 
 **In Laravel Admin and APIs:**
 - Enhanced application security by integrating token middleware to validate tokens effectively.
+- Implemented the lead generation module on the backend to process and store lead information.
+- Resolved issues and bugs pertaining to slug handling, API endpoints, and other backend functionalities.
 
 **In Next JS Client Side Application**
 - Created a loading icon for improved user experience.
 - Successfully completed the login functionality, allowing users to access their accounts.
+- Integrated the lead generation module, enabling users to submit inquiries and generate leads.
+- Addressed and fixed various bugs related to slug management, API interactions, and other frontend issues.
 
 ## Thursday, October 12:
 
 **In Laravel Admin and APIs:**
 - Made minor refinements in the authentication token request for improved performance and reliability.
+- Integrated APIs to support floor plan reservation functionality.
+- Designed the backend to handle data sent from the frontend modals.
 
 **In Next JS Client Side Application**
-- Created an API proxy, enhancing communication between the application and external services.
+- Created an API proxy, enhancing communication between the application and external services and increase security.
+- Integrated multi-modals to facilitate floor plan reservation.
+- Implemented state management to efficiently handle multiple modals and send data to the backend.
+- Created forms within the modals to collect information from two purchasers.
