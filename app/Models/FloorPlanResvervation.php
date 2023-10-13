@@ -34,4 +34,13 @@ class FloorPlanResvervation extends Model
         'photo_2',
         'reservation_status',
     ];
+    public function floor_plan()
+    {
+        return $this->belongsTo(PropertyFloorPlan::class , 'property_floor_plan_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class , 'tbl_user_id');
+    }
 }

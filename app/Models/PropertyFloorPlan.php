@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\FloorPlanResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,9 @@ class PropertyFloorPlan extends Model
     public function property()
     {
         return $this->belongsTo(Property::class);
+    }
+    public function reservations()
+    {
+        return $this->hasMany(FloorPlanResvervation::class, 'property_floor_plan_id');
     }
 }

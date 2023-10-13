@@ -18,16 +18,34 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>User Name</th>
-                                            <th>email</th>
-                                            <th>Contact  No</th>
-                                            <th>Property Name</th>
+                                            <th>Purchaser Name</th>
+                                            <th>User Logged In</th>
+                                            <th>Suite Name</th>
+                                            <th>Suite No</th>
+                                            <th>Bed</th>
+                                            <th>Bath</th>
+                                            <th>Terrace/Balcony</th>
+                                            <th>Reservation Date</th>
+                                            <th>Reservation Status</th>
+                                            <th>View</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($totalReservation as $total)
                                         <tr>
-                                            <td colspan="5" class="text-center">No data to display</td>
+                                            <td>{{ $total->id }}</td>
+                                            <td>{{ $total->first_name_1 }} {{ $total->last_name_1 }}</td>
+                                            <td>{{ $total->user->name }}</td>
+                                            <td>{{ $total->floor_plan->plan_suite_name }}</td>
+                                            <td>{{ $total->floor_plan->plan_suite_no }}</td>
+                                            <td>{{ $total->floor_plan->plan_bed }}</td>
+                                            <td>{{ $total->floor_plan->plan_bath }}</td>
+                                            <td>{{ $total->floor_plan->plan_terrace_balcony }}</td>
+                                            <td>{{ $total->floor_plan->created_at }}</td>
+                                            <td>{{ $total->reservation_status }}</td>
+                                            <td><a href="/secure-zone/reserved-floor-plan/details"><i class="icon-eye-open"></i></a></td>
                                         </tr>
+                                            @endforeach
                                     </tbody>
                                 </table>
                             </div>

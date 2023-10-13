@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\FloorPlanResvervationController;
+use GuzzleHttp\Middleware;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -61,6 +62,7 @@ Route::prefix('secure-zone')->group(function () {
         Route::get('/property-information', [AdminController::class, 'propertyInfo'])->name('admin.propertyInfo');
         // Property Information
         Route::get('/reserved-floor-plan', [AdminController::class, 'reservedFloorPlans'])->name('admin.reservedFloorPlans');
+        Route::get('/reserved-floor-plan/details', [AdminController::class, 'reservedFloorPlanDetails'])->name('admin.reservedFloorPlanDetails');
 
         Route::prefix('property')->group(function () {
             // Routes within the 'secure-zone/property' group

@@ -9,24 +9,43 @@ class FloorPlanResvervationController extends Controller
 {
     public function store(Request $request)
     {
-        // Validate the incoming request data
-        // $validatedData = $request->validate([
-        //     'property_floor_plan_id' => 'required',
-        //     'tbl_u_id' => 'required',
-        //     'email_1' => 'required|email',
-        //     'occupation_1' => 'required',
-        //     'reservation_status' => 'required',
-        //     // Add validation rules for other fields as needed
-        // ]);
+        $reservedFloor = FloorPlanResvervation::where([
+            ['property_floor_plan_id', $request->property_floor_plan_id],
+            ['tbl_user_id', $request->tbl_user_id]
+        ])->first();
 
-        // Create a new FloorPlanResvervation model instance
-        try {
-            FloorPlanResvervation::create($request->all());
-            // Redirect to a success page or return a response
-            // return redirect()->back()->route('success.page');
-            return response()->json(['message' => 'Floor plan added successfully'], 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred while saving the Floor plan.' , $e]);
+        if (!$reservedFloor)
+        {
+            $reservedFloor = new FloorPlanResvervation();
         }
+        $reservedFloor->property_floor_plan_id = $request->property_floor_plan_id;
+        $reservedFloor->tbl_user_id = $request->tbl_user_id;
+        $reservedFloor->first_name_1 = $request->first_name_1;
+        $reservedFloor->last_name_1 = $request->last_name_1;
+        $reservedFloor->email_1 = $request->email_1;
+        $reservedFloor->phone_number_1 = $request->phone_number_1;
+        $reservedFloor->street_address_1 = $request->street_address_1;
+        $reservedFloor->city_1 = $request->city_1;
+        $reservedFloor->postal_code_1 = $request->postal_code_1;
+        $reservedFloor->occupation_1 = $request->occupation_1;
+        $reservedFloor->first_name_2 = $request->first_name_2;
+        $reservedFloor->last_name_2 = $request->last_name_2;
+        $reservedFloor->email_2 = $request->email_2;
+        $reservedFloor->phone_number_2 = $request->phone_number_2;
+        $reservedFloor->street_address_2 = $request->street_address_2;
+        $reservedFloor->city_2 = $request->city_2;
+        $reservedFloor->postal_code_2 = $request->postal_code_2;
+        $reservedFloor->occupation_2 = $request->occupation_2;
+
+        $reservedFloor->save();
+
+        // try {
+        //     FloorPlanResvervation::create($request->all());
+        //     // Redirect to a success page or return a response
+        //     // return redirect()->back()->route('success.page');
+        //     return response()->json(['message' => 'Floor plan added successfully'], 201);
+        // } catch (\Exception $e) {
+        //     return response()->json(['error' => 'An error occurred while saving the Floor plan.' , $e]);
+        // }
     }
 }

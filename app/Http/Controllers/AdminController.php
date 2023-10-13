@@ -12,6 +12,7 @@ use App\Models\Development;
 use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
+use App\Models\FloorPlanResvervation;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -237,7 +238,18 @@ class AdminController extends Controller
     // Reserved floor plans
     public function reservedFloorPlans()
     {
-        return view('admin.reserved-floor-plans');
+        $totalReservation = FloorPlanResvervation::all();
+        // $reserved =$totalReservation->floor_plan;
+        // dd($reserved);
+        return view('admin.reserved-floor-plans',['totalReservation' => $totalReservation]);
+    }
+
+    public function reservedFloorPlanDetails()
+    {
+        $totalReservation = FloorPlanResvervation::all();
+        // $reserved =$totalReservation->floor_plan;
+        // dd($reserved);
+        return view('admin.reserved-floor-plan-detail');
     }
 
     public function login()

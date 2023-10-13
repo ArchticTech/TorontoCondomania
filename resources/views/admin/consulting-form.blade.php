@@ -1,6 +1,7 @@
 @extends('components.admin.layout')
 @section('content')
 
+   {{  print_r($request) }}
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
@@ -29,7 +30,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($consultations as $consultation)
+                                        {{-- @foreach ($consultations as $consultation)
                                             <tr>
                                                 <td>{{ $consultation->id }}</td>
                                                 <td>{{ $consultation->full_name }}</td>
@@ -41,7 +42,7 @@
                                                 <td>{{ $consultation->message_consultation }}</td>
                                                 <td>{{ $consultation->created_at }}</td>
                                             </tr>
-                                            @endforeach
+                                            @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>

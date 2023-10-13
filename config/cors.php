@@ -1,4 +1,5 @@
 <?php
+use Barryvdh\Cors\Middleware\HandleCors;
 
 return [
 
@@ -19,7 +20,9 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowedOrigins' => ['http://localhost:3000'],
+
+    'supports_credentials' => true,
 
     'allowed_origins_patterns' => [],
 
