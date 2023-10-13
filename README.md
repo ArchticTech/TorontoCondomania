@@ -131,17 +131,34 @@
 
 ## Tuesday, September 25:
 **In Next JS Client Side Application**
-
+- Made changes in the 'main.css' file.
+- Began work on the Advanced Search feature, involving minor changes.
 
 ## Tuesday, September 26:
-
 **In Laravel Admin and APIs:**
 - Developed a Form Component to enhance user interactions.
+
+**In Next JS Client Side Application**
+- Merged changes from the main branch.
+- Edited the style of min and max area elements.
+- Added background elements.
+- Integrated a link to access all properties.
+- Partially merged changes with 'masam.'
+- Resolved scroll-related issues.
+- Addressed minor bugs.
+- Completed the Advanced Search feature, involving changes in various files.
+- Completed Map Hover functionality.
+- Worked on Map Location Marker Hover effect.
 
 ## Wednesday, September 27:
 
 **In Laravel Admin and APIs:**
 - Added essential floor plans and advanced search data to the Property APIs for a more comprehensive property search experience.
+
+**In Next JS Client Side Application**
+- Updated and secured the SSL API link.
+- Updated the API link of the Laravel Server.
+- Reduced code complexity and resolved build errors.
 
 ## Thursday, September 28:
 
@@ -158,6 +175,21 @@
 - Improved the property form for user convenience.
 - Efficiently reverted prior commits related to images and properties.
 
+**In Next JS Client Side Application**
+- Advanced Search on the Home Page commenced.
+- Floor plan added, and associated bugs resolved.
+- Added 'env' to git ignore.
+- Merged changes from the 'masam' branch.
+- Implemented changes in 'env' settings.
+- Adjusted 'gitignore' file.
+- Integrated floor plans into the Single Property Page.
+- Added floor plans to the Single Property View Page.
+
+## Monday, October 02:
+
+**In Next JS Client Side Application**
+- Successfully completed the development of the Advanced Search functionality, enhancing the user's ability to find specific properties.
+
 ## Tuesday, October 03:
 
 **In Laravel Admin and APIs:**
@@ -168,6 +200,10 @@
 - Improved the functionality of rental migrations and forms for smoother operations.
 - Incorporated City Count APIs for insightful data analysis.
 - Enabled users to add rental properties through the integration of the add rental module.
+  
+**In Next JS Client Side Application**
+- Merged multiple branches to consolidate development efforts and improve code consistency.
+- Integrated the assignment module, adding an assignment slider to the main page and enabling users to view individual assignments.
 
 ## Wednesday, October 04:
 
@@ -178,6 +214,11 @@
 - Enhanced the assignment API to fetch city-related data.
 - Ensured code synchronization by merging changes from the main branch into Masam's branch.
 
+**In Next JS Client Side Application**
+- Added a dropdown listing for user convenience.
+- Enhanced the functionality of the search box to filter cities and improved the rental module.
+- Successfully integrated a rental slider on the home page, single rental page, and resolved various issues.
+
 ## Thursday, October 05:
 
 **In Laravel Admin and APIs:**
@@ -185,11 +226,19 @@
 - Maintained code consistency by integrating main branch changes into Masam's branch.
 - Commenced the SwiftMailer Email Verification work to enhance overall security.
 
+**In Next JS Client Side Application**
+- Merged branches to streamline development.
+- Implemented Mapbox marker filtering on the Advanced Search, enabling users to find properties more effectively.
+- Integrated the rental module, allowing users to explore rental listings and made other minor changes.
+
 ## Friday, October 06:
 
 **In Laravel Admin and APIs:**
 - Implemented an email verification system during the registration process, bolstering account security.
 - Enabled users to add properties to their favorites with the integration of a dedicated API.
+
+**In Next JS Client Side Application**
+- Created an API for user registration, enhancing the registration process.
 
 ## Monday, October 09:
 
@@ -198,17 +247,30 @@
 - Streamlined development efforts by merging the Masam branch into the main branch.
 - Made minor enhancements to the UserController for improved user management.
 
+**In Next JS Client Side Application**
+- Developed the registration functionality, making it easier for users to join the platform.
+
 ## Tuesday, October 10:
 
 **In Laravel Admin and APIs:**
 - Successfully completed the token generation for the login API, enhancing authentication and user access.
+
+**In Next JS Client Side Application**
+- Implemented registration and email verification pop-up functionality, enhancing user account management.
 
 ## Wednesday, October 11:
 
 **In Laravel Admin and APIs:**
 - Enhanced application security by integrating token middleware to validate tokens effectively.
 
+**In Next JS Client Side Application**
+- Created a loading icon for improved user experience.
+- Successfully completed the login functionality, allowing users to access their accounts.
+
 ## Thursday, October 12:
 
 **In Laravel Admin and APIs:**
 - Made minor refinements in the authentication token request for improved performance and reliability.
+
+**In Next JS Client Side Application**
+- Created an API proxy, enhancing communication between the application and external services.
