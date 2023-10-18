@@ -15,6 +15,7 @@ class FloorPlanResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=> $this->id,
             'image' => $this->floor_plan_image,
             'suite_no' => $this->plan_suite_no,
             'suite_name' => $this->plan_suite_name,

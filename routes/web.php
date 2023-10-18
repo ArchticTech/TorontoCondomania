@@ -5,6 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\FloorPlanResvervationController;
+use GuzzleHttp\Middleware;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [ApiController::class, 'login'])->name('login');
@@ -24,6 +27,9 @@ Route::prefix('api')->group(function () {
     Route::get('getCityPropertyCount/{name}', [ApiController::class, 'getCity'])->name('api.getCityPropertyCount');
 
     Route::middleware(['auth:sanctum'])->group(function () {
+
+        Route::get('/logout', [UserController::class, 'logout'])->name('api.logout');
+
         //Favorite Table
         Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
         Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
@@ -42,6 +48,12 @@ Route::prefix('api')->group(function () {
     Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
         ->name('verification.verify')
         ->middleware(['auth', 'signed']);
+
+    // Consultation api
+    Route::post('/sendConsultationRequest', [ApiController::class, 'storeConsultation'])->name('admin.addConsultingForm');
+
+    // floor plan api
+    Route::post('/addFloorPlanReservation', [FloorPlanResvervationController::class, 'store'])->name('admin.addFloorPlanReservation');
 });
 
 // Admin Registration
@@ -61,11 +73,15 @@ Route::prefix('secure-zone')->group(function () {
         Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
         // Consulting forms
-        Route::get('/consulting-form', [AdminController::class, 'consultingForm'])->name('admin.consultingForm');
+        Route::get('/consultation-requests', [AdminController::class, 'viewConsultingRequests'])->name('admin.consultingForm');
+
         // Subscription form
         Route::get('/subscription-form', [AdminController::class, 'subscriptionForm'])->name('admin.subscriptionForm');
         // Property Information
         Route::get('/property-information', [AdminController::class, 'propertyInfo'])->name('admin.propertyInfo');
+        // Property Information
+        Route::get('/reserved-floor-plan', [AdminController::class, 'reservedFloorPlans'])->name('admin.reservedFloorPlans');
+        Route::get('/reserved-floor-plan/details', [AdminController::class, 'reservedFloorPlanDetails'])->name('admin.reservedFloorPlanDetails');
 
         Route::prefix('property')->group(function () {
             // Routes within the 'secure-zone/property' group

@@ -180,7 +180,7 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="" class="menu-link ">
+                        <a href="{{ route('admin.reservedFloorPlans') }}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div data-i18n="Layouts">Reserved Floor Plans</div>
                         </a>
@@ -266,7 +266,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
+                                                    <span class="fw-semibold d-block">{{ $user = auth()->user()->name; }}</span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>

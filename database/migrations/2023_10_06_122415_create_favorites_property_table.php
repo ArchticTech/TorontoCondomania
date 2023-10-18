@@ -14,9 +14,10 @@ class CreateFavoritesPropertyTable extends Migration
     public function up()
     {
         Schema::create('favorites_property', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('property_id');
-            $table->primary(['user_id', 'property_id']);
+            $table->unique(['user_id', 'property_id']);
             $table->timestamps();
         });
     }

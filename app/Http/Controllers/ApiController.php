@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BriefAssignmentResource;
+use App\Http\Resources\BriefFavouriteResource;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Http\Resources\BriefPropertyResource;
@@ -11,10 +12,12 @@ use App\Http\Resources\DetailedRentalResource;
 use App\Http\Resources\DetailedAssignmentResource;
 use App\Http\Resources\DetailedPropertyResource;
 use App\Models\City;
+use App\Models\ContactConsultation;
 use App\Models\FavoriteProperty;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -46,11 +49,11 @@ class ApiController extends Controller
     }
     public function getAssignment($id)
     {
-        $property = PropertyController::get($id);
+        $assignment = AssignmentController::get($id);
 
-        $property = DetailedAssignmentResource::make($property);
+        $assignment = DetailedAssignmentResource::make($assignment);
 
-        return $property;
+        return $assignment;
     }
 
     public function getCity($name)
@@ -84,58 +87,82 @@ class ApiController extends Controller
         return $rental;
     }
 
-    //Client favorite api
-    public function storeFavorite($id)
-    {
-        $user = Auth::user();
-        $userId = $user['id'];
-
-        // Create a new favorite record
-        FavoriteProperty::create([
-            'user_id' => $userId,
-            'property_id' => $id,
-        ]);
-
-        // Return a response, e.g., a success message
-        return response()->json(['message' => 'Added to Favorites successfully']);
-    }
-
-
     public function getAllFavorites()
     {
-        $user = Auth::user();
+        try {
+            // User is authenticated
+            $user = Auth::user();
 
-        return response()->json($user->favorites);
+            // Retrieve all favorites for the user
+            $favorites = $user->favorites;
+
+            // Iterate through favorites and delete invalid property IDs
+            $favFiltered = $favorites->filter(function ($favorite) {
+                return $favorite->property !== null; 
+            });
+
+            // dd($fav);
+            $favorites = BriefFavouriteResource::collection($favFiltered);
+
+            return $favorites;
+        }
+        catch (Exception $e) {
+            // Handle other exceptions
+            return response()->json(['error' => 'An error occurred', $e], 200);
+        }
     }
-
-    public function deleteFavorite($id)
+    public function deleteFavorite($propertyID)
     {
         try {
+            // User is authenticated
             $user = Auth::user();
-            $userId = $user['id'];
-            // $favorite = FavoriteProperty::findOrFail($user && $id);
-            // $favorite = FavoriteProperty::find([$userId, $id]);
-            $favorite = FavoriteProperty::where('user_id', $userId)
-                ->where('property_id', $id)
-                ->delete();
-            // dd($favorite);
 
-            // Delete the favorite record
-            // $favorite->delete();
+            $favorite = $user->favorites->where('property_id', $propertyID)->first();
 
-            // Return a success response
-            return response()->json(['message' => 'Favorite property deleted successfully']);
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the favorite record is not found
-            return response()->json(['error' => 'Favorite property not found'], 404);
-        } catch (\Exception $e) {
+            if ($favorite) {
+                $favorite->delete();
+                return response()->json(['message' => 'Favorite property deleted successfully']);
+            }
+
+            return response()->json(['message' => 'Favorite property does not exist']);
+        } catch (Exception $e) {
             // Handle other exceptions
-            return response()->json(['error' => 'An error occurred' ,$e], 500);
+            return response()->json(['error' => 'An error occurred', $e], 200);
+        }
+    }
+    public function storeFavorite($propertyID)
+    {
+        try {
+            // User is authenticated
+            $user = Auth::user();
+
+            $favorite = $user->favorites()->firstOrNew(['property_id' => $propertyID]);
+
+            if (!$favorite->exists) {
+                $favorite->save();
+                return response()->json(['message' => 'Added to Favorites successfully']);
+            }
+
+            return response()->json(['message' => 'Already in Favorites']);
+        }
+        catch (Exception $e) {
+            // Handle other exceptions
+            return response()->json(['error' => 'An error occurred', $e], 200);
+        }
+    }
+
+    public function storeConsultation(Request $request)
+    {
+        try {
+            ContactConsultation::create($request->all());
+            return response()->json(['message' => 'Consultation added successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while saving the consultation.' , $e], 500);
         }
     }
 
     public function login()
     {
-        return response()->json(['error' => 'invalid_token'], 401);
+        return response()->json(['error' => 'invalid_token'], 200);
     }
 }

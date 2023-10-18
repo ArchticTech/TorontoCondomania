@@ -117,6 +117,11 @@ class Property extends Model
         return $this->hasMany(PropertyFloorPlan::class);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Property::class ,'property_id', 'id');
+    }
+
     public function assignment()
     {
         return $this->hasOne(Assignment::class, 'property_id', 'id');

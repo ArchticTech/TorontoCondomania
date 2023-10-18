@@ -12,8 +12,10 @@ use App\Models\Development;
 use App\Models\InteriorDesigner;
 use App\Models\PropertyAgent;
 use App\Models\Country;
+use App\Models\FloorPlanResvervation;
 use App\Models\Property;
 use App\Models\User;
+use App\Models\ContactConsultation;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
@@ -222,16 +224,33 @@ class AdminController extends Controller
         }
     }
 
-    // Consulting form
-    public function consultingForm()
+    public function viewConsultingRequests()
     {
-        return view('admin.consulting-form');
+        // Get all records from tbl_contact_consultation
+        $consultations = ContactConsultation::all();
+
+        return view('admin.consulting-form', compact('consultations'));
     }
 
     // Subscription Form
     public function subscriptionForm()
     {
         return view('admin.subscription-form');
+    }
+
+    // Reserved floor plans
+    public function reservedFloorPlans()
+    {
+        $totalReservation = FloorPlanResvervation::all();
+        
+        return view('admin.reserved-floor-plans',['totalReservation' => $totalReservation]);
+    }
+
+    public function reservedFloorPlanDetails()
+    {
+        $totalReservation = FloorPlanResvervation::all();
+        
+        return view('admin.reserved-floor-plan-detail');
     }
 
     public function login()

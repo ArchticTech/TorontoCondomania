@@ -38,7 +38,7 @@ class UserController extends Controller
         {
             return response()->json([
                 "error" => "user_already_exists"
-            ], 409);
+            ], 200);
         }
         else {
             $msg = "user_not_verified";
@@ -104,5 +104,13 @@ class UserController extends Controller
         {
             $this->sendVerificationEmail($user);
         }
+    }
+    public function logout()
+    {
+        auth()->user()->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+
+        return response()->json('Logged out successfully', 200);
     }
 }
