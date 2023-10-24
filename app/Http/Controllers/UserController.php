@@ -58,15 +58,19 @@ class UserController extends Controller
                 // User's email is verified, generate a token
                 $token = $user->createToken('authToken')->plainTextToken;
         
-                return response()->json(['token' => $token], 200);
+                return response()->json([
+                    'token' => $token,
+                    'name' => $user->name,
+                    'email' => $user->email
+                ], 200);
             } else {
                 // User's email is not verified
                 $this->sendVerificationEmail($user);
-                return response()->json(['error' => 'email_not_verified']);
+                return response()->json(['error' => 'email_not_verified'], 200);
             }
         } else {
             // Authentication failed
-            return response()->json(['error' => 'invalid_credentials']);
+            return response()->json(['error' => 'invalid_credentials'], 200);
         }
     }
 
