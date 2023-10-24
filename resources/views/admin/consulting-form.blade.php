@@ -1,7 +1,6 @@
 @extends('components.admin.layout')
 @section('content')
 
-   {{  print_r($request) }}
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
