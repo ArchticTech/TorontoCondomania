@@ -50,6 +50,7 @@ class DetailedAssignmentResource extends JsonResource
             'purchased_date' => $this->assign_purchased_date,
             'cooperation_percentage' => $this->assign_cooperation_percentage,
             'deposit_paid' => $this->assign_deposit_paid,
+            'isAssignment' => true,
             'property' => DetailedPropertyResource::make($this->property),
         ];
     }

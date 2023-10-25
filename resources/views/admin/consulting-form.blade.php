@@ -29,7 +29,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($consultations as $consultation)
+                                        @foreach ($consultations as $consultation)
                                             <tr>
                                                 <td>{{ $consultation->id }}</td>
                                                 <td>{{ $consultation->full_name }}</td>
@@ -41,7 +41,7 @@
                                                 <td>{{ $consultation->message_consultation }}</td>
                                                 <td>{{ $consultation->created_at }}</td>
                                             </tr>
-                                            @endforeach --}}
+                                            @endforeach
                                     </tbody>
                                 </table>
                             </div>
