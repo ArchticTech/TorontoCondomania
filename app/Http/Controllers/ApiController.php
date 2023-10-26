@@ -62,7 +62,7 @@ class ApiController extends Controller
 
         $propertyCount = 0;
         if ($city) {
-            $propertyCount = Property::where('city_id', $city->id)->count();
+            $propertyCount = Property::where(['city_id' => $city->id, 'is_assignment' => 0])->count();
             // $propertyCount now contains the count of properties in the specified city
         }
         return $propertyCount;
