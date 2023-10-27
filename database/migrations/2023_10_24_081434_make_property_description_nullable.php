@@ -14,7 +14,7 @@ class MakePropertyDescriptionNullable extends Migration
     public function up()
     {
         Schema::table('property', function (Blueprint $table) {
-            $table->string('description')->nullable()->change();
+            $table->text('description')->nullable()->change();
         });
     }
 
