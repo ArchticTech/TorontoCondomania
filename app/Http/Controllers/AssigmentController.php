@@ -22,9 +22,9 @@ class AssigmentController extends Controller
 
         return $assignments;
     }
-    public function get($id)
+    public function get($slug)
     {
-        $assignment =  Assignment::find($id);
+        $assignment = Assignment::where('slug', $slug)->firstOrFail();
         $assignment->assign_tentative_occ_date = Carbon::parse($assignment->assign_tentative_occ_date)->format('Y-m-d');
         return $assignment;
     }

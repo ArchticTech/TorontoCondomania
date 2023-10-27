@@ -34,6 +34,10 @@ class RentalController extends Controller
         {
             $image = RentalController::saveImage($request->file('image'));
         }
+        $meta_title = $request->input('meta_title');
+        $meta_description = $request->input('meta_description');
+        $meta_keywords = $request->input('meta_keywords');
+        $meta_tags = $request->input('meta_tags');
 
         $address = $request->input('rent_address');
         $city_id = $request->input('city_id');
@@ -58,6 +62,12 @@ class RentalController extends Controller
             'name' => $name,
             'description' => $description,
             'image' => $image,
+
+            'meta_title' => $meta_title,
+            'meta_description' => $meta_description,
+            'meta_keywords' => $meta_keywords,
+            'meta_tags' => $meta_tags,
+
             'address' => $address,
             'city_id' => $city_id,
             'latitude' => $latitude,
@@ -106,31 +116,8 @@ class RentalController extends Controller
                 ->with('message', 'Rental Not Found');
         }
 
-        //updating rental
-        // $rental->rent_address = $request->input('rent_address');
-        // $rental->rent_iframe = $request->input('rent_iframe');
-        // $rental->rent_type = $request->input('rent_type');
-        // $rental->rent_beds = $request->input('rent_beds');
-        // $rental->rent_baths = $request->input('rent_baths');
-        // $rental->rent_sqft = $request->input('rent_sqft');
-        // $rental->available_date = $request->input('available_date');
-        // $rental->security_deposit = $request->input('security_deposit');
-        // $rental->laundry_located = $request->input('laundry_located');
-        // $rental->rent_description = $request->input('rent_description');
-        // $rental->pet_policy = $request->input('pet_policy');
-        // $rental->lease_length = $request->input('lease_length');
-        // $rental->lease_terms = $request->input('lease_terms');
-        // $rental->rental_status = $request->input('rental_status');
-        // $rental->monthly_rent = $request->input('monthly_rent');
-        // $rental->smoking_policy = $request->input('smoking_policy');
         $rental->name = $request->input('rent_name');
         $rental->description = $request->input('description');
-        // $image = $request->input('image');
-        // $rental->image = '';
-        // if ($request->hasFile('image') && $request->file('image')->isValid())
-        // {
-        //     $rental->image = RentalController::saveImage($request->file('image'));
-        // }
 
         if ($request->hasFile('image') && $request->file('image')->isValid())
         {
@@ -143,6 +130,11 @@ class RentalController extends Controller
                 File::delete($imagePath);
             }
         }
+        $rental->meta_title = $request->input('meta_title');
+        $rental->meta_description = $request->input('meta_description');
+        $rental->meta_keywords = $request->input('meta_keywords');
+        $rental->meta_tags = $request->input('meta_tags');
+
         $rental->address = $request->input('rent_address');
         $rental->city_id = $request->input('city_id');
         $rental->latitude = $request->input('latitude');

@@ -33,6 +33,12 @@ class Rental extends Model
         'name',
         'description',
         'image',
+        
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'meta_tags',
+
         'address',
         'city_id',
         'latitude',

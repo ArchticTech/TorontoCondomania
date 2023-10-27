@@ -35,7 +35,7 @@ class CreateFloorPlanResvervationTable extends Migration
             $table->string('postal_code_2', 70)->nullable();
             $table->string('occupation_2', 70)->nullable();
             $table->text('photo_2')->nullable();
-            $table->string('reservation_status', 50);
+            $table->string('reservation_status', 50)->default('Pending');
             $table->timestamps();
         });
     }

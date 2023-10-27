@@ -20,6 +20,11 @@ class CreateRentalsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('image');
+            
+            $table->text('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->text('meta_tags')->nullable();
 
             $table->text('address');
             $table->integer('city_id');

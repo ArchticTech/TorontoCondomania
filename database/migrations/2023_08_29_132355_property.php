@@ -28,10 +28,12 @@ class Property extends Migration
             $table->integer('interior_designer_id')->default(0);
             $table->integer('prop_agent_id')->default(0);
             $table->text('prop_address');
+            
             $table->text('prop_meta_title')->nullable();
             $table->text('prop_meta_description')->nullable();
             $table->text('prop_meta_keywords')->nullable();
             $table->text('prop_meta_tags')->nullable();
+            
             $table->enum('prop_type', ['Condo', 'Townhouse', 'Condo Townhomes', 'Single Family']);
             $table->enum('prop_status', ['Pre-Construction', 'Under-Construction', 'Ready to move']);
             $table->integer('no_of_stories')->default(0);

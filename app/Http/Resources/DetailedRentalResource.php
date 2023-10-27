@@ -39,6 +39,12 @@ class DetailedRentalResource extends JsonResource
             'laundry_located' => $this->laundry_located,
             'smoking_policy' => $this->smoking_policy,
             'pet_policy' => $this->pet_policy,
+            
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
+            'meta_keyword' => $this->meta_keywords,
+            'meta_tags' => $this->meta_keywords,
+
             'status' => $this->status,
             'features' => $features->toArray(),
             'images' => $imageUrls->toArray(),

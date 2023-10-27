@@ -34,6 +34,9 @@ Route::prefix('api')->group(function () {
         Route::get('/getAllFavorites', [ApiController::class, 'getAllFavorites'])->name('api.getAllFavorites');
         Route::get('/storeFavorite/{id}', [ApiController::class, 'storeFavorite'])->name('api.storeFavorite');
         Route::get('/deleteFavorite/{id}', [ApiController::class, 'deleteFavorite'])->name('api.deleteFavorite');
+        
+        // floor plan api
+        Route::post('/addFloorPlanReservation', [FloorPlanResvervationController::class, 'store'])->name('admin.addFloorPlanReservation');
     });
 
     Route::get('register/{name}/{email}/{password}',
@@ -51,9 +54,6 @@ Route::prefix('api')->group(function () {
 
     // Consultation api
     Route::post('/sendConsultationRequest', [ApiController::class, 'storeConsultation'])->name('admin.addConsultingForm');
-
-    // floor plan api
-    Route::post('/addFloorPlanReservation', [FloorPlanResvervationController::class, 'store'])->name('admin.addFloorPlanReservation');
 });
 
 // Admin Registration

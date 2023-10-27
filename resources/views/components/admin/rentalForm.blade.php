@@ -9,14 +9,7 @@
                 @endisset>
         </div>
     </div>
-    <div class="col-md-4 mb-3 mt-3 ">
-        {{-- <div class="form-group">
-            <label for="image">Rental Image</label>
-            <input type="file" required class="form-control" id="image" name="image"
-                @isset($rental)
-                    value="{{ $rental->image }}"
-                @endisset>
-        </div> --}}
+    <div class="col-md-4 mb-3 mt-3">
         <div class="form-group">
             <label for="image"> Image</label>
             @if (isset($rental))
@@ -264,6 +257,46 @@
                     <option value="0">Not Active</option>
                 @endif
             </select>
+        </div>
+    </div>
+    
+    <div class="row col-md-12 mb-3 mt-3">
+        <p style="font-size: 22px;font-weight: 600;margin-top: 1rem;">Meta Data</p>
+        <div class="col-md-6 mb-3 mt-0">
+            <div class="form-group">
+                <label for="meta_title">Meta Title</label>
+                <input type="text" required class="form-control" id="meta_title" name="meta_title" placeholder="Rental Name"
+                    @isset($rental)
+                        value="{{ $rental->meta_title }}"
+                    @endisset>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3 mt-0">
+            <div class="form-group">
+                <label for="meta_description">Meta Description</label>
+                <input type="text" required class="form-control" id="meta_description" name="meta_description" placeholder="Rental Name"
+                    @isset($rental)
+                        value="{{ $rental->meta_description }}"
+                    @endisset>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3 mt-0">
+            <div class="form-group">
+                <label for="meta_keywords">Meta Keywords</label>
+                <input type="text" required class="form-control" id="meta_keywords" name="meta_keywords" placeholder="Rental Name"
+                    @isset($rental)
+                        value="{{ $rental->meta_keywords }}"
+                    @endisset>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3 mt-0">
+            <div class="form-group">
+                <label for="meta_tags">Meta Tags</label>
+                <input type="text" required class="form-control" id="meta_tags" name="meta_tags" placeholder="Rental Name"
+                    @isset($rental)
+                        value="{{ $rental->meta_tags }}"
+                    @endisset>
+            </div>
         </div>
     </div>
     <div class="col-md-12 mb-3 mt-3">

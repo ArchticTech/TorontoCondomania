@@ -33,7 +33,10 @@ class ApiController extends Controller
     {
         $property = PropertyController::get($slug);
 
-        $property = DetailedPropertyResource::make($property);
+        if($property)
+        {
+            $property = DetailedPropertyResource::make($property);
+        }
 
         return $property;
     }
@@ -47,11 +50,14 @@ class ApiController extends Controller
 
         return $assignments;
     }
-    public function getAssignment($id)
+    public function getAssignment($slug)
     {
-        $assignment = AssignmentController::get($id);
+        $assignment = AssignmentController::get($slug);
 
-        $assignment = DetailedAssignmentResource::make($assignment);
+        if($assignment)
+        {
+            $assignment = DetailedAssignmentResource::make($assignment);
+        }
 
         return $assignment;
     }
@@ -82,7 +88,10 @@ class ApiController extends Controller
     {
         $rental = RentalController::get($slug);
 
-        $rental = DetailedRentalResource::make($rental);
+        if($rental)
+        {
+            $rental = DetailedRentalResource::make($rental);
+        }
 
         return $rental;
     }
