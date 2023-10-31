@@ -23,7 +23,7 @@ class ApiController extends Controller
 {
     public function getAllProperties()
     {
-        $properties = PropertyController::all();
+        $properties = PropertyController::allActive();
 
         $properties = BriefPropertyResource::collection($properties);
 

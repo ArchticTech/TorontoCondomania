@@ -20,7 +20,11 @@ class PropertyController extends Controller
      */
     public static function all()
     {
-        return Property::where('is_assignment', 0)->get();
+        return Property::where('is_assignment', 0, )->get();
+    }
+    public static function allActive()
+    {
+        return Property::where(['is_assignment' => 0, 'status' => 1])->get();
     }
 
     /**
