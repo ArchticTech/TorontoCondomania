@@ -48,9 +48,10 @@ Route::prefix('api')->group(function () {
     Route::get('resendEmail/{email}', 
     [UserController::class, 'resendEmail'])->name('api.resendEmail');
 
-    Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
+    Route::get('/email/verify/{id}/{hash}', 
+        [UserController::class, 'verifyEmail'])
         ->name('verification.verify')
-        ->middleware(['auth', 'signed']);
+        ->middleware(['signed']);
 
     // Consultation api
     Route::post('/sendConsultationRequest', [ApiController::class, 'storeConsultation'])->name('admin.addConsultingForm');

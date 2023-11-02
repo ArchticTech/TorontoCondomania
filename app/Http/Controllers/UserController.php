@@ -85,9 +85,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function verifyEmail(Request $request)
+    public function verifyEmail($id, Request $request)
     {
-        $user = Auth::user();
+        $user = User::find($id);
 
         if ($user->hasVerifiedEmail()) {
             return response()->json(['success', 'Your email is already verified.']);
