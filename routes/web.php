@@ -57,8 +57,6 @@ Route::prefix('api')->group(function () {
 });
 
 // Admin Registration
-Route::get('/register', [AdminController::class, 'register'])->name('admin.signup');
-Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
 // Route::post('/clear-session-message', [AdminController::class, 'clearSessionMessage']);
 
 Route::prefix('secure-zone')->group(function () {
