@@ -20,7 +20,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowedOrigins' => ['http://localhost:3000'],
+    'allowedOrigins' => ['https://torontocondomania.ca', 'https://api.torontocondomania.ca'],
 
     'supports_credentials' => true,
 
