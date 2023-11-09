@@ -18,7 +18,7 @@ class AssigmentController extends Controller
     }
     public function all()
     {
-        $assignments = Assignment::with('property')->get();
+        $assignments = Assignment::with('property')->latest()->get();
 
         return $assignments;
     }

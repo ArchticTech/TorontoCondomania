@@ -337,14 +337,17 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'city_name' => 'required|string|max:255',
-            'city_status' => 'boolean', // Assuming 'city_status' is the checkbox field name.
         ]);
+
+        $status = 0;
+        if($request->has('city_status') == 'on')
+            $status = 1;
 
         // Create a new City instance and set its attributes
         $city = new City();
         $city->city_name = $validatedData['city_name'];
         $city->country_id = 1;
-        $city->status = $request->has('city_status') ? 1 : 0;
+        $city->status = $status;
         $saved = $city->save();
 
         if ($saved) {
@@ -358,11 +361,13 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'city_name' => 'required|string|max:255',
-            'status' => 'boolean',
         ]);
 
-        // Convert the checkbox value from 'on' to '1' if it's checked
-        $validatedData['status'] = $request->has('status') ? 1 : 0;
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
+
+        $validatedData['status'] = $status;
 
         // Update the record
         $saved = City::where('id', $id)->update($validatedData);
@@ -379,13 +384,15 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'development_name' => 'required|string|max:255',
-            'development_status' => 'boolean',
         ]);
 
+        $status = 0;
+        if($request->has('development_status') == 'on')
+            $status = 1;
         // Create a new City instance and set its attributes
         $development = new Development();
         $development->development_name = $validatedData['development_name'];
-        $development->status = $request->has('development_status') ? 1 : 0;
+        $development->status = $status;
         $saved = $development->save();
 
         if ($saved) {
@@ -401,8 +408,11 @@ class AdminController extends Controller
             'status' => 'boolean',
         ]);
 
-        // Convert the checkbox value from 'on' to '1' if it's checked
-        $validatedData['status'] = $request->has('status') ? 1 : 0;
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
+
+        $validatedData['status'] = $status;
 
         // Update the record
         $saved = Development::where('id', $id)->update($validatedData);
@@ -418,14 +428,16 @@ class AdminController extends Controller
     {
         // Validate the request data
         $validatedData = $request->validate([
-            'developer_name' => 'required|string|max:255',
-            'status' => 'boolean',
+            'developer_name' => 'required|string|max:255'
         ]);
 
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
         // Create a new City instance and set its attributes
         $developer = new Developer();
         $developer->developer_name = $validatedData['developer_name'];
-        $developer->status = $request->has('status') ? 1 : 0;
+        $developer->status = $status;
         $saved = $developer->save();
 
         if ($saved) {
@@ -438,11 +450,13 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'developer_name' => 'required|string|max:255',
-            'status' => 'boolean',
         ]);
 
-        // Convert the checkbox value from 'on' to '1' if it's checked
-        $validatedData['status'] = $request->has('status') ? 1 : 0;
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
+
+        $validatedData['status'] = $status;
 
         // Update the record
         $saved = Developer::where('id', $id)->update($validatedData);
@@ -460,13 +474,15 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'architects_name' => 'required|string|max:255',
-            'status' => 'boolean',
         ]);
 
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
         // Create a new City instance and set its attributes
         $architect = new Architect();
         $architect->architects_name = $validatedData['architects_name'];
-        $architect->status = $request->has('status') ? 1 : 0;
+        $architect->status = $status;
         $saved = $architect->save();
 
         if ($saved) {
@@ -479,11 +495,13 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'architects_name' => 'required|string|max:255',
-            'status' => 'boolean',
         ]);
 
-        // Convert the checkbox value from 'on' to '1' if it's checked
-        $validatedData['status'] = $request->has('status') ? 1 : 0;
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
+
+        $validatedData['status'] = $status;
 
         // Update the record
         $saved = Architect::where('id', $id)->update($validatedData);
@@ -501,13 +519,15 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'interior_designer_name' => 'required|string|max:255',
-            'status' => 'boolean',
         ]);
 
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
         // Create a new City instance and set its attributes
         $interiorDesigner = new InteriorDesigner();
         $interiorDesigner->interior_designer_name = $validatedData['interior_designer_name'];
-        $interiorDesigner->status = $request->has('status') ? 1 : 0;
+        $interiorDesigner->status = $status;
         $saved = $interiorDesigner->save();
 
         if ($saved) {
@@ -523,8 +543,11 @@ class AdminController extends Controller
             'status' => 'boolean',
         ]);
 
-        // Convert the checkbox value from 'on' to '1' if it's checked
-        $validatedData['status'] = $request->has('status') ? 1 : 0;
+        $status = 0;
+        if($request->has('status') == 'on')
+            $status = 1;
+
+        $validatedData['status'] = $status;
 
         // Update the record
         $saved = InteriorDesigner::where('id', $id)->update($validatedData);

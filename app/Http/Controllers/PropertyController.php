@@ -20,11 +20,11 @@ class PropertyController extends Controller
      */
     public static function all()
     {
-        return Property::where('is_assignment', 0, )->get();
+        return Property::where('is_assignment', 0, )->latest()->get();
     }
     public static function allActive()
     {
-        return Property::where(['is_assignment' => 0, 'status' => 1])->get();
+        return Property::where(['is_assignment' => 0, 'status' => 1])->latest()->get();
     }
 
     /**
@@ -173,8 +173,8 @@ class PropertyController extends Controller
         }
 
         return [
-            'saved' => $saved,   // This will be true or false
-            'property' => $property,  // This will be the saved Property object
+            'saved' => $saved,
+            'property' => $property,
         ];
     }
 

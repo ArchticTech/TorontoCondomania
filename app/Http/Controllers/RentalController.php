@@ -14,7 +14,7 @@ class RentalController extends Controller
     //Rentals CRUD Operation
     public static function all()
     {
-        $rentals = Rental::all();
+        $rentals = Rental::latest()->all();
         return $rentals;
     }
 
