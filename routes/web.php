@@ -48,8 +48,7 @@ Route::prefix('api')->group(function () {
     Route::get('resendEmail/{email}', 
     [UserController::class, 'resendEmail'])->name('api.resendEmail');
 
-    Route::get('/email/verify/{id}/{hash}', 
-        [UserController::class, 'verifyEmail'])
+    Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
         ->name('verification.verify')
         ->middleware(['signed']);
 
@@ -58,6 +57,8 @@ Route::prefix('api')->group(function () {
 });
 
 // Admin Registration
+Route::get('/register', [AdminController::class, 'register'])->name('admin.signup');
+Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
 // Route::post('/clear-session-message', [AdminController::class, 'clearSessionMessage']);
 
 Route::prefix('secure-zone')->group(function () {
