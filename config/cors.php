@@ -7,7 +7,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowedOrigins' => ['http://127.0.0.1:3000'],
+    'allowedOrigins' => ['https://torontocondomania.ca'],
 
     'supports_credentials' => true,
 
